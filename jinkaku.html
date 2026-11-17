@@ -1,0 +1,1929 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>『本音の4択』 〜1分でわかる、あなたの裏の顔〜</title>
+<style>
+  :root {
+    --bg-main: #07080d;
+    --bg-card: rgba(18, 22, 34, 0.92);
+    --bg-hover: rgba(30, 39, 62, 0.98);
+    --border: rgba(148, 163, 184, 0.2);
+    --cyan: #2dd4bf;
+    --violet: #a78bfa;
+    --rose: #fb7185;
+    --amber: #fbbf24;
+    --text: #f8fafc;
+    --sub: #94a3b8;
+    --font: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg-main);
+    background-image:
+      radial-gradient(circle at 12% 15%, rgba(45, 212, 191, 0.09) 0%, transparent 42%),
+      radial-gradient(circle at 88% 85%, rgba(167, 139, 250, 0.1) 0%, transparent 42%);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 16px 14px 60px;
+    transition: background-image 0.4s ease;
+  }
+
+  body.mode-drop {
+    background-image:
+      radial-gradient(circle at 50% 20%, rgba(251, 113, 133, 0.18) 0%, transparent 55%),
+      radial-gradient(circle at 85% 90%, rgba(190, 18, 60, 0.12) 0%, transparent 45%);
+  }
+
+  body.mode-rush {
+    background-image:
+      radial-gradient(circle at 50% 20%, rgba(251, 191, 36, 0.15) 0%, transparent 55%);
+  }
+
+  .container { max-width: 760px; margin: 0 auto; }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+    font-size: 0.82rem;
+    color: var(--sub);
+  }
+  .topbar-right { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .pill-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .pill-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .screen { display: none; animation: popIn 0.35s ease forwards; }
+  .screen.active { display: block; }
+  @keyframes popIn {
+    from { opacity: 0; transform: translateY(8px) scale(0.99); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* スタート画面 */
+  .hero {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 44px 24px;
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 0.74rem;
+    letter-spacing: 0.16em;
+    color: var(--cyan);
+    border: 1px solid rgba(45, 212, 191, 0.4);
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: clamp(1.9rem, 5.5vw, 2.7rem);
+    font-weight: 900;
+    margin-bottom: 6px;
+    background: linear-gradient(135deg, #fff 15%, var(--cyan) 60%, var(--violet) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .sub-h1 {
+    font-size: clamp(1rem, 3vw, 1.22rem);
+    font-weight: 700;
+    color: var(--amber);
+    margin-bottom: 22px;
+    letter-spacing: 0.04em;
+  }
+
+  .lead {
+    color: var(--sub);
+    font-size: 0.98rem;
+    line-height: 1.75;
+    max-width: 520px;
+    margin: 0 auto 28px;
+  }
+
+  .stats-banner {
+    display: inline-flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    font-size: 0.84rem;
+  }
+  .stats-banner strong { color: var(--amber); font-size: 1rem; }
+
+  .btn-main {
+    background: linear-gradient(135deg, #0d9488, #6366f1);
+    color: #fff;
+    border: none;
+    padding: 17px 48px;
+    font-size: 1.08rem;
+    font-weight: 800;
+    border-radius: 14px;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+    transition: transform 0.18s, box-shadow 0.18s;
+  }
+  .btn-main:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 35px rgba(45, 212, 191, 0.4);
+  }
+
+  /* クイズ画面 */
+  .quiz-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .q-badge {
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(45, 212, 191, 0.15);
+    color: var(--cyan);
+    border: 1px solid rgba(45, 212, 191, 0.35);
+  }
+  .q-badge.drop {
+    background: rgba(251, 113, 133, 0.18);
+    color: var(--rose);
+    border-color: rgba(251, 113, 133, 0.5);
+    animation: pulseRed 1.4s infinite;
+  }
+  .q-badge.rush {
+    background: rgba(251, 191, 36, 0.18);
+    color: var(--amber);
+    border-color: rgba(251, 191, 36, 0.5);
+  }
+  .q-badge.final {
+    background: rgba(167, 139, 250, 0.2);
+    color: var(--violet);
+    border-color: rgba(167, 139, 250, 0.5);
+  }
+
+  @keyframes pulseRed {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(251, 113, 133, 0.4); }
+    50% { box-shadow: 0 0 14px 2px rgba(251, 113, 133, 0.3); }
+  }
+
+  .q-num { font-size: 0.9rem; font-weight: 700; color: var(--sub); font-variant-numeric: tabular-nums; }
+
+  .progress-bar {
+    height: 6px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--violet));
+    transition: width 0.3s ease;
+  }
+
+  .rush-timer-wrap { display: none; margin-bottom: 14px; text-align: center; }
+  .rush-timer-wrap.active { display: block; }
+  .rush-text { font-size: 0.85rem; font-weight: 800; color: var(--amber); margin-bottom: 5px; }
+  .rush-text.over { color: var(--rose); animation: shake 0.3s infinite; }
+  .rush-bar-bg { height: 8px; background: rgba(255,255,255,0.08); border-radius: 999px; overflow: hidden; }
+  .rush-bar-fill { height: 100%; width: 100%; background: linear-gradient(90deg, var(--rose), var(--amber)); transition: width 0.08s linear; }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
+  }
+
+  .q-box { text-align: center; margin: 16px 0 20px; }
+  .q-box h2 { font-size: clamp(1.12rem, 3.8vw, 1.44rem); font-weight: 800; line-height: 1.45; margin-bottom: 6px; }
+  .q-box p { font-size: 0.86rem; color: var(--sub); }
+
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 580px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 16px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.16s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 112px;
+  }
+  .card:hover {
+    background: var(--bg-hover);
+    border-color: var(--cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.4);
+  }
+  body.mode-drop .card:hover { border-color: var(--rose); background: rgba(50, 20, 32, 0.92); }
+  body.mode-rush .card:hover { border-color: var(--amber); }
+
+  .card.picked { transform: scale(0.96); border-color: var(--cyan); background: rgba(45, 212, 191, 0.18); }
+  body.mode-drop .card.picked { border-color: var(--rose); background: rgba(251, 113, 133, 0.22); }
+
+  .c-cat { font-size: 0.7rem; color: var(--violet); font-weight: 700; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .c-title { font-size: 1.05rem; font-weight: 800; color: var(--text); margin-bottom: 5px; }
+  .c-desc { font-size: 0.8rem; color: var(--sub); line-height: 1.45; }
+
+  /* スキャン演出 */
+  .scan-box { text-align: center; padding: 90px 20px; }
+  .spinner {
+    width: 64px; height: 64px;
+    border: 3px solid rgba(255,255,255,0.1);
+    border-top-color: var(--cyan);
+    border-right-color: var(--violet);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .scan-log { font-family: monospace; color: var(--cyan); font-size: 0.86rem; margin-top: 8px; }
+
+  /* 結果画面 */
+  .res-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 26px 22px;
+    margin-bottom: 16px;
+  }
+
+  .delta-banner {
+    background: rgba(167, 139, 250, 0.12);
+    border: 1px solid rgba(167, 139, 250, 0.35);
+    color: #e9d5ff;
+    font-size: 0.82rem;
+    padding: 9px 14px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 16px;
+    line-height: 1.45;
+  }
+
+  .pixel-stage {
+    display: flex;
+    justify-content: center;
+    margin: 6px 0 12px;
+  }
+  .pixel-stage-bg {
+    width: 104px;
+    height: 104px;
+    border-radius: 20px;
+    background: radial-gradient(circle, rgba(45, 212, 191, 0.16), rgba(15, 23, 42, 0.9));
+    border: 1px solid rgba(45, 212, 191, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+  .pixel-bounce {
+    animation: floatPix 2.2s ease-in-out infinite;
+  }
+  @keyframes floatPix {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  .rarity-row { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .rarity-badge { font-size: 0.75rem; font-weight: 900; letter-spacing: 0.12em; padding: 4px 12px; border-radius: 6px; }
+  .rar-N { background: rgba(148,163,184,0.2); color: #cbd5e1; }
+  .rar-R { background: rgba(45,212,191,0.2); color: var(--cyan); border: 1px solid rgba(45,212,191,0.4); }
+  .rar-SR { background: rgba(167,139,250,0.25); color: #ddd6fe; border: 1px solid var(--violet); box-shadow: 0 0 15px rgba(167,139,250,0.35); }
+  .rar-SEC { background: linear-gradient(135deg, rgba(251,191,36,0.3), rgba(251,113,133,0.3)); color: var(--amber); border: 1px solid var(--amber); box-shadow: 0 0 20px rgba(251,191,36,0.4); }
+
+  .new-badge { font-size: 0.72rem; font-weight: 900; background: var(--rose); color: #fff; padding: 3px 8px; border-radius: 4px; }
+
+  .sub-alias { text-align: center; font-size: 0.82rem; color: var(--violet); font-weight: 700; margin-bottom: 4px; }
+
+  .res-name {
+    text-align: center;
+    font-size: clamp(1.55rem, 5vw, 2.15rem);
+    font-weight: 900;
+    margin-bottom: 6px;
+    background: linear-gradient(135deg, #fff, var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .res-catch { text-align: center; color: var(--amber); font-weight: 700; font-size: 0.95rem; margin-bottom: 14px; }
+  .res-desc { color: var(--sub); font-size: 0.92rem; line-height: 1.72; margin-bottom: 20px; }
+
+  .mini-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+  .m-stat { background: rgba(15,23,42,0.75); border: 1px solid var(--border); border-radius: 12px; padding: 10px 8px; text-align: center; }
+  .m-stat span { display: block; font-size: 0.72rem; color: var(--sub); margin-bottom: 3px; }
+  .m-stat strong { font-size: 1rem; color: var(--cyan); }
+
+  .radar-box { display: flex; justify-content: center; margin: 8px 0 4px; }
+
+  .sec-head { font-size: 0.95rem; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .sec-head::before { content: ""; width: 4px; height: 16px; background: var(--cyan); border-radius: 2px; }
+
+  .highlights { display: grid; gap: 10px; margin-bottom: 18px; }
+  .hl-item {
+    background: rgba(15,23,42,0.75);
+    border-left: 3px solid var(--cyan);
+    padding: 12px 14px;
+    border-radius: 0 10px 10px 0;
+    font-size: 0.87rem;
+    color: var(--sub);
+    line-height: 1.6;
+  }
+  .hl-item.red { border-left-color: var(--rose); }
+  .hl-item.gold { border-left-color: var(--amber); }
+  .hl-item.vio { border-left-color: var(--violet); }
+  .hl-item strong { color: var(--text); }
+
+  .picked-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .p-chip {
+    font-size: 0.74rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    color: var(--sub);
+  }
+  .p-chip.sac { border-color: rgba(251, 113, 133, 0.45); color: #fda4af; text-decoration: line-through; }
+
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 22px; }
+  .btn-sub {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 13px 20px;
+    border-radius: 12px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-sub:hover { border-color: var(--cyan); color: var(--cyan); }
+  .toast { text-align: center; font-size: 0.82rem; color: var(--cyan); margin-top: 10px; min-height: 1.2em; }
+
+  /* 図鑑モーダル */
+  .modal-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.82);
+    backdrop-filter: blur(6px);
+    z-index: 99;
+    padding: 20px 14px;
+    overflow-y: auto;
+  }
+  .modal-bg.open { display: flex; justify-content: center; align-items: flex-start; }
+  .modal {
+    background: #111624;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    max-width: 740px;
+    width: 100%;
+    padding: 24px 20px;
+    margin-top: 16px;
+  }
+  .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .dex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
+  .dex-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 12px;
+    font-size: 0.8rem;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .dex-card.locked { opacity: 0.55; }
+  .dex-card.unlocked { border-color: rgba(45, 212, 191, 0.35); background: rgba(45, 212, 191, 0.05); }
+  .dex-pix-wrap {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: rgba(15, 23, 42, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .dex-card.locked .dex-pix-wrap svg {
+    filter: brightness(0.15) contrast(1.2);
+    opacity: 0.6;
+  }
+  .dex-info { min-width: 0; flex: 1; }
+  .dex-rar { font-size: 0.66rem; font-weight: 800; color: var(--amber); margin-bottom: 2px; }
+  .dex-title { font-weight: 800; color: var(--text); margin-bottom: 3px; font-size: 0.86rem; }
+  .dex-hint { color: var(--sub); font-size: 0.72rem; line-height: 1.38; }
+  .dex-foot { margin-top: 18px; text-align: right; }
+  .btn-reset { background: none; border: none; color: var(--sub); font-size: 0.75rem; cursor: pointer; text-decoration: underline; }
+  .btn-reset:hover { color: var(--rose); }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="topbar">
+    <span>『本音の4択』</span>
+    <div class="topbar-right">
+      <button class="pill-btn" id="sound-btn" onclick="toggleSound()">🔊 SE: ON</button>
+      <button class="pill-btn" onclick="openDex()">📖 裏の顔図鑑 (<span id="top-dex-count">0</span>/24)</button>
+    </div>
+  </div>
+
+  <!-- 1. スタート画面 -->
+  <section id="screen-start" class="screen active">
+    <div class="hero">
+      <div class="tag">1-Minute Deep Psychology</div>
+      <h1>『本音の4択』</h1>
+      <div class="sub-h1">〜1分でわかる、あなたの裏の顔〜</div>
+      <p class="lead">
+        4枚のカードから1番大切なものを直感でタップするだけ。<br>
+        わずか1分で、あなたの隠れた本音と全24タイプの「裏の顔」をズバリ見抜きます。
+      </p>
+
+      <div class="stats-banner">
+        <div>プレイ回数: <strong id="stat-plays">0</strong> 回</div>
+        <div>図鑑コンプ: <strong id="stat-dex">0 / 24</strong></div>
+        <div id="stat-last-wrap" style="display:none;">前回: <strong id="stat-last"></strong></div>
+      </div>
+
+      <div>
+        <button class="btn-main" onclick="startGame()">診断をスタートする</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. クイズ画面 -->
+  <section id="screen-quiz" class="screen">
+    <div class="quiz-meta">
+      <span id="q-badge" class="q-badge">QUESTION</span>
+      <span id="q-num" class="q-num">1 / 10</span>
+    </div>
+    <div class="progress-bar">
+      <div id="progress-fill" class="progress-fill"></div>
+    </div>
+
+    <div id="rush-wrap" class="rush-timer-wrap">
+      <div id="rush-text" class="rush-text">⚡ 直感勝負！</div>
+      <div class="rush-bar-bg"><div id="rush-bar" class="rush-bar-fill"></div></div>
+    </div>
+
+    <div class="q-box">
+      <h2 id="q-title"></h2>
+      <p id="q-sub"></p>
+    </div>
+
+    <div id="choices-grid" class="grid"></div>
+  </section>
+
+  <!-- 3. 分析中画面 -->
+  <section id="screen-scan" class="screen">
+    <div class="scan-box">
+      <div class="spinner"></div>
+      <h2>あなたの裏の顔を解析中...</h2>
+      <div id="scan-log" class="scan-log">本音の選択パターンを読み取っています</div>
+    </div>
+  </section>
+
+  <!-- 4. 結果画面 -->
+  <section id="screen-result" class="screen">
+    <div class="res-panel">
+      <div id="delta-banner" class="delta-banner" style="display:none;"></div>
+
+      <div class="pixel-stage">
+        <div class="pixel-stage-bg">
+          <div id="res-pixel" class="pixel-bounce"></div>
+        </div>
+      </div>
+
+      <div class="rarity-row">
+        <span id="res-rarity" class="rarity-badge"></span>
+        <span id="res-new" class="new-badge" style="display:none;">NEW UNLOCK!</span>
+      </div>
+      <div id="res-alias" class="sub-alias"></div>
+      <h2 id="res-name" class="res-name"></h2>
+      <div id="res-catch" class="res-catch"></div>
+      <p id="res-desc" class="res-desc"></p>
+
+      <div class="mini-stats">
+        <div class="m-stat"><span>平均決断タイム</span><strong id="st-speed">-</strong></div>
+        <div class="m-stat"><span>一番反応した本音</span><strong id="st-top">-</strong></div>
+        <div class="m-stat"><span>図鑑解放</span><strong id="st-dex">-</strong></div>
+      </div>
+
+      <div class="radar-box">
+        <svg id="radar-svg" width="270" height="245" viewBox="0 0 270 245"></svg>
+      </div>
+    </div>
+
+    <div class="res-panel">
+      <div class="sec-head">今回のあなたを覗く「3つの分析レンズ」</div>
+      <div id="highlights" class="highlights"></div>
+
+      <div class="sec-head" style="margin-top:8px;">今回の10問であなたが辿った軌跡</div>
+      <div id="picked-chips" class="picked-chips"></div>
+
+      <div class="actions">
+        <button class="btn-main" onclick="startGame()">🎲 違う質問・4択でもう1回！</button>
+        <button class="btn-sub" onclick="copyResult()">📋 結果をコピー</button>
+        <button class="btn-sub" onclick="openDex()">📖 図鑑 (24種)</button>
+      </div>
+      <div id="copy-toast" class="toast"></div>
+    </div>
+  </section>
+</div>
+
+<!-- 図鑑モーダル -->
+<div id="dex-modal" class="modal-bg" onclick="if(event.target===this) closeDex()">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>📖 裏の顔コレクション図鑑（全24種）</h3>
+      <button class="pill-btn" onclick="closeDex()">✕ 閉じる</button>
+    </div>
+    <div id="dex-grid" class="dex-grid"></div>
+    <div class="dex-foot">
+      <button class="btn-reset" onclick="resetSaveData()">記録をすべてリセットする</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==========================================
+// 1. 全240個のマスターデータ (8カテゴリ × 各30個)
+// traits: [防衛(sec), 自律(aut), 愛着(bnd), 成長(grw), 美学(aes), 実利(prg)]
+// ==========================================
+const CATEGORIES = [
+  "健康と体", "人間関係と愛情", "時間と自由", "精神性と心のあり方",
+  "経験と挑戦", "仕事と自己実現", "お金と経済的基盤", "環境と教養"
+];
+
+const ITEMS = [
+  // 1. 健康と体 (1〜30)
+  { id: 1, cat: 0, title: "尽きないスタミナ", desc: "一日中動き回れる持久力。", t: [2,1,0,1,0,1] },
+  { id: 2, cat: 0, title: "質の高い深い睡眠", desc: "脳と体を完全に修復する力。", t: [2,1,0,0,1,1] },
+  { id: 3, cat: 0, title: "老いない若さと活力", desc: "何にでも挑戦できる肉体エネルギー。", t: [1,1,0,2,0,1] },
+  { id: 4, cat: 0, title: "一生モノの強い歯", desc: "生涯自分の歯で味わう基盤。", t: [2,0,0,0,0,3] },
+  { id: 5, cat: 0, title: "クリアな視力と聴力", desc: "世界を鮮明に受け取る感覚。", t: [1,0,1,0,2,1] },
+  { id: 6, cat: 0, title: "太りにくく燃える代謝", desc: "理想の体型を保つ体質。", t: [2,1,0,0,1,1] },
+  { id: 7, cat: 0, title: "栄養を吸収する力", desc: "食事を血肉に変える効率の良さ。", t: [2,0,0,0,0,3] },
+  { id: 8, cat: 0, title: "折れないストレス耐性", desc: "逆境で心をすり減らさない防具。", t: [2,1,0,1,0,1] },
+  { id: 9, cat: 0, title: "自律神経の安定", desc: "焦りや緊張を自力で鎮める力。", t: [2,1,0,0,2,0] },
+  { id: 10, cat: 0, title: "病を寄せつけない免疫力", desc: "流行病に寝込まない鉄壁の防御。", t: [3,0,0,0,0,2] },
+  { id: 11, cat: 0, title: "一晩で戻る回復力", desc: "疲れを翌朝に持ち越さないタフさ。", t: [2,1,0,1,0,2] },
+  { id: 12, cat: 0, title: "穏やかな心拍", desc: "動悸や息切れのない安定感。", t: [3,0,0,0,1,1] },
+  { id: 13, cat: 0, title: "食事が美味しい味覚", desc: "ご飯を心から幸せに感じる感性。", t: [1,0,1,0,3,0] },
+  { id: 14, cat: 0, title: "理想の体型とスタイル", desc: "鏡を見るたび自信が湧くシルエット。", t: [0,1,1,1,2,1] },
+  { id: 15, cat: 0, title: "鋼の胃腸と消化力", desc: "旅先の食事ももたれない内臓の強さ。", t: [2,1,0,1,0,1] },
+  { id: 16, cat: 0, title: "しなやかな関節と姿勢", desc: "猫のように軽やかに動く柔軟性。", t: [2,1,0,0,1,1] },
+  { id: 17, cat: 0, title: "ケガをしにくい強靭さ", desc: "転んでも大事に至らない頑丈さ。", t: [3,0,0,1,0,1] },
+  { id: 18, cat: 0, title: "ツヤのある肌と髪", desc: "内側から若さが滲み出る見た目。", t: [1,0,1,0,2,1] },
+  { id: 19, cat: 0, title: "スッキリした目覚め", desc: "朝からパッと即座に動き出せる快感。", t: [2,2,0,0,1,1] },
+  { id: 20, cat: 0, title: "どこまでも歩ける足腰", desc: "歳を重ねても自由に旅する足。", t: [2,2,0,1,0,1] },
+  { id: 21, cat: 0, title: "痛みやコリのない快適さ", desc: "慢性的な不調がゼロの日常。", t: [3,1,0,0,1,0] },
+  { id: 22, cat: 0, title: "食欲のスマートな制御", desc: "暴飲暴食を防ぐ揺るぎない自制心。", t: [1,2,0,0,0,2] },
+  { id: 23, cat: 0, title: "鋭く豊かな五感", desc: "微細な変化や香りに感動する感度。", t: [0,1,0,0,3,0] },
+  { id: 24, cat: 0, title: "不調を察知する感覚", desc: "限界の前に体のSOSに気づく力。", t: [2,1,0,0,0,2] },
+  { id: 25, cat: 0, title: "ハリのある通る声", desc: "想いを真っ直ぐ相手に届ける声帯。", t: [0,1,2,1,1,1] },
+  { id: 26, cat: 0, title: "巡りの良い温かい体", desc: "冷えやだるさと無縁の血流。", t: [2,0,0,1,1,1] },
+  { id: 27, cat: 0, title: "霧が晴れたような集中力", desc: "明晰に思考が冴えわたる脳。", t: [0,1,0,2,1,2] },
+  { id: 28, cat: 0, title: "嗜好品への節度", desc: "お酒や甘いものに依存しない体質。", t: [1,2,0,0,1,1] },
+  { id: 29, cat: 0, title: "アレルギーのない自由", desc: "花粉や食べ物を気にせず過ごす快適さ。", t: [2,2,0,0,0,1] },
+  { id: 30, cat: 0, title: "野生の順応性", desc: "どんな環境や硬いベッドでも平気な体。", t: [1,2,0,2,0,1] },
+
+  // 2. 人間関係と愛情 (31〜60)
+  { id: 31, cat: 1, title: "無条件の愛情", desc: "存在そのものを愛される絶対的な安心感。", t: [2,0,3,0,0,0] },
+  { id: 32, cat: 1, title: "一生モノの親友", desc: "魂レベルで本音を語り合える戦友。", t: [0,0,3,0,1,0] },
+  { id: 33, cat: 1, title: "家族との温かい時間", desc: "最期に最も思い出すかけがえのない絆。", t: [1,0,3,0,0,0] },
+  { id: 34, cat: 1, title: "パートナーの信頼", desc: "人生という旅の最高の相棒。", t: [1,0,3,0,0,1] },
+  { id: 35, cat: 1, title: "悔いのない親孝行", desc: "元気なうちに感謝を伝え合う時間。", t: [1,0,3,0,1,0] },
+  { id: 36, cat: 1, title: "愛される人徳", desc: "周囲が自然と手を差し伸べてくれる魅力。", t: [1,0,3,0,1,1] },
+  { id: 37, cat: 1, title: "過去を許す心", desc: "怒りや恨みを手放す圧倒的な器。", t: [0,1,2,0,2,0] },
+  { id: 38, cat: 1, title: "心地よい距離感", desc: "互いの境界線を尊重し合う知恵。", t: [1,2,1,0,1,0] },
+  { id: 39, cat: 1, title: "メンターとの出会い", desc: "進むべき道を示してくれる師の存在。", t: [0,0,2,3,0,0] },
+  { id: 40, cat: 1, title: "精神的自立", desc: "一人の時間も満たされている強さ。", t: [0,3,0,0,2,0] },
+  { id: 41, cat: 1, title: "弱音を吐ける場所", desc: "仮面を脱いで泣き言を言える理解者。", t: [2,0,3,0,0,0] },
+  { id: 42, cat: 1, title: "沈黙が心地よい関係", desc: "無理に話さなくても安らぐ空気感。", t: [1,1,2,0,2,0] },
+  { id: 43, cat: 1, title: "バカ笑いできる仲間", desc: "童心に帰って笑い合える輪。", t: [0,0,3,1,1,0] },
+  { id: 44, cat: 1, title: "次世代への継承", desc: "知恵や優しさを若い世代へ手渡す喜び。", t: [0,0,2,1,1,1] },
+  { id: 45, cat: 1, title: "天性の愛嬌", desc: "初対面の心も一瞬で解きほぐす温かいオーラ。", t: [0,0,2,1,1,1] },
+  { id: 46, cat: 1, title: "嫌われる勇気", desc: "全員に好かれず自分を守る強い信念。", t: [1,3,0,1,0,0] },
+  { id: 47, cat: 1, title: "純粋な優しさ", desc: "損得勘定ゼロで動ける美しい心。", t: [0,0,3,0,2,0] },
+  { id: 48, cat: 1, title: "旧友の縁", desc: "何年経っても一瞬で当時に戻れる関係。", t: [1,0,3,0,1,0] },
+  { id: 49, cat: 1, title: "ペットとの無垢な絆", desc: "言葉を超えて癒やし合う幸福。", t: [1,0,2,0,2,0] },
+  { id: 50, cat: 1, title: "素直に頼る才能", desc: "一人で抱えず「力を貸して」と言える力。", t: [1,0,2,1,0,1] },
+  { id: 51, cat: 1, title: "他人の幸せを祝う心", desc: "嫉妬せず拍手を送れる豊かな心。", t: [0,0,2,1,2,0] },
+  { id: 52, cat: 1, title: "ユーモアの機転", desc: "ピンチを笑いに変えるスマートさ。", t: [0,1,2,0,1,1] },
+  { id: 53, cat: 1, title: "別れを糧にする成熟", desc: "去った人の思い出も感謝に変える深さ。", t: [0,1,2,0,2,0] },
+  { id: 54, cat: 1, title: "揺るぎない信用", desc: "「この人の言うことなら」と頼られる生き様。", t: [1,0,2,0,1,2] },
+  { id: 55, cat: 1, title: "圧倒的な傾聴力", desc: "すべてを受け止めて救う包容力。", t: [0,0,3,0,1,1] },
+  { id: 56, cat: 1, title: "悪縁を断ち切る決断", desc: "自分を削る関係から離れる強さ。", t: [2,3,0,0,0,1] },
+  { id: 57, cat: 1, title: "ご近所の繋がり", desc: "いざという時に助け合えるセーフティネット。", t: [2,1,2,0,0,0] },
+  { id: 58, cat: 1, title: "尊敬できるライバル", desc: "限界を引き上げてくれる好敵手。", t: [0,0,1,3,0,1] },
+  { id: 59, cat: 1, title: "素直な愛情表現", desc: "好きや感謝を言葉やハグで届ける力。", t: [0,0,3,0,2,0] },
+  { id: 60, cat: 1, title: "必要とされる実感", desc: "「あなたがいてくれてよかった」の誇り。", t: [0,0,3,1,1,0] },
+
+  // 3. 時間と自由 (61〜90)
+  { id: 61, cat: 2, title: "完全な自由時間", desc: "自分のためだけに使える純粋な時間。", t: [0,3,0,0,1,1] },
+  { id: 62, cat: 2, title: "自己決定権", desc: "人生のハンドルを自分で握る権利。", t: [0,3,0,1,0,1] },
+  { id: 63, cat: 2, title: "今に没頭する集中力", desc: "過去や未来の不安から離れる感覚。", t: [0,1,0,0,3,0] },
+  { id: 64, cat: 2, title: "引き算の勇気", desc: "大切なことに集中するため他を手放す力。", t: [0,2,0,1,0,2] },
+  { id: 65, cat: 2, title: "創造的な余白", desc: "新しいアイデアが湧き出る心の空白。", t: [1,2,0,0,2,0] },
+  { id: 66, cat: 2, title: "静寂の朝時間", desc: "誰にも邪魔されず自分を整えるひととき。", t: [1,2,0,1,1,1] },
+  { id: 67, cat: 2, title: "十分な寿命", desc: "やりたいことをすべてやり切る長い時間。", t: [3,0,1,1,0,0] },
+  { id: 68, cat: 2, title: "絶妙なタイミング", desc: "「今だ」というチャンスを掴む運と感覚。", t: [0,1,0,2,0,2] },
+  { id: 69, cat: 2, title: "縛られない生き方", desc: "世間の常識から抜け出すマイルール。", t: [0,3,0,1,1,0] },
+  { id: 70, cat: 2, title: "季節を感じる感性", desc: "自然の変化に立ち止まって感動するゆとり。", t: [1,1,0,0,3,0] },
+  { id: 71, cat: 2, title: "場所の自由", desc: "気に入った街や海外へ気軽に拠点を移す身軽さ。", t: [0,3,0,2,1,0] },
+  { id: 72, cat: 2, title: "罪悪感ゼロの昼寝", desc: "真っ昼間から堂々と休める極上のゆとり。", t: [2,2,0,0,1,0] },
+  { id: 73, cat: 2, title: "予定のない贅沢", desc: "「何もない日」を心から楽しめる状態。", t: [1,2,0,0,2,0] },
+  { id: 74, cat: 2, title: "スマートな断り力", desc: "角を立てずに自分の時間を守る技術。", t: [1,3,0,0,0,2] },
+  { id: 75, cat: 2, title: "深夜の独り占め", desc: "世界が寝静まった夜更けの自由。", t: [0,3,0,0,2,0] },
+  { id: 76, cat: 2, title: "通勤ストレスゼロ", desc: "満員電車や無駄な拘束のない日常。", t: [2,2,0,0,0,2] },
+  { id: 77, cat: 2, title: "即座の旅立ち", desc: "パスポートひとつで非日常へ飛び出すフットワーク。", t: [0,3,0,2,1,0] },
+  { id: 78, cat: 2, title: "自分の呼吸のペース", desc: "他人の時計に急かされない環境。", t: [1,3,0,0,1,0] },
+  { id: 79, cat: 2, title: "まとまった長期休暇", desc: "日常を完全に忘れてリセットする自由。", t: [1,2,1,1,1,0] },
+  { id: 80, cat: 2, title: "通知オフの解放感", desc: "返信の強迫観念から離れるデジタルデトックス。", t: [1,3,0,0,1,0] },
+  { id: 81, cat: 2, title: "時間をずらす快適さ", desc: "行列やラッシュと無縁で過ごす特権。", t: [1,2,0,0,1,2] },
+  { id: 82, cat: 2, title: "人生の選び直し", desc: "何歳からでも新しい道へ方向転換できる権利。", t: [0,3,0,2,0,0] },
+  { id: 83, cat: 2, title: "過去を悔やまない軽やかさ", desc: "終わった時間に執着しない心。", t: [1,1,0,2,0,1] },
+  { id: 84, cat: 2, title: "スマホを見ない無為", desc: "ただ流れる雲や雨音をぼーっと味わう贅沢。", t: [0,2,0,0,3,0] },
+  { id: 85, cat: 2, title: "毎日の小さな儀式", desc: "自分をリセットできる定番の聖域。", t: [2,1,0,0,2,0] },
+  { id: 86, cat: 2, title: "完全な素の時間", desc: "評価の目を気にせず好き勝手に過ごす瞬間。", t: [1,3,0,0,1,0] },
+  { id: 87, cat: 2, title: "塊の時間", desc: "朝から晩まで好きな創作に没頭できる一日。", t: [0,2,0,2,2,0] },
+  { id: 88, cat: 2, title: "四季を祝う暮らし", desc: "行事や旬の小さな喜びを逃さず味わうゆとり。", t: [1,0,1,0,3,0] },
+  { id: 89, cat: 2, title: "老いを楽しむ心", desc: "年齢を重ねることをワクワクして待てる感覚。", t: [2,1,1,1,1,0] },
+  { id: 90, cat: 2, title: "段取りの瞬発力", desc: "面倒なことをサッと片付け遊び時間を生む力。", t: [0,1,0,2,0,3] },
+
+  // 4. 精神性と心のあり方 (91〜120)
+  { id: 91, cat: 3, title: "揺るぎない自己肯定感", desc: "欠点も含めて自分を丸ごと愛せる安心感。", t: [2,1,1,0,1,0] },
+  { id: 92, cat: 3, title: "心の平穏", desc: "外が荒れても湖面のように静かな安定感。", t: [2,1,0,0,2,0] },
+  { id: 93, cat: 3, title: "自分軸", desc: "世間に流されず自分で決断できる背骨。", t: [0,3,0,1,1,0] },
+  { id: 94, cat: 3, title: "素直さ", desc: "変な意地を張らず謝れる柔軟性。", t: [0,0,2,2,0,1] },
+  { id: 95, cat: 3, title: "枯れない好奇心", desc: "未知の世界へ目を輝かせて飛び込む若さ。", t: [0,1,0,3,1,0] },
+  { id: 96, cat: 3, title: "軽やかな楽観主義", desc: "「まあどうにかなる」と笑って進む才能。", t: [1,1,0,2,0,0] },
+  { id: 97, cat: 3, title: "レジリエンス", desc: "挫折しても元の形に戻る心のバネ。", t: [2,1,0,2,0,0] },
+  { id: 98, cat: 3, title: "ユーモア", desc: "人生のピンチさえ面白がる知性。", t: [0,1,2,0,2,0] },
+  { id: 99, cat: 3, title: "比較しない心", desc: "他人の成功に焦らず自分の幸せに集中する豊かさ。", t: [1,2,0,0,2,0] },
+  { id: 100, cat: 3, title: "誠実さ", desc: "良心に恥じない曇りのない生き方。", t: [1,0,2,0,2,0] },
+  { id: 101, cat: 3, title: "セルフケア力", desc: "落ち込んでも自分で機嫌を取れる技術。", t: [2,2,0,0,1,1] },
+  { id: 102, cat: 3, title: "曖昧さに耐える器", desc: "すぐ答えが出なくてもじっくり待てる成熟。", t: [1,1,0,1,2,0] },
+  { id: 103, cat: 3, title: "プライドを捨てる力", desc: "学ぶためなら潔く頭を下げられる強さ。", t: [0,1,1,2,0,1] },
+  { id: 104, cat: 3, title: "怒りを受け流す余裕", desc: "カッとなっても一呼吸置ける大人の対応。", t: [1,1,1,0,2,0] },
+  { id: 105, cat: 3, title: "直感を信じる力", desc: "「なんとなくこっちだ」という予感を信頼する感覚。", t: [0,2,0,1,2,0] },
+  { id: 106, cat: 3, title: "小さな幸せに気づく感度", desc: "何気ない日常に感動できる豊かな心。", t: [1,0,1,0,3,0] },
+  { id: 107, cat: 3, title: "「まあいいか」の緩さ", desc: "完璧主義の呪縛を解く優しさ。", t: [2,2,0,0,1,0] },
+  { id: 108, cat: 3, title: "孤独を恐れない芯", desc: "群れずに自分の道を歩ける太い軸。", t: [0,3,0,1,1,0] },
+  { id: 109, cat: 3, title: "深い謙虚さ", desc: "成功しても「おかげさま」を忘れない美しい姿勢。", t: [0,0,2,1,2,0] },
+  { id: 110, cat: 3, title: "嫉妬のエネルギー化", desc: "羨ましさを成長の燃料に変える賢さ。", t: [0,0,0,3,0,2] },
+  { id: 111, cat: 3, title: "動じない貫禄", desc: "気まずさを恐れず静かに構えていられる落ち着き。", t: [1,2,0,0,2,0] },
+  { id: 112, cat: 3, title: "純粋な遊び心", desc: "子どものように無邪気にワクワクする余白。", t: [0,2,1,1,2,0] },
+  { id: 113, cat: 3, title: "トラブルを楽しむ心", desc: "予定外の展開を「面白い」と笑える柔軟さ。", t: [0,2,0,3,1,0] },
+  { id: 114, cat: 3, title: "弱さをさらけ出す勇気", desc: "「苦手だから助けて」と言える人間味。", t: [1,1,2,0,1,0] },
+  { id: 115, cat: 3, title: "揺るぎない美意識", desc: "カッコ悪いことはしないという静かな矜持。", t: [0,2,0,0,3,0] },
+  { id: 116, cat: 3, title: "不屈の希望", desc: "暗い状況でも光が差すと信じ抜く灯火。", t: [1,0,0,3,1,0] },
+  { id: 117, cat: 3, title: "偏見のない目", desc: "ラベルを外し物事の本質をフラットに見る冷静さ。", t: [0,2,0,1,2,1] },
+  { id: 118, cat: 3, title: "メタ認知の視点", desc: "感情に飲み込まれず自分を上から見る力。", t: [1,2,0,1,1,1] },
+  { id: 119, cat: 3, title: "美しい言葉選び", desc: "丁寧で的確な言葉で自分と相手を守る品性。", t: [0,0,1,0,3,1] },
+  { id: 120, cat: 3, title: "心の防波堤", desc: "他人の不機嫌を吸い込まず弾き返す強さ。", t: [3,2,0,0,0,0] },
+
+  // 5. 経験と挑戦 (121〜150)
+  { id: 121, cat: 4, title: "最初の挑戦", desc: "やらなかった後悔を残さない記念すべき一歩。", t: [0,1,0,3,0,0] },
+  { id: 122, cat: 4, title: "異国の旅", desc: "常識を壊してくれる未知の文化体験。", t: [0,2,0,2,2,0] },
+  { id: 123, cat: 4, title: "本音の対話", desc: "建前を捨てて魂ごと語り合った夜。", t: [0,1,3,0,1,0] },
+  { id: 124, cat: 4, title: "胸を焦がす目標", desc: "毎日が楽しみになる人生の灯火。", t: [0,0,0,3,1,1] },
+  { id: 125, cat: 4, title: "没頭できる趣味", desc: "寝食を忘れて夢中になれるライフワーク。", t: [0,2,0,1,2,0] },
+  { id: 126, cat: 4, title: "手痛い挫折", desc: "人間の深みを作ってくれる尊い糧。", t: [0,0,2,2,1,0] },
+  { id: 127, cat: 4, title: "安全圏からの脱出", desc: "保証のない世界へ身を投じるスリル。", t: [0,1,0,3,1,0] },
+  { id: 128, cat: 4, title: "芸術の感動", desc: "音楽や美術に触れて涙が溢れる魂の震え。", t: [0,0,1,0,3,0] },
+  { id: 129, cat: 4, title: "黄金の記憶", desc: "かけがえのない瞬間を形に残す記録。", t: [1,0,2,0,2,0] },
+  { id: 130, cat: 4, title: "圧倒的な達成感", desc: "継続の力で壁を乗り越えた自信。", t: [0,0,0,3,0,2] },
+  { id: 131, cat: 4, title: "ゼロからの創造", desc: "頭の中のアイデアを現実の形にする喜び。", t: [0,1,0,2,2,1] },
+  { id: 132, cat: 4, title: "常識が覆る衝撃", desc: "世界の見え方が180度変わる出会い。", t: [0,1,0,3,2,0] },
+  { id: 133, cat: 4, title: "盛大な恥", desc: "プライドが砕け散って自由を手に入れた瞬間。", t: [0,2,0,3,0,0] },
+  { id: 134, cat: 4, title: "制御不能な恋", desc: "損得も忘れて誰かを強く想い焦がれた記憶。", t: [0,0,3,0,2,0] },
+  { id: 135, cat: 4, title: "絶景との遭遇", desc: "自分の悩みが小さくなる大自然の雄大さ。", t: [0,1,0,1,3,0] },
+  { id: 136, cat: 4, title: "限界突破", desc: "「もう無理」の先を突き破ったピーク体験。", t: [0,0,0,3,0,2] },
+  { id: 137, cat: 4, title: "誰かの転機", desc: "自分の言葉が誰かの人生を動かした手応え。", t: [0,0,3,1,1,0] },
+  { id: 138, cat: 4, title: "名作との遭遇", desc: "生き方ごと揺さぶられる本や映画との出会い。", t: [0,1,0,1,3,0] },
+  { id: 139, cat: 4, title: "武勇伝への昇華", desc: "かつての苦い失敗を笑い話にする余裕。", t: [0,1,2,1,1,0] },
+  { id: 140, cat: 4, title: "一人旅の冒険", desc: "直感と度胸だけを頼りに進む孤独なスリル。", t: [0,3,0,3,0,0] },
+  { id: 141, cat: 4, title: "大胆な環境変化", desc: "人生のページを破り新しい章を始める決断。", t: [0,2,0,3,0,0] },
+  { id: 142, cat: 4, title: "ライブの熱狂", desc: "何千人と音を全身で浴びるその場限りの興奮。", t: [0,0,2,0,3,0] },
+  { id: 143, cat: 4, title: "美食の感動", desc: "一口食べて言葉を失う極上の味との出会い。", t: [0,0,1,0,3,1] },
+  { id: 144, cat: 4, title: "手作りの手応え", desc: "自分で修理やDIYをして暮らす豊かさ。", t: [1,1,0,1,2,1] },
+  { id: 145, cat: 4, title: "純粋な奉仕", desc: "お金を介さず人の温かさに触れる時間。", t: [0,0,3,1,1,0] },
+  { id: 146, cat: 4, title: "真剣勝負のヒリヒリ感", desc: "言い訳できない舞台ですべてを出し切る緊張。", t: [0,0,0,3,0,2] },
+  { id: 147, cat: 4, title: "大人の悪ふざけ", desc: "仲間と泥だらけになって笑い転げる時間。", t: [0,1,2,1,1,0] },
+  { id: 148, cat: 4, title: "セレンディピティ", desc: "寄り道やハプニングが呼ぶ奇跡の出会い。", t: [0,2,1,1,2,0] },
+  { id: 149, cat: 4, title: "喪失が教えた優しさ", desc: "別れの痛みを越えて手に入る心の器。", t: [0,0,2,1,2,0] },
+  { id: 150, cat: 4, title: "人生最高の1日", desc: "思い出すだけで何度でも温かくなる記憶。", t: [1,0,2,0,3,0] },
+
+  // 6. 仕事と自己実現 (151〜180)
+  { id: 151, cat: 5, title: "やりがいのある仕事", desc: "能力を活かして社会の役に立つ実感。", t: [0,0,1,2,0,2] },
+  { id: 152, cat: 5, title: "ワークライフバランス", desc: "私生活の時間を確実に守る働き方。", t: [2,2,1,0,0,0] },
+  { id: 153, cat: 5, title: "専門スキル", desc: "どこへ行っても自分の腕で生き抜く武器。", t: [1,2,0,1,0,2] },
+  { id: 154, cat: 5, title: "プロの信用", desc: "「この人に任せれば安心」という無形の資産。", t: [1,0,2,0,0,2] },
+  { id: 155, cat: 5, title: "社会貢献の実感", desc: "自分の働きが未来の誰かの笑顔に繋がる誇り。", t: [0,0,3,1,1,0] },
+  { id: 156, cat: 5, title: "最高の職場環境", desc: "ストレスなく純粋に打ち込める快適さ。", t: [2,0,2,0,0,1] },
+  { id: 157, cat: 5, title: "誇り高い役割", desc: "大切な人に堂々と語れる自分の仕事。", t: [0,0,1,2,1,1] },
+  { id: 158, cat: 5, title: "天職との出会い", desc: "息をするように自然と没頭できる分野。", t: [0,1,0,3,1,0] },
+  { id: 159, cat: 5, title: "リーダーシップ", desc: "熱量で人の心を動かしチームを勝たせる力。", t: [0,0,1,2,0,2] },
+  { id: 160, cat: 5, title: "個人の人間的魅力", desc: "肩書きを外しても慕われる自分の価値。", t: [0,1,3,0,1,0] },
+  { id: 161, cat: 5, title: "個人のブランド力", desc: "「あなたにお願いしたい」と指名される力。", t: [0,2,0,2,0,2] },
+  { id: 162, cat: 5, title: "プロの相棒", desc: "本気で議論し高め合える最高の戦友。", t: [0,0,3,1,0,1] },
+  { id: 163, cat: 5, title: "裁量権の自由", desc: "自分の頭で考え責任を持って舵を切る権利。", t: [0,3,0,1,0,2] },
+  { id: 164, cat: 5, title: "正当な報酬", desc: "努力と成果が納得の対価で返ってくる環境。", t: [1,0,0,1,0,3] },
+  { id: 165, cat: 5, title: "人間本質力", desc: "AI時代にも奪われない共感力と創造力。", t: [1,1,1,1,1,1] },
+  { id: 166, cat: 5, title: "ゲーム感覚の仕事", desc: "義務ではなく攻略するワクワク感。", t: [0,2,0,2,1,1] },
+  { id: 167, cat: 5, title: "顧客からの直接の感謝", desc: "目の前の人を救い「ありがとう」と言われる喜び。", t: [0,0,3,1,1,0] },
+  { id: 168, cat: 5, title: "複数収入源の分散", desc: "一つの会社に運命を握られない安心感。", t: [2,2,0,0,0,2] },
+  { id: 169, cat: 5, title: "合意を作る交渉力", desc: "対立する意見から最高の着地点を見出す知性。", t: [0,1,1,1,0,3] },
+  { id: 170, cat: 5, title: "即決の決断スピード", desc: "リスクを引き受けてサッと一歩目を踏み出す力。", t: [0,1,0,2,0,2] },
+  { id: 171, cat: 5, title: "世に残る実績", desc: "自分が去った後も形として残る仕事の足跡。", t: [0,0,0,2,2,1] },
+  { id: 172, cat: 5, title: "引き際の美学", desc: "執着せず最も美しいタイミングでバトンを渡す潔さ。", t: [0,2,1,0,2,0] },
+  { id: 173, cat: 5, title: "プロ人脈", desc: "困ったときに知恵を貸してくれる多様な繋がり。", t: [1,0,2,1,0,2] },
+  { id: 174, cat: 5, title: "最高の仕事道具", desc: "触れるだけでスイッチが入る洗練された愛用品。", t: [0,1,0,0,3,1] },
+  { id: 175, cat: 5, title: "オン・オフの切り替え", desc: "業務終了と同時にプライベートに戻る技。", t: [2,2,1,0,0,0] },
+  { id: 176, cat: 5, title: "修羅場の問題解決力", desc: "ピンチほど頭が冴え渡る頼もしさ。", t: [1,0,0,2,0,3] },
+  { id: 177, cat: 5, title: "好きと得意の掛け算", desc: "情熱と強みが交差する場所で稼ぐ工夫。", t: [0,2,0,2,1,1] },
+  { id: 178, cat: 5, title: "育成の喜び", desc: "後輩の才能を開花させ羽ばたかせる指導力。", t: [0,0,3,1,0,1] },
+  { id: 179, cat: 5, title: "グローバルなタフさ", desc: "世界中のどこでも価値を生み出せる視点。", t: [0,2,0,3,0,1] },
+  { id: 180, cat: 5, title: "生涯現役の活動", desc: "死ぬまで楽しく続けられる一生モノのライフワーク。", t: [0,2,1,2,1,0] },
+
+  // 7. お金と経済的基盤 (181〜210)
+  { id: 181, cat: 6, title: "完全な経済的自立", desc: "嫌な我慢を一切しなくて済む自由（FIRE）。", t: [1,3,0,0,0,2] },
+  { id: 182, cat: 6, title: "衣食住の絶対的安定", desc: "「明日に困らない」という土台の安心。", t: [3,0,0,0,0,2] },
+  { id: 183, cat: 6, title: "投資の知恵", desc: "世界の成長に乗ってお金を働かせるリテラシー。", t: [1,1,0,1,0,3] },
+  { id: 184, cat: 6, title: "生きたお金の使い方", desc: "経験や大切な人の笑顔に投じる豊かなセンス。", t: [0,0,2,1,2,1] },
+  { id: 185, cat: 6, title: "借金ゼロの身軽さ", desc: "将来の重荷がない健全な家計。", t: [3,1,0,0,0,2] },
+  { id: 186, cat: 6, title: "不労所得の仕組み", desc: "休んでいる間もチャリンと収入を生む資産。", t: [2,2,0,0,0,2] },
+  { id: 187, cat: 6, title: "富の社会還元", desc: "誰かの夢や社会へ惜しみなく贈る幸福感。", t: [0,0,3,0,2,0] },
+  { id: 188, cat: 6, title: "「足るを知る」感覚", desc: "自分にとって十分なゴールを知る心。", t: [1,1,0,0,2,1] },
+  { id: 189, cat: 6, title: "防衛資金の盾", desc: "予期せぬトラブルを数年単位で守り抜く現金。", t: [3,0,0,0,0,2] },
+  { id: 190, cat: 6, title: "本質を見抜く審美眼", desc: "安さに飛びつかず一生モノを選ぶ目。", t: [0,1,0,0,2,2] },
+  { id: 191, cat: 6, title: "値札を見ない買い物", desc: "金額のストレスなく欲しいものを即決する感覚。", t: [1,2,0,0,1,2] },
+  { id: 192, cat: 6, title: "複利の長期思考", desc: "10年単位でじっくり大きな果実を育てる忍耐。", t: [2,0,0,0,0,3] },
+  { id: 193, cat: 6, title: "スマートに奢る度量", desc: "後輩に恩着せがましくなくご馳走する余裕。", t: [0,0,2,0,1,2] },
+  { id: 194, cat: 6, title: "低コストの生活力", desc: "少ないお金でも工夫して豊かに生きる力。", t: [2,2,0,0,1,1] },
+  { id: 195, cat: 6, title: "クリーンな信用", desc: "支払いも契約も完璧な高い信用スコア。", t: [2,0,1,0,0,2] },
+  { id: 196, cat: 6, title: "相場に動じないメンタル", desc: "資産の上下に一喜一憂しない鋼の心。", t: [2,1,0,0,1,1] },
+  { id: 197, cat: 6, title: "惜しみない自己投資", desc: "本や健康には迷わずお金を出せる決断力。", t: [0,0,0,3,0,2] },
+  { id: 198, cat: 6, title: "制度を味方につける知恵", desc: "ルールの中で賢く手元にお金を残す技。", t: [2,0,0,0,0,3] },
+  { id: 199, cat: 6, title: "分散収入の安心", desc: "いくつもの蛇口からお金が入るルート。", t: [2,1,0,1,0,2] },
+  { id: 200, cat: 6, title: "質実剛健の誇り", desc: "他人の見栄のための出費を一切必要としない心。", t: [1,1,0,0,2,1] },
+  { id: 201, cat: 6, title: "金銭感覚の合う家庭", desc: "お金の価値観がピタリと一致する平和。", t: [2,0,3,0,0,1] },
+  { id: 202, cat: 6, title: "詐欺を見抜く防御知性", desc: "甘い誘惑を直感と知識で弾く力。", t: [3,0,0,0,0,2] },
+  { id: 203, cat: 6, title: "贅沢のツボ", desc: "自分の一番心が潤うお金の使い道を知ること。", t: [0,2,0,0,3,1] },
+  { id: 204, cat: 6, title: "時間を買う合理性", desc: "家電や時短サービスで人生の時間を買い戻す技。", t: [0,2,0,0,0,3] },
+  { id: 205, cat: 6, title: "迷惑をかけない備え", desc: "人生の最期まで自分の資金で完結させる準備。", t: [3,1,1,0,0,1] },
+  { id: 206, cat: 6, title: "トレンドを読む経済眼", desc: "時代の変化を肌で捉え次に備えるアンテナ。", t: [0,0,0,2,0,3] },
+  { id: 207, cat: 6, title: "完璧な資産分散", desc: "どんな経済危機でも生き残る盤石のポートフォリオ。", t: [2,0,0,0,0,3] },
+  { id: 208, cat: 6, title: "クリーンな人間関係", desc: "金の貸し借りと無縁で純粋に繋がる友情。", t: [1,1,3,0,0,0] },
+  { id: 209, cat: 6, title: "理不尽にNOと言える資金", desc: "いつでも辞表を出せる心の防波堤。", t: [2,3,0,0,0,1] },
+  { id: 210, cat: 6, title: "健全な魂", desc: "数字ばかり追わず人情や美しさを尊ぶ心。", t: [0,0,2,0,3,0] },
+
+  // 8. 環境と教養 (211〜240)
+  { id: 211, cat: 7, title: "自分だけの城（住まい）", desc: "心からリラックスして充電できる安全な空間。", t: [3,1,0,0,1,0] },
+  { id: 212, cat: 7, title: "読書と学びの習慣", desc: "人類の叡智と対話し思考をアップデートする日々。", t: [0,1,0,2,2,0] },
+  { id: 213, cat: 7, title: "実践的な語学力", desc: "世界中の人と直接笑い合える言葉の鍵。", t: [0,1,1,2,0,1] },
+  { id: 214, cat: 7, title: "静かなデジタル環境", desc: "SNSの騒音から離れ現実の手触りを取り戻す空間。", t: [1,2,0,0,2,0] },
+  { id: 215, cat: 7, title: "豊かな自然環境", desc: "本能が深く癒やされる森や海のそばの暮らし。", t: [1,1,0,0,3,0] },
+  { id: 216, cat: 7, title: "知的な書斎空間", desc: "いつでも思考の旅に出られる本棚とストック。", t: [0,2,0,1,2,0] },
+  { id: 217, cat: 7, title: "美術や文化に触れる環境", desc: "本物の美しさに日常で触れ感性を磨く場所。", t: [0,0,0,1,3,0] },
+  { id: 218, cat: 7, title: "整理整頓された部屋", desc: "空気が澄み自然と集中力が湧くクリーンな空間。", t: [2,1,0,0,1,1] },
+  { id: 219, cat: 7, title: "歴史と哲学の教養", desc: "目先のニュースに惑わされない俯瞰の視点。", t: [0,1,0,1,3,0] },
+  { id: 220, cat: 7, title: "成熟した市民社会", desc: "誰もが安心して明日を信じられる平和の土台。", t: [3,0,2,0,0,0] },
+  { id: 221, cat: 7, title: "隠れ家カフェ", desc: "ほっと呼吸ができ素の自分に戻れる第三の居場所。", t: [1,2,0,0,2,0] },
+  { id: 222, cat: 7, title: "朝日が差し込む部屋", desc: "太陽の光で自然に目が覚める心地よい構造。", t: [2,1,0,0,2,0] },
+  { id: 223, cat: 7, title: "最高の音環境", desc: "お気に入りのプレイリストで心を調律できる聖域。", t: [0,2,0,0,3,0] },
+  { id: 224, cat: 7, title: "洗練されたインテリア", desc: "寝具や香りで暮らしの質を底上げする空間。", t: [1,0,0,0,3,1] },
+  { id: 225, cat: 7, title: "治安が良く穏やかな街", desc: "優しい時間が流れる理想の生活圏。", t: [3,0,1,0,1,0] },
+  { id: 226, cat: 7, title: "ルーツの理解", desc: "故郷や家族の歴史を知り自分が立つ場所を知る安心。", t: [1,0,2,0,2,0] },
+  { id: 227, cat: 7, title: "経済を読み解く知性", desc: "ニュースの裏側の構造を自分事として理解する力。", t: [1,0,0,2,0,2] },
+  { id: 228, cat: 7, title: "技術を面白がる好奇心", desc: "新しいツールを怖れず味方につける柔軟性。", t: [0,1,0,3,0,2] },
+  { id: 229, cat: 7, title: "自炊の生活力", desc: "旬の食材を選び自分の手で温かい食事を作る豊かさ。", t: [2,1,0,0,2,1] },
+  { id: 230, cat: 7, title: "観葉植物のある暮らし", desc: "視界の端に小さな緑があるだけで和む空間。", t: [1,0,0,0,3,0] },
+  { id: 231, cat: 7, title: "メディアリテラシー", desc: "煽りやフェイクに振り回されない防御力。", t: [2,2,0,0,0,2] },
+  { id: 232, cat: 7, title: "かかりつけの専門医", desc: "信頼して任せられるプロと繋がっている安心。", t: [2,0,2,0,0,2] },
+  { id: 233, cat: 7, title: "ノートの対話習慣", desc: "モヤモヤを紙に書き出し心を整える知的儀式。", t: [1,2,0,1,2,0] },
+  { id: 234, cat: 7, title: "大人の品格", desc: "どんな場でも堂々と敬意を払って振る舞えるマナー。", t: [0,0,2,0,2,2] },
+  { id: 235, cat: 7, title: "現実的な防災力", desc: "いざという時に自分と家族を守る備えと知識。", t: [3,0,1,0,0,2] },
+  { id: 236, cat: 7, title: "綺麗な水と空気", desc: "生命を根底から支えてくれる究極の環境。", t: [3,0,0,0,2,0] },
+  { id: 237, cat: 7, title: "反対意見を受け入れる柔軟さ", desc: "異なる考えも頭ごなしに否定しない知性。", t: [0,1,1,2,1,0] },
+  { id: 238, cat: 7, title: "少数精鋭の愛用品", desc: "本当に気に入ったモノだけに囲まれる暮らし。", t: [0,2,0,0,3,1] },
+  { id: 239, cat: 7, title: "座右の銘", desc: "迷ったときに自分を正しい場所へ連れ戻す言葉。", t: [1,1,0,1,3,0] },
+  { id: 240, cat: 7, title: "伝統への敬意", desc: "先人たちの知恵や美しさを尊び次代へ繋ぐ心。", t: [1,0,1,0,3,0] }
+];
+
+const TRAIT_NAMES = ["防衛・安定", "自律・自由", "愛着・絆", "成長・挑戦", "内省・美学", "現実・実利"];
+
+// ==========================================
+// 2. 質問バリエーション（32パターン）
+// ==========================================
+const PROMPTS_NORMAL = [
+  { badge: "DESIRE", title: "神様が気まぐれで1つだけ完璧に叶えてくれるなら？", sub: "今いちばん渇望しているものを選んでください。" },
+  { badge: "ENVY", title: "他人が持っていて、密かに一番羨ましいと思うのは？", sub: "普段は隠している嫉妬や憧れを正直に。" },
+  { badge: "MISSING", title: "今のあなたの人生に「決定的に足りていない」と感じるのは？", sub: "心の隙間を埋めてくれそうな1つを選択。" },
+  { badge: "PRIDE", title: "もし1億円を積まれても、絶対に売り渡したくないのは？", sub: "あなたの中でプライスレスな誇りを守ってください。" },
+  { badge: "JOURNEY", title: "見知らぬ街へ一人で移住するとき、真っ先に持っていきたいのは？", sub: "新しい人生の相棒を1つ選んでください。" },
+  { badge: "NIGHT", title: "深夜2時、眠れない夜にふと「これが欲しいな」と思うのは？", sub: "理性がゆるむ夜の思考で選んでください。" },
+  { badge: "LEGACY", title: "大切な人にたった1つだけ譲り渡せるとしたら？", sub: "あなたが本当に価値があると信じるものを選択。" },
+  { badge: "CRISIS", title: "すべてを失う大ピンチのとき、最後まで手放したくない切り札は？", sub: "あなたの最後の砦を選んでください。" },
+  { badge: "REBORN", title: "記憶を1つだけ持って異世界へ転生するなら、どれを携える？", sub: "来世でも武器になりそうな1つを選んでください。" },
+  { badge: "AI ERA", title: "AIが人生のすべてを最適化する時代。これだけは自分の手で握りたいのは？", sub: "機械に譲れない人間らしさを選択。" },
+  { badge: "PAST", title: "タイムマシンで「10年前の自分」に1つだけ贈れるとしたら？", sub: "あの頃の自分に一番必要だったものを選択。" },
+  { badge: "FUTURE", title: "「10年後の自分」が今より輝いているために、今日から強化したいのは？", sub: "未来への投資を1つ選んでください。" },
+  { badge: "SECRET", title: "親友にも恋人にも言っていないが、実は一番こだわっているのは？", sub: "誰にも見せない秘密の優先順位を教えてください。" },
+  { badge: "HEALING", title: "心も体もボロボロに疲れた週末。今すぐあなたを救ってくれるのは？", sub: "今のあなたに効く特効薬を1つ選択。" },
+  { badge: "ENCOUNTER", title: "初対面の相手を見たとき、無意識に「この人いいな」と惹かれる要素は？", sub: "あなたが他人に投影している理想を選んでください。" },
+  { badge: "MIRACLE", title: "明日の朝目覚めたら、1つだけステータスがMAXになっていた。どれがいい？", sub: "一番ワクワクするものを選んでください。" },
+  { badge: "SUNDAY", title: "何の予定もない完璧な休日。その中心にあってほしいものは？", sub: "あなたの理想の過ごし方に直結する1つ。" },
+  { badge: "STRENGTH", title: "「これさえあれば、どんな理不尽な世の中でも戦える」と思えるのは？", sub: "あなたにとっての最強の防具または武器を選択。" },
+  { badge: "JEALOUSY", title: "SNSで見かけたとき、思わず画面を閉じてしまうほど眩しいのは？", sub: "感情が揺さぶられるものを直感で。" }
+];
+
+const PROMPTS_DROP = [
+  { badge: "⚠️ 悪魔の生贄", title: "1つを今すぐ捨てなければ、残りの3つが消滅します。何を差し出す？", sub: "【注意】ここでは「最も手放せる（優先度が低い）もの」を選んでください！", mode: "drop" },
+  { badge: "🔪 断捨離の儀式", title: "人生を身軽にするため、この中から1つだけ永久に封印してください。", sub: "【注意】「今の自分には一番不要だ」と思うものを1つ切り捨ててください。", mode: "drop" },
+  { badge: "🛃 人生の税関", title: "「重量オーバーだ。1つ没収する」と言われた。どれを諦める？", sub: "【注意】泣く泣く手放す1つを選んでください。", mode: "drop" },
+  { badge: "🕳️ 記憶の消去", title: "脳の容量を空けるため、1つだけ存在ごと忘れるとしたらどれ？", sub: "【注意】消してもなんとか生きていけそうな1つを選択。", mode: "drop" },
+  { badge: "⚖️ 呪いの天秤", title: "1つを差し出せば、残りの3つに祝福が与えられる。犠牲にするのは？", sub: "【注意】切り捨てる1つを選んでください。", mode: "drop" }
+];
+
+const PROMPTS_RUSH = [
+  { badge: "⚡ 直感スキャン", title: "考えるな！一番最初に目が吸い寄せられたものを掴み取れ！", sub: "計算する前に指を動かしてください！", mode: "rush", sec: 4.5 },
+  { badge: "🔥 緊急脱出", title: "目の前に4つの扉がある。迷わず飛び込むならどれ？", sub: "理性が追いつく前に本能でクリック！", mode: "rush", sec: 5.0 },
+  { badge: "⏱️ 瞬間反射", title: "迷えば消える！今の心が一番反応したワードはどれ？", sub: "制限時間内に直感で選び取ってください！", mode: "rush", sec: 4.0 },
+  { badge: "⚡ 本能テスト", title: "0.1秒で好き嫌いを決めろ！一番「欲しい！」と思ったのは？", sub: "直感スピードが診断結果に影響します！", mode: "rush", sec: 5.0 }
+];
+
+const PROMPTS_FINAL = [
+  { badge: "👑 FINAL QUESTION", title: "これが最後の質問。人生最期の日に「これだけは手に入れてよかった」と微笑みたいのは？", sub: "あなたの魂を締めくくる1つを選んでください。", mode: "final" },
+  { badge: "👑 FINAL QUESTION", title: "あなたの墓碑銘に刻まれる、たった1つのテーマを選ぶとしたら？", sub: "人生を象徴する最後の選択です。", mode: "final" },
+  { badge: "👑 FINAL QUESTION", title: "長い旅の終わりに、たった1つだけ宝箱に入れて持ち帰れるとしたら？", sub: "これが今回のあなたの結論になります。", mode: "final" },
+  { badge: "👑 FINAL QUESTION", title: "もし人生を一本の映画にするなら、一番のクライマックスに置きたいのは？", sub: "最後にふさわしい1つを選んでください。", mode: "final" }
+];
+
+// ==========================================
+// 3. 全24種・完全オリジナル ピクセルアート (12×12ドット)
+//    B:輪郭/髪, S:肌/顔, C:メイン色, A:飾り/持ち物色, E:目, W:白
+// ==========================================
+const PIXEL_ART = {
+  n_wall: {
+    pal: { B:"#1e293b", S:"#fed7aa", C:"#3b82f6", A:"#94a3b8", E:"#0f172a", W:"#f8fafc" },
+    grid: [
+      "....BBBB....",
+      "...BCCCCB...",
+      "..BCWWWWCB..",
+      "..BSSSSSSB..",
+      "..BSESSESB..",
+      "..BSSSSSSB..",
+      ".AABCCCCB...",
+      ".AWBCCCCBA..",
+      ".AABBBBBBA..",
+      "..AABCCCB...",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  n_nest: {
+    pal: { B:"#3b0764", S:"#ffedd5", C:"#f472b6", A:"#fb7185", E:"#1e1b4b", W:"#ffffff" },
+    grid: [
+      "...BBBBBB...",
+      "..BCCCCCCB..",
+      ".BCSSSSSSCB.",
+      ".BCSESSESCB.",
+      ".BCSSSSSSCB.",
+      "..BCCCCCCB..",
+      "..BCAAWACB..",
+      "..BCAAAACB..",
+      "..BCCAACCB..",
+      "...BCCCCB...",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  n_calm: {
+    pal: { B:"#14532d", S:"#fef3c7", C:"#4ade80", A:"#facc15", E:"#052e16", W:"#ffffff" },
+    grid: [
+      "....AAAA....",
+      "..BBBBBBBB..",
+      ".BCCCCCCCCB.",
+      "..BSSSSSSB..",
+      "..BSESSESB..",
+      "..BSSSSSSB..",
+      "..BBCCCCBB..",
+      ".AABCCCCB...",
+      ".WABCCCCB...",
+      "..BBBBBBBB..",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  n_free: {
+    pal: { B:"#1e293b", S:"#fde68a", C:"#2dd4bf", A:"#a16207", E:"#0f172a", W:"#f1f5f9" },
+    grid: [
+      ".....BB.....",
+      "....BCCB....",
+      "..BBBBBBBB..",
+      "..BSSSSSSB..",
+      "..BSESSESB..",
+      "..BSSSSSSB..",
+      ".AABCCCCBA..",
+      ".AABCCCCBAA.",
+      "..BCCCCCCB..",
+      "...BBBBBB...",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  n_wild: {
+    pal: { B:"#27272a", S:"#fed7aa", C:"#ea580c", A:"#fde047", E:"#18181b", W:"#fff" },
+    grid: [
+      "....BBBB..A.",
+      "...BCCCCBAAA",
+      "..BCCCCCCBWA",
+      "..BSSSSSSBBA",
+      "..BSESSESB.B",
+      "..BSSSSSSB.B",
+      "..BCCCCCCB.B",
+      "..BCCBBCCB.B",
+      "...BCCCCB...",
+      "...BB..BB...",
+      "..BBB..BBB..",
+      "............"
+    ]
+  },
+  n_solo: {
+    pal: { B:"#0f172a", S:"#ffedd5", C:"#334155", A:"#38bdf8", E:"#020617", W:"#e2e8f0" },
+    grid: [
+      "...BBBBBB...",
+      "..BCCCCCCB..",
+      "..BSSSSSSB..",
+      "..BAAAASSB..",
+      "..BAEAESEB..",
+      "..BSSSSSSB..",
+      "..BCCWWCCB..",
+      "..BCCCCCCB..",
+      "..BCCCCCCA..",
+      "...BBBBAAA..",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  n_warm: {
+    pal: { B:"#431407", S:"#ffedd5", C:"#fb923c", A:"#fde047", E:"#292524", W:"#ffffff" },
+    grid: [
+      "...A....A...",
+      "....BBBB....",
+      "...BCCCCB...",
+      "..BSSSSSSB..",
+      "..BSESSESB..",
+      "..BSSSSSSB..",
+      "..BCCCCCCB..",
+      ".ABCCWWCCBA.",
+      "..BCCCCCCB..",
+      "...BBBBBB...",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  n_team: {
+    pal: { B:"#1e1b4b", S:"#fde68a", C:"#6366f1", A:"#ef4444", E:"#0f172a", W:"#ffffff" },
+    grid: [
+      ".........AAA",
+      "....BBBB.AAW",
+      "...BCCCCBAAA",
+      "..BSSSSSSB.B",
+      "..BSESSESB.B",
+      "..BSSSSSSB.B",
+      "..BCCCCCCB.B",
+      "..BCCWWCCB.B",
+      "..BCCCCCCB.B",
+      "...BBBBBB...",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  n_craft: {
+    pal: { B:"#18181b", S:"#fed7aa", C:"#4f46e5", A:"#fbbf24", E:"#09090b", W:"#ffffff" },
+    grid: [
+      ".....AA.....",
+      "...BBBBBB...",
+      "..BCCCCCCB..",
+      "..BSSSSSSB..",
+      "..BSESSESB..",
+      "..BSSSSSSB..",
+      ".BBCCCCCCBB.",
+      ".BCCCAACCB..",
+      "..BCCCCCCB..",
+      "...BBBBBB...",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  n_muse: {
+    pal: { B:"#2e1065", S:"#ffedd5", C:"#9333ea", A:"#f472b6", E:"#1e1b4b", W:"#ffffff" },
+    grid: [
+      ".....BB.....",
+      "....BCCB....",
+      "...BCCCCB...",
+      "..BBBBBBBB..",
+      "..BSSSSSSB..",
+      "..BSESSESB..",
+      "..BSSSSSSB..",
+      "..BCCCCCCB..",
+      ".WWBCCCCB...",
+      ".AABCCCCB...",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  r_bunker: {
+    pal: { B:"#1c1917", S:"#fde68a", C:"#64748b", A:"#facc15", E:"#0c0a09", W:"#bae6fd" },
+    grid: [
+      "...BBBBBB...",
+      "..BCCCCCCB..",
+      "..BWWWWWWB..",
+      "..BSSSSSSB..",
+      "..BSESSESB..",
+      "..BSSSSSSB..",
+      ".AABCCCCBA..",
+      ".A.BCCCCBAA.",
+      "...BBBBBB...",
+      "..BCCCCCCB..",
+      "..BB....BB..",
+      "............"
+    ]
+  },
+  r_rebel: {
+    pal: { B:"#18181b", S:"#ffedd5", C:"#dc2626", A:"#facc15", E:"#000000", W:"#ffffff" },
+    grid: [
+      "..A..AA..A..",
+      ".BBBBBBBBBB.",
+      "..BCCCCCCB..",
+      "..BSSSSSSB..",
+      "..BSESSESB..",
+      "..BSSSSSSB..",
+      "..BCCCCCCB..",
+      "..BCCAACCB..",
+      "..BCCACCB...",
+      "...BBBBBB...",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  r_devote: {
+    pal: { B:"#312e81", S:"#fff7ed", C:"#e0f2fe", A:"#fde047", E:"#1e1b4b", W:"#ffffff" },
+    grid: [
+      "...AAAAAA...",
+      "............",
+      "...BBBBBB...",
+      "..BSSSSSSB..",
+      "..BSESSESB..",
+      "WWBSSSSSSBWW",
+      "WWBCCCCCCBWW",
+      ".WBCCCCCCBW.",
+      "..BCCCCCCB..",
+      "...BBBBBB...",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  r_blaze: {
+    pal: { B:"#450a0a", S:"#fed7aa", C:"#f97316", A:"#fde047", E:"#7f1d1d", W:"#ffffff" },
+    grid: [
+      "..A.AA.A.A..",
+      ".ACCCCCCCCA.",
+      "..BCCCCCCB..",
+      "..BSSSSSSB..",
+      "..BSESSESB..",
+      "..BSSSSSSB..",
+      ".ABCCCCCCBA.",
+      ".AABCCCCBAA.",
+      "..BCCCCCCB..",
+      "...BB..BB...",
+      "..BBB..BBB..",
+      "............"
+    ]
+  },
+  r_ethic: {
+    pal: { B:"#1e293b", S:"#ffedd5", C:"#ec4899", A:"#38bdf8", E:"#0f172a", W:"#ffffff" },
+    grid: [
+      "..BBBBBB....",
+      ".BCCCCCCB...",
+      "..BBBBBBBB..",
+      "..BSSSSSSB..",
+      "..BSESSESB..",
+      "..BSSSSSSB..",
+      "..BCCCCCCB.A",
+      ".WWBCCCCB.A.",
+      ".ACBCCCCBA..",
+      "...BBBBBB...",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  r_tycoon: {
+    pal: { B:"#09090b", S:"#fde68a", C:"#1e293b", A:"#fbbf24", E:"#000000", W:"#ffffff" },
+    grid: [
+      "...BBBBBB...",
+      "...BCCCCB...",
+      "...BAAAAB...",
+      ".BBBBBBBBBB.",
+      "..BSSSSSSB..",
+      "..BSESSESB..",
+      "..BSSSSSSB..",
+      "..BCCWWCCB..",
+      "..BCCCCCCBAA",
+      "...BBBBBBAAW",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  r_paradox: {
+    pal: { B:"#0f172a", S:"#f8fafc", C:"#7c3aed", A:"#14b8a6", E:"#020617", W:"#ffffff" },
+    grid: [
+      "...BBBBBB...",
+      "..BCCCAAAB..",
+      "..BSSSSSSB..",
+      "..BSEBBASB..",
+      "..BSSSSSSB..",
+      "WWBCCCAAABBB",
+      "WWBCCCAAABBB",
+      ".WBCCCAAABB.",
+      "..BCCCAAAB..",
+      "...BBBBBB...",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  r_gambler: {
+    pal: { B:"#1e1b4b", S:"#ffedd5", C:"#be123c", A:"#ffffff", E:"#0f172a", W:"#fbbf24" },
+    grid: [
+      "...BBBBBB...",
+      "..BCCCCCCB..",
+      "..BSSSSSSB..",
+      "..BSEBBWSB..",
+      "..BSSSSSSB..",
+      "..BCCCCCCB..",
+      ".AABCCCCB...",
+      ".ACABCCCB...",
+      ".AAABCCCB...",
+      "...BBBBBB...",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  sr_flash: {
+    pal: { B:"#422006", S:"#fef08a", C:"#f59e0b", A:"#38bdf8", E:"#000000", W:"#ffffff" },
+    grid: [
+      ".BB......BB.",
+      ".BCCBBBBCCB.",
+      "..BCCCCCCB..",
+      "..BSSSSSSB..",
+      "..BSESSESB..",
+      "..BSSSSSSB.A",
+      "..BCCCCCCBAA",
+      ".ABCCCCCCBA.",
+      "..BCCCCCCB..",
+      "...BBBBBB...",
+      "..BB....BB..",
+      "............"
+    ]
+  },
+  sr_ice: {
+    pal: { B:"#0c4a6e", S:"#f0f9ff", C:"#38bdf8", A:"#e0f2fe", E:"#0369a1", W:"#ffffff" },
+    grid: [
+      "..A..AA..A..",
+      "..AWWWWWWA..",
+      "...BBBBBB...",
+      "..BSSSSSSB..",
+      "..BSESSESB..",
+      "..BSSSSSSB..",
+      "..BCCCCCCB..",
+      ".ABBCCCCBBA.",
+      "..BCCCCCCB..",
+      "..BCCCCCCB..",
+      "...BBBBBB...",
+      "............"
+    ]
+  },
+  sr_shadow: {
+    pal: { B:"#18181b", S:"#f5f5f4", C:"#9333ea", A:"#f43f5e", E:"#09090b", W:"#ffffff" },
+    grid: [
+      ".AA......CC.",
+      ".ABB....CBB.",
+      "..BBCCCCBB..",
+      "..BSSSSSSB..",
+      "..BSESSESB..",
+      "..BSBBBBSSB.",
+      "..BCCAAACB..",
+      "..BCAAAACB..",
+      "..BCCCCCCB..",
+      "...BBBBBB...",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  sr_monk: {
+    pal: { B:"#3f3f46", S:"#fed7aa", C:"#10b981", A:"#a16207", E:"#18181b", W:"#f8fafc" },
+    grid: [
+      "...BBBBBB...",
+      "..BWWWWWWB..",
+      "..BSSSSSSB..",
+      "..BSESSESB..",
+      "..BWWWWWWB..",
+      "..BWWWWWWB.A",
+      "..BCCCCCCB.A",
+      "..BCCCCCCB.A",
+      "..BCCCCCCB.A",
+      "...BBBBBB..A",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  sec_all: {
+    pal: { B:"#451a03", S:"#ffedd5", C:"#8b5cf6", A:"#fbbf24", E:"#0f172a", W:"#ffffff" },
+    grid: [
+      "..A..AA..A..",
+      "..AAAAAAAA..",
+      "...BBBBBB...",
+      "..BSSSSSSB..",
+      "..BSESSESB..",
+      "..BSSSSSSB..",
+      ".AABCCCCBAA.",
+      ".WWBCCCCBWW.",
+      "..BCCAACCB..",
+      "...BBBBBB...",
+      "...BB..BB...",
+      "............"
+    ]
+  },
+  sec_ghost: {
+    pal: { B:"#334155", S:"#e2e8f0", C:"#94a3b8", A:"#2dd4bf", E:"#0f172a", W:"#ffffff" },
+    grid: [
+      "....BBBB....",
+      "...BWWWWB...",
+      "..BWWWWWWB..",
+      "..BWEWWEWB..",
+      "..BWWWWWWB..",
+      "..BWWAWWWB..",
+      "..BWWWWWWB..",
+      "..BSSSSSSB..",
+      "..BSSBBSSB..",
+      "..BS.BB.SB..",
+      "............",
+      "............"
+    ]
+  }
+};
+
+function renderPixelSVG(archId, size = 84) {
+  const art = PIXEL_ART[archId] || PIXEL_ART.n_wall;
+  let rects = "";
+  for (let y = 0; y < art.grid.length; y++) {
+    const row = art.grid[y];
+    for (let x = 0; x < row.length; x++) {
+      const ch = row[x];
+      if (ch !== "." && art.pal[ch]) {
+        rects += `<rect x="${x}" y="${y}" width="1" height="1" fill="${art.pal[ch]}"/>`;
+      }
+    }
+  }
+  return `<svg width="${size}" height="${size}" viewBox="0 0 12 12" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">${rects}</svg>`;
+}
+
+// ==========================================
+// 4. 裏人格コレクション（全24種）
+// ==========================================
+const ARCHETYPES = [
+  { id: "n_wall", rar: "N", name: "鉄壁のリアリスト", catch: "夢より現実、感情より確かな備え", desc: "破綻しないこと・生活の土台を固めることを最優先にする堅実な知性派。リスク管理が完璧な反面、安全策をとりすぎて少し冒険をためらいがちな一面もあります。" },
+  { id: "n_nest", rar: "N", name: "聖域の守護者", catch: "愛する平穏を命がけで守り抜く人", desc: "壮大な野望より「大切な人たちとの穏やかで安心できる日常」を何よりも愛する温かい魂。優しさゆえに、自分の本音を後回しにして我慢しすぎる癖があります。" },
+  { id: "n_calm", rar: "N", name: "静寂の庭師", catch: "嵐の外側で、美しい日常を整える人", desc: "心の平穏や清潔感、美しい環境を静かに守り育てるタイプ。派手な競争には興味がなく、自分の小さな世界を丁寧に整えているときに深い幸福を感じます。" },
+  { id: "n_free", rar: "N", name: "風まかせの旅人", catch: "誰のルールにも縛られない精神の遊牧民", desc: "世間の常識や他人の評価から距離を置き、自分の時間と美意識だけで生きる自由人。身軽さが最大の武器ですが、深いしがらみを煩わしく感じて逃げたくなることも。" },
+  { id: "n_wild", rar: "N", name: "野生の開拓者", catch: "現状維持を退屈と感じる冒険家", desc: "未知の世界や新しい挑戦に心が燃える行動派。自由な環境でこそ圧倒的に輝きますが、手に入れた幸せに満足せず次の刺激を探し続けてしまうところがあります。" },
+  { id: "n_solo", rar: "N", name: "孤高の合理主義者", catch: "自らの腕一本で自由を勝ち取る実務家", desc: "誰かに依存せず、スキルや時間管理、実利を武器に自立して生きるクールなタイプ。無駄や非効率を嫌うため、感情論ばかりの場では密かに疲弊しがちです。" },
+  { id: "n_warm", rar: "N", name: "陽だまりの共鳴者", catch: "損得より心の震えを信じるロマンチスト", desc: "感謝や感動、人との温かい縁を人生の宝物とする繊細な心。周囲を癒やす力がありますが、社会の殺伐とした競争や冷たい論理に少し傷つきやすい一面も。" },
+  { id: "n_team", rar: "N", name: "絆を紡ぐ牽引者", catch: "人を信じ、人と共に高みを目指す人", desc: "一人の成功よりも「信頼できる仲間と何かを成し遂げること」に喜びを見出すタイプ。周囲からの信頼が厚い反面、期待に応えようとして背負い込みすぎることも。" },
+  { id: "n_craft", rar: "N", name: "静かなる野心家", catch: "理想を現実に叩き込む実力派", desc: "ただ夢を見るだけでなく、スキルや地道な継続で確実に成果へ結びつける推進力の塊。自分の価値を「結果」で測りすぎて、休むことに罪悪感を覚えがちです。" },
+  { id: "n_muse", rar: "N", name: "夢を編む詩人", catch: "知性と感性で世界を味わい尽くす人", desc: "挑戦や学びを通じて自分の内面世界を広げ続ける探求者。物質的な豊かさよりも「心が震える体験」や「美しい物語」に生きる意味を見出します。" },
+
+  { id: "r_bunker", rar: "R", name: "終末世界のシェルター設計士", catch: "あらゆる不測の事態を想定しきる防衛の極み", desc: "健康・お金・安全を極限まで重視し、何があっても生き残れる完璧な防壁を築こうとする気質。その慎重さは周囲に絶大な安心感を与えますが、心休まる瞬間が少ないかも？" },
+  { id: "r_rebel", rar: "R", name: "常識を焼き払う反逆者", catch: "「こうあるべき」を最も嫌う純粋な自由魂", desc: "自律・自由への渇望が極限まで高まった状態。他人にコントロールされるくらいなら孤立を選ぶほどの強い自分軸を持っており、既存の枠に収まらない魅力があります。" },
+  { id: "r_devote", rar: "R", name: "無償の愛を捧ぐ聖者", catch: "自分のこと以上に、誰かの笑顔を願う人", desc: "愛着と絆にパラメータが大きく振り切れた深い愛情の持ち主。見返りを求めず誰かを支えることができますが、悪意ある人に利用されないよう少し境界線を引くことも大切です。" },
+  { id: "r_blaze", rar: "R", name: "ブレーキを知らない突破者", catch: "失敗すら燃料にして加速し続ける熱源", desc: "安定や守りをほとんど顧みず、成長と挑戦に全振りしたアグレッシブな魂。人生のジェットコースターを全力で楽しめる反面、燃え尽き症候群には要注意。" },
+  { id: "r_ethic", rar: "R", name: "浮世離れした美の求道者", catch: "俗世の計算より、魂の美しさを貫く芸術肌", desc: "お金や実利への執着が驚くほど薄く、感性・自然・教養・心の平穏を深く愛するレアな気質。現代社会では少し生きづらさを感じることもありますが、内面は誰より豊かです。" },
+  { id: "r_tycoon", rar: "R", name: "すべてを資産に変える錬金術師", catch: "感情に流されず、現実の最適解を掴む戦略家", desc: "実利・金融リテラシー・スキル・時間効率への意識が極めて高いクレバーな達成者。人生というゲームを冷静に攻略する才能に長けています。" },
+  { id: "r_paradox", rar: "R", name: "抱擁と逃走のジレンマ", catch: "深く愛したいのに、誰にも縛られたくない人", desc: "「愛着（人と繋がりたい）」と「自律（一人で自由でいたい）」という相反する2つの欲求が同等に高まっている繊細な状態。近づきすぎると逃げたくなり、離れると寂しくなる矛盾を抱えています。" },
+  { id: "r_gambler", rar: "R", name: "安定を捨てた刹那のギャンブラー", catch: "退屈な安全より、ヒリつく自由と刺激を愛す", desc: "防衛本能が低く、自由と挑戦のスコアが突出したスリル愛好家。「どうせ一度きりの人生なら」と、あえて不確実な道を選びたがる胆力の持ち主です。" },
+
+  { id: "sr_flash", rar: "SR", name: "思考を置き去りにする野獣", catch: "全問を圧倒的スピードで即決した純粋本能", desc: "1問あたり1.6秒以下という驚異的な速さで直感を貫き通したプレイヤーにのみ現れるレア人格。迷うくらいならまず飛び込む、常人離れした決断力の塊です。" },
+  { id: "sr_ice", rar: "SR", name: "微笑む氷の選別者", catch: "悪魔の取引すら一瞬で斬り捨てる冷徹な覚悟", desc: "「生贄」のステージで一切の情を挟まず一瞬で切り捨てを完了させた強靭なメンタルの持ち主。優柔不断とは無縁で、修羅場でこそ頼りになる冷徹な合理性を持っています。" },
+  { id: "sr_shadow", rar: "SR", name: "矛盾を愛するトリックスター", catch: "最も欲しがった価値観を、自ら生贄に捧げた奇才", desc: "通常問題で熱心に集めたはずの領域から、生贄問題ではあっさり切り捨てを行うなど、予測不能な二面性を見せた状態。他人の常識では測れない複雑な魅力があります。" },
+  { id: "sr_monk", rar: "SR", name: "無欲を極めた現代の仙人", catch: "お金と仕事の誘惑を完全にスルーした悟りの境地", desc: "出題された中で「お金」「仕事」カテゴリのカードを一度も選ばず、精神性や自由・自然を選び続けた極めて珍しい脱俗タイプ。すでに心の豊かさを知っています。" },
+
+  { id: "sec_all", rar: "SEC", name: "すべてを統べる強欲の賢者", catch: "6つの欲求すべてを黄金比で抱きしめる器", desc: "防衛・自律・愛着・成長・美学・実利のどれ一つも極端に欠けることなく、極めて均整のとれたバランスで選び抜いた奇跡の存在。矛盾を統合する器の大きさを持っています。" },
+  { id: "sec_ghost", rar: "SEC", name: "観測不能の透明人間", catch: "一定の鼓動と捉えどころのない選択で煙に巻く影", desc: "回答時間のブレが極めて少なく、かつ6つのパラメータも淡々と中庸を保ったミステリアスな結果。システムによるプロファイリングを静かにすり抜ける、掴みどころのない人物です。" }
+];
+
+// ==========================================
+// 5. 効果音 (Web Audio API)
+// ==========================================
+let soundOn = true;
+let audioCtx = null;
+
+function playTone(freq, type = "sine", dur = 0.08, vol = 0.07) {
+  if (!soundOn) return;
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + dur);
+  } catch (e) {}
+}
+
+function playSE(kind) {
+  if (kind === "pick") { playTone(520, "sine", 0.07, 0.06); setTimeout(() => playTone(780, "sine", 0.09, 0.05), 40); }
+  else if (kind === "drop") { playTone(210, "sawtooth", 0.13, 0.045); setTimeout(() => playTone(145, "sawtooth", 0.17, 0.045), 65); }
+  else if (kind === "rush") { playTone(880, "triangle", 0.06, 0.055); }
+  else if (kind === "win") {
+    [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => playTone(f, "triangle", 0.2, 0.06), i * 75));
+  }
+}
+
+function toggleSound() {
+  soundOn = !soundOn;
+  document.getElementById("sound-btn").textContent = soundOn ? "🔊 SE: ON" : "🔇 SE: OFF";
+}
+
+// ==========================================
+// 6. セーブデータ & 非重複デッキ・レンズ管理
+// ==========================================
+const SAVE_KEY = "honne4taku_v1_save";
+
+function loadSave() {
+  try {
+    const raw = localStorage.getItem(SAVE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      return {
+        plays: parsed.plays || 0,
+        unlocked: parsed.unlocked || [],
+        lastArchId: parsed.lastArchId || null,
+        lastArchName: parsed.lastArchName || null,
+        deckUsedIds: parsed.deckUsedIds || [],
+        usedLensIds: parsed.usedLensIds || []
+      };
+    }
+  } catch (e) {}
+  return { plays: 0, unlocked: [], lastArchId: null, lastArchName: null, deckUsedIds: [], usedLensIds: [] };
+}
+
+function writeSave(data) {
+  try { localStorage.setItem(SAVE_KEY, JSON.stringify(data)); } catch (e) {}
+}
+
+function resetSaveData() {
+  if (!confirm("図鑑・プレイ回数・履歴をすべてリセットしますか？")) return;
+  writeSave({ plays: 0, unlocked: [], lastArchId: null, lastArchName: null, deckUsedIds: [], usedLensIds: [] });
+  refreshStatsUI();
+  openDex();
+}
+
+function refreshStatsUI() {
+  const save = loadSave();
+  document.getElementById("stat-plays").textContent = save.plays;
+  document.getElementById("stat-dex").textContent = `${save.unlocked.length} / ${ARCHETYPES.length}`;
+  document.getElementById("top-dex-count").textContent = save.unlocked.length;
+
+  const lastWrap = document.getElementById("stat-last-wrap");
+  if (save.lastArchName) {
+    lastWrap.style.display = "block";
+    document.getElementById("stat-last").textContent = save.lastArchName;
+  } else {
+    lastWrap.style.display = "none";
+  }
+}
+
+function openDex() {
+  const save = loadSave();
+  const grid = document.getElementById("dex-grid");
+  grid.innerHTML = ARCHETYPES.map(a => {
+    const isOpen = save.unlocked.includes(a.id);
+    const rarLabel = a.rar === "SEC" ? "★ SECRET" : a.rar === "SR" ? "★★★ SUPER RARE" : a.rar === "R" ? "★★ RARE" : "★ NORMAL";
+    return `
+      <div class="dex-card ${isOpen ? 'unlocked' : 'locked'}">
+        <div class="dex-pix-wrap">${renderPixelSVG(a.id, 44)}</div>
+        <div class="dex-info">
+          <div class="dex-rar">${rarLabel}</div>
+          <div class="dex-title">${isOpen ? a.name : "？？？？？"}</div>
+          <div class="dex-hint">${isOpen ? a.catch : "未開放"}</div>
+        </div>
+      </div>
+    `;
+  }).join("");
+  document.getElementById("dex-modal").classList.add("open");
+}
+
+function closeDex() { document.getElementById("dex-modal").classList.remove("open"); }
+
+// ==========================================
+// 7. ゲーム進行（240枚非重複デッキから10問生成）
+// ==========================================
+let gState = null;
+let rushInterval = null;
+let lockClick = false;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function showScreen(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function buildTenQuestions() {
+  const save = loadSave();
+  let usedSet = new Set(save.deckUsedIds);
+
+  const pools = [];
+  for (let c = 0; c < 8; c++) {
+    const allInCat = ITEMS.filter(x => x.cat === c);
+    let unusedInCat = allInCat.filter(x => !usedSet.has(x.id));
+    if (unusedInCat.length < 5) {
+      allInCat.forEach(x => usedSet.delete(x.id));
+      unusedInCat = [...allInCat];
+    }
+    pools.push(shuffle(unusedInCat));
+  }
+
+  const catSlots = [];
+  for (let r = 0; r < 5; r++) {
+    const order = shuffle([0, 1, 2, 3, 4, 5, 6, 7]);
+    catSlots.push(order.slice(0, 4));
+    catSlots.push(order.slice(4, 8));
+  }
+  const finalCatOrder = shuffle(catSlots);
+
+  const cardSets = [];
+  const drawnIds = [];
+  for (let i = 0; i < 10; i++) {
+    const set = finalCatOrder[i].map(c => {
+      const card = pools[c].pop();
+      drawnIds.push(card.id);
+      return card;
+    });
+    cardSets.push(set);
+  }
+
+  const normals = shuffle(PROMPTS_NORMAL);
+  const drops = shuffle(PROMPTS_DROP);
+  const rushes = shuffle(PROMPTS_RUSH);
+  const finals = shuffle(PROMPTS_FINAL);
+
+  const dropCount = Math.random() < 0.5 ? 2 : 1;
+  const rushCount = Math.random() < 0.45 ? 2 : 1;
+
+  const middlePrompts = [];
+  for (let i = 0; i < dropCount; i++) middlePrompts.push(drops[i]);
+  for (let i = 0; i < rushCount; i++) middlePrompts.push(rushes[i]);
+  let nIdx = 2;
+  while (middlePrompts.length < 7) {
+    middlePrompts.push({ ...normals[nIdx++], mode: "keep" });
+  }
+
+  const script = [
+    { ...normals[0], mode: "keep" },
+    { ...normals[1], mode: "keep" },
+    ...shuffle(middlePrompts),
+    finals[0]
+  ];
+
+  return {
+    questions: script.map((p, idx) => ({ ...p, choices: cardSets[idx] })),
+    drawnIds,
+    nextDeckUsedIds: [...Array.from(usedSet), ...drawnIds]
+  };
+}
+
+function startGame() {
+  playSE("pick");
+  clearInterval(rushInterval);
+  const built = buildTenQuestions();
+  gState = {
+    questions: built.questions,
+    drawnIds: built.drawnIds,
+    nextDeckUsedIds: built.nextDeckUsedIds,
+    index: 0,
+    logs: [],
+    startTime: 0,
+    lastReportText: ""
+  };
+  showScreen("screen-quiz");
+  renderQ();
+}
+
+function renderQ() {
+  clearInterval(rushInterval);
+  const q = gState.questions[gState.index];
+  document.body.className = q.mode === "drop" ? "mode-drop" : q.mode === "rush" ? "mode-rush" : "";
+
+  const badge = document.getElementById("q-badge");
+  badge.textContent = q.badge;
+  badge.className = `q-badge ${q.mode === "drop" ? "drop" : q.mode === "rush" ? "rush" : q.mode === "final" ? "final" : ""}`;
+
+  document.getElementById("q-num").textContent = `${gState.index + 1} / 10`;
+  document.getElementById("progress-fill").style.width = `${(gState.index / 10) * 100}%`;
+  document.getElementById("q-title").textContent = q.title;
+  document.getElementById("q-sub").textContent = q.sub;
+
+  const rushWrap = document.getElementById("rush-wrap");
+  if (q.mode === "rush") {
+    const limitMs = (q.sec || 5) * 1000;
+    rushWrap.classList.add("active");
+    playSE("rush");
+    const rushText = document.getElementById("rush-text");
+    const rushBar = document.getElementById("rush-bar");
+    rushText.className = "rush-text";
+    let remain = limitMs;
+    rushBar.style.width = "100%";
+    rushText.textContent = `⚡ 直感勝負！ ${(remain / 1000).toFixed(1)}s`;
+
+    rushInterval = setInterval(() => {
+      remain -= 80;
+      if (remain <= 0) {
+        clearInterval(rushInterval);
+        rushBar.style.width = "0%";
+        rushText.textContent = "⌛ 迷いすぎ！早く直感で選べ！";
+        rushText.className = "rush-text over";
+      } else {
+        rushBar.style.width = `${(remain / limitMs) * 100}%`;
+        rushText.textContent = `⚡ 直感勝負！ ${(remain / 1000).toFixed(1)}s`;
+      }
+    }, 80);
+  } else {
+    rushWrap.classList.remove("active");
+  }
+
+  const grid = document.getElementById("choices-grid");
+  grid.innerHTML = "";
+  q.choices.forEach(item => {
+    const btn = document.createElement("button");
+    btn.className = "card";
+    btn.innerHTML = `
+      <span class="c-cat">${CATEGORIES[item.cat]}</span>
+      <span class="c-title">${item.title}</span>
+      <span class="c-desc">${item.desc}</span>
+    `;
+    btn.onclick = () => pickCard(item, btn);
+    grid.appendChild(btn);
+  });
+
+  gState.startTime = performance.now();
+}
+
+function pickCard(item, btn) {
+  if (lockClick) return;
+  lockClick = true;
+  clearInterval(rushInterval);
+
+  const q = gState.questions[gState.index];
+  const durationMs = Math.round(performance.now() - gState.startTime);
+
+  playSE(q.mode === "drop" ? "drop" : "pick");
+  btn.classList.add("picked");
+  gState.logs.push({ q, picked: item, durationMs });
+
+  setTimeout(() => {
+    lockClick = false;
+    gState.index++;
+    if (gState.index < 10) renderQ();
+    else {
+      document.body.className = "";
+      runScan();
+    }
+  }, 190);
+}
+
+function runScan() {
+  showScreen("screen-scan");
+  const msgs = [
+    "10問の直感と迷いをデータ化しています...",
+    "選んだ言葉と捨てた言葉のコントラストを解析中...",
+    "あなたの裏の顔を特定しました！"
+  ];
+  const el = document.getElementById("scan-log");
+  el.textContent = msgs[0];
+  let i = 0;
+  const t = setInterval(() => {
+    i++;
+    if (i < msgs.length) el.textContent = msgs[i];
+    else { clearInterval(t); showResult(); }
+  }, 380);
+}
+
+// ==========================================
+// 8. 結果判定＆18種の非重複分析レンズ
+// ==========================================
+function showResult() {
+  playSE("win");
+
+  const scores = [0, 0, 0, 0, 0, 0];
+  const times = [];
+  const keepLogs = [];
+  const dropLogs = [];
+  let pickedMoneyOrWork = false;
+  let offeredMoneyOrWork = false;
+
+  gState.logs.forEach(log => {
+    times.push(log.durationMs);
+    if (log.q.mode === "drop") {
+      dropLogs.push(log);
+      log.q.choices.forEach(c => {
+        if (c.id === log.picked.id) {
+          c.t.forEach((v, idx) => scores[idx] -= v * 0.75);
+        } else {
+          c.t.forEach((v, idx) => scores[idx] += v * 0.4);
+        }
+      });
+    } else {
+      keepLogs.push(log);
+      if (log.q.choices.some(c => c.cat === 5 || c.cat === 6)) offeredMoneyOrWork = true;
+      if (log.picked.cat === 5 || log.picked.cat === 6) pickedMoneyOrWork = true;
+      const w = log.q.mode === "final" ? 2.0 : log.q.mode === "rush" ? 1.3 : 1.0;
+      log.picked.t.forEach((v, idx) => scores[idx] += v * w);
+    }
+  });
+
+  const minRaw = Math.min(...scores);
+  const shifted = scores.map(s => s - Math.min(0, minRaw) + 2);
+  const maxS = Math.max(...shifted, 1);
+  const totalS = shifted.reduce((a, b) => a + b, 0);
+  const norm = shifted.map(s => Math.min(100, Math.round((s / maxS) * 84 + 16)));
+
+  const sorted = shifted.map((v, i) => ({ i, v })).sort((a, b) => b.v - a.v);
+  const top1 = sorted[0].i;
+  const top2 = sorted[1].i;
+  const low1 = sorted[5].i;
+
+  const avgMs = times.reduce((a, b) => a + b, 0) / times.length;
+  const avgSec = avgMs / 1000;
+  const spreadRatio = sorted[5].v / sorted[0].v;
+  const topShare = sorted[0].v / totalS;
+  const meanDiff = times.reduce((acc, t) => acc + Math.abs(t - avgMs), 0) / times.length;
+
+  const dropTraits = [0, 0, 0, 0, 0, 0];
+  dropLogs.forEach(d => d.picked.t.forEach((v, idx) => dropTraits[idx] += v));
+  const topDropTrait = dropTraits.map((v, i) => ({ i, v })).sort((a, b) => b.v - a.v)[0].i;
+  const hasSelfParadox = dropTraits[top1] > 0 && topDropTrait === top1;
+
+  let archId = "n_wall";
+  if (spreadRatio >= 0.76) {
+    archId = "sec_all";
+  } else if (meanDiff < 380 && spreadRatio >= 0.62 && avgSec >= 2.0 && avgSec <= 4.8) {
+    archId = "sec_ghost";
+  } else if (avgSec <= 1.65 && Math.max(...times) <= 2600) {
+    archId = "sr_flash";
+  } else if (dropLogs.length >= 2 && dropLogs.every(d => d.durationMs <= 2000)) {
+    archId = "sr_ice";
+  } else if (offeredMoneyOrWork && !pickedMoneyOrWork && (top1 === 4 || top1 === 1 || top1 === 2)) {
+    archId = "sr_monk";
+  } else if (hasSelfParadox && Math.random() < 0.7) {
+    archId = "sr_shadow";
+  } else if (topShare >= 0.275) {
+    const rareSingle = ["r_bunker", "r_rebel", "r_devote", "r_blaze", "r_ethic", "r_tycoon"];
+    archId = rareSingle[top1];
+  } else if ((top1 === 1 && top2 === 2 || top1 === 2 && top2 === 1) && (sorted[0].v - sorted[1].v) < maxS * 0.14) {
+    archId = "r_paradox";
+  } else if ((top1 === 3 || top1 === 1) && low1 === 0 && shifted[0] < maxS * 0.42) {
+    archId = "r_gambler";
+  } else {
+    const p = `${top1}-${top2}`;
+    const nMap = {
+      "0-5": "n_wall", "5-0": "n_wall",
+      "0-2": "n_nest", "2-0": "n_nest",
+      "0-4": "n_calm", "4-0": "n_calm", "0-1": "n_calm", "1-0": "n_calm",
+      "1-4": "n_free", "4-1": "n_free",
+      "1-3": "n_wild", "3-1": "n_wild", "3-0": "n_wild", "0-3": "n_wild",
+      "1-5": "n_solo", "5-1": "n_solo",
+      "2-4": "n_warm", "4-2": "n_warm",
+      "2-3": "n_team", "3-2": "n_team", "2-5": "n_team", "5-2": "n_team",
+      "3-5": "n_craft", "5-3": "n_craft",
+      "3-4": "n_muse", "4-3": "n_muse", "4-5": "n_muse", "5-4": "n_muse"
+    };
+    archId = nMap[p] || "n_wall";
+  }
+
+  const arch = ARCHETYPES.find(a => a.id === archId);
+  const save = loadSave();
+  const prevId = save.lastArchId;
+  const prevName = save.lastArchName;
+
+  // 18種の分析レンズデータ構築
+  const fastestKeep = [...keepLogs].sort((a, b) => a.durationMs - b.durationMs)[0];
+  const secondKeep = [...keepLogs].sort((a, b) => a.durationMs - b.durationMs)[1] || fastestKeep;
+  const slowest = [...gState.logs].sort((a, b) => b.durationMs - a.durationMs)[0];
+  const finalPick = gState.logs[9].picked;
+  const sacList = dropLogs.map(d => `「${d.picked.title}」`).join("・");
+  const rushLog = gState.logs.find(l => l.q.mode === "rush");
+  const topLabel = TRAIT_NAMES[top1].split("・")[0];
+  const lowLabel = TRAIT_NAMES[low1].split("・")[0];
+
+  const allLenses = [
+    { id: "l1", cls: "", title: `⚡ 直感スピードが暴いた欲求（${(fastestKeep.durationMs/1000).toFixed(1)}秒で即決）`, body: `他の誰よりも早く「${fastestKeep.picked.title}」に反応しました。今あなたの心の中で一番エネルギーが不足しているか、理屈抜きで求めているテーマがまさにこれです。` },
+    { id: "l2", cls: "red", title: `🔪 悪魔の取引から見える「割り切り」`, body: `今回あなたが切り捨てたのは ${sacList} でした。「なくても何とかなる」と判断したその選択に、今のあなたがどこに線を引いて生きているかというリアルな優先順位が透けて見えます。` },
+    { id: "l3", cls: "gold", title: `⏳ 最も心が揺れた瞬間（${(slowest.durationMs/1000).toFixed(1)}秒の迷い）`, body: `「${slowest.q.title.slice(0, 20)}…」という問いの前で最も長く指が止まりました。最終的に「${slowest.picked.title}」を選びましたが、他の3択にも今のあなたの小さな葛藤が隠れています。` },
+    { id: "l4", cls: "vio", title: `💘 恋愛・パートナーシップでの裏の顔`, body: `${top1 === 2 || top2 === 2 ? `深い絆を求める一方で「${finalPick.title}」を手放せないあなた。相手を想うほど、心の奥では自分なりの理想やこだわりを譲れない一途なタイプです。` : `自立心を保ちながら「${fastestKeep.picked.title}」を優先するあなたは、恋愛でも依存し合うより「お互いの時間を尊重できる対等な関係」を望んでいます。`}` },
+    { id: "l5", cls: "", title: `🌙 深夜2時のあなたの思考パターン`, body: `昼間は周囲に合わせて上手く振る舞っていても、一人きりの夜にふと頭をよぎるのは「${finalPick.title}」のこと。今回の結果では「${lowLabel}」への関心が低く、そこに無防備な隙間があります。` },
+    { id: "l6", cls: "gold", title: `💼 仕事・お金に対するリアルな本音`, body: `${pickedMoneyOrWork ? `あなたは理想論だけでなく、現実を生き抜くための力もしっかり計算に入れています。「${fastestKeep.picked.title}」を大事にしつつ、足元を固める賢さがあります。` : `今回のチョイスでは経済や仕事のカードより「${finalPick.title}」のような人間的・精神的な価値を優先しました。条件や肩書きより「自分が納得できるか」で動くタイプです。`}` },
+    { id: "l7", cls: "vio", title: `⚠️ 今のあなたへの小さな処方箋`, body: `今回の死角になりやすいのは、最もスコアが低かった「${TRAIT_NAMES[low1]}」の領域です。${topLabel}を大切にするあまり後回しにしがちなので、たまには意識して補うと運気が整います。` },
+    { id: "l8", cls: "red", title: `🎭 もしあなたが映画の主人公なら`, body: `「${finalPick.title}」を守り抜くために、必要とあれば ${sacList} すら迷わず手放す――。穏やかに見えて、いざという時には驚くほど思い切りの良い「主人公気質」の決断を下す人です。` },
+    { id: "l9", cls: "", title: `🔮 次に訪れる転機での行動予測`, body: `${rushLog ? `直感テストで「${rushLog.picked.title}」を${(rushLog.durationMs/1000).toFixed(1)}秒で選んだあなた。` : ""}人生の岐路では損得を計算しているようで、最後は「${finalPick.title}」が守れるかどうかという直感で道を選ぶでしょう。` },
+    { id: "l10", cls: "gold", title: `💎 今回の40枚が映した「今の気分」`, body: `普段のあなたと少し違う結果だったとしても、今日この瞬間に「${fastestKeep.picked.title}」と「${finalPick.title}」を選び取ったこと自体が、今の心のコンディションを映す鏡になっています。` },
+    { id: "l11", cls: "vio", title: `🐾 周囲から見たあなたの「意外なギャップ」`, body: `普段は落ち着いた常識人に見られがちですが、内面では「${secondKeep.picked.title}」や「${finalPick.title}」に対して人一倍強い執着と情熱を燃やしている、熱いギャップの持ち主です。` },
+    { id: "l12", cls: "red", title: `🛡️ ストレスが限界に達したときの逃避行動`, body: `限界まで我慢したある日、あなたは突然 ${sacList} のような世間体や義務感を切り捨て、「${fastestKeep.picked.title}」だけを握りしめて殻に閉じこもる傾向があります。` },
+    { id: "l13", cls: "gold", title: `💰 お金と時間を無意識に注ぐ場所`, body: `自分では節約や堅実を意識していても、「${fastestKeep.picked.title}」や「${secondKeep.picked.title}」に関係することになると、途端に財布の紐や時間の制限が緩くなるタイプです。` },
+    { id: "l14", cls: "", title: `🗝️ あなたが本当に心を許せる人の条件`, body: `表面的な愛想良さではなく、「${finalPick.title}」に対する感覚が自分と似ている相手や、${sacList} を押し付けてこない人にだけ、本当の素顔を見せます。` },
+    { id: "l15", cls: "vio", title: `🔥 密かにライバル心を燃やしているポイント`, body: `口には出しませんが、「${secondKeep.picked.title}」をスマートに手に入れている人を見ると、心のどこかで「自分だって負けたくない」と静かな闘志に火がつきます。` },
+    { id: "l16", cls: "", title: `☔ 落ち込んだ日に効く回復スイッチ`, body: `元気がなくなったときに無理にポジティブになる必要はありません。今のあなたにとっては「${fastestKeep.picked.title}」に触れること自体が、一番手っ取り早い特効薬になります。` },
+    { id: "l17", cls: "gold", title: `🧭 10年後のあなたが今のあなたに言いそうな一言`, body: `未来のあなたはきっと「あのとき ${sacList} に振り回されず、『${finalPick.title}』を信じて選び続けたのは正解だったよ」と微笑んで背中を押してくれるはずです。` },
+    { id: "l18", cls: "red", title: `🎲 明日から1週間の完全な自由をもらえたら`, body: `誰にも気兼ねしなくていいなら、あなたは真っ先に「${fastestKeep.picked.title}」を満たす行動を取り、残りの時間は「${finalPick.title}」を味わうために使い切るでしょう。` }
+  ];
+
+  // 非重複レンズ選出（過去に使ったレンズを避けて3つ選ぶ）
+  let usedLensSet = new Set(save.usedLensIds);
+  let unusedLenses = allLenses.filter(l => !usedLensSet.has(l.id));
+  if (unusedLenses.length < 3) {
+    usedLensSet.clear();
+    unusedLenses = [...allLenses];
+  }
+  const chosenLenses = shuffle(unusedLenses).slice(0, 3);
+  chosenLenses.forEach(l => usedLensSet.add(l.id));
+
+  // セーブ更新
+  save.plays += 1;
+  const isNew = !save.unlocked.includes(arch.id);
+  if (isNew) save.unlocked.push(arch.id);
+  save.lastArchId = arch.id;
+  save.lastArchName = arch.name;
+  save.deckUsedIds = gState.nextDeckUsedIds;
+  save.usedLensIds = Array.from(usedLensSet);
+  writeSave(save);
+  refreshStatsUI();
+
+  // 前回比較バナー
+  const deltaEl = document.getElementById("delta-banner");
+  if (prevId) {
+    deltaEl.style.display = "block";
+    if (prevId === arch.id) {
+      deltaEl.innerHTML = `🔄 前回とは違うカードが出たにもかかわらず、同じ<strong>「${arch.name}」</strong>へ辿り着きました。ブレない本性がここにあります。`;
+    } else {
+      deltaEl.innerHTML = `✨ 前回の<strong>「${prevName}」</strong>から、今回は<strong>「${arch.name}」</strong>へと変化！新しい問いがあなたの別の顔を引き出しました。`;
+    }
+  } else {
+    deltaEl.style.display = "none";
+  }
+
+  // ピクセルキャラ描画
+  document.getElementById("res-pixel").innerHTML = renderPixelSVG(arch.id, 84);
+
+  const aliases = [
+    `『${finalPick.title}』を胸に抱く、`,
+    `『${fastestKeep.picked.title}』に本能が反応した、`,
+    `『${dropLogs[0].picked.title}』を切り捨てて前へ進む、`
+  ];
+  document.getElementById("res-alias").textContent = aliases[Math.floor(Math.random() * aliases.length)];
+
+  const rarEl = document.getElementById("res-rarity");
+  rarEl.className = `rarity-badge rar-${arch.rar}`;
+  rarEl.textContent = arch.rar === "SEC" ? "★ SECRET" : arch.rar === "SR" ? "★★★ SUPER RARE" : arch.rar === "R" ? "★★ RARE" : "★ NORMAL";
+  document.getElementById("res-new").style.display = isNew ? "inline-block" : "none";
+
+  document.getElementById("res-name").textContent = arch.name;
+  document.getElementById("res-catch").textContent = `「${arch.catch}」`;
+  document.getElementById("res-desc").textContent = arch.desc;
+
+  document.getElementById("st-speed").textContent = `${avgSec.toFixed(1)} 秒`;
+  document.getElementById("st-top").textContent = topLabel;
+  document.getElementById("st-dex").textContent = `${save.unlocked.length} / ${ARCHETYPES.length}`;
+
+  drawRadar(norm);
+
+  document.getElementById("highlights").innerHTML = chosenLenses.map(l => `
+    <div class="hl-item ${l.cls}">
+      <strong>${l.title}</strong><br>${l.body}
+    </div>
+  `).join("");
+
+  document.getElementById("picked-chips").innerHTML = gState.logs.map((l, idx) => {
+    const isDrop = l.q.mode === "drop";
+    return `<span class="p-chip ${isDrop ? 'sac' : ''}">${idx + 1}. ${isDrop ? '捨:' : ''}${l.picked.title}</span>`;
+  }).join("");
+
+  gState.lastReportText =
+`【本音の4択 診断結果】
+■ 裏の顔：${arch.name} [${arch.rar}]
+「${arch.catch}」
+■ 最速の本能：${fastestKeep.picked.title} (${(fastestKeep.durationMs/1000).toFixed(1)}秒)
+■ 生贄にしたもの：${dropLogs.map(d => d.picked.title).join("・")}
+■ 最期に抱えるもの：『${finalPick.title}』
+■ 図鑑解放：${save.unlocked.length}/${ARCHETYPES.length}`;
+
+  showScreen("screen-result");
+}
+
+function drawRadar(values) {
+  const svg = document.getElementById("radar-svg");
+  const cx = 135, cy = 123, r = 74, n = 6;
+  let html = "";
+
+  [0.33, 0.66, 1].forEach(sc => {
+    const pts = [];
+    for (let i = 0; i < n; i++) {
+      const a = (Math.PI * 2 * i) / n - Math.PI / 2;
+      pts.push(`${cx + Math.cos(a) * r * sc},${cy + Math.sin(a) * r * sc}`);
+    }
+    html += `<polygon points="${pts.join(" ")}" fill="none" stroke="rgba(148,163,184,0.22)" stroke-width="1"/>`;
+  });
+
+  for (let i = 0; i < n; i++) {
+    const a = (Math.PI * 2 * i) / n - Math.PI / 2;
+    html += `<line x1="${cx}" y1="${cy}" x2="${cx + Math.cos(a)*r}" y2="${cy + Math.sin(a)*r}" stroke="rgba(148,163,184,0.22)" stroke-width="1"/>`;
+    const lx = cx + Math.cos(a) * (r + 22);
+    const ly = cy + Math.sin(a) * (r + 16);
+    html += `<text x="${lx}" y="${ly}" fill="#cbd5e1" font-size="10" text-anchor="middle" dominant-baseline="middle">${TRAIT_NAMES[i]}</text>`;
+  }
+
+  const dPts = [];
+  for (let i = 0; i < n; i++) {
+    const a = (Math.PI * 2 * i) / n - Math.PI / 2;
+    const ratio = values[i] / 100;
+    dPts.push(`${cx + Math.cos(a) * r * ratio},${cy + Math.sin(a) * r * ratio}`);
+  }
+  html += `<polygon points="${dPts.join(" ")}" fill="rgba(45, 212, 191, 0.26)" stroke="#2dd4bf" stroke-width="2.2"/>`;
+  dPts.forEach(p => {
+    const [x, y] = p.split(",");
+    html += `<circle cx="${x}" cy="${y}" r="3.2" fill="#a78bfa" stroke="#fff" stroke-width="1"/>`;
+  });
+  svg.innerHTML = html;
+}
+
+function copyResult() {
+  navigator.clipboard.writeText(gState.lastReportText).then(() => {
+    const t = document.getElementById("copy-toast");
+    t.textContent = "✓ 診断結果をコピーしました！";
+    setTimeout(() => t.textContent = "", 2500);
+  });
+}
+
+refreshStatsUI();
+</script>
+</body>
+</html>
