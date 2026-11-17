@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PICK YOUR TRUTH — 60-Second Persona Test</title>
+<style>
+  :root {
+    --bg-main: #07080d;
+    --bg-card: rgba(18, 22, 34, 0.92);
+    --bg-hover: rgba(30, 39, 62, 0.98);
+    --border: rgba(148, 163, 184, 0.2);
+    --cyan: #2dd4bf;
+    --violet: #a78bfa;
+    --rose: #fb7185;
+    --amber: #fbbf24;
+    --text: #f8fafc;
+    --sub: #94a3b8;
+    --font: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg-main);
+    background-image:
+      radial-gradient(circle at 12% 15%, rgba(45, 212, 191, 0.09) 0%, transparent 42%),
+      radial-gradient(circle at 88% 85%, rgba(167, 139, 250, 0.1) 0%, transparent 42%);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 16px 14px 60px;
+    transition: background-image 0.4s ease;
+  }
+
+  body.mode-drop {
+    background-image:
+      radial-gradient(circle at 50% 20%, rgba(251, 113, 133, 0.18) 0%, transparent 55%),
+      radial-gradient(circle at 85% 90%, rgba(190, 18, 60, 0.12) 0%, transparent 45%);
+  }
+
+  body.mode-rush {
+    background-image:
+      radial-gradient(circle at 50% 20%, rgba(251, 191, 36, 0.15) 0%, transparent 55%);
+  }
+
+  .container { max-width: 760px; margin: 0 auto; }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+    font-size: 0.82rem;
+    color: var(--sub);
+    letter-spacing: 0.06em;
+  }
+  .topbar-right { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .pill-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .pill-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .screen { display: none; animation: popIn 0.35s ease forwards; }
+  .screen.active { display: block; }
+  @keyframes popIn {
+    from { opacity: 0; transform: translateY(8px) scale(0.99); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Start Screen */
+  .hero {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 44px 24px;
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    border: 1px solid rgba(45, 212, 191, 0.4);
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 6vw, 2.85rem);
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+    background: linear-gradient(135deg, #fff 15%, var(--cyan) 60%, var(--violet) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .sub-h1 {
+    font-size: clamp(0.98rem, 3vw, 1.18rem);
+    font-weight: 600;
+    color: var(--amber);
+    margin-bottom: 22px;
+  }
+
+  .lead {
+    color: var(--sub);
+    font-size: 0.98rem;
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto 28px;
+  }
+
+  .stats-banner {
+    display: inline-flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    font-size: 0.84rem;
+  }
+  .stats-banner strong { color: var(--amber); font-size: 1rem; }
+
+  .btn-main {
+    background: linear-gradient(135deg, #0d9488, #6366f1);
+    color: #fff;
+    border: none;
+    padding: 17px 44px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    border-radius: 14px;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+    transition: transform 0.18s, box-shadow 0.18s;
+  }
+  .btn-main:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 35px rgba(45, 212, 191, 0.4);
+  }
+
+  /* Quiz Screen */
+  .quiz-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .q-badge {
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(45, 212, 191, 0.15);
+    color: var(--cyan);
+    border: 1px solid rgba(45, 212, 191, 0.35);
+  }
+  .q-badge.drop {
+    background: rgba(251, 113, 133, 0.18);
+    color: var(--rose);
+    border-color: rgba(251, 113, 133, 0.5);
+    animation: pulseRed 1.4s infinite;
+  }
+  .q-badge.rush {
+    background: rgba(251, 191, 36, 0.18);
+    color: var(--amber);
+    border-color: rgba(251, 191, 36, 0.5);
+  }
+  .q-badge.final {
+    background: rgba(167, 139, 250, 0.2);
+    color: var(--violet);
+    border-color: rgba(167, 139, 250, 0.5);
+  }
+
+  @keyframes pulseRed {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(251, 113, 133, 0.4); }
+    50% { box-shadow: 0 0 14px 2px rgba(251, 113, 133, 0.3); }
+  }
+
+  .q-num { font-size: 0.9rem; font-weight: 700; color: var(--sub); font-variant-numeric: tabular-nums; }
+
+  .progress-bar {
+    height: 6px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--violet));
+    transition: width 0.3s ease;
+  }
+
+  .rush-timer-wrap { display: none; margin-bottom: 14px; text-align: center; }
+  .rush-timer-wrap.active { display: block; }
+  .rush-text { font-size: 0.85rem; font-weight: 800; color: var(--amber); margin-bottom: 5px; }
+  .rush-text.over { color: var(--rose); animation: shake 0.3s infinite; }
+  .rush-bar-bg { height: 8px; background: rgba(255,255,255,0.08); border-radius: 999px; overflow: hidden; }
+  .rush-bar-fill { height: 100%; width: 100%; background: linear-gradient(90deg, var(--rose), var(--amber)); transition: width 0.08s linear; }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
+  }
+
+  .q-box { text-align: center; margin: 16px 0 20px; }
+  .q-box h2 { font-size: clamp(1.15rem, 3.8vw, 1.46rem); font-weight: 800; line-height: 1.4; margin-bottom: 6px; }
+  .q-box p { font-size: 0.88rem; color: var(--sub); }
+
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 580px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 16px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.16s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 112px;
+  }
+  .card:hover {
+    background: var(--bg-hover);
+    border-color: var(--cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.4);
+  }
+  body.mode-drop .card:hover { border-color: var(--rose); background: rgba(50, 20, 32, 0.92); }
+  body.mode-rush .card:hover { border-color: var(--amber); }
+
+  .card.picked { transform: scale(0.96); border-color: var(--cyan); background: rgba(45, 212, 191, 0.18); }
+  body.mode-drop .card.picked { border-color: var(--rose); background: rgba(251, 113, 133, 0.22); }
+
+  .c-cat { font-size: 0.68rem; color: var(--violet); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 5px; }
+  .c-title { font-size: 1.06rem; font-weight: 800; color: var(--text); margin-bottom: 5px; }
+  .c-desc { font-size: 0.82rem; color: var(--sub); line-height: 1.45; }
+
+  /* Scanning Screen */
+  .scan-box { text-align: center; padding: 90px 20px; }
+  .spinner {
+    width: 64px; height: 64px;
+    border: 3px solid rgba(255,255,255,0.1);
+    border-top-color: var(--cyan);
+    border-right-color: var(--violet);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .scan-log { font-family: monospace; color: var(--cyan); font-size: 0.86rem; margin-top: 8px; }
+
+  /* Result Screen */
+  .res-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 26px 22px;
+    margin-bottom: 16px;
+  }
+
+  .delta-banner {
+    background: rgba(167, 139, 250, 0.12);
+    border: 1px solid rgba(167, 139, 250, 0.35);
+    color: #e9d5ff;
+    font-size: 0.84rem;
+    padding: 10px 14px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .pixel-stage { display: flex; justify-content: center; margin: 6px 0 12px; }
+  .pixel-stage-bg {
+    width: 104px;
+    height: 104px;
+    border-radius: 20px;
+    background: radial-gradient(circle, rgba(45, 212, 191, 0.16), rgba(15, 23, 42, 0.9));
+    border: 1px solid rgba(45, 212, 191, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+  .pixel-bounce { animation: floatPix 2.2s ease-in-out infinite; }
+  @keyframes floatPix {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  .rarity-row { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .rarity-badge { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.12em; padding: 4px 12px; border-radius: 6px; }
+  .rar-N { background: rgba(148,163,184,0.2); color: #cbd5e1; }
+  .rar-R { background: rgba(45,212,191,0.2); color: var(--cyan); border: 1px solid rgba(45,212,191,0.4); }
+  .rar-SR { background: rgba(167,139,250,0.25); color: #ddd6fe; border: 1px solid var(--violet); box-shadow: 0 0 15px rgba(167,139,250,0.35); }
+  .rar-SEC { background: linear-gradient(135deg, rgba(251,191,36,0.3), rgba(251,113,133,0.3)); color: var(--amber); border: 1px solid var(--amber); box-shadow: 0 0 20px rgba(251,191,36,0.4); }
+
+  .new-badge { font-size: 0.72rem; font-weight: 900; background: var(--rose); color: #fff; padding: 3px 8px; border-radius: 4px; }
+
+  .sub-alias { text-align: center; font-size: 0.84rem; color: var(--violet); font-weight: 700; margin-bottom: 4px; }
+
+  .res-name {
+    text-align: center;
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    font-weight: 900;
+    margin-bottom: 6px;
+    background: linear-gradient(135deg, #fff, var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .res-catch { text-align: center; color: var(--amber); font-weight: 700; font-size: 0.96rem; margin-bottom: 14px; }
+  .res-desc { color: var(--sub); font-size: 0.94rem; line-height: 1.7; margin-bottom: 20px; }
+
+  .mini-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+  .m-stat { background: rgba(15,23,42,0.75); border: 1px solid var(--border); border-radius: 12px; padding: 10px 8px; text-align: center; }
+  .m-stat span { display: block; font-size: 0.72rem; color: var(--sub); margin-bottom: 3px; }
+  .m-stat strong { font-size: 1rem; color: var(--cyan); }
+
+  .radar-box { display: flex; justify-content: center; margin: 8px 0 4px; }
+
+  .sec-head { font-size: 0.96rem; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .sec-head::before { content: ""; width: 4px; height: 16px; background: var(--cyan); border-radius: 2px; }
+
+  .highlights { display: grid; gap: 10px; margin-bottom: 20px; }
+  .hl-item {
+    background: rgba(15,23,42,0.75);
+    border-left: 3px solid var(--cyan);
+    padding: 12px 14px;
+    border-radius: 0 10px 10px 0;
+    font-size: 0.88rem;
+    color: var(--sub);
+    line-height: 1.6;
+  }
+  .hl-item.red { border-left-color: var(--rose); }
+  .hl-item.gold { border-left-color: var(--amber); }
+  .hl-item.vio { border-left-color: var(--violet); }
+  .hl-item strong { color: var(--text); }
+
+  .picked-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .p-chip {
+    font-size: 0.74rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    color: var(--sub);
+  }
+  .p-chip.sac { border-color: rgba(251, 113, 133, 0.45); color: #fda4af; text-decoration: line-through; }
+
+  .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 22px; }
+  .btn-sub {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 13px 20px;
+    border-radius: 12px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-sub:hover { border-color: var(--cyan); color: var(--cyan); }
+  .toast { text-align: center; font-size: 0.82rem; color: var(--cyan); margin-top: 10px; min-height: 1.2em; }
+
+  /* Dex Modal */
+  .modal-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.82);
+    backdrop-filter: blur(6px);
+    z-index: 99;
+    padding: 20px 14px;
+    overflow-y: auto;
+  }
+  .modal-bg.open { display: flex; justify-content: center; align-items: flex-start; }
+  .modal {
+    background: #111624;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    max-width: 740px;
+    width: 100%;
+    padding: 24px 20px;
+    margin-top: 16px;
+  }
+  .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .dex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 10px; }
+  .dex-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 12px;
+    font-size: 0.8rem;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .dex-card.locked { opacity: 0.55; }
+  .dex-card.unlocked { border-color: rgba(45, 212, 191, 0.35); background: rgba(45, 212, 191, 0.05); }
+  .dex-pix-wrap {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: rgba(15, 23, 42, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .dex-card.locked .dex-pix-wrap svg {
+    filter: brightness(0.15) contrast(1.2);
+    opacity: 0.6;
+  }
+  .dex-info { min-width: 0; flex: 1; }
+  .dex-rar { font-size: 0.66rem; font-weight: 800; color: var(--amber); margin-bottom: 2px; }
+  .dex-title { font-weight: 800; color: var(--text); margin-bottom: 3px; font-size: 0.86rem; }
+  .dex-hint { color: var(--sub); font-size: 0.72rem; line-height: 1.38; }
+  .dex-foot { margin-top: 18px; text-align: right; }
+  .btn-reset { background: none; border: none; color: var(--sub); font-size: 0.75rem; cursor: pointer; text-decoration: underline; }
+  .btn-reset:hover { color: var(--rose); }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="topbar">
+    <span>PICK YOUR TRUTH</span>
+    <div class="topbar-right">
+      <button class="pill-btn" id="sound-btn" onclick="toggleSound()">🔊 SFX: ON</button>
+      <button class="pill-btn" onclick="openDex()">📖 Persona Dex (<span id="top-dex-count">0</span>/24)</button>
+    </div>
+  </div>
+
+  <!-- 1. Start Screen -->
+  <section id="screen-start" class="screen active">
+    <div class="hero">
+      <div class="tag">60-Second Gut Check</div>
+      <h1>PICK YOUR TRUTH</h1>
+      <div class="sub-h1">Your hidden persona revealed in 60 seconds</div>
+      <p class="lead">
+        Four cards. Ten tough calls. Pure instinct.<br>
+        Tap what matters most to you right now—and uncover which of the 24 hidden personas lives beneath the surface.
+      </p>
+
+      <div class="stats-banner">
+        <div>Runs: <strong id="stat-plays">0</strong></div>
+        <div>Unlocked: <strong id="stat-dex">0 / 24</strong></div>
+        <div id="stat-last-wrap" style="display:none;">Last Persona: <strong id="stat-last"></strong></div>
+      </div>
+
+      <div>
+        <button class="btn-main" onclick="startGame()">Reveal My Persona</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Quiz Screen -->
+  <section id="screen-quiz" class="screen">
+    <div class="quiz-meta">
+      <span id="q-badge" class="q-badge">QUESTION</span>
+      <span id="q-num" class="q-num">1 / 10</span>
+    </div>
+    <div class="progress-bar">
+      <div id="progress-fill" class="progress-fill"></div>
+    </div>
+
+    <div id="rush-wrap" class="rush-timer-wrap">
+      <div id="rush-text" class="rush-text">⚡ Go with your gut!</div>
+      <div class="rush-bar-bg"><div id="rush-bar" class="rush-bar-fill"></div></div>
+    </div>
+
+    <div class="q-box">
+      <h2 id="q-title"></h2>
+      <p id="q-sub"></p>
+    </div>
+
+    <div id="choices-grid" class="grid"></div>
+  </section>
+
+  <!-- 3. Scanning Screen -->
+  <section id="screen-scan" class="screen">
+    <div class="scan-box">
+      <div class="spinner"></div>
+      <h2>Decoding your choices...</h2>
+      <div id="scan-log" class="scan-log">Reading between the lines of your instincts</div>
+    </div>
+  </section>
+
+  <!-- 4. Result Screen -->
+  <section id="screen-result" class="screen">
+    <div class="res-panel">
+      <div id="delta-banner" class="delta-banner" style="display:none;"></div>
+
+      <div class="pixel-stage">
+        <div class="pixel-stage-bg">
+          <div id="res-pixel" class="pixel-bounce"></div>
+        </div>
+      </div>
+
+      <div class="rarity-row">
+        <span id="res-rarity" class="rarity-badge"></span>
+        <span id="res-new" class="new-badge" style="display:none;">NEW UNLOCK!</span>
+      </div>
+      <div id="res-alias" class="sub-alias"></div>
+      <h2 id="res-name" class="res-name"></h2>
+      <div id="res-catch" class="res-catch"></div>
+      <p id="res-desc" class="res-desc"></p>
+
+      <div class="mini-stats">
+        <div class="m-stat"><span>Avg. Decision Time</span><strong id="st-speed">-</strong></div>
+        <div class="m-stat"><span>Core Instinct</span><strong id="st-top">-</strong></div>
+        <div class="m-stat"><span>Dex Progress</span><strong id="st-dex">-</strong></div>
+      </div>
+
+      <div class="radar-box">
+        <svg id="radar-svg" width="300" height="255" viewBox="0 0 300 255"></svg>
+      </div>
+    </div>
+
+    <div class="res-panel">
+      <div class="sec-head">3 Lenses Into Your Mind</div>
+      <div id="highlights" class="highlights"></div>
+
+      <div class="sec-head" style="margin-top:8px;">Your 10-Step Trail</div>
+      <div id="picked-chips" class="picked-chips"></div>
+
+      <div class="actions">
+        <button class="btn-main" onclick="startGame()">🎲 Play Again (Fresh Set)</button>
+        <button class="btn-sub" onclick="copyResult()">📋 Copy Result</button>
+        <button class="btn-sub" onclick="openDex()">📖 Persona Dex</button>
+      </div>
+      <div id="copy-toast" class="toast"></div>
+    </div>
+  </section>
+</div>
+
+<!-- Dex Modal -->
+<div id="dex-modal" class="modal-bg" onclick="if(event.target===this) closeDex()">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>📖 Persona Dex (24 Types)</h3>
+      <button class="pill-btn" onclick="closeDex()">✕ Close</button>
+    </div>
+    <div id="dex-grid" class="dex-grid"></div>
+    <div class="dex-foot">
+      <button class="btn-reset" onclick="resetSaveData()">Reset all progress & history</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==========================================
+// 1. 240 Value Cards (8 Categories × 30)
+// traits: [Security(0), Freedom(1), Connection(2), Growth(3), Depth(4), Realism(5)]
+// ==========================================
+const CATEGORIES = [
+  "Health & Body",
+  "Love & Connection",
+  "Time & Freedom",
+  "Mindset & Soul",
+  "Experiences & Risk",
+  "Career & Purpose",
+  "Wealth & Security",
+  "Space & Wisdom"
+];
+
+const ITEMS = [
+  // 0: Health & Body (1-30)
+  { id: 1, cat: 0, title: "Endless Stamina", desc: "All-day energy that never seems to run dry.", t: [2,1,0,1,0,1] },
+  { id: 2, cat: 0, title: "Deep, Restorative Sleep", desc: "Waking up with a completely recharged mind and body.", t: [2,1,0,0,1,1] },
+  { id: 3, cat: 0, title: "Ageless Vitality", desc: "The physical spark to say yes to any adventure.", t: [1,1,0,2,0,1] },
+  { id: 4, cat: 0, title: "Bulletproof Teeth", desc: "Enjoying every meal for life without a single cavity.", t: [2,0,0,0,0,3] },
+  { id: 5, cat: 0, title: "Razor-Sharp Senses", desc: "Crystal-clear vision and hearing to take the world in.", t: [1,0,1,0,2,1] },
+  { id: 6, cat: 0, title: "Effortless Metabolism", desc: "A body that naturally stays lean and balanced.", t: [2,1,0,0,1,1] },
+  { id: 7, cat: 0, title: "Peak Nutrient Absorption", desc: "Turning every meal efficiently into clean fuel.", t: [2,0,0,0,0,3] },
+  { id: 8, cat: 0, title: "Unshakable Stress Shield", desc: "Staying composed without burning out under pressure.", t: [2,1,0,1,0,1] },
+  { id: 9, cat: 0, title: "Steady Nervous System", desc: "Calming anxiety and racing thoughts on command.", t: [2,1,0,0,2,0] },
+  { id: 10, cat: 0, title: "Ironclad Immunity", desc: "Rarely catching whatever bug is going around.", t: [3,0,0,0,0,2] },
+  { id: 11, cat: 0, title: "Overnight Bounce-Back", desc: "Waking up fresh no matter how hard yesterday was.", t: [2,1,0,1,0,2] },
+  { id: 12, cat: 0, title: "A Calm Heartbeat", desc: "Moving through life with zero physical panic.", t: [3,0,0,0,1,1] },
+  { id: 13, cat: 0, title: "Joyful Taste Buds", desc: "Finding pure happiness in a great plate of food.", t: [1,0,1,0,3,0] },
+  { id: 14, cat: 0, title: "A Body You Love", desc: "Catching your reflection and feeling quietly proud.", t: [0,1,1,1,2,1] },
+  { id: 15, cat: 0, title: "Cast-Iron Stomach", desc: "Eating street food abroad without a second thought.", t: [2,1,0,1,0,1] },
+  { id: 16, cat: 0, title: "Fluid Posture & Joints", desc: "Moving with effortless, cat-like grace at any age.", t: [2,1,0,0,1,1] },
+  { id: 17, cat: 0, title: "Injury-Proof Frame", desc: "Taking a hard tumble and walking away fine.", t: [3,0,0,1,0,1] },
+  { id: 18, cat: 0, title: "Glowing Skin & Hair", desc: "Looking vibrant from the inside out.", t: [1,0,1,0,2,1] },
+  { id: 19, cat: 0, title: "Bright Mornings", desc: "Springing out of bed sharp and ready to move.", t: [2,2,0,0,1,1] },
+  { id: 20, cat: 0, title: "Strong Legs for Life", desc: "Walking anywhere on your own two feet into old age.", t: [2,2,0,1,0,1] },
+  { id: 21, cat: 0, title: "Zero Chronic Pain", desc: "No nagging backaches, stiff necks, or migraines.", t: [3,1,0,0,1,0] },
+  { id: 22, cat: 0, title: "Effortless Self-Control", desc: "Cravings never dictating your choices.", t: [1,2,0,0,0,2] },
+  { id: 23, cat: 0, title: "Heightened Senses", desc: "Catching subtle scents, textures, and small wonders.", t: [0,1,0,0,3,0] },
+  { id: 24, cat: 0, title: "Body Radar", desc: "Sensing subtle burnout signals before crashing.", t: [2,1,0,0,0,2] },
+  { id: 25, cat: 0, title: "A Resonant Voice", desc: "Speaking with warmth and clarity that lands.", t: [0,1,2,1,1,1] },
+  { id: 26, cat: 0, title: "Warm Circulation", desc: "Never feeling sluggish, cold, or weighed down.", t: [2,0,0,1,1,1] },
+  { id: 27, cat: 0, title: "Laser-Clear Focus", desc: "A mind free of brain fog when it counts.", t: [0,1,0,2,1,2] },
+  { id: 28, cat: 0, title: "Clean Habits", desc: "Enjoying drinks or sweets without ever needing them.", t: [1,2,0,0,1,1] },
+  { id: 29, cat: 0, title: "Allergy-Free Living", desc: "Breathing easy in every season and eating freely.", t: [2,2,0,0,0,1] },
+  { id: 30, cat: 0, title: "Wild Adaptability", desc: "Sleeping fine on hard floors or in strange climates.", t: [1,2,0,2,0,1] },
+
+  // 1: Love & Connection (31-60)
+  { id: 31, cat: 1, title: "Unconditional Love", desc: "Being accepted completely, flaws and all.", t: [2,0,3,0,0,0] },
+  { id: 32, cat: 1, title: "A Ride-or-Die Friend", desc: "Someone who knows the real you and stays.", t: [0,0,3,0,1,0] },
+  { id: 33, cat: 1, title: "Warm Family Ties", desc: "The faces you'll miss most when time runs short.", t: [1,0,3,0,0,0] },
+  { id: 34, cat: 1, title: "Deep Partner Trust", desc: "Sharing the road with someone who truly has your back.", t: [1,0,3,0,0,1] },
+  { id: 35, cat: 1, title: "Zero-Regret Gratitude", desc: "Thanking your parents before it's ever too late.", t: [1,0,3,0,1,0] },
+  { id: 36, cat: 1, title: "Magnetic Goodwill", desc: "People naturally rooting for you and lending a hand.", t: [1,0,3,0,1,1] },
+  { id: 37, cat: 1, title: "The Grace to Forgive", desc: "Dropping old grudges so your own heart travels light.", t: [0,1,2,0,2,0] },
+  { id: 38, cat: 1, title: "Healthy Boundaries", desc: "Respecting space even with the people you love most.", t: [1,2,1,0,1,0] },
+  { id: 39, cat: 1, title: "A True Mentor", desc: "Someone wise enough to light the path ahead.", t: [0,0,2,3,0,0] },
+  { id: 40, cat: 1, title: "Loving Your Own Company", desc: "Feeling genuinely whole even when you're alone.", t: [0,3,0,0,2,0] },
+  { id: 41, cat: 1, title: "A Safe Place to Break", desc: "Someone you can drop the strong act around.", t: [2,0,3,0,0,0] },
+  { id: 42, cat: 1, title: "Comfortable Silence", desc: "Sitting together without needing to fill the air.", t: [1,1,2,0,2,0] },
+  { id: 43, cat: 1, title: "Belly-Laugh Crew", desc: "Friends who turn you back into a carefree kid.", t: [0,0,3,1,1,0] },
+  { id: 44, cat: 1, title: "Passing the Torch", desc: "Handing down your hard-won wisdom to younger souls.", t: [0,0,2,1,1,1] },
+  { id: 45, cat: 1, title: "Natural Charm", desc: "Disarming strangers in seconds with genuine warmth.", t: [0,0,2,1,1,1] },
+  { id: 46, cat: 1, title: "Courage to Be Disliked", desc: "Standing in your truth instead of people-pleasing.", t: [1,3,0,1,0,0] },
+  { id: 47, cat: 1, title: "No-Strings Kindness", desc: "Helping someone out with zero hidden agenda.", t: [0,0,3,0,2,0] },
+  { id: 48, cat: 1, title: "Timeless Old Friends", desc: "Picking up right where you left off years later.", t: [1,0,3,0,1,0] },
+  { id: 49, cat: 1, title: "Bond With a Pet", desc: "Pure, unspoken loyalty that melts away bad days.", t: [1,0,2,0,2,0] },
+  { id: 50, cat: 1, title: "Asking for Help", desc: "Having the humility to say 'I need a hand' early.", t: [1,0,2,1,0,1] },
+  { id: 51, cat: 1, title: "Zero-Envy Applause", desc: "Clapping wholeheartedly when others win big.", t: [0,0,2,1,2,0] },
+  { id: 52, cat: 1, title: "Tension-Breaking Wit", desc: "Saving awkward rooms with one well-timed joke.", t: [0,1,2,0,1,1] },
+  { id: 53, cat: 1, title: "Honoring Past Goodbyes", desc: "Carrying old loves as gratitude, not bitterness.", t: [0,1,2,0,2,0] },
+  { id: 54, cat: 1, title: "Rock-Solid Word", desc: "Being the person everyone trusts to keep a promise.", t: [1,0,2,0,1,2] },
+  { id: 55, cat: 1, title: "Deep Listening", desc: "Holding space so fully that people feel truly seen.", t: [0,0,3,0,1,1] },
+  { id: 56, cat: 1, title: "Cutting Toxic Ties", desc: "Walking away cleanly from relationships that drain you.", t: [2,3,0,0,0,1] },
+  { id: 57, cat: 1, title: "Local Community", desc: "Friendly neighbors who actually look out for each other.", t: [2,1,2,0,0,0] },
+  { id: 58, cat: 1, title: "A Worthy Rival", desc: "Someone who pushes you to beat your own limits.", t: [0,0,1,3,0,1] },
+  { id: 59, cat: 1, title: "Unfiltered Affection", desc: "Saying 'I love you' and giving hugs without hesitation.", t: [0,0,3,0,2,0] },
+  { id: 60, cat: 1, title: "Feeling Needed", desc: "Knowing your presence genuinely changes someone's life.", t: [0,0,3,1,1,0] },
+
+  // 2: Time & Freedom (61-90)
+  { id: 61, cat: 2, title: "Unclaimed Time", desc: "Hours that belong 100% to you and nobody else.", t: [0,3,0,0,1,1] },
+  { id: 62, cat: 2, title: "Total Autonomy", desc: "Keeping your hands firmly on life's steering wheel.", t: [0,3,0,1,0,1] },
+  { id: 63, cat: 2, title: "Living in the Now", desc: "Zero mental static from yesterday or tomorrow.", t: [0,1,0,0,3,0] },
+  { id: 64, cat: 2, title: "Ruthless Subtraction", desc: "Dropping good things to make room for great ones.", t: [0,2,0,1,0,2] },
+  { id: 65, cat: 2, title: "Creative Breathing Room", desc: "White space in your day where fresh ideas spark.", t: [1,2,0,0,2,0] },
+  { id: 66, cat: 2, title: "Quiet Early Mornings", desc: "Peaceful hours before the rest of the world wakes.", t: [1,2,0,1,1,1] },
+  { id: 67, cat: 2, title: "A Long, Full Life", desc: "Decades enough to savor everything you care about.", t: [3,0,1,1,0,0] },
+  { id: 68, cat: 2, title: "Impeccable Timing", desc: "Knowing the exact second to leap at a rare chance.", t: [0,1,0,2,0,2] },
+  { id: 69, cat: 2, title: "An Unboxed Life", desc: "Living by your own script, not society's checklist.", t: [0,3,0,1,1,0] },
+  { id: 70, cat: 2, title: "Noticing the Seasons", desc: "Slowing down enough to feel autumn air or spring bloom.", t: [1,1,0,0,3,0] },
+  { id: 71, cat: 2, title: "Location Freedom", desc: "Packing up and living wherever sparks your soul.", t: [0,3,0,2,1,0] },
+  { id: 72, cat: 2, title: "Guilt-Free Naps", desc: "Resting in broad daylight without a shred of guilt.", t: [2,2,0,0,1,0] },
+  { id: 73, cat: 2, title: "Blank Calendar Days", desc: "Waking up with zero plans and loving every second.", t: [1,2,0,0,2,0] },
+  { id: 74, cat: 2, title: "The Graceful 'No'", desc: "Protecting your calendar without burning bridges.", t: [1,3,0,0,0,2] },
+  { id: 75, cat: 2, title: "Midnight Solitude", desc: "Owning the quiet 2 AM hours while the city sleeps.", t: [0,3,0,0,2,0] },
+  { id: 76, cat: 2, title: "Zero Commute", desc: "Never wasting life stuck in traffic or packed trains.", t: [2,2,0,0,0,2] },
+  { id: 77, cat: 2, title: "Spontaneous Getaways", desc: "Grabbing your passport and leaving on a whim.", t: [0,3,0,2,1,0] },
+  { id: 78, cat: 2, title: "Your Own Rhythm", desc: "Moving at your natural pace, not someone else's clock.", t: [1,3,0,0,1,0] },
+  { id: 79, cat: 2, title: "True Sabbaticals", desc: "Disappearing for weeks at a time to fully reset.", t: [1,2,1,1,1,0] },
+  { id: 80, cat: 2, title: "Notifications Off", desc: "Zero pressure to text anyone back right away.", t: [1,3,0,0,1,0] },
+  { id: 81, cat: 2, title: "Skipping the Crowds", desc: "Living off-peak with zero lines and zero rush.", t: [1,2,0,0,1,2] },
+  { id: 82, cat: 2, title: "Right to Reinvent", desc: "Changing direction completely at any age.", t: [0,3,0,2,0,0] },
+  { id: 83, cat: 2, title: "Forward-Looking Spirit", desc: "Refusing to stay trapped in yesterday's mistakes.", t: [1,1,0,2,0,1] },
+  { id: 84, cat: 2, title: "Art of Doing Nothing", desc: "Watching clouds roll by without touching your phone.", t: [0,2,0,0,3,0] },
+  { id: 85, cat: 2, title: "Daily Micro-Rituals", desc: "A sacred coffee walk or playlist that centers you.", t: [2,1,0,0,2,0] },
+  { id: 86, cat: 2, title: "Unobserved Moments", desc: "Being completely weird and free with nobody watching.", t: [1,3,0,0,1,0] },
+  { id: 87, cat: 2, title: "Unbroken Deep Hours", desc: "Whole days to disappear into one passion project.", t: [0,2,0,2,2,0] },
+  { id: 88, cat: 2, title: "Savoring Traditions", desc: "Slowing down to celebrate holidays and little rituals.", t: [1,0,1,0,3,0] },
+  { id: 89, cat: 2, title: "Growing Older Fearlessly", desc: "Actually looking forward to your next decade.", t: [2,1,1,1,1,0] },
+  { id: 90, cat: 2, title: "Bias for Action", desc: "Knocking out chores fast to buy yourself more play.", t: [0,1,0,2,0,3] },
+
+  // 3: Mindset & Soul (91-120)
+  { id: 91, cat: 3, title: "Unconditional Self-Worth", desc: "Liking yourself even on your messiest days.", t: [2,1,1,0,1,0] },
+  { id: 92, cat: 3, title: "Inner Stillness", desc: "A glassy calm inside even when life gets loud.", t: [2,1,0,0,2,0] },
+  { id: 93, cat: 3, title: "Inner Compass", desc: "Knowing what you stand for without checking the crowd.", t: [0,3,0,1,1,0] },
+  { id: 94, cat: 3, title: "Open-Minded Humility", desc: "Admitting when you're wrong without ego getting bruised.", t: [0,0,2,2,0,1] },
+  { id: 95, cat: 3, title: "Undying Curiosity", desc: "Still asking 'Wait, how does that work?' at 80.", t: [0,1,0,3,1,0] },
+  { id: 96, cat: 3, title: "Buoyant Optimism", desc: "Truly believing things will work out somehow.", t: [1,1,0,2,0,0] },
+  { id: 97, cat: 3, title: "Emotional Bounce-Back", desc: "Snapping back into shape after life hits hard.", t: [2,1,0,2,0,0] },
+  { id: 98, cat: 3, title: "Gallows Humor", desc: "Laughing at disaster when tears won't fix it.", t: [0,1,2,0,2,0] },
+  { id: 99, cat: 3, title: "Comparison Immunity", desc: "Running your own race without peeking sideways.", t: [1,2,0,0,2,0] },
+  { id: 100, cat: 3, title: "Quiet Integrity", desc: "Doing the right thing when nobody will ever know.", t: [1,0,2,0,2,0] },
+  { id: 101, cat: 3, title: "Self-Regulation", desc: "Knowing exactly how to lift yourself out of a slump.", t: [2,2,0,0,1,1] },
+  { id: 102, cat: 3, title: "Comfort With Mystery", desc: "Staying patient when life gives no clear answers.", t: [1,1,0,1,2,0] },
+  { id: 103, cat: 3, title: "Ego-Free Learning", desc: "Willing to look like a beginner to master something new.", t: [0,1,1,2,0,1] },
+  { id: 104, cat: 3, title: "Letting Anger Pass", desc: "Taking one deep breath instead of snapping back.", t: [1,1,1,0,2,0] },
+  { id: 105, cat: 3, title: "Trusting Your Gut", desc: "Following that quiet inner nudge logic can't explain.", t: [0,2,0,1,2,0] },
+  { id: 106, cat: 3, title: "Micro-Joy Radar", desc: "Getting genuinely thrilled by good light or fresh bread.", t: [1,0,1,0,3,0] },
+  { id: 107, cat: 3, title: "'Good Enough' Peace", desc: "Breaking free from the curse of perfectionism.", t: [2,2,0,0,1,0] },
+  { id: 108, cat: 3, title: "Standing Alone", desc: "Walking your path even if nobody gets it yet.", t: [0,3,0,1,1,0] },
+  { id: 109, cat: 3, title: "Grounded Grace", desc: "Remembering luck and help even at your peak.", t: [0,0,2,1,2,0] },
+  { id: 110, cat: 3, title: "Turning Envy to Fuel", desc: "Using someone else's win as proof that you can too.", t: [0,0,0,3,0,2] },
+  { id: 111, cat: 3, title: "Unflappable Poise", desc: "Holding steady in silence while others scramble.", t: [1,2,0,0,2,0] },
+  { id: 112, cat: 3, title: "Childlike Playfulness", desc: "Keeping a corner of your soul forever silly and curious.", t: [0,2,1,1,2,0] },
+  { id: 113, cat: 3, title: "Plot-Twist Mindset", desc: "Treating sudden setbacks like an interesting twist.", t: [0,2,0,3,1,0] },
+  { id: 114, cat: 3, title: "Courageous Vulnerability", desc: "Saying 'I'm struggling with this' out loud.", t: [1,1,2,0,1,0] },
+  { id: 115, cat: 3, title: "Personal Taste & Code", desc: "Refusing to cut corners on what matters to your soul.", t: [0,2,0,0,3,0] },
+  { id: 116, cat: 3, title: "Stubborn Hope", desc: "Spotting a sliver of light in the darkest winter.", t: [1,0,0,3,1,0] },
+  { id: 117, cat: 3, title: "Zero Prejudice", desc: "Seeing people as they are, stripped of every label.", t: [0,2,0,1,2,1] },
+  { id: 118, cat: 3, title: "Bird's-Eye Awareness", desc: "Stepping outside your emotions to observe yourself.", t: [1,2,0,1,1,1] },
+  { id: 119, cat: 3, title: "Thoughtful Words", desc: "Choosing language that heals instead of scars.", t: [0,0,1,0,3,1] },
+  { id: 120, cat: 3, title: "An Emotional Seawall", desc: "Letting other people's bad moods roll right off you.", t: [3,2,0,0,0,0] },
+
+  // 4: Experiences & Risk (121-150)
+  { id: 121, cat: 4, title: "The First Leap", desc: "Taking the shot so you never wonder 'what if?'", t: [0,1,0,3,0,0] },
+  { id: 122, cat: 4, title: "Far-Flung Travel", desc: "Wandering unfamiliar streets that rewrite your worldview.", t: [0,2,0,2,2,0] },
+  { id: 123, cat: 4, title: "3 AM Real Talk", desc: "Dropping every mask for one raw, honest night.", t: [0,1,3,0,1,0] },
+  { id: 124, cat: 4, title: "A Burning Quest", desc: "A goal that pulls you out of bed electric with purpose.", t: [0,0,0,3,1,1] },
+  { id: 125, cat: 4, title: "Obsessive Hobbies", desc: "Losing track of food and sleep over pure passion.", t: [0,2,0,1,2,0] },
+  { id: 126, cat: 4, title: "Humble Heartbreak", desc: "Hard knocks that carved depth into your character.", t: [0,0,2,2,1,0] },
+  { id: 127, cat: 4, title: "Leaving the Comfort Zone", desc: "Betting on yourself with zero safety net.", t: [0,1,0,3,1,0] },
+  { id: 128, cat: 4, title: "Soul-Shaking Art", desc: "A song or painting that unexpectedly brings tears.", t: [0,0,1,0,3,0] },
+  { id: 129, cat: 4, title: "Golden Keepsakes", desc: "Capturing fleeting magic in photos and vivid memories.", t: [1,0,2,0,2,0] },
+  { id: 130, cat: 4, title: "Earned Triumph", desc: "Breaking through a wall with sheer, stubborn grit.", t: [0,0,0,3,0,2] },
+  { id: 131, cat: 4, title: "Creating From Scratch", desc: "Turning a blank page or raw idea into something real.", t: [0,1,0,2,2,1] },
+  { id: 132, cat: 4, title: "Mind-Bending Moments", desc: "Encounters that flip everything you thought you knew.", t: [0,1,0,3,2,0] },
+  { id: 133, cat: 4, title: "Glorious Embarrassment", desc: "Bombing so spectacularly that fear loses its grip.", t: [0,2,0,3,0,0] },
+  { id: 134, cat: 4, title: "Reckless Romance", desc: "Loving someone so fiercely that logic went out the window.", t: [0,0,3,0,2,0] },
+  { id: 135, cat: 4, title: "Wilderness Awe", desc: "Standing before vast mountains feeling blissfully small.", t: [0,1,0,1,3,0] },
+  { id: 136, cat: 4, title: "Breaking Your Ceiling", desc: "Pushing straight past the moment you swore you'd quit.", t: [0,0,0,3,0,2] },
+  { id: 137, cat: 4, title: "Changing Someone's Arc", desc: "Seeing one sentence of yours alter another life.", t: [0,0,3,1,1,0] },
+  { id: 138, cat: 4, title: "A Book That Ruined You", desc: "Stories so good you never saw the world the same way.", t: [0,1,0,1,3,0] },
+  { id: 139, cat: 4, title: "Turning Scars to Stories", desc: "Laughing over drinks about disasters that once hurt.", t: [0,1,2,1,1,0] },
+  { id: 140, cat: 4, title: "Solo Backpacking", desc: "Navigating foreign chaos armed only with gut instinct.", t: [0,3,0,3,0,0] },
+  { id: 141, cat: 4, title: "Clean-Slate Moves", desc: "Moving cities or switching tracks to start a new chapter.", t: [0,2,0,3,0,0] },
+  { id: 142, cat: 4, title: "Live-Show Euphoria", desc: "Bass shaking your chest in a crowd singing as one.", t: [0,0,2,0,3,0] },
+  { id: 143, cat: 4, title: "Unforgettable Meals", desc: "One bite so transcendent you close your eyes.", t: [0,0,1,0,3,1] },
+  { id: 144, cat: 4, title: "Hands-On Craft", desc: "Fixing, building, and shaping your world by hand.", t: [1,1,0,1,2,1] },
+  { id: 145, cat: 4, title: "Pure Volunteering", desc: "Stepping into a space where money means nothing.", t: [0,0,3,1,1,0] },
+  { id: 146, cat: 4, title: "High-Stakes Arenas", desc: "Giving everything on a stage with zero excuses.", t: [0,0,0,3,0,2] },
+  { id: 147, cat: 4, title: "Grown-Up Mischief", desc: "Getting into harmless trouble and laughing until it hurts.", t: [0,1,2,1,1,0] },
+  { id: 148, cat: 4, title: "Happy Accidents", desc: "Wrong turns that lead to the best chapters of your life.", t: [0,2,1,1,2,0] },
+  { id: 149, cat: 4, title: "Wisdom Born of Loss", desc: "A deeper tenderness that only grief can teach.", t: [0,0,2,1,2,0] },
+  { id: 150, cat: 4, title: "One Perfect Day", desc: "A single memory bright enough to warm any winter.", t: [1,0,2,0,3,0] },
+
+  // 5: Career & Purpose (151-180)
+  { id: 151, cat: 5, title: "Meaningful Work", desc: "Using your strengths to actually make a dent.", t: [0,0,1,2,0,2] },
+  { id: 152, cat: 5, title: "Work-Life Boundaries", desc: "Logging off cleanly so life stays yours.", t: [2,2,1,0,0,0] },
+  { id: 153, cat: 5, title: "Rare Craft & Skill", desc: "An expertise that lets you earn your keep anywhere.", t: [1,2,0,1,0,2] },
+  { id: 154, cat: 5, title: "A Bulletproof Reputation", desc: "'If they're on it, we're good'—your invisible asset.", t: [1,0,2,0,0,2] },
+  { id: 155, cat: 5, title: "Tangible Impact", desc: "Knowing your effort makes someone's tomorrow brighter.", t: [0,0,3,1,1,0] },
+  { id: 156, cat: 5, title: "A Healthy Workplace", desc: "Doing great work without politics or daily dread.", t: [2,0,2,0,0,1] },
+  { id: 157, cat: 5, title: "Dignified Purpose", desc: "A role you're genuinely proud to tell your family about.", t: [0,0,1,2,1,1] },
+  { id: 158, cat: 5, title: "Your True Calling", desc: "Work that feels like breathing, not a grind.", t: [0,1,0,3,1,0] },
+  { id: 159, cat: 5, title: "Inspiring Leadership", desc: "Rallying people around a vision and helping them win.", t: [0,0,1,2,0,2] },
+  { id: 160, cat: 5, title: "Respect Beyond Titles", desc: "Being valued for who you are, not your job badge.", t: [0,1,3,0,1,0] },
+  { id: 161, cat: 5, title: "Personal Leverage", desc: "Clients asking for you by name, not your company.", t: [0,2,0,2,0,2] },
+  { id: 162, cat: 5, title: "A Co-Conspirator", desc: "A sharp partner you can debate fiercely and trust blindly.", t: [0,0,3,1,0,1] },
+  { id: 163, cat: 5, title: "Creative Ownership", desc: "Calling the shots instead of just following orders.", t: [0,3,0,1,0,2] },
+  { id: 164, cat: 5, title: "Fair Compensation", desc: "Getting paid what your real value is actually worth.", t: [1,0,0,1,0,3] },
+  { id: 165, cat: 5, title: "AI-Proof Humanity", desc: "Taste, empathy, and judgment no machine can fake.", t: [1,1,1,1,1,1] },
+  { id: 166, cat: 5, title: "Playful Ambition", desc: "Treating hard projects like a strategy game, not a chore.", t: [0,2,0,2,1,1] },
+  { id: 167, cat: 5, title: "Direct 'Thank Yous'", desc: "Hearing straight from the person your work helped.", t: [0,0,3,1,1,0] },
+  { id: 168, cat: 5, title: "Multiple Income Lanes", desc: "Never letting one boss hold your whole fate.", t: [2,2,0,0,0,2] },
+  { id: 169, cat: 5, title: "Sharp Negotiation", desc: "Turning tense standoffs into win-win deals.", t: [0,1,1,1,0,3] },
+  { id: 170, cat: 5, title: "Decisive Speed", desc: "Weighing the risk and pulling the trigger fast.", t: [0,1,0,2,0,2] },
+  { id: 171, cat: 5, title: "Lasting Artifacts", desc: "Work that outlives you with your signature on it.", t: [0,0,0,2,2,1] },
+  { id: 172, cat: 5, title: "Knowing When to Exit", desc: "Passing the baton cleanly at the top of your game.", t: [0,2,1,0,2,0] },
+  { id: 173, cat: 5, title: "A Diverse Rolodex", desc: "Sharp friends in ten fields you can text anytime.", t: [1,0,2,1,0,2] },
+  { id: 174, cat: 5, title: "Beloved Tools", desc: "A keyboard, pen, or setup that clicks you into flow.", t: [0,1,0,0,3,1] },
+  { id: 175, cat: 5, title: "Clean Mental Switch", desc: "Shutting the laptop and actually leaving work behind.", t: [2,2,1,0,0,0] },
+  { id: 176, cat: 5, title: "Clutch Problem-Solving", desc: "Getting sharper and calmer the worse a crisis gets.", t: [1,0,0,2,0,3] },
+  { id: 177, cat: 5, title: "The Sweet Spot", desc: "Getting paid right where passion meets rare talent.", t: [0,2,0,2,1,1] },
+  { id: 178, cat: 5, title: "Growing Others", desc: "Watching someone you coached outshine you.", t: [0,0,3,1,0,1] },
+  { id: 179, cat: 5, title: "Borderless Relevance", desc: "Skills that hold value in any city on Earth.", t: [0,2,0,3,0,1] },
+  { id: 180, cat: 5, title: "A Lifelong Craft", desc: "A joyful pursuit you'll never want to retire from.", t: [0,2,1,2,1,0] },
+
+  // 6: Wealth & Security (181-210)
+  { id: 181, cat: 6, title: "Financial Independence", desc: "Never tolerating misery just to pay the bills.", t: [1,3,0,0,0,2] },
+  { id: 182, cat: 6, title: "Rock-Solid Basics", desc: "Zero worry about rent, groceries, or tomorrow.", t: [3,0,0,0,0,2] },
+  { id: 183, cat: 6, title: "Money Smarts", desc: "Making your money work harder than you do.", t: [1,1,0,1,0,3] },
+  { id: 184, cat: 6, title: "Money Well Spent", desc: "Trading dollars for memories and loved ones' smiles.", t: [0,0,2,1,2,1] },
+  { id: 185, cat: 6, title: "Debt-Free Lightness", desc: "Owing nobody a dime and sleeping easy.", t: [3,1,0,0,0,2] },
+  { id: 186, cat: 6, title: "Passive Cash Flow", desc: "Assets quietly earning while you're fast asleep.", t: [2,2,0,0,0,2] },
+  { id: 187, cat: 6, title: "Joyful Generosity", desc: "Backing causes and people you genuinely believe in.", t: [0,0,3,0,2,0] },
+  { id: 188, cat: 6, title: "Knowing Your 'Enough'", desc: "Hitting your personal finish line instead of chasing endless more.", t: [1,1,0,0,2,1] },
+  { id: 189, cat: 6, title: "An Emergency Fortress", desc: "Years of runway tucked safely away for storms.", t: [3,0,0,0,0,2] },
+  { id: 190, cat: 6, title: "Buy-It-For-Life Eye", desc: "Choosing enduring quality over cheap throwaways.", t: [0,1,0,0,2,2] },
+  { id: 191, cat: 6, title: "Never Checking Price Tags", desc: "Buying what you truly need without flinching.", t: [1,2,0,0,1,2] },
+  { id: 192, cat: 6, title: "Long-Game Patience", desc: "Letting compounding do magic over decades.", t: [2,0,0,0,0,3] },
+  { id: 193, cat: 6, title: "Picking Up the Tab", desc: "Treating friends effortlessly without keeping score.", t: [0,0,2,0,1,2] },
+  { id: 194, cat: 6, title: "Lean Living", desc: "Living richly on little so you're impossible to trap.", t: [2,2,0,0,1,1] },
+  { id: 195, cat: 6, title: "Spotless Credit", desc: "A clean financial track record that opens every door.", t: [2,0,1,0,0,2] },
+  { id: 196, cat: 6, title: "Market Stoicism", desc: "Not sweating red charts or daily noise.", t: [2,1,0,0,1,1] },
+  { id: 197, cat: 6, title: "Investing in Yourself", desc: "Never hesitating to spend on books, health, or skills.", t: [0,0,0,3,0,2] },
+  { id: 198, cat: 6, title: "Tax & Rule Fluency", desc: "Legally keeping more of what you build.", t: [2,0,0,0,0,3] },
+  { id: 199, cat: 6, title: "Diversified Streams", desc: "Multiple small faucets feeding your stability.", t: [2,1,0,1,0,2] },
+  { id: 200, cat: 6, title: "Zero Status Spending", desc: "Zero urge to buy things to impress strangers.", t: [1,1,0,0,2,1] },
+  { id: 201, cat: 6, title: "Shared Money Values", desc: "A partner completely on the same page about spending.", t: [2,0,3,0,0,1] },
+  { id: 202, cat: 6, title: "Scam Radar", desc: "Spotting shady hype and traps from a mile away.", t: [3,0,0,0,0,2] },
+  { id: 203, cat: 6, title: "Your Exact Splurge", desc: "Knowing the small luxury that actually lights you up.", t: [0,2,0,0,3,1] },
+  { id: 204, cat: 6, title: "Buying Back Time", desc: "Paying cheerfully to skip chores and reclaim hours.", t: [0,2,0,0,0,3] },
+  { id: 205, cat: 6, title: "Self-Funded Farewell", desc: "Leaving zero burden behind at the very end.", t: [3,1,1,0,0,1] },
+  { id: 206, cat: 6, title: "Macro Foresight", desc: "Feeling economic shifts before headlines catch up.", t: [0,0,0,2,0,3] },
+  { id: 207, cat: 6, title: "All-Weather Portfolio", desc: "Spreading risk so no single crash breaks you.", t: [2,0,0,0,0,3] },
+  { id: 208, cat: 6, title: "Money-Free Friendships", desc: "Connections untouched by loans or favors.", t: [1,1,3,0,0,0] },
+  { id: 209, cat: 6, title: "Walk-Away Cushion", desc: "Savings that let you say 'No' to any bad deal.", t: [2,3,0,0,0,1] },
+  { id: 210, cat: 6, title: "Beyond Net Worth", desc: "Knowing the best things in life have no ticker symbol.", t: [0,0,2,0,3,0] },
+
+  // 7: Space & Wisdom (211-240)
+  { id: 211, cat: 7, title: "A True Sanctuary", desc: "A home where your shoulders drop the second you enter.", t: [3,1,0,0,1,0] },
+  { id: 212, cat: 7, title: "Lifelong Reading", desc: "Borrowing centuries of wisdom from great minds.", t: [0,1,0,2,2,0] },
+  { id: 213, cat: 7, title: "Speaking Another Tongue", desc: "Connecting directly with worlds outside your own.", t: [0,1,1,2,0,1] },
+  { id: 214, cat: 7, title: "Digital Detox", desc: "Stepping off the feed to touch real life again.", t: [1,2,0,0,2,0] },
+  { id: 215, cat: 7, title: "Wild Nature Nearby", desc: "Forest trails or ocean air an easy walk away.", t: [1,1,0,0,3,0] },
+  { id: 216, cat: 7, title: "A Personal Library", desc: "Shelves of books waiting whenever your mind wanders.", t: [0,2,0,1,2,0] },
+  { id: 217, cat: 7, title: "Daily Beauty", desc: "Living close to galleries, music, and inspired design.", t: [0,0,0,1,3,0] },
+  { id: 218, cat: 7, title: "An Uncluttered Room", desc: "Clean lines and calm air that let your mind breathe.", t: [2,1,0,0,1,1] },
+  { id: 219, cat: 7, title: "History & Philosophy", desc: "Perspective that keeps you steady through loud headlines.", t: [0,1,0,1,3,0] },
+  { id: 220, cat: 7, title: "A Peaceful Society", desc: "Safe streets where people can trust tomorrow.", t: [3,0,2,0,0,0] },
+  { id: 221, cat: 7, title: "A Favorite Third Place", desc: "A cozy corner café that feels like yours.", t: [1,2,0,0,2,0] },
+  { id: 222, cat: 7, title: "Sunlit Mornings", desc: "Natural daylight pouring into your room at dawn.", t: [2,1,0,0,2,0] },
+  { id: 223, cat: 7, title: "Your Soundtrack", desc: "Playlists that instantly tune your mood and focus.", t: [0,2,0,0,3,0] },
+  { id: 224, cat: 7, title: "Crisp Sheets & Scents", desc: "Small sensory upgrades where you spend a third of life.", t: [1,0,0,0,3,1] },
+  { id: 225, cat: 7, title: "A Safe, Quiet Block", desc: "Walking home at midnight feeling completely at ease.", t: [3,0,1,0,1,0] },
+  { id: 226, cat: 7, title: "Knowing Your Roots", desc: "Understanding the family history that shaped you.", t: [1,0,2,0,2,0] },
+  { id: 227, cat: 7, title: "Connecting the Dots", desc: "Seeing how politics and markets affect real life.", t: [1,0,0,2,0,2] },
+  { id: 228, cat: 7, title: "Tech Curiosity", desc: "Playing with new tools instead of fearing the future.", t: [0,1,0,3,0,2] },
+  { id: 229, cat: 7, title: "Home-Cooked Comfort", desc: "Turning fresh ingredients into something warm by hand.", t: [2,1,0,0,2,1] },
+  { id: 230, cat: 7, title: "Green Houseplants", desc: "Quiet bursts of living green softening your room.", t: [1,0,0,0,3,0] },
+  { id: 231, cat: 7, title: "BS Filter", desc: "Tuning out outrage bait, clickbait, and fake panic.", t: [2,2,0,0,0,2] },
+  { id: 232, cat: 7, title: "Trusted Specialists", desc: "A great doctor, mechanic, or pro in your corner.", t: [2,0,2,0,0,2] },
+  { id: 233, cat: 7, title: "A Paper Journal", desc: "Untangling messy thoughts with ink on paper.", t: [1,2,0,1,2,0] },
+  { id: 234, cat: 7, title: "Effortless Class", desc: "Walking into any room knowing how to carry yourself.", t: [0,0,2,0,2,2] },
+  { id: 235, cat: 7, title: "Ready for Storms", desc: "Flashlights, supplies, and a plan when power goes out.", t: [3,0,1,0,0,2] },
+  { id: 236, cat: 7, title: "Clean Air & Water", desc: "Pure basics we never notice until they vanish.", t: [3,0,0,0,2,0] },
+  { id: 237, cat: 7, title: "Debating Without Ego", desc: "Learning from opposing views without getting defensive.", t: [0,1,1,2,1,0] },
+  { id: 238, cat: 7, title: "Curated Belongings", desc: "Owning less, but loving every single piece you keep.", t: [0,2,0,0,3,1] },
+  { id: 239, cat: 7, title: "A Guiding Quote", desc: "One timeless line that pulls you back on track.", t: [1,1,0,1,3,0] },
+  { id: 240, cat: 7, title: "Respect for Craft & Heritage", desc: "Honoring traditions built over hundreds of years.", t: [1,0,1,0,3,0] }
+];
+
+const TRAIT_NAMES = ["Security", "Freedom", "Connection", "Growth", "Depth", "Realism"];
+
+// ==========================================
+// 2. Question Prompts (32 Variations)
+// ==========================================
+const PROMPTS_NORMAL = [
+  { badge: "DESIRE", title: "A genie grants you one effortless upgrade for life. Which one do you claim?", sub: "Pick whatever your heart jumps for first." },
+  { badge: "ENVY", title: "What do other people have that secretly makes you the most envious?", sub: "Be brutally honest with yourself." },
+  { badge: "MISSING", title: "Which of these feels most missing from your life right now?", sub: "Choose the piece that would fix the biggest gap." },
+  { badge: "PRIDE", title: "Even for $10 million cash, which one would you refuse to sell?", sub: "Protect what's truly priceless to you." },
+  { badge: "FRESH START", title: "You're moving alone to a brand-new city. What's the first thing you pack?", sub: "Pick your number-one anchor." },
+  { badge: "3 AM", title: "It's 3 AM and you can't sleep. Which one do you find yourself craving?", sub: "Pick with your unguarded late-night brain." },
+  { badge: "LEGACY", title: "You can pass down just ONE gift to someone you love. Which is it?", sub: "Choose what you believe carries the deepest worth." },
+  { badge: "CRISIS", title: "Everything around you is falling apart. Which trump card do you cling to?", sub: "Pick your last line of defense." },
+  { badge: "NEXT LIFE", title: "You get to carry ONE perk into your next life. Which one comes with you?", sub: "Choose your ultimate starting advantage." },
+  { badge: "AI ERA", title: "Algorithms run almost everything. Which one must stay strictly in human hands?", sub: "Keep control over what matters most." },
+  { badge: "TIME TRAVEL", title: "You can mail ONE of these back to your 10-year-younger self. Which one?", sub: "Give your younger self what they needed most." },
+  { badge: "NEXT DECADE", title: "To make sure your life 10 years from now shines, what do you invest in today?", sub: "Pick your highest-return bet." },
+  { badge: "SECRET", title: "You never brag about it, yet you secretly care about this more than most people.", sub: "Reveal your quiet obsession." },
+  { badge: "RECOVERY", title: "After an exhausting week from hell, what saves you fastest?", sub: "Pick your personal antidote." },
+  { badge: "MAGNET", title: "When you meet someone new, which trait instantly draws you in?", sub: "What we admire in others often mirrors our own hunger." },
+  { badge: "MAXED OUT", title: "You wake up tomorrow with ONE of these dialed up to 100%. Which do you pick?", sub: "Go with the one that excites you most." },
+  { badge: "PERFECT SUNDAY", title: "Zero chores, zero obligations. What sits at the center of your ideal Sunday?", sub: "Pick what makes a day truly feel like yours." },
+  { badge: "ARMOR", title: "With just ONE of these, you know you could survive an unfair world. Which one?", sub: "Choose your strongest shield or weapon." },
+  { badge: "SCROLLING", title: "Seeing someone post about which of these makes you quietly close the app?", sub: "Follow the sting—it points straight to your truth." }
+];
+
+const PROMPTS_DROP = [
+  { badge: "⚠️ DEVIL'S BARGAIN", title: "Sacrifice ONE right now, or lose the other three forever. What do you give up?", sub: "CAREFUL: Tap the one you're most willing to LOSE!", mode: "drop" },
+  { badge: "🔪 CLEAN CUT", title: "You must permanently lock away ONE of these to travel lighter. Which goes?", sub: "CAREFUL: Choose the one you can live WITHOUT!", mode: "drop" },
+  { badge: "🛃 LIFE CUSTOMS", title: "'Baggage overweight—pick one to leave behind at the border.' Which do you drop?", sub: "CAREFUL: Pick the card you're sacrificing!", mode: "drop" },
+  { badge: "🕳️ MEMORY WIPE", title: "To free up headspace, you have to erase ONE of these from your life. Which one?", sub: "CAREFUL: Tap the one you'd cut first!", mode: "drop" },
+  { badge: "⚖️ CURSED SCALE", title: "Give up ONE card to bless and protect the other three. Who takes the fall?", sub: "CAREFUL: Choose the sacrifice!", mode: "drop" }
+];
+
+const PROMPTS_RUSH = [
+  { badge: "⚡ GUT CHECK", title: "Don't think—TAP! Which one did your eyes lock onto first?", sub: "Move before logic talks you out of it!", mode: "rush", sec: 4.5 },
+  { badge: "🔥 FOUR DOORS", title: "Fire at your back. Four doors ahead. Which one do you dive through?", sub: "Pure reflex! Hit it now!", mode: "rush", sec: 5.0 },
+  { badge: "⏱️ BLINK TEST", title: "Hesitate and it's gone—grab the one that sparks an instant 'YES!'", sub: "Your reaction time shapes your profile!", mode: "rush", sec: 4.0 },
+  { badge: "⚡ IMPULSE", title: "No overthinking allowed. Which card pulls you in right this second?", sub: "Beat the clock!", mode: "rush", sec: 5.0 }
+];
+
+const PROMPTS_FINAL = [
+  { badge: "👑 FINAL QUESTION", title: "Last call. On your final day alive, which one do you want to smile knowing you had?", sub: "Lock in the cornerstone of your story.", mode: "final" },
+  { badge: "👑 FINAL QUESTION", title: "If only ONE of these could be carved as your life's headline, which earns the spot?", sub: "Make your closing statement.", mode: "final" },
+  { badge: "👑 FINAL QUESTION", title: "At the end of a long journey, you can keep just ONE treasure in your vault. Which is it?", sub: "Your final choice seals your persona.", mode: "final" },
+  { badge: "👑 FINAL QUESTION", title: "If your life were a movie, what should the climax be fighting for?", sub: "Pick the theme that defines you.", mode: "final" }
+];
+
+// ==========================================
+// 3. 24 Original Pixel Art Characters (12×12)
+// ==========================================
+const PIXEL_ART = {
+  n_wall: { pal: { B:"#1e293b", S:"#fed7aa", C:"#3b82f6", A:"#94a3b8", E:"#0f172a", W:"#f8fafc" }, grid: ["....BBBB....","...BCCCCB...","..BCWWWWCB..","..BSSSSSSB..","..BSESSESB..","..BSSSSSSB..",".AABCCCCB...",".AWBCCCCBA..",".AABBBBBBA..","..AABCCCB...","...BB..BB...","............"] },
+  n_nest: { pal: { B:"#3b0764", S:"#ffedd5", C:"#f472b6", A:"#fb7185", E:"#1e1b4b", W:"#ffffff" }, grid: ["...BBBBBB...","..BCCCCCCB..",".BCSSSSSSCB.",".BCSESSESCB.",".BCSSSSSSCB.","..BCCCCCCB..","..BCAAWACB..","..BCAAAACB..","..BCCAACCB..","...BCCCCB...","...BB..BB...","............"] },
+  n_calm: { pal: { B:"#14532d", S:"#fef3c7", C:"#4ade80", A:"#facc15", E:"#052e16", W:"#ffffff" }, grid: ["....AAAA....","..BBBBBBBB..",".BCCCCCCCCB.","..BSSSSSSB..","..BSESSESB..","..BSSSSSSB..","..BBCCCCBB..",".AABCCCCB...",".WABCCCCB...","..BBBBBBBB..","...BB..BB...","............"] },
+  n_free: { pal: { B:"#1e293b", S:"#fde68a", C:"#2dd4bf", A:"#a16207", E:"#0f172a", W:"#f1f5f9" }, grid: [".....BB.....","....BCCB....","..BBBBBBBB..","..BSSSSSSB..","..BSESSESB..","..BSSSSSSB..",".AABCCCCBA..",".AABCCCCBAA.","..BCCCCCCB..","...BBBBBB...","...BB..BB...","............"] },
+  n_wild: { pal: { B:"#27272a", S:"#fed7aa", C:"#ea580c", A:"#fde047", E:"#18181b", W:"#fff" }, grid: ["....BBBB..A.","...BCCCCBAAA","..BCCCCCCBWA","..BSSSSSSBBA","..BSESSESB.B","..BSSSSSSB.B","..BCCCCCCB.B","..BCCBBCCB.B","...BCCCCB...","...BB..BB...","..BBB..BBB..","............"] },
+  n_solo: { pal: { B:"#0f172a", S:"#ffedd5", C:"#334155", A:"#38bdf8", E:"#020617", W:"#e2e8f0" }, grid: ["...BBBBBB...","..BCCCCCCB..","..BSSSSSSB..","..BAAAASSB..","..BAEAESEB..","..BSSSSSSB..","..BCCWWCCB..","..BCCCCCCB..","..BCCCCCCA..","...BBBBAAA..","...BB..BB...","............"] },
+  n_warm: { pal: { B:"#431407", S:"#ffedd5", C:"#fb923c", A:"#fde047", E:"#292524", W:"#ffffff" }, grid: ["...A....A...","....BBBB....","...BCCCCB...","..BSSSSSSB..","..BSESSESB..","..BSSSSSSB..","..BCCCCCCB..",".ABCCWWCCBA.","..BCCCCCCB..","...BBBBBB...","...BB..BB...","............"] },
+  n_team: { pal: { B:"#1e1b4b", S:"#fde68a", C:"#6366f1", A:"#ef4444", E:"#0f172a", W:"#ffffff" }, grid: [".........AAA","....BBBB.AAW","...BCCCCBAAA","..BSSSSSSB.B","..BSESSESB.B","..BSSSSSSB.B","..BCCCCCCB.B","..BCCWWCCB.B","..BCCCCCCB.B","...BBBBBB...","...BB..BB...","............"] },
+  n_craft: { pal: { B:"#18181b", S:"#fed7aa", C:"#4f46e5", A:"#fbbf24", E:"#09090b", W:"#ffffff" }, grid: [".....AA.....","...BBBBBB...","..BCCCCCCB..","..BSSSSSSB..","..BSESSESB..","..BSSSSSSB..",".BBCCCCCCBB.",".BCCCAACCB..","..BCCCCCCB..","...BBBBBB...","...BB..BB...","............"] },
+  n_muse: { pal: { B:"#2e1065", S:"#ffedd5", C:"#9333ea", A:"#f472b6", E:"#1e1b4b", W:"#ffffff" }, grid: [".....BB.....","....BCCB....","...BCCCCB...","..BBBBBBBB..","..BSSSSSSB..","..BSESSESB..","..BSSSSSSB..","..BCCCCCCB..",".WWBCCCCB...",".AABCCCCB...","...BB..BB...","............"] },
+  r_bunker: { pal: { B:"#1c1917", S:"#fde68a", C:"#64748b", A:"#facc15", E:"#0c0a09", W:"#bae6fd" }, grid: ["...BBBBBB...","..BCCCCCCB..","..BWWWWWWB..","..BSSSSSSB..","..BSESSESB..","..BSSSSSSB..",".AABCCCCBA..",".A.BCCCCBAA.","...BBBBBB...","..BCCCCCCB..","..BB....BB..","............"] },
+  r_rebel: { pal: { B:"#18181b", S:"#ffedd5", C:"#dc2626", A:"#facc15", E:"#000000", W:"#ffffff" }, grid: ["..A..AA..A..",".BBBBBBBBBB.","..BCCCCCCB..","..BSSSSSSB..","..BSESSESB..","..BSSSSSSB..","..BCCCCCCB..","..BCCAACCB..","..BCCACCB...","...BBBBBB...","...BB..BB...","............"] },
+  r_devote: { pal: { B:"#312e81", S:"#fff7ed", C:"#e0f2fe", A:"#fde047", E:"#1e1b4b", W:"#ffffff" }, grid: ["...AAAAAA...","............","...BBBBBB...","..BSSSSSSB..","..BSESSESB..","WWBSSSSSSBWW","WWBCCCCCCBWW",".WBCCCCCCBW.","..BCCCCCCB..","...BBBBBB...","...BB..BB...","............"] },
+  r_blaze: { pal: { B:"#450a0a", S:"#fed7aa", C:"#f97316", A:"#fde047", E:"#7f1d1d", W:"#ffffff" }, grid: ["..A.AA.A.A..",".ACCCCCCCCA.","..BCCCCCCB..","..BSSSSSSB..","..BSESSESB..","..BSSSSSSB..",".ABCCCCCCBA.",".AABCCCCBAA.","..BCCCCCCB..","...BB..BB...","..BBB..BBB..","............"] },
+  r_ethic: { pal: { B:"#1e293b", S:"#ffedd5", C:"#ec4899", A:"#38bdf8", E:"#0f172a", W:"#ffffff" }, grid: ["..BBBBBB....",".BCCCCCCB...","..BBBBBBBB..","..BSSSSSSB..","..BSESSESB..","..BSSSSSSB..","..BCCCCCCB.A",".WWBCCCCB.A.",".ACBCCCCBA..","...BBBBBB...","...BB..BB...","............"] },
+  r_tycoon: { pal: { B:"#09090b", S:"#fde68a", C:"#1e293b", A:"#fbbf24", E:"#000000", W:"#ffffff" }, grid: ["...BBBBBB...","...BCCCCB...","...BAAAAB...",".BBBBBBBBBB.","..BSSSSSSB..","..BSESSESB..","..BSSSSSSB..","..BCCWWCCB..","..BCCCCCCBAA","...BBBBBBAAW","...BB..BB...","............"] },
+  r_paradox: { pal: { B:"#0f172a", S:"#f8fafc", C:"#7c3aed", A:"#14b8a6", E:"#020617", W:"#ffffff" }, grid: ["...BBBBBB...","..BCCCAAAB..","..BSSSSSSB..","..BSEBBASB..","..BSSSSSSB..","WWBCCCAAABBB","WWBCCCAAABBB",".WBCCCAAABB.","..BCCCAAAB..","...BBBBBB...","...BB..BB...","............"] },
+  r_gambler: { pal: { B:"#1e1b4b", S:"#ffedd5", C:"#be123c", A:"#ffffff", E:"#0f172a", W:"#fbbf24" }, grid: ["...BBBBBB...","..BCCCCCCB..","..BSSSSSSB..","..BSEBBWSB..","..BSSSSSSB..","..BCCCCCCB..",".AABCCCCB...",".ACABCCCB...",".AAABCCCB...","...BBBBBB...","...BB..BB...","............"] },
+  sr_flash: { pal: { B:"#422006", S:"#fef08a", C:"#f59e0b", A:"#38bdf8", E:"#000000", W:"#ffffff" }, grid: [".BB......BB.",".BCCBBBBCCB.","..BCCCCCCB..","..BSSSSSSB..","..BSESSESB..","..BSSSSSSB.A","..BCCCCCCBAA",".ABCCCCCCBA.","..BCCCCCCB..","...BBBBBB...","..BB....BB..","............"] },
+  sr_ice: { pal: { B:"#0c4a6e", S:"#f0f9ff", C:"#38bdf8", A:"#e0f2fe", E:"#0369a1", W:"#ffffff" }, grid: ["..A..AA..A..","..AWWWWWWA..","...BBBBBB...","..BSSSSSSB..","..BSESSESB..","..BSSSSSSB..","..BCCCCCCB..",".ABBCCCCBBA.","..BCCCCCCB..","..BCCCCCCB..","...BBBBBB...","............"] },
+  sr_shadow: { pal: { B:"#18181b", S:"#f5f5f4", C:"#9333ea", A:"#f43f5e", E:"#09090b", W:"#ffffff" }, grid: [".AA......CC.",".ABB....CBB.","..BBCCCCBB..","..BSSSSSSB..","..BSESSESB..","..BSBBBBSSB.","..BCCAAACB..","..BCAAAACB..","..BCCCCCCB..","...BBBBBB...","...BB..BB...","............"] },
+  sr_monk: { pal: { B:"#3f3f46", S:"#fed7aa", C:"#10b981", A:"#a16207", E:"#18181b", W:"#f8fafc" }, grid: ["...BBBBBB...","..BWWWWWWB..","..BSSSSSSB..","..BSESSESB..","..BWWWWWWB..","..BWWWWWWB.A","..BCCCCCCB.A","..BCCCCCCB.A","..BCCCCCCB.A","...BBBBBB..A","...BB..BB...", "............"] },
+  sec_all: { pal: { B:"#451a03", S:"#ffedd5", C:"#8b5cf6", A:"#fbbf24", E:"#0f172a", W:"#ffffff" }, grid: ["..A..AA..A..","..AAAAAAAA..","...BBBBBB...","..BSSSSSSB..","..BSESSESB..","..BSSSSSSB..",".AABCCCCBAA.",".WWBCCCCBWW.","..BCCAACCB..","...BBBBBB...","...BB..BB...","............"] },
+  sec_ghost: { pal: { B:"#334155", S:"#e2e8f0", C:"#94a3b8", A:"#2dd4bf", E:"#0f172a", W:"#ffffff" }, grid: ["....BBBB....","...BWWWWB...","..BWWWWWWB..","..BWEWWEWB..","..BWWWWWWB..","..BWWAWWWB..","..BWWWWWWB..","..BSSSSSSB..","..BSSBBSSB..","..BS.BB.SB..","............","............"] }
+};
+
+function renderPixelSVG(archId, size = 84) {
+  const art = PIXEL_ART[archId] || PIXEL_ART.n_wall;
+  let rects = "";
+  for (let y = 0; y < art.grid.length; y++) {
+    const row = art.grid[y];
+    for (let x = 0; x < row.length; x++) {
+      const ch = row[x];
+      if (ch !== "." && art.pal[ch]) {
+        rects += `<rect x="${x}" y="${y}" width="1" height="1" fill="${art.pal[ch]}"/>`;
+      }
+    }
+  }
+  return `<svg width="${size}" height="${size}" viewBox="0 0 12 12" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">${rects}</svg>`;
+}
+
+// ==========================================
+// 4. 24 Hidden Personas
+// ==========================================
+const ARCHETYPES = [
+  { id: "n_wall", rar: "N", name: "The Ironclad Realist", catch: "Bricks and mortar over castles in the sky", desc: "You put stability, health, and solid foundations first. While others chase hype, you quietly build a life that can weather anything—though playing it too safe sometimes keeps you from bold leaps." },
+  { id: "n_nest", rar: "N", name: "The Sanctuary Keeper", catch: "Guarding quiet love at all costs", desc: "To you, true success isn't applause—it's coming home to people who genuinely love you. Warm, loyal, and protective, you just need to remember not to swallow your own needs for everyone else's comfort." },
+  { id: "n_calm", rar: "N", name: "The Quiet Gardener", catch: "Tending a peaceful world while storms rage outside", desc: "You thrive on calm routines, clean spaces, and gentle beauty. Noise and status games bore you—your richest joy comes from curating a peaceful corner of the earth that feels unmistakably yours." },
+  { id: "n_free", rar: "N", name: "The Wind-Borne Nomad", catch: "Bound by no map, ruled by no clock", desc: "Time, autonomy, and personal taste mean more to you than gold or titles. Staying light on your feet is your superpower, though heavy obligations make you quietly look for the exit." },
+  { id: "n_wild", rar: "N", name: "The Untamed Pioneer", catch: "Comfort feels like a cage; the horizon calls", desc: "You come alive in uncharted territory where you get to learn, risk, and move freely. Just watch out for restless boredom—you can outrun good things right after you finally catch them." },
+  { id: "n_solo", rar: "N", name: "The Cool Pragmatist", catch: "Self-made, sharp-minded, needing no permission", desc: "You rely on skills, time leverage, and clear-eyed realism to buy your own freedom. Inefficiency and drama drain your battery fast—you respect results over noise." },
+  { id: "n_warm", rar: "N", name: "The Empathic Resonator", catch: "Measuring wealth in goosebumps and grace", desc: "Shared laughter, deep art, and human warmth are your lifeblood. You feel the world in high definition—which makes you deeply magnetic, though harsh environments bruise you faster." },
+  { id: "n_team", rar: "N", name: "The Bond Weaver", catch: "Rising higher only when others rise with you", desc: "Solo trophies feel hollow to you compared to winning alongside people you trust. People naturally rally around you—just be careful not to carry everyone else's weight on your back." },
+  { id: "n_craft", rar: "N", name: "The Quiet Titan", catch: "Turning lofty visions into cold, hard reality", desc: "You don't just daydream—you execute. Driven by mastery and real-world impact, your only flaw is tying your self-worth so tightly to output that resting makes you feel guilty." },
+  { id: "n_muse", rar: "N", name: "The Storyweaver", catch: "Collecting moments that set the soul on fire", desc: "Curiosity, wonder, and transformative experiences keep you forever young. You'd rather own an unforgettable memory or a great idea than a shiny status symbol." },
+
+  { id: "r_bunker", rar: "R", name: "The Doomsday Architect", catch: "Prepared for every storm, resting for none", desc: "Health, reserves, contingencies—you build triple-reinforced walls around everything you love. Your foresight makes you rock-solid in a crisis, though your mind rarely clocks out." },
+  { id: "r_rebel", rar: "R", name: "The Rulebook Arsonist", catch: "Allergic to 'that's just how things are'", desc: "Your craving for autonomy runs white-hot. You'd rather walk alone down an unpaved road than follow someone else's script—and that fierce individuality is your sharpest edge." },
+  { id: "r_devote", rar: "R", name: "The Selfless Saint", catch: "Carrying everyone's joy on your own shoulders", desc: "Your compass points relentlessly toward love, loyalty, and caring for others. Your generosity is rare and deeply healing—just make sure your kindness goes to people who earn it." },
+  { id: "r_blaze", rar: "R", name: "The Brakeless Trailblazer", catch: "Burning failure as jet fuel", desc: "You threw caution out the window and went all-in on growth, thrill, and breaking your own limits. You'll live ten lifetimes in one—just don't forget to check your fuel gauge before burnout hits." },
+  { id: "r_ethic", rar: "R", name: "The Ethereal Aesthete", catch: "Living on beauty while ignoring the price tag", desc: "Practicality and spreadsheets barely register for you compared to nature, art, peace, and soul. You may feel out of step with hustle culture, yet your inner world is richer than most." },
+  { id: "r_tycoon", rar: "R", name: "The Life Alchemist", catch: "Turning time, money, and skill into pure leverage", desc: "You see life like a grand strategy board—optimizing skills, assets, and smart bets. Emotion rarely clouds your math, giving you an uncanny knack for building lasting advantage." },
+  { id: "r_paradox", rar: "R", name: "The Tethered Fugitive", catch: "Craving deep intimacy—and the nearest exit", desc: "Two fierce forces wrestle inside you: a deep hunger for connection and an equally fierce need to stay completely free. Too close feels suffocating; too far feels lonely." },
+  { id: "r_gambler", rar: "R", name: "The High-Stakes Gambler", catch: "Trading boring safety for a pulse that races", desc: "Security ranked near zero for you while freedom and risk soared. You'd rather take a wild shot with uncertain odds than settle for a predictable, padded cage." },
+
+  { id: "sr_flash", rar: "SR", name: "The Lightning Instinct", catch: "Pure gut reaction, zero hesitation", desc: "You flew through every single choice at breakneck speed (under 1.6s avg). You trust your instincts before doubt can even clear its throat—a rare breed of pure decisiveness." },
+  { id: "sr_ice", rar: "SR", name: "The Velvet Executioner", catch: "Making ruthless cuts without blinking", desc: "When forced to sacrifice cards you value, you didn't flinch for even two seconds. Under pressure, you possess a cool, surgical clarity most people only wish they had." },
+  { id: "sr_shadow", rar: "SR", name: "The Chaos Trickster", catch: "Sacrificing the very thing you claim to adore", desc: "You spent normal rounds collecting one core drive—then coldly tossed that exact same drive onto the altar when asked to sacrifice. Unpredictable, layered, and impossible to box in." },
+  { id: "sr_monk", rar: "SR", name: "The Modern Ascetic", catch: "Untempted by gold, unbothered by status", desc: "Across ten rounds, you ignored every single career and money card in favor of peace, freedom, and soul. Whatever hustle culture is selling, you're clearly not buying." },
+
+  { id: "sec_all", rar: "SEC", name: "The Sovereign Polymath", catch: "Wanting it all—and balancing the impossible", desc: "Against all odds, you scored remarkably high across all six human drives at once. Security, freedom, love, growth, depth, and realism—you refuse to settle for half a life." },
+  { id: "sec_ghost", rar: "SEC", name: "The Unreadable Ghost", catch: "Moving at a steady pulse no algorithm can pin down", desc: "Clockwork pacing and razor-thin margins across every trait. You slipped cleanly between every stereotype, leaving the profiler staring at a smooth, inscrutable mirror." }
+];
+
+// ==========================================
+// 5. Sound Effects (Web Audio API)
+// ==========================================
+let soundOn = true;
+let audioCtx = null;
+
+function playTone(freq, type = "sine", dur = 0.08, vol = 0.07) {
+  if (!soundOn) return;
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + dur);
+  } catch (e) {}
+}
+
+function playSE(kind) {
+  if (kind === "pick") { playTone(520, "sine", 0.07, 0.06); setTimeout(() => playTone(780, "sine", 0.09, 0.05), 40); }
+  else if (kind === "drop") { playTone(210, "sawtooth", 0.13, 0.045); setTimeout(() => playTone(145, "sawtooth", 0.17, 0.045), 65); }
+  else if (kind === "rush") { playTone(880, "triangle", 0.06, 0.055); }
+  else if (kind === "win") {
+    [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => playTone(f, "triangle", 0.2, 0.06), i * 75));
+  }
+}
+
+function toggleSound() {
+  soundOn = !soundOn;
+  document.getElementById("sound-btn").textContent = soundOn ? "🔊 SFX: ON" : "🔇 SFX: OFF";
+}
+
+// ==========================================
+// 6. Save Data & Non-Repeat Deck / Lens Manager
+// ==========================================
+const SAVE_KEY = "pickyourtruth_v1_save";
+
+function loadSave() {
+  try {
+    const raw = localStorage.getItem(SAVE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      return {
+        plays: parsed.plays || 0,
+        unlocked: parsed.unlocked || [],
+        lastArchId: parsed.lastArchId || null,
+        lastArchName: parsed.lastArchName || null,
+        deckUsedIds: parsed.deckUsedIds || [],
+        usedLensIds: parsed.usedLensIds || []
+      };
+    }
+  } catch (e) {}
+  return { plays: 0, unlocked: [], lastArchId: null, lastArchName: null, deckUsedIds: [], usedLensIds: [] };
+}
+
+function writeSave(data) {
+  try { localStorage.setItem(SAVE_KEY, JSON.stringify(data)); } catch (e) {}
+}
+
+function resetSaveData() {
+  if (!confirm("Reset all unlocked personas, run counts, and card history?")) return;
+  writeSave({ plays: 0, unlocked: [], lastArchId: null, lastArchName: null, deckUsedIds: [], usedLensIds: [] });
+  refreshStatsUI();
+  openDex();
+}
+
+function refreshStatsUI() {
+  const save = loadSave();
+  document.getElementById("stat-plays").textContent = save.plays;
+  document.getElementById("stat-dex").textContent = `${save.unlocked.length} / ${ARCHETYPES.length}`;
+  document.getElementById("top-dex-count").textContent = save.unlocked.length;
+
+  const lastWrap = document.getElementById("stat-last-wrap");
+  if (save.lastArchName) {
+    lastWrap.style.display = "block";
+    document.getElementById("stat-last").textContent = save.lastArchName;
+  } else {
+    lastWrap.style.display = "none";
+  }
+}
+
+function openDex() {
+  const save = loadSave();
+  const grid = document.getElementById("dex-grid");
+  grid.innerHTML = ARCHETYPES.map(a => {
+    const isOpen = save.unlocked.includes(a.id);
+    const rarLabel = a.rar === "SEC" ? "★ SECRET" : a.rar === "SR" ? "★★★ SUPER RARE" : a.rar === "R" ? "★★ RARE" : "★ NORMAL";
+    return `
+      <div class="dex-card ${isOpen ? 'unlocked' : 'locked'}">
+        <div class="dex-pix-wrap">${renderPixelSVG(a.id, 44)}</div>
+        <div class="dex-info">
+          <div class="dex-rar">${rarLabel}</div>
+          <div class="dex-title">${isOpen ? a.name : "?????"}</div>
+          <div class="dex-hint">${isOpen ? a.catch : "Locked"}</div>
+        </div>
+      </div>
+    `;
+  }).join("");
+  document.getElementById("dex-modal").classList.add("open");
+}
+
+function closeDex() { document.getElementById("dex-modal").classList.remove("open"); }
+
+// ==========================================
+// 7. Game Flow
+// ==========================================
+let gState = null;
+let rushInterval = null;
+let lockClick = false;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function showScreen(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function buildTenQuestions() {
+  const save = loadSave();
+  let usedSet = new Set(save.deckUsedIds);
+
+  const pools = [];
+  for (let c = 0; c < 8; c++) {
+    const allInCat = ITEMS.filter(x => x.cat === c);
+    let unusedInCat = allInCat.filter(x => !usedSet.has(x.id));
+    if (unusedInCat.length < 5) {
+      allInCat.forEach(x => usedSet.delete(x.id));
+      unusedInCat = [...allInCat];
+    }
+    pools.push(shuffle(unusedInCat));
+  }
+
+  const catSlots = [];
+  for (let r = 0; r < 5; r++) {
+    const order = shuffle([0, 1, 2, 3, 4, 5, 6, 7]);
+    catSlots.push(order.slice(0, 4));
+    catSlots.push(order.slice(4, 8));
+  }
+  const finalCatOrder = shuffle(catSlots);
+
+  const cardSets = [];
+  const drawnIds = [];
+  for (let i = 0; i < 10; i++) {
+    const set = finalCatOrder[i].map(c => {
+      const card = pools[c].pop();
+      drawnIds.push(card.id);
+      return card;
+    });
+    cardSets.push(set);
+  }
+
+  const normals = shuffle(PROMPTS_NORMAL);
+  const drops = shuffle(PROMPTS_DROP);
+  const rushes = shuffle(PROMPTS_RUSH);
+  const finals = shuffle(PROMPTS_FINAL);
+
+  const dropCount = Math.random() < 0.5 ? 2 : 1;
+  const rushCount = Math.random() < 0.45 ? 2 : 1;
+
+  const middlePrompts = [];
+  for (let i = 0; i < dropCount; i++) middlePrompts.push(drops[i]);
+  for (let i = 0; i < rushCount; i++) middlePrompts.push(rushes[i]);
+  let nIdx = 2;
+  while (middlePrompts.length < 7) {
+    middlePrompts.push({ ...normals[nIdx++], mode: "keep" });
+  }
+
+  const script = [
+    { ...normals[0], mode: "keep" },
+    { ...normals[1], mode: "keep" },
+    ...shuffle(middlePrompts),
+    finals[0]
+  ];
+
+  return {
+    questions: script.map((p, idx) => ({ ...p, choices: cardSets[idx] })),
+    drawnIds,
+    nextDeckUsedIds: [...Array.from(usedSet), ...drawnIds]
+  };
+}
+
+function startGame() {
+  playSE("pick");
+  clearInterval(rushInterval);
+  const built = buildTenQuestions();
+  gState = {
+    questions: built.questions,
+    drawnIds: built.drawnIds,
+    nextDeckUsedIds: built.nextDeckUsedIds,
+    index: 0,
+    logs: [],
+    startTime: 0,
+    lastReportText: ""
+  };
+  showScreen("screen-quiz");
+  renderQ();
+}
+
+function renderQ() {
+  clearInterval(rushInterval);
+  const q = gState.questions[gState.index];
+  document.body.className = q.mode === "drop" ? "mode-drop" : q.mode === "rush" ? "mode-rush" : "";
+
+  const badge = document.getElementById("q-badge");
+  badge.textContent = q.badge;
+  badge.className = `q-badge ${q.mode === "drop" ? "drop" : q.mode === "rush" ? "rush" : q.mode === "final" ? "final" : ""}`;
+
+  document.getElementById("q-num").textContent = `${gState.index + 1} / 10`;
+  document.getElementById("progress-fill").style.width = `${(gState.index / 10) * 100}%`;
+  document.getElementById("q-title").textContent = q.title;
+  document.getElementById("q-sub").textContent = q.sub;
+
+  const rushWrap = document.getElementById("rush-wrap");
+  if (q.mode === "rush") {
+    const limitMs = (q.sec || 5) * 1000;
+    rushWrap.classList.add("active");
+    playSE("rush");
+    const rushText = document.getElementById("rush-text");
+    const rushBar = document.getElementById("rush-bar");
+    rushText.className = "rush-text";
+    let remain = limitMs;
+    rushBar.style.width = "100%";
+    rushText.textContent = `⚡ Go with your gut! ${(remain / 1000).toFixed(1)}s`;
+
+    rushInterval = setInterval(() => {
+      remain -= 80;
+      if (remain <= 0) {
+        clearInterval(rushInterval);
+        rushBar.style.width = "0%";
+        rushText.textContent = "⌛ Overthinking! Just tap one!";
+        rushText.className = "rush-text over";
+      } else {
+        rushBar.style.width = `${(remain / limitMs) * 100}%`;
+        rushText.textContent = `⚡ Go with your gut! ${(remain / 1000).toFixed(1)}s`;
+      }
+    }, 80);
+  } else {
+    rushWrap.classList.remove("active");
+  }
+
+  const grid = document.getElementById("choices-grid");
+  grid.innerHTML = "";
+  q.choices.forEach(item => {
+    const btn = document.createElement("button");
+    btn.className = "card";
+    btn.innerHTML = `
+      <span class="c-cat">${CATEGORIES[item.cat]}</span>
+      <span class="c-title">${item.title}</span>
+      <span class="c-desc">${item.desc}</span>
+    `;
+    btn.onclick = () => pickCard(item, btn);
+    grid.appendChild(btn);
+  });
+
+  gState.startTime = performance.now();
+}
+
+function pickCard(item, btn) {
+  if (lockClick) return;
+  lockClick = true;
+  clearInterval(rushInterval);
+
+  const q = gState.questions[gState.index];
+  const durationMs = Math.round(performance.now() - gState.startTime);
+
+  playSE(q.mode === "drop" ? "drop" : "pick");
+  btn.classList.add("picked");
+  gState.logs.push({ q, picked: item, durationMs });
+
+  setTimeout(() => {
+    lockClick = false;
+    gState.index++;
+    if (gState.index < 10) renderQ();
+    else {
+      document.body.className = "";
+      runScan();
+    }
+  }, 190);
+}
+
+function runScan() {
+  showScreen("screen-scan");
+  const msgs = [
+    "Scanning your 10 instincts and hesitations...",
+    "Comparing what you claimed vs. what you sacrificed...",
+    "Hidden persona locked in!"
+  ];
+  const el = document.getElementById("scan-log");
+  el.textContent = msgs[0];
+  let i = 0;
+  const t = setInterval(() => {
+    i++;
+    if (i < msgs.length) el.textContent = msgs[i];
+    else { clearInterval(t); showResult(); }
+  }, 380);
+}
+
+// ==========================================
+// 8. Result Engine & 18 Non-Repeat Lenses
+// ==========================================
+function showResult() {
+  playSE("win");
+
+  const scores = [0, 0, 0, 0, 0, 0];
+  const times = [];
+  const keepLogs = [];
+  const dropLogs = [];
+  let pickedMoneyOrWork = false;
+  let offeredMoneyOrWork = false;
+
+  gState.logs.forEach(log => {
+    times.push(log.durationMs);
+    if (log.q.mode === "drop") {
+      dropLogs.push(log);
+      log.q.choices.forEach(c => {
+        if (c.id === log.picked.id) {
+          c.t.forEach((v, idx) => scores[idx] -= v * 0.75);
+        } else {
+          c.t.forEach((v, idx) => scores[idx] += v * 0.4);
+        }
+      });
+    } else {
+      keepLogs.push(log);
+      if (log.q.choices.some(c => c.cat === 5 || c.cat === 6)) offeredMoneyOrWork = true;
+      if (log.picked.cat === 5 || log.picked.cat === 6) pickedMoneyOrWork = true;
+      const w = log.q.mode === "final" ? 2.0 : log.q.mode === "rush" ? 1.3 : 1.0;
+      log.picked.t.forEach((v, idx) => scores[idx] += v * w);
+    }
+  });
+
+  const minRaw = Math.min(...scores);
+  const shifted = scores.map(s => s - Math.min(0, minRaw) + 2);
+  const maxS = Math.max(...shifted, 1);
+  const totalS = shifted.reduce((a, b) => a + b, 0);
+  const norm = shifted.map(s => Math.min(100, Math.round((s / maxS) * 84 + 16)));
+
+  const sorted = shifted.map((v, i) => ({ i, v })).sort((a, b) => b.v - a.v);
+  const top1 = sorted[0].i;
+  const top2 = sorted[1].i;
+  const low1 = sorted[5].i;
+
+  const avgMs = times.reduce((a, b) => a + b, 0) / times.length;
+  const avgSec = avgMs / 1000;
+  const spreadRatio = sorted[5].v / sorted[0].v;
+  const topShare = sorted[0].v / totalS;
+  const meanDiff = times.reduce((acc, t) => acc + Math.abs(t - avgMs), 0) / times.length;
+
+  const dropTraits = [0, 0, 0, 0, 0, 0];
+  dropLogs.forEach(d => d.picked.t.forEach((v, idx) => dropTraits[idx] += v));
+  const topDropTrait = dropTraits.map((v, i) => ({ i, v })).sort((a, b) => b.v - a.v)[0].i;
+  const hasSelfParadox = dropTraits[top1] > 0 && topDropTrait === top1;
+
+  let archId = "n_wall";
+  if (spreadRatio >= 0.76) {
+    archId = "sec_all";
+  } else if (meanDiff < 380 && spreadRatio >= 0.62 && avgSec >= 2.0 && avgSec <= 4.8) {
+    archId = "sec_ghost";
+  } else if (avgSec <= 1.65 && Math.max(...times) <= 2600) {
+    archId = "sr_flash";
+  } else if (dropLogs.length >= 2 && dropLogs.every(d => d.durationMs <= 2000)) {
+    archId = "sr_ice";
+  } else if (offeredMoneyOrWork && !pickedMoneyOrWork && (top1 === 4 || top1 === 1 || top1 === 2)) {
+    archId = "sr_monk";
+  } else if (hasSelfParadox && Math.random() < 0.7) {
+    archId = "sr_shadow";
+  } else if (topShare >= 0.275) {
+    const rareSingle = ["r_bunker", "r_rebel", "r_devote", "r_blaze", "r_ethic", "r_tycoon"];
+    archId = rareSingle[top1];
+  } else if ((top1 === 1 && top2 === 2 || top1 === 2 && top2 === 1) && (sorted[0].v - sorted[1].v) < maxS * 0.14) {
+    archId = "r_paradox";
+  } else if ((top1 === 3 || top1 === 1) && low1 === 0 && shifted[0] < maxS * 0.42) {
+    archId = "r_gambler";
+  } else {
+    const p = `${top1}-${top2}`;
+    const nMap = {
+      "0-5": "n_wall", "5-0": "n_wall",
+      "0-2": "n_nest", "2-0": "n_nest",
+      "0-4": "n_calm", "4-0": "n_calm", "0-1": "n_calm", "1-0": "n_calm",
+      "1-4": "n_free", "4-1": "n_free",
+      "1-3": "n_wild", "3-1": "n_wild", "3-0": "n_wild", "0-3": "n_wild",
+      "1-5": "n_solo", "5-1": "n_solo",
+      "2-4": "n_warm", "4-2": "n_warm",
+      "2-3": "n_team", "3-2": "n_team", "2-5": "n_team", "5-2": "n_team",
+      "3-5": "n_craft", "5-3": "n_craft",
+      "3-4": "n_muse", "4-3": "n_muse", "4-5": "n_muse", "5-4": "n_muse"
+    };
+    archId = nMap[p] || "n_wall";
+  }
+
+  const arch = ARCHETYPES.find(a => a.id === archId);
+  const save = loadSave();
+  const prevId = save.lastArchId;
+  const prevName = save.lastArchName;
+
+  const fastestKeep = [...keepLogs].sort((a, b) => a.durationMs - b.durationMs)[0];
+  const secondKeep = [...keepLogs].sort((a, b) => a.durationMs - b.durationMs)[1] || fastestKeep;
+  const slowest = [...gState.logs].sort((a, b) => b.durationMs - a.durationMs)[0];
+  const finalPick = gState.logs[9].picked;
+  const sacList = dropLogs.map(d => `"${d.picked.title}"`).join(" and ");
+  const rushLog = gState.logs.find(l => l.q.mode === "rush");
+  const topLabel = TRAIT_NAMES[top1];
+  const lowLabel = TRAIT_NAMES[low1];
+
+  const allLenses = [
+    { id: "l1", cls: "", title: `⚡ Your Fastest Gut Call (${(fastestKeep.durationMs/1000).toFixed(1)}s)`, body: `You locked onto "${fastestKeep.picked.title}" faster than anything else. Whether you realize it or not, that's the exact itch your mind is trying to scratch right now.` },
+    { id: "l2", cls: "red", title: `🔪 What Your Sacrifices Gave Away`, body: `When forced to make cuts, you dropped ${sacList} without looking back. What we're willing to lose always reveals our true hierarchy faster than what we say we love.` },
+    { id: "l3", cls: "gold", title: `⏳ Where You Hesitated Most (${(slowest.durationMs/1000).toFixed(1)}s)`, body: `Your finger froze longest on "${slowest.q.badge}" before finally picking "${slowest.picked.title}." That pause shows an active tug-of-war inside you right now.` },
+    { id: "l4", cls: "vio", title: `💘 Your Hidden Side in Love`, body: `${top1 === 2 || top2 === 2 ? `You crave deep closeness, yet refusing to give up "${finalPick.title}" shows you won't lose yourself just to keep someone happy.` : `Prioritizing "${fastestKeep.picked.title}" while guarding your independence means you thrive in relationships built on mutual space, not clinginess.`}` },
+    { id: "l5", cls: "", title: `🌙 Your 3 AM Headspace`, body: `When the distractions go quiet, your thoughts drift toward "${finalPick.title}." Meanwhile, ${lowLabel} scored lowest for you this round—making it your quietest blind spot.` },
+    { id: "l6", cls: "gold", title: `💼 Work & Money Unfiltered`, body: `${pickedMoneyOrWork ? `You don't run on wishful thinking alone—picking "${fastestKeep.picked.title}" shows you respect real-world leverage and keeping your footing.` : `You passed over pure career and money plays in favor of "${finalPick.title}." Status alone will never satisfy you if the soul isn't fed.`}` },
+    { id: "l7", cls: "vio", title: `⚠️ A Gentle Reality Check`, body: `Because you lean so heavily toward ${topLabel}, it's easy to neglect ${lowLabel}. Giving that overlooked corner even a little attention could unlock your next breakthrough.` },
+    { id: "l8", cls: "red", title: `🎭 If Your Life Were a Movie`, body: `To protect "${finalPick.title}," you'd willingly throw ${sacList} overboard—classic main-character energy. Beneath a calm exterior, you make surprisingly bold calls when it counts.` },
+    { id: "l9", cls: "", title: `🔮 Your Next Crossroads`, body: `${rushLog ? `You grabbed "${rushLog.picked.title}" in ${(rushLog.durationMs/1000).toFixed(1)}s under pressure. ` : ""}At your next big fork in the road, you'll run the numbers—then ignore them if "${finalPick.title}" is on the line.` },
+    { id: "l10", cls: "gold", title: `💎 Snapshot of Your Current Mood`, body: `Even if this surprises you, choosing "${fastestKeep.picked.title}" and "${finalPick.title}" today captures an honest X-ray of where your head is at right now.` },
+    { id: "l11", cls: "vio", title: `🐾 The Plot Twist People Miss About You`, body: `People may see a steady exterior, yet your choices around "${secondKeep.picked.title}" and "${finalPick.title}" reveal a fiercely protective streak you rarely show out loud.` },
+    { id: "l12", cls: "red", title: `🛡️ Your Burnout Escape Hatch`, body: `Push you past your limit and you'll drop ${sacList} overnight, grab "${fastestKeep.picked.title}," and vanish into your own quiet corner until you feel human again.` },
+    { id: "l13", cls: "gold", title: `💰 Where Your Wallet & Calendar Leak`, body: `Even if you try to stay disciplined, anything tied to "${fastestKeep.picked.title}" or "${secondKeep.picked.title}" is where your willpower happily loosens up.` },
+    { id: "l14", cls: "", title: `🗝️ Who Earns Your Real Trust`, body: `Smooth talk doesn't impress you. You only truly open up to people who naturally respect "${finalPick.title}" and never force ${sacList} onto your plate.` },
+    { id: "l15", cls: "vio", title: `🔥 Your Quiet Competitive Streak`, body: `You rarely admit it, but seeing someone effortlessly nail "${secondKeep.picked.title}" lights a subtle, competitive spark behind your eyes.` },
+    { id: "l16", cls: "", title: `☔ Your Instant Reset Button`, body: `Skip the generic pep talks on rough days—leaning straight into "${fastestKeep.picked.title}" is the fastest shortcut back to yourself.` },
+    { id: "l17", cls: "gold", title: `🧭 A Note From Future You`, body: `"Good call not getting distracted by ${sacList}," your future self would say. "Protecting '${finalPick.title}' paid off bigger than you knew."` },
+    { id: "l18", cls: "red", title: `🎲 Seven Days of Zero Rules`, body: `Hand you a blank week with zero obligations, and your first move would revolve around "${fastestKeep.picked.title}"—ending with pure time for "${finalPick.title}."` }
+  ];
+
+  let usedLensSet = new Set(save.usedLensIds);
+  let unusedLenses = allLenses.filter(l => !usedLensSet.has(l.id));
+  if (unusedLenses.length < 3) {
+    usedLensSet.clear();
+    unusedLenses = [...allLenses];
+  }
+  const chosenLenses = shuffle(unusedLenses).slice(0, 3);
+  chosenLenses.forEach(l => usedLensSet.add(l.id));
+
+  // Save update
+  save.plays += 1;
+  const isNew = !save.unlocked.includes(arch.id);
+  if (isNew) save.unlocked.push(arch.id);
+  save.lastArchId = arch.id;
+  save.lastArchName = arch.name;
+  save.deckUsedIds = gState.nextDeckUsedIds;
+  save.usedLensIds = Array.from(usedLensSet);
+  writeSave(save);
+  refreshStatsUI();
+
+  // Comparison Banner
+  const deltaEl = document.getElementById("delta-banner");
+  if (prevId) {
+    deltaEl.style.display = "block";
+    if (prevId === arch.id) {
+      deltaEl.innerHTML = `🔄 Brand-new cards, same verdict: <strong>${arch.name}</strong>. That core instinct of yours doesn't budge easily.`;
+    } else {
+      deltaEl.innerHTML = `✨ Shifted from <strong>${prevName}</strong> to <strong>${arch.name}</strong>! A fresh batch of dilemmas brought out a different side of you.`;
+    }
+  } else {
+    deltaEl.style.display = "none";
+  }
+
+  document.getElementById("res-pixel").innerHTML = renderPixelSVG(arch.id, 84);
+
+  const aliases = [
+    `Holding tight to "${finalPick.title}"`,
+    `Drawn instinctively to "${fastestKeep.picked.title}"`,
+    `Willing to drop "${dropLogs[0].picked.title}" without flinching`
+  ];
+  document.getElementById("res-alias").textContent = aliases[Math.floor(Math.random() * aliases.length)];
+
+  const rarEl = document.getElementById("res-rarity");
+  rarEl.className = `rarity-badge rar-${arch.rar}`;
+  rarEl.textContent = arch.rar === "SEC" ? "★ SECRET" : arch.rar === "SR" ? "★★★ SUPER RARE" : arch.rar === "R" ? "★★ RARE" : "★ NORMAL";
+  document.getElementById("res-new").style.display = isNew ? "inline-block" : "none";
+
+  document.getElementById("res-name").textContent = arch.name;
+  document.getElementById("res-catch").textContent = `"${arch.catch}"`;
+  document.getElementById("res-desc").textContent = arch.desc;
+
+  document.getElementById("st-speed").textContent = `${avgSec.toFixed(1)}s`;
+  document.getElementById("st-top").textContent = topLabel;
+  document.getElementById("st-dex").textContent = `${save.unlocked.length} / ${ARCHETYPES.length}`;
+
+  drawRadar(norm);
+
+  document.getElementById("highlights").innerHTML = chosenLenses.map(l => `
+    <div class="hl-item ${l.cls}">
+      <strong>${l.title}</strong><br>${l.body}
+    </div>
+  `).join("");
+
+  document.getElementById("picked-chips").innerHTML = gState.logs.map((l, idx) => {
+    const isDrop = l.q.mode === "drop";
+    return `<span class="p-chip ${isDrop ? 'sac' : ''}">${idx + 1}. ${isDrop ? 'Cut: ' : ''}${l.picked.title}</span>`;
+  }).join("");
+
+  gState.lastReportText =
+`[PICK YOUR TRUTH — Result]
+Persona: ${arch.name} [${arch.rar}]
+"${arch.catch}"
+Fastest Gut Call: ${fastestKeep.picked.title} (${(fastestKeep.durationMs/1000).toFixed(1)}s)
+Sacrificed: ${dropLogs.map(d => d.picked.title).join(" / ")}
+Final Core Value: "${finalPick.title}"
+Dex: ${save.unlocked.length}/${ARCHETYPES.length}`;
+
+  showScreen("screen-result");
+}
+
+function drawRadar(values) {
+  const svg = document.getElementById("radar-svg");
+  const cx = 150, cy = 128, r = 74, n = 6;
+  let html = "";
+
+  [0.33, 0.66, 1].forEach(sc => {
+    const pts = [];
+    for (let i = 0; i < n; i++) {
+      const a = (Math.PI * 2 * i) / n - Math.PI / 2;
+      pts.push(`${cx + Math.cos(a) * r * sc},${cy + Math.sin(a) * r * sc}`);
+    }
+    html += `<polygon points="${pts.join(" ")}" fill="none" stroke="rgba(148,163,184,0.22)" stroke-width="1"/>`;
+  });
+
+  for (let i = 0; i < n; i++) {
+    const a = (Math.PI * 2 * i) / n - Math.PI / 2;
+    html += `<line x1="${cx}" y1="${cy}" x2="${cx + Math.cos(a)*r}" y2="${cy + Math.sin(a)*r}" stroke="rgba(148,163,184,0.22)" stroke-width="1"/>`;
+    const lx = cx + Math.cos(a) * (r + 28);
+    const ly = cy + Math.sin(a) * (r + 17);
+    html += `<text x="${lx}" y="${ly}" fill="#cbd5e1" font-size="10.5" font-weight="600" text-anchor="middle" dominant-baseline="middle">${TRAIT_NAMES[i]}</text>`;
+  }
+
+  const dPts = [];
+  for (let i = 0; i < n; i++) {
+    const a = (Math.PI * 2 * i) / n - Math.PI / 2;
+    const ratio = values[i] / 100;
+    dPts.push(`${cx + Math.cos(a) * r * ratio},${cy + Math.sin(a) * r * ratio}`);
+  }
+  html += `<polygon points="${dPts.join(" ")}" fill="rgba(45, 212, 191, 0.26)" stroke="#2dd4bf" stroke-width="2.2"/>`;
+  dPts.forEach(p => {
+    const [x, y] = p.split(",");
+    html += `<circle cx="${x}" cy="${y}" r="3.2" fill="#a78bfa" stroke="#fff" stroke-width="1"/>`;
+  });
+  svg.innerHTML = html;
+}
+
+function copyResult() {
+  navigator.clipboard.writeText(gState.lastReportText).then(() => {
+    const t = document.getElementById("copy-toast");
+    t.textContent = "✓ Result copied to clipboard!";
+    setTimeout(() => t.textContent = "", 2500);
+  });
+}
+
+refreshStatsUI();
+</script>
+</body>
+</html>
