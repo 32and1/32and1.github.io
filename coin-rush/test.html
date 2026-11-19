@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>60s COIN & GEM RUSH - SOUND EDITION</title>
+<style>
+  html, body {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    background: #0f172a; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; font-family: sans-serif;
+    overflow: hidden;
+    touch-action: manipulation;
+    -webkit-user-select: none; user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #box {
+    position: relative; width: 380px; max-width: 96vw;
+    height: calc(94vh - 64px); height: calc(94dvh - 64px);
+    background: #1e1b4b; border: 2px solid #6366f1; overflow: hidden;
+    transition: border-color 0.2s;
+    touch-action: none;
+  }
+  #box.fever { border-color: #facc15; box-shadow: 0 0 25px rgba(250, 204, 21, 0.7); }
+  canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+  #hud { position: absolute; top: 6px; left: 0; width: 100%; display: flex; justify-content: space-around; align-items: center; padding: 0 4px; pointer-events: none; z-index: 10; box-sizing: border-box; }
+  .card { background: rgba(15,23,42,0.85); border: 1px solid #4f46e5; border-radius: 6px; padding: 3px 7px; text-align: center; color: #fff; min-width: 66px; }
+  .lbl { font-size: 9px; color: #a5b4fc; } .val { font-size: 15px; font-weight: bold; }
+  #t-num { color: #38bdf8; } #k-num { color: #facc15; } #p-num { color: #34d399; }
+  #snd-btn { pointer-events: auto; background: rgba(15,23,42,0.9); border: 1px solid #6366f1; color: #fff; border-radius: 6px; padding: 5px 8px; font-size: 11px; font-weight: bold; cursor: pointer; touch-action: none; }
+  #fever-bar { position: absolute; top: 44px; left: 0; width: 100%; text-align: center; font-size: 14px; font-weight: bold; color: #fde047; text-shadow: 0 0 8px #d97706; display: none; pointer-events: none; z-index: 15; }
+  #gates { position: absolute; top: 38%; left: 0; width: 100%; display: none; justify-content: space-around; padding: 0 10px; z-index: 20; box-sizing: border-box; pointer-events: none; }
+  .gbtn { width: 45%; padding: 10px 5px; font-size: 16px; font-weight: bold; color: #fff; border: 2px solid #fff; border-radius: 8px; cursor: pointer; pointer-events: auto; touch-action: none; }
+  .gsub { display: block; font-size: 10px; font-weight: normal; margin-top: 2px; }
+  .blue { background: #2563eb; } .red { background: #dc2626; } .gold { background: #d97706; }
+  #menu { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.94); display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; text-align: center; padding: 14px; box-sizing: border-box; z-index: 30; overflow-y: auto; touch-action: pan-y; }
+  #studio-logo-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 12px; }
+  #studio-logo { width: 84px; height: 84px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.3); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); object-fit: cover; background: #fff; }
+  #studio-credit { font-size: 10px; color: #94a3b8; letter-spacing: 0.08em; margin-top: 5px; }
+  #menu h1 { font-size: 21px; color: #facc15; margin: 0 0 6px 0; }
+  #rank-box { display: none; margin: 2px 0 6px 0; }
+  #rank-char { font-size: 46px; font-weight: 900; line-height: 1; text-shadow: 0 0 15px rgba(255,255,255,0.4); }
+  #rank-msg { font-size: 15px; font-weight: bold; color: #fda4af; margin-top: 6px; padding: 6px 12px; background: rgba(255,255,255,0.1); border-radius: 8px; }
+  #menu p { font-size: 12px; color: #e0e7ff; line-height: 1.4; margin: 6px 0 10px 0; }
+  #best-txt { font-size: 11px; color: #94a3b8; margin-bottom: 8px; }
+  #share-row { display: none; gap: 8px; margin-bottom: 12px; width: 100%; justify-content: center; }
+  .s-act { padding: 8px 12px; font-size: 12px; font-weight: bold; color: #fff; border: none; border-radius: 8px; cursor: pointer; touch-action: manipulation; }
+  #btn-x { background: #000; border: 1px solid #555; }
+  #btn-img { background: #0284c7; }
+  #sbtn { padding: 11px 30px; font-size: 17px; font-weight: bold; background: linear-gradient(135deg, #f59e0b, #eab308); color: #111; border: none; border-radius: 50px; cursor: pointer; touch-action: manipulation; }
+  #affi-area { display: none; margin-top: 18px; padding: 6px; background: rgba(255, 255, 255, 0.08); border: 1px solid #4f46e5; border-radius: 8px; width: 334px; max-width: 100%; box-sizing: border-box; text-align: center; }
+  #affi-label { font-size: 10px; color: #94a3b8; margin-bottom: 4px; }
+  #affi-content { width: 320px; max-width: 100%; height: 48px; margin: 0 auto; overflow: hidden; }
+#bottom-ad-wrap { margin-top: 8px; width: 320px; max-width: 100%; min-height: 50px; display: block; text-align: center; flex-shrink: 0; overflow: visible; touch-action: auto; user-select: auto; }</style>
+</head>
+<body>
+<div id="box">
+  <div id="hud">
+    <div class="card"><div class="lbl">残り時間</div><div class="val" id="t-num">60.0</div></div>
+    <div class="card"><div class="lbl">獲得コイン</div><div class="val" id="k-num">0</div></div>
+    <div class="card"><div class="lbl">1タップ獲得</div><div class="val" id="p-num">2</div></div>
+    <button id="snd-btn">音 ON</button>
+  </div>
+  <div id="fever-bar">GOLD FEVER!!</div>
+  <div id="gates"><button class="gbtn" id="gl"></button><button class="gbtn" id="gr"></button></div>
+  <div id="menu">
+    <div id="studio-logo-wrap">
+      <img id="studio-logo" src="logo.png" alt="32and1 studio">
+      <div id="studio-credit">Presented by 32and1 studio</div>
+    </div>
+    <h1 id="m-title">60s COIN & GEM RUSH</h1>
+    <div id="rank-box">
+      <div id="rank-char">S</div>
+      <div id="rank-msg">コメント</div>
+    </div>
+    <p id="m-desc">降り注ぐ金貨と宝石をタップで砕け！<br>巨大ルビー・伝説ダイヤを砕いてFEVER突入！</p>
+    <div id="best-txt"></div>
+    <div id="share-row">
+      <button class="s-act" id="btn-x">Xでシェア</button>
+      <button class="s-act" id="btn-img">結果画像を保存</button>
+    </div>
+    <button id="sbtn">ゲームスタート</button>
+    <div id="affi-area">
+      <div id="affi-label">[PR] 開発者の応援リンク（楽天市場）</div>
+      <div id="affi-content">
+        <!-- ▼ ここに楽天モーションウィジェット（320×48）のコードを貼り付け ▼ -->
+<script type="text/javascript">rakuten_design="slide";rakuten_affiliateId="08ec75f0.e399f4a0.08ec75f1.572faa39";rakuten_items="ranking";rakuten_genreId="0";rakuten_size="320x48";rakuten_target="_blank";rakuten_theme="gray";rakuten_border="off";rakuten_auto_mode="on";rakuten_genre_title="off";rakuten_recommend="on";rakuten_ts="1794664354036";</script><script type="text/javascript" src="https://xml.affiliate.rakuten.co.jp/widget/js/rakuten_widget.js?20230106"></script>
+      </div>
+    </div>
+  </div>
+  <canvas id="cv"></canvas>
+</div>
+<div id="bottom-ad-wrap">
+  <!-- ▼ ここに忍者AdMax（320×50）の広告タグを貼り付け ▼ -->
+<!-- admax -->
+<script src="https://adm.shinobi.jp/s/b620e3d8febb6730147f7880062a727c"></script>
+<!-- admax -->
+</div>
+<script>
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d'), box = document.getElementById('box');
+const tNum = document.getElementById('t-num'), kNum = document.getElementById('k-num'), pNum = document.getElementById('p-num'), sndBtn = document.getElementById('snd-btn');
+const feverBar = document.getElementById('fever-bar'), gates = document.getElementById('gates'), gl = document.getElementById('gl'), gr = document.getElementById('gr');
+const menu = document.getElementById('menu'), mTitle = document.getElementById('m-title'), mDesc = document.getElementById('m-desc'), sbtn = document.getElementById('sbtn');
+const rankBox = document.getElementById('rank-box'), rankChar = document.getElementById('rank-char'), rankMsg = document.getElementById('rank-msg'), bestTxt = document.getElementById('best-txt');
+const shareRow = document.getElementById('share-row'), btnX = document.getElementById('btn-x'), btnImg = document.getElementById('btn-img');
+const affiArea = document.getElementById('affi-area'), logoWrap = document.getElementById('studio-logo-wrap');
+
+let run = false, zList = new Array(), bList = new Array(), tList = new Array(), rList = new Array();
+let pwr = 2, kills = 0, tLeft = 60.0, lastT = 0, spAcc = 0, midT = 0, bigT = 0, spdUp = 0, shk = 0, gT = 0, gL = 0, gOn = false, opL = null, opR = null;
+let feverTime = 0, feverMult = 1, bestScore = 0, lastInfo = null, lastWhy = '';
+try { bestScore = parseInt(localStorage.getItem('coin_rush_best') || '0', 10) || 0; } catch (e) {}
+if (bestScore > 0) bestTxt.textContent = '自己ベスト: ' + bestScore + '枚';
+
+function get(a, i) { return a.slice(i, i + 1).pop(); }
+function fit() { cv.width = box.clientWidth; cv.height = box.clientHeight; }
+window.onresize = fit; fit();
+
+let actx = null, masterComp = null, soundOn = true, lastSndTime = 0;
+function initAudio() {
+  if (!actx) {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    actx = new AC();
+    masterComp = actx.createDynamicsCompressor();
+    masterComp.threshold.value = -18;
+    masterComp.knee.value = 12;
+    masterComp.ratio.value = 8;
+    masterComp.attack.value = 0.002;
+    masterComp.release.value = 0.12;
+    masterComp.connect(actx.destination);
+  }
+  if (actx.state === 'suspended') actx.resume();
+}
+
+sndBtn.addEventListener('pointerdown', function(e) {
+  if (e.pointerType === 'mouse' && e.button !== 0) return;
+  e.stopPropagation();
+  e.preventDefault();
+  soundOn = !soundOn;
+  sndBtn.textContent = soundOn ? '音 ON' : '音 OFF';
+  sndBtn.style.opacity = soundOn ? '1' : '0.55';
+});
+
+function playCoinSnd(count) {
+  if (!soundOn) return;
+  initAudio();
+  if (!actx) return;
+  const now = actx.currentTime;
+  if (now - lastSndTime < 0.055) return;
+  lastSndTime = now;
+  const boost = Math.min(count * 4, 180);
+  const f1 = 987.77 + boost;
+  const f2 = 1318.51 + boost;
+  const osc = actx.createOscillator();
+  const gain = actx.createGain();
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(f1, now);
+  osc.frequency.setValueAtTime(f2, now + 0.045);
+  gain.gain.setValueAtTime(0.001, now);
+  gain.gain.linearRampToValueAtTime(0.16, now + 0.006);
+  gain.gain.exponentialRampToValueAtTime(0.001, now + 0.24);
+  osc.connect(gain); gain.connect(masterComp);
+  osc.start(now); osc.stop(now + 0.25);
+}
+function playGemHitSnd() {
+  if (!soundOn) return;
+  initAudio();
+  if (!actx) return;
+  const now = actx.currentTime;
+  if (now - lastSndTime < 0.05) return;
+  lastSndTime = now;
+  const osc = actx.createOscillator();
+  const gain = actx.createGain();
+  osc.type = 'triangle';
+  osc.frequency.setValueAtTime(1760, now);
+  osc.frequency.exponentialRampToValueAtTime(2400, now + 0.07);
+  gain.gain.setValueAtTime(0.14, now);
+  gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+  osc.connect(gain); gain.connect(masterComp);
+  osc.start(now); osc.stop(now + 0.1);
+}
+function playFeverSnd(isBig) {
+  if (!soundOn) return;
+  initAudio();
+  if (!actx) return;
+  const now = actx.currentTime;
+  const notes = isBig ? new Array(523.25, 659.25, 783.99, 1046.5, 1318.51) : new Array(587.33, 739.99, 880.0, 1174.66);
+  for (let i = 0; i < notes.length; i++) {
+    const osc = actx.createOscillator();
+    const gain = actx.createGain();
+    osc.type = 'triangle';
+    const t0 = now + i * 0.05;
+    osc.frequency.setValueAtTime(get(notes, i), t0);
+    gain.gain.setValueAtTime(0.15, t0);
+    gain.gain.exponentialRampToValueAtTime(0.001, t0 + 0.28);
+    osc.connect(gain); gain.connect(masterComp);
+    osc.start(t0); osc.stop(t0 + 0.3);
+  }
+}
+function playGateSnd(isGood) {
+  if (!soundOn) return;
+  initAudio();
+  if (!actx) return;
+  const now = actx.currentTime;
+  const osc = actx.createOscillator();
+  const gain = actx.createGain();
+  osc.type = isGood ? 'sine' : 'sawtooth';
+  osc.frequency.setValueAtTime(isGood ? 660 : 180, now);
+  osc.frequency.exponentialRampToValueAtTime(isGood ? 1100 : 110, now + 0.15);
+  gain.gain.setValueAtTime(0.14, now);
+  gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+  osc.connect(gain); gain.connect(masterComp);
+  osc.start(now); osc.stop(now + 0.17);
+}
+function addZ(n, spd, startY) {
+  for (let i = 0; i < n; i++) {
+    const isGem = Math.random() < 0.16;
+    const py = startY !== undefined ? startY : (20 + Math.random() * 25);
+    zList.push({ kind: 0, isGem: isGem, hp: 1, max: 1, x: 14 + Math.random() * (cv.width - 28), y: py, r: isGem ? 7 : 5, s: (isGem ? spd * 0.85 : spd) + Math.random() * 0.35, w: Math.random() * 6, c: isGem ? '#34d399' : '#facc15' });
+  }
+}
+function addMidBoss(el) {
+  const hp = Math.floor(30 + el * 2.5);
+  zList.push({ kind: 1, hp: hp, max: hp, x: 45 + Math.random() * (cv.width - 90), y: 30, r: 17, s: 0.65 + el * 0.006, w: 0, c: '#f43f5e' });
+  tList.push({ x: cv.width / 2, y: 80, txt: 'GIANT RUBY!', c: '#fb7185', ttl: 45 });
+}
+function addBigBoss(el) {
+  const hp = Math.floor(95 + el * 5.5);
+  zList.push({ kind: 2, hp: hp, max: hp, x: cv.width / 2, y: 40, r: 30, s: 0.45 + el * 0.004, w: 0, c: '#38bdf8' });
+  tList.push({ x: cv.width / 2, y: 90, txt: '!! LEGEND DIAMOND !!', c: '#7dd3fc', ttl: 60 });
+  shk = 10;
+}
+function startFever(sec, mult, label) {
+  feverTime = Math.max(feverTime, sec);
+  feverMult = Math.max(feverMult, mult);
+  box.className = 'fever';
+  feverBar.style.display = 'block';
+  playFeverSnd(mult >= 5);
+  tList.push({ x: cv.width / 2, y: cv.height * 0.35, txt: label, c: '#fde047', ttl: 55 });
+}
+const ops = new Array(
+  { t: '+3', sub: '堅実に増加', cls: 'blue', f: function(v) { return v + 3; } },
+  { t: '+6', sub: 'パワーアップ', cls: 'blue', f: function(v) { return v + 6; } },
+  { t: '+12', sub: '落下も加速!', cls: 'gold', f: function(v) { spdUp += 0.25; return v + 12; } },
+  { t: '×1.5', sub: '1.5倍に増加', cls: 'blue', f: function(v) { return Math.ceil(v * 1.5); } },
+  { t: '×2 OR ÷2', sub: '50%の運試し!', cls: 'gold', f: function(v) { return Math.random() > 0.5 ? v * 2 : Math.max(1, Math.floor(v / 2)); } },
+  { t: '-4', sub: 'トラップ!', cls: 'red', f: function(v) { return Math.max(1, v - 4); } },
+  { t: '÷2', sub: '獲得半減!', cls: 'red', f: function(v) { return Math.max(1, Math.floor(v / 2)); } }
+);
+function openG() {
+  gOn = true; gL = 170;
+  const i1 = Math.floor(Math.random() * ops.length);
+  let i2 = Math.floor(Math.random() * ops.length);
+  if (i1 === i2) i2 = (i1 + 1) % ops.length;
+  opL = get(ops, i1); opR = get(ops, i2);
+  gl.innerHTML = opL.t + '<span class="gsub">' + opL.sub + '</span>'; gl.className = 'gbtn ' + opL.cls;
+  gr.innerHTML = opR.t + '<span class="gsub">' + opR.sub + '</span>'; gr.className = 'gbtn ' + opR.cls;
+  gates.style.top = (25 + Math.random() * 30) + '%'; gates.style.display = 'flex';
+}
+function closeG() { gOn = false; gates.style.display = 'none'; gT = 0; }
+function pickG(op) {
+  if (!gOn || !op) return;
+  const old = pwr; pwr = op.f(pwr);
+  const d = pwr - old;
+  playGateSnd(d >= 0);
+  tList.push({ x: cv.width / 2, y: cv.height * 0.42, txt: d >= 0 ? 'POWER +' + d + '!' : 'POWER ' + d + '...', c: d >= 0 ? '#60a5fa' : '#f87171', ttl: 40 });
+  closeG();
+}
+gl.addEventListener('pointerdown', function(e) {
+  if (e.pointerType === 'mouse' && e.button !== 0) return;
+  e.stopPropagation(); e.preventDefault(); pickG(opL);
+});
+gr.addEventListener('pointerdown', function(e) {
+  if (e.pointerType === 'mouse' && e.button !== 0) return;
+  e.stopPropagation(); e.preventDefault(); pickG(opR);
+});
+
+function getCurPower() {
+  if (feverTime <= 0) return pwr;
+  const base = pwr * feverMult;
+  return feverMult >= 5 ? Math.max(45, base) : Math.max(15, base);
+}
+function pickOne(arr) { return get(arr, Math.floor(Math.random() * arr.length)); }
+function getRankInfo(sc) {
+  if (sc >= 2200) return { r: 'SS', col: '#fde047', msg: pickOne(new Array('神レベル！', '大富豪誕生', '金庫がパンクする', '指がバグってる')) };
+  if (sc >= 1500) return { r: 'S', col: '#facc15', msg: pickOne(new Array('まあまあね', '意外と稼ぐじゃん', 'そこそこ優秀', 'ドヤ顔していいよ')) };
+  if (sc >= 1000) return { r: 'A', col: '#4ade80', msg: pickOne(new Array('悪くない、けど普通', '指の運動不足', 'あと一歩が足りない', '惜しい、実に惜しい')) };
+  if (sc >= 600) return { r: 'B', col: '#38bdf8', msg: pickOne(new Array('いたって平凡', '記憶に残らない', '可もなく不可もなく', '量産型プレイヤー')) };
+  if (sc >= 250) return { r: 'C', col: '#fb923c', msg: pickOne(new Array('あらまぁ…', '画面見てる？', '寝てました？', '指が震えてるよ？')) };
+  return { r: 'D', col: '#ef4444', msg: pickOne(new Array('どんまい、出直して', 'ただの散財', '話にならない', 'ルール理解してる？')) };
+}
+function drawDiamond(x, y, r, fill, stroke, lw) {
+  ctx.beginPath();
+  ctx.moveTo(x, y - r);
+  ctx.lineTo(x + r * 0.85, y - r * 0.25);
+  ctx.lineTo(x + r * 0.55, y + r);
+  ctx.lineTo(x - r * 0.55, y + r);
+  ctx.lineTo(x - r * 0.85, y - r * 0.25);
+  ctx.closePath();
+  ctx.fillStyle = fill; ctx.fill();
+  if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw; ctx.stroke(); }
+}
+btnX.onclick = function() {
+  if (!lastInfo) return;
+  const status = lastWhy === 'time' ? '60秒完走！' : '途中オーバー…';
+  let txt = '【60s COIN & GEM RUSH】\n結果: ' + status + '（' + kills + '枚獲得）\n評価: RANK ' + lastInfo.r + '「' + lastInfo.msg + '」\n#コインゲーム #ブラウザゲーム';
+  if (location.protocol.startsWith('http')) txt += '\n' + location.href;
+  window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(txt), '_blank');
+};
+btnImg.onclick = function() {
+  if (!lastInfo) return;
+  const c = document.createElement('canvas');
+  c.width = 600; c.height = 420;
+  const g = c.getContext('2d');
+  g.fillStyle = '#1e1b4b'; g.fillRect(0, 0, 600, 420);
+  g.strokeStyle = lastInfo.col; g.lineWidth = 8; g.strokeRect(16, 16, 568, 388);
+  g.textAlign = 'center';
+  g.fillStyle = '#facc15'; g.font = 'bold 26px sans-serif'; g.fillText('60s COIN & GEM RUSH', 300, 68);
+  g.fillStyle = lastWhy === 'time' ? '#38bdf8' : '#ef4444'; g.font = 'bold 22px sans-serif';
+  g.fillText(lastWhy === 'time' ? 'TIME UP!!' : 'GAME OVER...', 300, 108);
+  g.fillStyle = lastInfo.col; g.font = '900 84px sans-serif'; g.fillText('RANK ' + lastInfo.r, 300, 205);
+  g.fillStyle = '#fda4af'; g.font = 'bold 26px sans-serif'; g.fillText('「' + lastInfo.msg + '」', 300, 260);
+  g.fillStyle = '#ffffff'; g.font = 'bold 30px sans-serif'; g.fillText('獲得コイン: ' + kills + ' 枚', 300, 325);
+  g.fillStyle = '#94a3b8'; g.font = '18px sans-serif'; g.fillText('自己ベスト: ' + bestScore + ' 枚', 300, 368);
+  const link = document.createElement('a');
+  link.download = 'coin_rank_' + lastInfo.r + '.png';
+  link.href = c.toDataURL('image/png');
+  link.click();
+};
+
+document.addEventListener('gesturestart', function(e) {
+  e.preventDefault();
+}, { passive: false });
+
+cv.addEventListener('touchstart', function(e) {
+  if (run) e.preventDefault();
+}, { passive: false });
+
+gates.addEventListener('touchstart', function(e) {
+  if (run && e.target === gates) e.preventDefault();
+}, { passive: false });
+
+cv.addEventListener('pointerdown', function(e) {
+  if (!run) return;
+  if (e.pointerType === 'mouse' && e.button !== 0) return;
+
+  const r = cv.getBoundingClientRect();
+  const tx = (e.clientX - r.left) * (cv.width / r.width);
+  const ty = (e.clientY - r.top) * (cv.height / r.height);
+
+  rList.push({ x: tx, y: ty, r: 8, maxR: feverTime > 0 ? 55 : 42, ttl: 12, maxTtl: 12, c: feverTime > 0 ? '#fde047' : '#a5b4fc' });
+
+  zList.sort(function(a, b) { return Math.hypot(a.x - tx, a.y - ty) - Math.hypot(b.x - tx, b.y - ty); });
+  let rem = getCurPower(), kn = 0, bh = false, bossKilled = false;
+  const maxRange = feverTime > 0 ? 999 : 140;
+  for (let i = 0; i < zList.length && rem > 0; i++) {
+    const z = get(zList, i);
+    if (z.y < 10) continue;
+    if (Math.hypot(z.x - tx, z.y - ty) > maxRange) break;
+    if (z.kind > 0) {
+      const dmg = Math.min(rem, z.hp); z.hp -= dmg; rem -= dmg; bh = true;
+      for (let k = 0; k < 4; k++) { const a = Math.random() * 6.28, s = 2 + Math.random() * 5; bList.push({ x: z.x, y: z.y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 1.5, c: z.kind === 2 ? '#7dd3fc' : '#fda4af', ttl: 18 }); }
+      if (z.hp <= 0) {
+        bossKilled = true;
+        const pCnt = z.kind === 2 ? 35 : 18;
+        for (let k = 0; k < pCnt; k++) { const a = Math.random() * 6.28, s = 3 + Math.random() * 10; bList.push({ x: z.x, y: z.y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 2, c: '#fde047', ttl: 30 }); }
+        if (z.kind === 2) { kills += 50; pwr += 4; startFever(6.0, 5, 'SUPER FEVER!! 6秒間無双!!'); shk = 16; }
+        else { kills += 15; pwr += 2; startFever(4.0, 3, 'RUBY FEVER!! 4秒間3倍!!'); shk = 10; }
+        zList.splice(i, 1); i--;
+      }
+    } else {
+      rem -= 1; kn += z.isGem ? 2 : 1;
+      for (let k = 0; k < 2; k++) { const a = Math.random() * 6.28, s = 3 + Math.random() * 6; bList.push({ x: z.x, y: z.y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 1.5, c: z.isGem ? '#6ee7b7' : '#fde047', ttl: 20 }); }
+      zList.splice(i, 1); i--;
+    }
+  }
+  if (kn > 0) {
+    playCoinSnd(kn);
+  } else if (bh && !bossKilled) {
+    playGemHitSnd();
+  }
+  if (kn > 0 || bh) {
+    if (shk < 10) shk = Math.min(10, 3 + Math.floor(getCurPower() / 12));
+    kills += kn; kNum.textContent = kills;
+    if (kn > 0) tList.push({ x: tx, y: ty - 12, txt: '+' + kn, c: '#fde047', ttl: 22 });
+  }
+});
+
+function start() {
+  initAudio();
+  fit(); run = true; pwr = 2; kills = 0; tLeft = 60.0; lastT = performance.now();
+  spAcc = 0; midT = 4.5; bigT = 8.0; spdUp = 0; shk = 0; gT = 0; gOn = false; feverTime = 0; feverMult = 1;
+  box.className = ''; feverBar.style.display = 'none'; rankBox.style.display = 'none'; shareRow.style.display = 'none';
+  affiArea.style.display = 'none';
+  logoWrap.style.display = 'none';
+  zList = new Array(); bList = new Array(); tList = new Array(); rList = new Array();
+  tNum.textContent = '60.0'; kNum.textContent = '0'; pNum.textContent = '2';
+  gates.style.display = 'none'; menu.style.display = 'none';
+  for (let i = 0; i < 45; i++) addZ(1, 0.95, 50 + Math.random() * 160);
+  playCoinSnd(5);
+  requestAnimationFrame(tick);
+}
+function end(why) {
+  run = false; gates.style.display = 'none'; feverBar.style.display = 'none'; box.className = ''; menu.style.display = 'flex';
+  lastWhy = why;
+  mTitle.textContent = why === 'time' ? 'TIME UP!!' : 'GAME OVER...';
+  mTitle.style.color = why === 'time' ? '#38bdf8' : '#ef4444';
+  const info = getRankInfo(kills);
+  lastInfo = info;
+  rankChar.textContent = 'RANK ' + info.r;
+  rankChar.style.color = info.col;
+  rankMsg.textContent = '「' + info.msg + '」';
+  rankBox.style.display = 'block';
+  shareRow.style.display = 'flex';
+  if (kills > bestScore) {
+    bestScore = kills;
+    try { localStorage.setItem('coin_rush_best', String(bestScore)); } catch (e) {}
+  }
+  mDesc.innerHTML = (why === 'time' ? '60秒間集めきった！' : '一番下まで溢れてしまった！') + '<br>獲得コイン: <strong>' + kills + '枚</strong>';
+  bestTxt.textContent = '自己ベスト: ' + bestScore + '枚';
+  sbtn.textContent = 'もう一度挑戦';
+  affiArea.style.display = 'block';
+}
+sbtn.onclick = start;
+function tick(now) {
+  if (!run) return;
+  const dt = Math.min(0.1, (now - lastT) / 1000); lastT = now; tLeft -= dt;
+  const f60 = dt * 60;
+  if (tLeft <= 0) { tNum.textContent = '0.0'; end('time'); return; }
+  tNum.textContent = tLeft.toFixed(1);
+  if (feverTime > 0) {
+    feverTime -= dt;
+    feverBar.textContent = 'GOLD FEVER!! 残り ' + Math.max(0, feverTime).toFixed(1) + '秒';
+    if (feverTime <= 0) { feverTime = 0; feverMult = 1; box.className = ''; feverBar.style.display = 'none'; }
+  }
+  pNum.textContent = getCurPower();
+  const el = 60 - tLeft, diff = 1 + el * 0.06, spd = 0.95 + el * 0.022 + spdUp;
+  const feverSpawn = feverTime > 0 ? 2.5 : 1.0;
+  spAcc += dt * (13 * diff * feverSpawn);
+  if (spAcc >= 1) { const n = Math.floor(spAcc); addZ(n, spd); spAcc -= n; }
+  midT += dt; if (midT >= 8.5) { addMidBoss(el); midT = 0; }
+  bigT += dt; if (bigT >= 18.0) { addBigBoss(el); bigT = 0; }
+  let ox = 0, oy = 0;
+  if (shk > 0) { ox = (Math.random() - 0.5) * shk * 2; oy = (Math.random() - 0.5) * shk * 2; shk = Math.max(0, shk - f60); }
+  ctx.setTransform(1, 0, 0, 1, ox, oy);
+  ctx.fillStyle = feverTime > 0 ? '#2e2618' : '#1e1b4b'; ctx.fillRect(-20, -20, cv.width + 40, cv.height + 40);
+  ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(0, cv.height - 3); ctx.lineTo(cv.width, cv.height - 3); ctx.stroke();
+  if (!gOn) { gT += f60; if (gT > 200) openG(); } else { gL -= f60; if (gL <= 0) closeG(); }
+  for (let i = 0; i < zList.length; i++) {
+    const z = get(zList, i); z.y += z.s * f60; z.w += 0.12 * f60;
+    const dx = z.x + Math.sin(z.w) * (z.kind > 0 ? 0.6 : 1.2);
+    if (z.kind === 2) {
+      ctx.fillStyle = 'rgba(56, 189, 248, 0.25)'; ctx.beginPath(); ctx.arc(dx, z.y, z.r + 8 + Math.sin(z.w * 2) * 3, 0, 6.28); ctx.fill();
+      drawDiamond(dx, z.y, z.r, '#0284c7', '#e0f2fe', 3);
+    } else if (z.kind === 1) {
+      drawDiamond(dx, z.y, z.r, '#e11d48', '#ffe4e6', 2);
+    } else if (z.isGem) {
+      drawDiamond(dx, z.y, z.r, '#10b981', '#a7f3d0', 1.2);
+    } else {
+      ctx.fillStyle = '#facc15'; ctx.beginPath(); ctx.arc(dx, z.y, z.r, 0, 6.28); ctx.fill();
+      ctx.strokeStyle = '#fef08a'; ctx.lineWidth = 1.2; ctx.stroke();
+    }
+    if (z.kind > 0) {
+      const bw = z.kind === 2 ? 56 : 34, bx = dx - bw / 2, by = z.y - z.r - 10;
+      ctx.fillStyle = '#000'; ctx.fillRect(bx - 1, by - 1, bw + 2, 7);
+      ctx.fillStyle = z.kind === 2 ? '#38bdf8' : '#fb7185'; ctx.fillRect(bx, by, bw * Math.max(0, z.hp / z.max), 5);
+      ctx.fillStyle = '#fff'; ctx.font = z.kind === 2 ? 'bold 11px sans-serif' : 'bold 9px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText(z.hp, dx, z.y + 4);
+    }
+    if (z.y + z.r >= cv.height) { end('dead'); return; }
+  }
+  for (let i = rList.length - 1; i >= 0; i--) {
+    const rg = get(rList, i);
+    rg.ttl -= f60;
+    if (rg.ttl <= 0) { rList.splice(i, 1); continue; }
+    const prog = 1 - (rg.ttl / rg.maxTtl);
+    const rad = rg.r + (rg.maxR - rg.r) * prog;
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, 1 - prog) * 0.65;
+    ctx.strokeStyle = rg.c;
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.arc(rg.x, rg.y, rad, 0, 6.28);
+    ctx.stroke();
+    ctx.restore();
+  }
+  for (let i = bList.length - 1; i >= 0; i--) {
+    const p = get(bList, i); p.x += p.vx * f60; p.y += p.vy * f60; p.vy += 0.3 * f60; p.ttl -= f60;
+    ctx.fillStyle = p.c; ctx.fillRect(p.x, p.y, 4, 4);
+    if (p.ttl <= 0) bList.splice(i, 1);
+  }
+  for (let i = tList.length - 1; i >= 0; i--) {
+    const f = get(tList, i); f.y -= 1.2 * f60; f.ttl -= f60;
+    ctx.font = 'bold 15px sans-serif'; ctx.fillStyle = f.c; ctx.textAlign = 'center'; ctx.fillText(f.txt, f.x, f.y);
+    if (f.ttl <= 0) tList.splice(i, 1);
+  }
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  requestAnimationFrame(tick);
+}
+</script>
+</body>
+</html>
