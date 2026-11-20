@@ -9,7 +9,7 @@ const PR_CONFIG = {
   items: {
     "1": [
       {
-        title: "小学生〜中1向け！イラストで覚える英単語ドリル",
+        title: "小学生～中1向け！イラストで覚える英単語ドリル",
         desc: "基礎単語を音声とイラストで「書く・読む」まで楽しく定着させたい方におすすめです。",
         amazonUrl: "https://link.amazon/B06SPTOxu",
         rakutenUrl: "https://hb.afl.rakuten.co.jp/ichiba/0b4452f0.ce6f9970.0b4452f1.76748351/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F17530942%2F&link_type=hybrid_url&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJoeWJyaWRfdXJsIiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MSwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9"
@@ -30,7 +30,7 @@ const PR_CONFIG = {
       },
       {
         title: "英検4級・3級 でる順パス単",
-        desc: "中学前半〜中2レベルの必須語彙を効率よくチェック！アプリ音声付きで通学中にも便利です。",
+        desc: "中学前半～中2レベルの必須語彙を効率よくチェック！アプリ音声付きで通学中にも便利です。",
         amazonUrl: "https://link.amazon/B01e7bwaA",
         rakutenUrl: "https://hb.afl.rakuten.co.jp/ichiba/0b4452f0.ce6f9970.0b4452f1.76748351/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18660700%2F&link_type=hybrid_url&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJoeWJyaWRfdXJsIiwic2l6ZSI6IjI0MHgyNDAiLCJuYW0iOjEsIm5hbXAiOiJyaWdodCIsImNvbSI6MSwiY29tcCI6ImRvd24iLCJwcmljZSI6MSwiYm9yIjoxLCJjb2wiOjEsImJidG4iOjEsInByb2QiOjAsImFtcCI6ZmFsc2V9"
       }
@@ -63,10 +63,7 @@ if (!window.WORDFIND_DB) {
 
 const SERIES_LIST = window.WORDFIND_DB.series;
 const WORDS_DB = window.WORDFIND_DB.words.map(([word, meaning, grade, seriesId]) => ({
-  word,
-  meaning,
-  grade,     // "1", "2", "3"
-  seriesId   // "chu1-1" etc.
+  word, meaning, grade, seriesId
 }));
 const WORDS_MAP = new Map(WORDS_DB.map(w => [w.word, w]));
 
@@ -81,14 +78,11 @@ const MARKER_COLORS = [
 ];
 
 // =========================================================
-// 2. HTML画面の自動生成（共通化）
+// 2. HTML画面の自動生成
 // =========================================================
 function buildSeriesSelectHtml() {
   const groups = { "1": [], "2": [], "3": [], "all": [] };
-  SERIES_LIST.forEach(s => {
-    if (groups[s.grade]) groups[s.grade].push(s);
-  });
-
+  SERIES_LIST.forEach(s => { if (groups[s.grade]) groups[s.grade].push(s); });
   const makeOpts = (arr) => arr.map(s =>
     `<option value="${s.file}" ${s.id === CURRENT_SERIES.id ? "selected" : ""}>${s.title}</option>`
   ).join("");
@@ -117,15 +111,15 @@ function renderAppShell() {
     <div class="app-container">
       <header>
         <div class="brand">
-          <div class="brand-icon">W</div>
+          <img src="https://32and1.com/logo.png" alt="ロゴ" class="brand-logo" onerror="this.style.display='none'">
           <div>
             <h1>${CURRENT_SERIES.gradeLabel}｜${CURRENT_SERIES.title}</h1>
-            <small>収録 ${poolCount}語（全シリーズ計 ${WORDS_DB.length}語・毎回ランダム出題）</small>
+            <small>収録 ${poolCount}語（全シリーズ計 ${WORDS_DB.length}語・毎回ランダム）</small>
           </div>
         </div>
         <div class="header-actions">
-          <div class="stat-pill" title="連続クリア回数">🔥 連勝: <span id="streakVal">0</span></div>
-          <div class="stat-pill" title="ハイスコア">👑 Best: <span id="bestScoreVal">0</span></div>
+          <div class="stat-pill" title="連続クリア回数">🔥 <span id="streakVal">0</span>連勝</div>
+          <div class="stat-pill" title="ハイスコア">👑 <span id="bestScoreVal">0</span></div>
           <button class="btn btn-accent" id="openDictBtn">📖 図鑑 (<span id="dictCountVal">0</span>/${WORDS_DB.length})</button>
           <button class="btn btn-icon" id="soundToggleBtn" title="効果音 ON/OFF">🔊</button>
           <button class="btn btn-icon" id="voiceToggleBtn" title="英語読み上げ ON/OFF">🗣️</button>
@@ -142,7 +136,7 @@ function renderAppShell() {
             <label>リスト表示</label>
             <select id="displayModeSelect">
               <option value="both">英語 ＋ 日本語</option>
-              <option value="quiz">日本語のみ（記憶クイズ 1.5倍）</option>
+              <option value="quiz">日本語のみ（1.5倍）</option>
             </select>
           </div>
           <div class="select-wrap">
@@ -156,12 +150,13 @@ function renderAppShell() {
           <div class="select-wrap">
             <label>ルール</label>
             <select id="ruleSelect">
-              <option value="relax">じっくり（時間制限なし）</option>
+              <option value="relax">じっくり（制限なし）</option>
               <option value="time">タイムアタック (90秒)</option>
             </select>
           </div>
         </div>
-        <button class="btn btn-primary" id="newGameBtn">🎲 新しい問題でスタート</button>
+        <!-- スタート前（待機中）は非表示にし、プレイ中のみ切り替えボタンとして表示 -->
+        <button class="btn btn-secondary" id="newGameBtn" style="display:none;">🔄 別の問題でやり直す</button>
       </div>
 
       <div class="main-grid">
@@ -181,12 +176,12 @@ function renderAppShell() {
             <div class="combo-badge" id="comboBadge">⚡ 2 COMBO!</div>
           </div>
 
-          <div class="preview-bar placeholder" id="previewBar">「スタート」を押してゲームを始めよう！</div>
+          <div class="preview-bar placeholder" id="previewBar">下の「ゲームスタート！」を押して始めよう！</div>
 
           <div class="board-wrapper" id="boardWrapper">
             <div class="board-inner" id="boardInner">
               <svg class="lines-svg" id="linesSvg"></svg>
-              <div class="grid" id="grid"></div>
+              <div class="grid size-10" id="grid"></div>
             </div>
             <div class="board-overlay active" id="boardOverlay">
               <div class="overlay-title" id="overlayTitle">準備はいいですか？</div>
@@ -197,7 +192,7 @@ function renderAppShell() {
 
           <div class="board-footer">
             <button class="btn btn-accent" id="hintBtn" disabled>💡 ヒント (残り <span id="hintCountVal">3</span>)</button>
-            <span style="font-size:0.78rem; color:var(--muted); font-weight:600;" id="directionInfo">方向: タテ・ヨコ・ナナメ</span>
+            <span style="font-size:0.74rem; color:var(--muted); font-weight:600;" id="directionInfo">方向: タテ・ヨコ・ナナメ</span>
           </div>
         </div>
 
@@ -339,8 +334,10 @@ let state = {
   rule: "relax",
   displayMode: "both",
   isDragging: false,
+  hasMovedMulti: false,
   startCell: null,
-  selectedCells: []
+  selectedCells: [],
+  tapStartCell: null
 };
 
 // =========================================================
@@ -398,7 +395,6 @@ function pickCandidateWords(count, maxLen) {
     (CURRENT_SERIES.id === "all" || w.seriesId === CURRENT_SERIES.id) &&
     w.word.length <= maxLen
   );
-  // 万一該当シリーズで短い単語が不足した場合のフォールバック
   if (pool.length < count) {
     pool = WORDS_DB.filter(w => w.word.length <= maxLen);
   }
@@ -548,7 +544,8 @@ function prepareIdleState() {
     elapsedSec: 0,
     remainingSec: 90,
     rule,
-    displayMode
+    displayMode,
+    tapStartCell: null
   };
 
   const dirLabels = {
@@ -565,10 +562,10 @@ function prepareIdleState() {
   updateHUD();
   showOverlay(
     `${CURRENT_SERIES.gradeLabel}｜${CURRENT_SERIES.title}`,
-    "準備ができたら「ゲームスタート」を押してください！",
+    "準備ができたら「ゲームスタート」を押してください！（なぞり・2回タップ両対応）",
     "▶ ゲームスタート！"
   );
-  resetPreview("「スタート」を押してゲームを始めよう！");
+  resetPreview("下の「ゲームスタート！」を押して始めよう！");
 }
 
 function startNewGame() {
@@ -596,8 +593,10 @@ function startNewGame() {
     rule,
     displayMode,
     isDragging: false,
+    hasMovedMulti: false,
     startCell: null,
-    selectedCells: []
+    selectedCells: [],
+    tapStartCell: null
   };
 
   hideOverlay();
@@ -605,7 +604,7 @@ function startNewGame() {
   renderWordList();
   renderLines();
   updateHUD();
-  resetPreview("文字をなぞって単語を探そう！");
+  resetPreview("なぞる か 最初→最後をタップ！");
   playTone(523, 0.08, "triangle", 0.12);
   state.timerId = setInterval(tickTimer, 1000);
 }
@@ -613,6 +612,8 @@ function startNewGame() {
 function togglePause() {
   if (state.phase === "playing") {
     state.phase = "paused";
+    state.tapStartCell = null;
+    renderTapAnchor();
     clearInterval(state.timerId);
     showOverlay("⏸ 一時停止中", "再開ボタンを押すとタイマーが再び動き出します。", "▶ ゲームを再開する");
     updateHUD();
@@ -665,6 +666,10 @@ function updateHUD() {
   pauseBtn.disabled = state.phase !== "playing" && state.phase !== "paused";
   pauseBtn.textContent = state.phase === "paused" ? "▶ 再開" : "⏸ 一時停止";
 
+  // 待機中は上の「別の問題でやり直す」ボタンを隠してスタートボタンの重複を防ぐ
+  const newGameBtn = document.getElementById("newGameBtn");
+  newGameBtn.style.display = state.phase === "idle" ? "none" : "inline-flex";
+
   const badge = document.getElementById("comboBadge");
   if (state.combo >= 2 && state.phase === "playing") {
     badge.textContent = `⚡ ${state.combo} COMBO!`;
@@ -681,9 +686,9 @@ function updateHUD() {
 function renderBoard() {
   const gridEl = document.getElementById("grid");
   gridEl.innerHTML = "";
+  gridEl.className = `grid size-${state.size}`;
   gridEl.style.gridTemplateColumns = `repeat(${state.size}, 1fr)`;
   gridEl.style.gridTemplateRows = `repeat(${state.size}, 1fr)`;
-  const fontSize = state.size === 8 ? "1.4rem" : state.size === 10 ? "1.15rem" : "0.96rem";
 
   for (let r = 0; r < state.size; r++) {
     for (let c = 0; c < state.size; c++) {
@@ -692,7 +697,6 @@ function renderBoard() {
       cell.dataset.r = r;
       cell.dataset.c = c;
       cell.textContent = state.grid[r][c];
-      cell.style.fontSize = fontSize;
       gridEl.appendChild(cell);
     }
   }
@@ -788,7 +792,7 @@ function renderLines(tempCells = []) {
 }
 
 // =========================================================
-// 7. Pointer Drag & 8-Direction Snap
+// 7. Pointer Drag + 2-Tap Hybrid Interaction
 // =========================================================
 function getGridCoordsFromPointer(clientX, clientY) {
   const rect = document.getElementById("boardInner").getBoundingClientRect();
@@ -818,6 +822,21 @@ function computeSnappedCells(startR, startC, relX, relY) {
   return cells;
 }
 
+function getLineBetweenCells(r0, c0, r1, c1) {
+  const dr = r1 - r0;
+  const dc = c1 - c0;
+  if (dr !== 0 && dc !== 0 && Math.abs(dr) !== Math.abs(dc)) return null;
+  const steps = Math.max(Math.abs(dr), Math.abs(dc));
+  if (steps === 0) return null;
+  const stepR = dr === 0 ? 0 : dr / Math.abs(dr);
+  const stepC = dc === 0 ? 0 : dc / Math.abs(dc);
+  const cells = [];
+  for (let i = 0; i <= steps; i++) {
+    cells.push([r0 + stepR * i, c0 + stepC * i]);
+  }
+  return cells;
+}
+
 function highlightSelectedCells(cells) {
   document.querySelectorAll(".cell.selected").forEach(el => el.classList.remove("selected"));
   cells.forEach(([r, c]) => {
@@ -826,13 +845,22 @@ function highlightSelectedCells(cells) {
   });
 }
 
+function renderTapAnchor() {
+  document.querySelectorAll(".cell.tap-anchor").forEach(el => el.classList.remove("tap-anchor"));
+  if (state.tapStartCell) {
+    const [r, c] = state.tapStartCell;
+    const el = document.querySelector(`.cell[data-r="${r}"][data-c="${c}"]`);
+    if (el) el.classList.add("tap-anchor");
+  }
+}
+
 function updatePreview(cells) {
   const bar = document.getElementById("previewBar");
   bar.classList.remove("placeholder");
   bar.innerHTML = cells.map(([r, c]) => state.grid[r][c]).join("");
 }
 
-function resetPreview(msg = "文字をなぞって単語を探そう！") {
+function resetPreview(msg = "なぞる か 最初→最後をタップ！") {
   const bar = document.getElementById("previewBar");
   if (bar.querySelector(".toast-msg")) return;
   bar.classList.add("placeholder");
@@ -844,7 +872,7 @@ function showToast(text, type = "toast-success") {
   bar.classList.remove("placeholder");
   bar.innerHTML = `<div class="toast-msg ${type}">${text}</div>`;
   setTimeout(() => {
-    if (!state.isDragging) { bar.innerHTML = ""; resetPreview(); }
+    if (!state.isDragging && !state.tapStartCell) { bar.innerHTML = ""; resetPreview(); }
   }, 1600);
 }
 
@@ -885,7 +913,7 @@ function checkSelection(cells) {
     const isNew = registerDiscovery(target.word);
     playSuccessSfx();
     speakWord(target.word);
-    showToast(`✨ ${target.word} (${target.meaning}) +${gained}pt${isNew ? " 🆕図鑑登録!" : ""}`, "toast-success");
+    showToast(`✨ ${target.word} (${target.meaning}) +${gained}pt${isNew ? " 🆕図鑑!" : ""}`, "toast-success");
     renderWordList();
     updateHUD();
 
@@ -943,6 +971,8 @@ function renderAffiliateBox() {
 
 function endGame(cleared) {
   state.phase = "gameover";
+  state.tapStartCell = null;
+  renderTapAnchor();
   clearInterval(state.timerId);
 
   if (cleared) {
@@ -1023,10 +1053,10 @@ function renderDictionary() {
     card.className = `dict-card ${isFound ? "" : "locked"}`;
     card.innerHTML = `
       <div style="min-width:0;">
-        <div style="font-weight:900; font-size:0.88rem; color:${isFound ? "var(--primary-dark)" : "var(--muted)"};">
+        <div style="font-weight:700; font-size:0.86rem; font-family:Verdana,sans-serif; color:${isFound ? "var(--primary-dark)" : "var(--muted)"};">
           ${isFound ? w.word : "???"}
         </div>
-        <div style="font-size:0.75rem; color:var(--muted);">${w.meaning}</div>
+        <div style="font-size:0.74rem; color:var(--muted);">${w.meaning}</div>
       </div>
       ${isFound ? `<button class="speak-btn" title="発音">🔊</button>` : `<span style="font-size:0.8rem;">🔒</span>`}
     `;
@@ -1084,13 +1114,14 @@ boardInner.addEventListener("pointerdown", (e) => {
   if (state.phase !== "playing") return;
   const { r, c } = getGridCoordsFromPointer(e.clientX, e.clientY);
   if (r < 0 || r >= state.size || c < 0 || c >= state.size) return;
+
   boardInner.setPointerCapture(e.pointerId);
   state.isDragging = true;
+  state.hasMovedMulti = false;
   state.startCell = [r, c];
   state.selectedCells = [[r, c]];
   highlightSelectedCells(state.selectedCells);
   renderLines(state.selectedCells);
-  updatePreview(state.selectedCells);
   playTone(330, 0.04, "sine", 0.08);
 });
 
@@ -1098,13 +1129,23 @@ boardInner.addEventListener("pointermove", (e) => {
   if (!state.isDragging || state.phase !== "playing") return;
   const { relX, relY } = getGridCoordsFromPointer(e.clientX, e.clientY);
   const newCells = computeSnappedCells(state.startCell[0], state.startCell[1], relX, relY);
+
+  if (newCells.length >= 2) {
+    state.hasMovedMulti = true;
+    if (state.tapStartCell) {
+      state.tapStartCell = null;
+      renderTapAnchor();
+    }
+  }
+
   const changed = newCells.length !== state.selectedCells.length ||
     newCells.some((cell, i) => cell[0] !== state.selectedCells[i][0] || cell[1] !== state.selectedCells[i][1]);
+
   if (changed) {
     state.selectedCells = newCells;
     highlightSelectedCells(newCells);
     renderLines(newCells);
-    updatePreview(newCells);
+    if (state.hasMovedMulti) updatePreview(newCells);
     playTone(330 + Math.min(newCells.length, 10) * 35, 0.04, "sine", 0.07);
   }
 });
@@ -1113,11 +1154,41 @@ function finishDrag() {
   if (!state.isDragging) return;
   state.isDragging = false;
   highlightSelectedCells([]);
-  if (state.selectedCells.length >= 2 && state.phase === "playing") checkSelection(state.selectedCells);
-  else resetPreview();
+
+  if (state.hasMovedMulti && state.selectedCells.length >= 2 && state.phase === "playing") {
+    state.tapStartCell = null;
+    renderTapAnchor();
+    checkSelection(state.selectedCells);
+  } else if (state.phase === "playing" && state.startCell) {
+    const [r, c] = state.startCell;
+    if (!state.tapStartCell) {
+      state.tapStartCell = [r, c];
+      renderTapAnchor();
+      resetPreview(`「${state.grid[r][c]}」を選択中 → 最後の文字をタップ！`);
+    } else if (state.tapStartCell[0] === r && state.tapStartCell[1] === c) {
+      state.tapStartCell = null;
+      renderTapAnchor();
+      resetPreview();
+    } else {
+      const line = getLineBetweenCells(state.tapStartCell[0], state.tapStartCell[1], r, c);
+      if (line) {
+        state.tapStartCell = null;
+        renderTapAnchor();
+        checkSelection(line);
+      } else {
+        state.tapStartCell = [r, c];
+        renderTapAnchor();
+        resetPreview(`「${state.grid[r][c]}」に変更 → 最後の文字をタップ！`);
+      }
+    }
+  } else {
+    resetPreview();
+  }
+
   state.selectedCells = [];
   renderLines();
 }
+
 boardInner.addEventListener("pointerup", finishDrag);
 boardInner.addEventListener("pointercancel", finishDrag);
 
