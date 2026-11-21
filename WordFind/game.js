@@ -52,6 +52,8 @@ const PR_CONFIG = {
   }
 };
 
+const LOGO_URL = "https://32and1.com/logo.png";
+
 // =========================================================
 // 1. 初期化チェック & DB読み込み
 // =========================================================
@@ -111,7 +113,7 @@ function renderAppShell() {
     <div class="app-container">
       <header>
         <div class="brand">
-          <img src="https://32and1.com/logo.png" alt="ロゴ" class="brand-logo" onerror="this.style.display='none'">
+          <img src="${LOGO_URL}" alt="ロゴ" class="brand-logo" onerror="this.style.display='none'">
           <div>
             <h1>${CURRENT_SERIES.gradeLabel}｜${CURRENT_SERIES.title}</h1>
             <small>収録 ${poolCount}語（全シリーズ計 ${WORDS_DB.length}語・毎回ランダム）</small>
@@ -121,6 +123,7 @@ function renderAppShell() {
           <div class="stat-pill" title="連続クリア回数">🔥 <span id="streakVal">0</span>連勝</div>
           <div class="stat-pill" title="ハイスコア">👑 <span id="bestScoreVal">0</span></div>
           <button class="btn btn-accent" id="openDictBtn">📖 図鑑 (<span id="dictCountVal">0</span>/${WORDS_DB.length})</button>
+          <button class="btn btn-secondary" id="openTutorialBtn" title="遊び方を見る">❓ 遊び方</button>
           <button class="btn btn-icon" id="soundToggleBtn" title="効果音 ON/OFF">🔊</button>
           <button class="btn btn-icon" id="voiceToggleBtn" title="英語読み上げ ON/OFF">🗣️</button>
         </div>
@@ -155,7 +158,6 @@ function renderAppShell() {
             </select>
           </div>
         </div>
-        <!-- スタート前（待機中）は非表示にし、プレイ中のみ切り替えボタンとして表示 -->
         <button class="btn btn-secondary" id="newGameBtn" style="display:none;">🔄 別の問題でやり直す</button>
       </div>
 
@@ -184,6 +186,7 @@ function renderAppShell() {
               <div class="grid size-10" id="grid"></div>
             </div>
             <div class="board-overlay active" id="boardOverlay">
+              <img src="${LOGO_URL}" alt="ロゴ" class="overlay-logo" id="overlayLogo" onerror="this.style.display='none'">
               <div class="overlay-title" id="overlayTitle">準備はいいですか？</div>
               <div class="overlay-desc" id="overlayDesc"></div>
               <button class="btn btn-primary btn-lg" id="overlayStartBtn">▶ ゲームスタート！</button>
@@ -219,6 +222,30 @@ function renderAppShell() {
       </div>
     </div>
 
+    <!-- チュートリアルモーダル（スキップ可能） -->
+    <div class="modal-backdrop" id="tutorialModal">
+      <div class="modal tutorial-modal">
+        <div class="modal-header">
+          <h3>🎮 かんたん遊び方ガイド</h3>
+          <button class="btn btn-ghost" id="tutCloseX" style="padding:4px 8px;">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="tut-dots" id="tutDots"></div>
+          <div class="tut-visual" id="tutVisual"></div>
+          <h4 class="tut-step-title" id="tutTitle"></h4>
+          <p class="tut-step-desc" id="tutDesc"></p>
+        </div>
+        <div class="modal-footer" style="justify-content:space-between;">
+          <button class="btn btn-ghost" id="tutSkipBtn">スキップ</button>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-secondary" id="tutPrevBtn" style="display:none;">← 戻る</button>
+            <button class="btn btn-primary" id="tutNextBtn">次へ →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- リザルトモーダル -->
     <div class="modal-backdrop" id="resultModal">
       <div class="modal">
         <div class="modal-header">
@@ -227,6 +254,7 @@ function renderAppShell() {
         </div>
         <div class="modal-body">
           <div class="result-banner">
+            <img src="${LOGO_URL}" alt="ロゴ" class="result-logo" onerror="this.style.display='none'">
             <div style="font-size:0.85rem; color:var(--muted); font-weight:700;">TOTAL SCORE</div>
             <div class="result-score" id="finalScoreVal">0</div>
             <div id="resultSubText" style="font-size:0.85rem; font-weight:700; color:#059669; margin-top:4px;"></div>
@@ -255,6 +283,7 @@ function renderAppShell() {
       </div>
     </div>
 
+    <!-- 図鑑モーダル -->
     <div class="modal-backdrop" id="dictModal">
       <div class="modal">
         <div class="modal-header">
@@ -301,7 +330,8 @@ let saveData = {
   bestScore: 0,
   streak: 0,
   soundOn: true,
-  voiceOn: true
+  voiceOn: true,
+  tutorialDone: false
 };
 
 function loadSave() {
@@ -341,7 +371,90 @@ let state = {
 };
 
 // =========================================================
-// 4. Audio & Speech
+// 4. Tutorial Logic (3ステップ・スキップ可能)
+// =========================================================
+const TUTORIAL_STEPS = [
+  {
+    title: "① リストの英単語を盤面から探そう！",
+    desc: "「探す単語リスト」にある英単語が、タテ・ヨコ・ナナメに隠れています。<br>文字を<strong>指でなぞる</strong>か、<strong>「最初の文字 → 最後の文字」を2回タップ</strong>して見つけよう！",
+    visual: `
+      <div class="tut-mini-grid">
+        <div class="tut-mini-cell hl">A</div>
+        <div class="tut-mini-cell hl">P</div>
+        <div class="tut-mini-cell hl">P</div>
+        <div class="tut-mini-cell hl">L</div>
+        <div class="tut-mini-cell hl">E</div>
+        <div class="tut-mini-cell">X</div>
+        <div class="tut-mini-cell">C</div>
+        <div class="tut-mini-cell">R</div>
+        <div class="tut-mini-cell">M</div>
+        <div class="tut-mini-cell">T</div>
+      </div>
+      <div style="margin-top:10px;font-size:0.78rem;font-weight:700;color:#059669;">🍎 APPLE (りんご) 発見！</div>
+    `
+  },
+  {
+    title: "② 2つのモード＆困った時のヒント！",
+    desc: "慣れてきたら「リスト表示」を<strong>「日本語のみ（1.5倍）」</strong>にすると記憶力クイズに！<br>どうしても見つからない時は<strong>「💡ヒント」</strong>を押すと先頭の文字が光ります。",
+    visual: `
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+        <div style="background:white;border:1.5px solid #e2e8f0;border-radius:10px;padding:8px 12px;text-align:left;">
+          <div style="font-size:0.78rem;font-weight:800;color:#4f46e5;">🔑 ? (5文字)</div>
+          <div style="font-size:0.75rem;color:#64748b;">りんご → APPLEを探そう！</div>
+        </div>
+        <div style="background:#fef3c7;border:1.5px solid #f59e0b;border-radius:10px;padding:8px 12px;font-weight:800;font-size:0.85rem;color:#b45309;display:flex;align-items:center;">
+          💡 1文字目が光る！
+        </div>
+      </div>
+    `
+  },
+  {
+    title: "③ 隠しボーナス＆全540語図鑑！",
+    desc: "リストにない<strong>秘密の単語</strong>を見つけてもボーナスGET！<br>見つけた単語は英語の発音付きで<strong>「📖図鑑」</strong>に登録されます。全シリーズ制覇を目指そう！",
+    visual: `
+      <div style="display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;">
+        <div style="background:linear-gradient(135deg,#fffbeb,#fdf2f8);border:1.5px dashed #f59e0b;border-radius:10px;padding:8px 12px;font-size:0.8rem;font-weight:800;color:#b45309;">
+          🌟 隠し単語 +200pt
+        </div>
+        <div style="background:#eef2ff;border:1.5px solid #4f46e5;border-radius:10px;padding:8px 12px;font-size:0.8rem;font-weight:800;color:#4f46e5;">
+          📖 図鑑 ＆ 🔊 発音
+        </div>
+      </div>
+    `
+  }
+];
+
+let tutStep = 0;
+
+function renderTutorial() {
+  const step = TUTORIAL_STEPS[tutStep];
+  document.getElementById("tutDots").innerHTML = TUTORIAL_STEPS.map((_, i) =>
+    `<div class="tut-dot ${i === tutStep ? "active" : ""}"></div>`
+  ).join("");
+  document.getElementById("tutVisual").innerHTML = step.visual;
+  document.getElementById("tutTitle").textContent = step.title;
+  document.getElementById("tutDesc").innerHTML = step.desc;
+
+  document.getElementById("tutPrevBtn").style.display = tutStep > 0 ? "inline-flex" : "none";
+  document.getElementById("tutSkipBtn").style.visibility = tutStep < TUTORIAL_STEPS.length - 1 ? "visible" : "hidden";
+  document.getElementById("tutNextBtn").textContent =
+    tutStep === TUTORIAL_STEPS.length - 1 ? "さっそく遊ぶ！ 🚀" : "次へ →";
+}
+
+function openTutorial() {
+  tutStep = 0;
+  renderTutorial();
+  openModal("tutorialModal");
+}
+
+function finishTutorial() {
+  saveData.tutorialDone = true;
+  writeSave();
+  closeModal("tutorialModal");
+}
+
+// =========================================================
+// 5. Audio & Speech
 // =========================================================
 let audioCtx = null;
 function playTone(freq, duration = 0.08, type = "sine", vol = 0.12) {
@@ -388,7 +501,7 @@ function speakWord(word) {
 }
 
 // =========================================================
-// 5. Smart Word Selection & Board Generator
+// 6. Smart Word Selection & Board Generator
 // =========================================================
 function pickCandidateWords(count, maxLen) {
   let pool = WORDS_DB.filter(w =>
@@ -517,7 +630,7 @@ function generateBoard(difficulty) {
 }
 
 // =========================================================
-// 6. Game Lifecycle & Rendering
+// 7. Game Lifecycle & Rendering
 // =========================================================
 function prepareIdleState() {
   clearInterval(state.timerId);
@@ -562,8 +675,9 @@ function prepareIdleState() {
   updateHUD();
   showOverlay(
     `${CURRENT_SERIES.gradeLabel}｜${CURRENT_SERIES.title}`,
-    "準備ができたら「ゲームスタート」を押してください！（なぞり・2回タップ両対応）",
-    "▶ ゲームスタート！"
+    "準備ができたら「ゲームスタート」を押してください！",
+    "▶ ゲームスタート！",
+    true
   );
   resetPreview("下の「ゲームスタート！」を押して始めよう！");
 }
@@ -615,7 +729,7 @@ function togglePause() {
     state.tapStartCell = null;
     renderTapAnchor();
     clearInterval(state.timerId);
-    showOverlay("⏸ 一時停止中", "再開ボタンを押すとタイマーが再び動き出します。", "▶ ゲームを再開する");
+    showOverlay("⏸ 一時停止中", "再開ボタンを押すとタイマーが再び動き出します。", "▶ ゲームを再開する", false);
     updateHUD();
   } else if (state.phase === "paused") {
     state.phase = "playing";
@@ -625,7 +739,9 @@ function togglePause() {
   }
 }
 
-function showOverlay(title, desc, btnText) {
+function showOverlay(title, desc, btnText, showLogo = true) {
+  const logoEl = document.getElementById("overlayLogo");
+  if (logoEl) logoEl.style.display = showLogo ? "block" : "none";
   document.getElementById("overlayTitle").textContent = title;
   document.getElementById("overlayDesc").textContent = desc;
   document.getElementById("overlayStartBtn").textContent = btnText;
@@ -666,7 +782,6 @@ function updateHUD() {
   pauseBtn.disabled = state.phase !== "playing" && state.phase !== "paused";
   pauseBtn.textContent = state.phase === "paused" ? "▶ 再開" : "⏸ 一時停止";
 
-  // 待機中は上の「別の問題でやり直す」ボタンを隠してスタートボタンの重複を防ぐ
   const newGameBtn = document.getElementById("newGameBtn");
   newGameBtn.style.display = state.phase === "idle" ? "none" : "inline-flex";
 
@@ -792,7 +907,7 @@ function renderLines(tempCells = []) {
 }
 
 // =========================================================
-// 7. Pointer Drag + 2-Tap Hybrid Interaction
+// 8. Pointer Drag + 2-Tap Hybrid Interaction
 // =========================================================
 function getGridCoordsFromPointer(clientX, clientY) {
   const rect = document.getElementById("boardInner").getBoundingClientRect();
@@ -823,17 +938,14 @@ function computeSnappedCells(startR, startC, relX, relY) {
 }
 
 function getLineBetweenCells(r0, c0, r1, c1) {
-  const dr = r1 - r0;
-  const dc = c1 - c0;
+  const dr = r1 - r0, dc = c1 - c0;
   if (dr !== 0 && dc !== 0 && Math.abs(dr) !== Math.abs(dc)) return null;
   const steps = Math.max(Math.abs(dr), Math.abs(dc));
   if (steps === 0) return null;
   const stepR = dr === 0 ? 0 : dr / Math.abs(dr);
   const stepC = dc === 0 ? 0 : dc / Math.abs(dc);
   const cells = [];
-  for (let i = 0; i <= steps; i++) {
-    cells.push([r0 + stepR * i, c0 + stepC * i]);
-  }
+  for (let i = 0; i <= steps; i++) cells.push([r0 + stepR * i, c0 + stepC * i]);
   return cells;
 }
 
@@ -877,7 +989,7 @@ function showToast(text, type = "toast-success") {
 }
 
 // =========================================================
-// 8. Validation, EndGame, PR Box & Dictionary
+// 9. Validation, EndGame, PR Box & Dictionary
 // =========================================================
 function registerDiscovery(word) {
   if (!saveData.discovered.includes(word)) {
@@ -1103,7 +1215,7 @@ function launchConfetti() {
 }
 
 // =========================================================
-// 9. Init & Event Binding
+// 10. Init & Event Binding
 // =========================================================
 loadSave();
 renderAppShell();
@@ -1258,4 +1370,25 @@ document.getElementById("voiceToggleBtn").addEventListener("click", () => {
   saveData.voiceOn = !saveData.voiceOn; writeSave(); syncAudioButtons();
 });
 
+// チュートリアルのボタンイベント
+document.getElementById("openTutorialBtn").addEventListener("click", openTutorial);
+document.getElementById("tutSkipBtn").addEventListener("click", finishTutorial);
+document.getElementById("tutCloseX").addEventListener("click", finishTutorial);
+document.getElementById("tutPrevBtn").addEventListener("click", () => {
+  if (tutStep > 0) { tutStep--; renderTutorial(); }
+});
+document.getElementById("tutNextBtn").addEventListener("click", () => {
+  if (tutStep < TUTORIAL_STEPS.length - 1) {
+    tutStep++;
+    renderTutorial();
+  } else {
+    finishTutorial();
+  }
+});
+
 prepareIdleState();
+
+// 初回アクセス時のみチュートリアルを表示
+if (!saveData.tutorialDone) {
+  openTutorial();
+}
