@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>GRAMMAR QUEST｜中3英語 3学期（学年末・卒業テスト＆入試総仕上げ）マスター</title>
+<style>
+  :root{--bg:#0f172a;--bg-card:#1e293b;--bg-card2:#283548;--text:#f8fafc;--text-muted:#94a3b8;--primary:#38bdf8;--primary-dark:#0284c7;--accent:#a855f7;--success:#22c55e;--warning:#f59e0b;--danger:#ef4444;--border:#334155;--radius:16px}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans','Meiryo',system-ui,sans-serif;background:radial-gradient(circle at top right,#1e1b4b,var(--bg) 60%);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center}
+  .container{width:100%;max-width:860px;padding:16px;flex:1;display:flex;flex-direction:column}
+  header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(30,41,59,.9);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:14px;gap:12px;flex-wrap:wrap}
+  .logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:1.08rem;letter-spacing:.4px;cursor:pointer}
+  .site-logo{height:60px;width:auto;max-width:240px;object-fit:contain;border-radius:10px;background:rgba(255,255,255,.08);padding:4px 8px}
+  .logo-text-wrap{display:flex;flex-direction:column;gap:3px}
+  .logo span.badge{background:linear-gradient(135deg,var(--primary),var(--accent));padding:2px 8px;border-radius:7px;font-size:.7rem;color:#fff;width:fit-content}
+  .hud{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  @media(max-width:640px){header{justify-content:center}.logo,.hud{width:100%;justify-content:center}}
+  .pill{background:var(--bg);border:1px solid var(--border);padding:5px 10px;border-radius:999px;font-size:.8rem;font-weight:700;display:flex;align-items:center;gap:4px}
+  .pill.xp{color:#fde047}.pill.combo{color:#fb923c}
+  .icon-btn{background:var(--bg-card2);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:6px 9px;cursor:pointer;font-size:.8rem;font-weight:600;transition:transform .1s,background .2s}
+  .icon-btn:hover{background:#334155}.icon-btn:active{transform:scale(.95)}
+  .screen{display:none;animation:fadeIn .25s ease}.screen.active{display:flex;flex-direction:column;gap:14px}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:0 10px 25px rgba(0,0,0,.25)}
+  .hero{text-align:center;padding:24px 20px;background:linear-gradient(145deg,rgba(56,189,248,.12),rgba(168,85,247,.12));border:1px solid rgba(56,189,248,.3)}
+  .hero h1{margin:0 0 8px;font-size:1.65rem;background:linear-gradient(90deg,#38bdf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .hero p{margin:0 auto 14px;color:var(--text-muted);max-width:660px;line-height:1.6;font-size:.93rem}
+  .stat-chips{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .stat-chip{background:rgba(15,23,42,.7);border:1px solid rgba(56,189,248,.3);padding:4px 10px;border-radius:999px;font-size:.78rem;color:#bae6fd;font-weight:700}
+  .btn{border:none;border-radius:12px;padding:13px 20px;font-size:.96rem;font-weight:700;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;gap:8px;color:#fff;text-decoration:none}
+  .btn:active{transform:scale(.97)}
+  .btn-primary{background:linear-gradient(135deg,var(--primary-dark),var(--accent));box-shadow:0 4px 15px rgba(56,189,248,.3)}.btn-primary:hover{filter:brightness(1.1)}
+  .btn-secondary{background:var(--bg-card2);border:1px solid var(--border);color:var(--text)}.btn-secondary:hover{background:#334155}
+  .btn-pr{background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 4px 14px rgba(16,185,129,.28)}.btn-pr:hover{filter:brightness(1.08)}
+  .btn-sm{padding:8px 12px;font-size:.84rem;border-radius:9px}
+  .section-note{font-size:.84rem;color:var(--text-muted);margin:4px 0 12px;line-height:1.5}
+  .mode-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+  .mode-card{background:var(--bg-card2);border:1px solid var(--border);border-radius:14px;padding:15px;cursor:pointer;transition:transform .15s,border-color .2s;text-align:left;display:flex;flex-direction:column;gap:6px}
+  .mode-card:hover{transform:translateY(-2px);border-color:var(--primary)}
+  .mode-card.featured{grid-column:1/-1;background:linear-gradient(135deg,rgba(245,158,11,.14),rgba(56,189,248,.1));border:1px solid rgba(245,158,11,.45)}
+  .mode-card.featured:hover{border-color:var(--warning)}
+  .step-tag{display:inline-block;width:fit-content;font-size:.7rem;font-weight:800;padding:2px 7px;border-radius:6px;background:rgba(56,189,248,.16);color:#7dd3fc}
+  .step-tag.warn{background:rgba(245,158,11,.22);color:#fcd34d}
+  .mode-card h3{margin:2px 0;font-size:1rem;display:flex;align-items:center;gap:6px}
+  .mode-card p{margin:0;font-size:.82rem;color:var(--text-muted);line-height:1.5}
+  .pr-card{background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(56,189,248,.1));border:1px solid rgba(16,185,129,.4);border-radius:16px;padding:18px;text-align:left;display:flex;flex-direction:column;gap:10px}
+  .pr-header{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .pr-badge{background:rgba(148,163,184,.2);color:#cbd5e1;font-size:.7rem;font-weight:700;padding:2px 7px;border-radius:5px;border:1px solid rgba(148,163,184,.3)}
+  .pr-tag{font-size:.78rem;font-weight:800;color:#34d399}
+  .pr-body{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .pr-title{margin:0 0 4px;font-size:1.04rem;font-weight:800;color:#f8fafc;line-height:1.4}
+  .pr-desc{margin:0;font-size:.85rem;color:#cbd5e1;line-height:1.55}
+  .pr-note{font-size:.73rem;color:var(--text-muted);margin:2px 0 0;line-height:1.45}
+  .site-footer{margin-top:20px;padding:12px 10px 6px;border-top:1px solid var(--border);text-align:center;font-size:.76rem;color:var(--text-muted);line-height:1.6}
+  .unit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+  .unit-item{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;cursor:pointer;transition:border-color .2s,transform .1s;display:flex;flex-direction:column;gap:6px}
+  .unit-item:hover{border-color:var(--primary);transform:translateY(-2px)}
+  .unit-top{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--text-muted)}
+  .unit-title{font-weight:700;font-size:.94rem}
+  .bar-bg{height:7px;background:#1e293b;border-radius:99px;overflow:hidden}.bar-fill{height:100%;border-radius:99px;transition:width .4s ease}
+  .tag{font-size:.72rem;padding:2px 7px;border-radius:6px;font-weight:700}
+  .tag-master{background:rgba(34,197,94,.2);color:#4ade80}.tag-weak{background:rgba(239,68,68,.2);color:#f87171}.tag-mid{background:rgba(245,158,11,.2);color:#fbbf24}.tag-new{background:rgba(148,163,184,.2);color:#cbd5e1}
+  .hint-bar{display:flex;align-items:center;gap:10px;background:linear-gradient(90deg,rgba(56,189,248,.1),rgba(168,85,247,.08));border:1px solid rgba(56,189,248,.32);border-radius:14px;padding:10px 14px}
+  .hint-icon{width:34px;height:34px;border-radius:10px;background:rgba(56,189,248,.18);border:1px solid rgba(56,189,248,.4);display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0}
+  .hint-msg{font-size:.88rem;line-height:1.45}.hint-msg strong{color:var(--primary)}
+  .q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:.82rem;color:var(--text-muted);gap:8px;flex-wrap:wrap}
+  .q-type-badge{background:rgba(168,85,247,.2);color:#d8b4fe;padding:3px 9px;border-radius:7px;font-weight:700}
+  .q-gen-badge{background:rgba(56,189,248,.16);color:#7dd3fc;padding:2px 7px;border-radius:6px;font-size:.72rem;font-weight:700;margin-left:6px}
+  .progress-wrap{height:8px;background:var(--bg);border-radius:99px;overflow:hidden;margin-bottom:14px}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .3s ease}
+  .q-jp{font-size:1.02rem;color:#cbd5e1;margin-bottom:8px;font-weight:600}
+  .q-en-box{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:16px;font-size:1.2rem;font-weight:700;line-height:1.5;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}
+  .speak-btn{background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.4);color:var(--primary);border-radius:10px;padding:8px 11px;cursor:pointer;font-size:.95rem;flex-shrink:0}
+  .speak-btn:hover{background:rgba(56,189,248,.28)}
+  .opts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .opt-btn{background:var(--bg-card2);border:2px solid var(--border);color:var(--text);border-radius:12px;padding:14px 16px;font-size:1.02rem;font-weight:700;cursor:pointer;text-align:left;transition:all .15s;display:flex;align-items:center;gap:10px}
+  .opt-btn:hover:not(:disabled){border-color:var(--primary);background:#334155}
+  .opt-btn.correct{border-color:var(--success);background:rgba(34,197,94,.2);color:#86efac}
+  .opt-btn.wrong{border-color:var(--danger);background:rgba(239,68,68,.2);color:#fca5a5}
+  .opt-num{width:26px;height:26px;border-radius:7px;background:var(--bg);display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--text-muted);flex-shrink:0}
+  .sort-zone{min-height:60px;background:var(--bg);border:2px dashed var(--border);border-radius:12px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+  .word-bank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .word-chip{background:var(--bg-card2);border:1px solid #475569;color:var(--text);padding:9px 14px;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;user-select:none}
+  .word-chip:hover{background:#3b4c66}.word-chip.used{opacity:.28;pointer-events:none}.word-chip.placed{background:rgba(56,189,248,.2);border-color:var(--primary)}
+  .input-wrap{display:flex;flex-direction:column;gap:10px}
+  .text-input,.select-input{width:100%;background:var(--bg);border:2px solid var(--border);color:var(--text);border-radius:12px;padding:12px 14px;font-size:1.05rem;font-weight:700;outline:none}
+  .text-input:focus,.select-input:focus{border-color:var(--primary)}
+  .helper-keys{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .key-chip{background:var(--bg-card2);border:1px solid var(--border);color:var(--text-muted);padding:5px 10px;border-radius:8px;font-size:.85rem;cursor:pointer}
+  .seg-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .seg-btn{background:var(--bg);border:2px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-size:1.08rem;font-weight:700;cursor:pointer}
+  .seg-btn.selected{border-color:var(--warning);background:rgba(245,158,11,.2)}.seg-btn.correct{border-color:var(--success);background:rgba(34,197,94,.2)}.seg-btn.wrong{border-color:var(--danger);background:rgba(239,68,68,.2)}
+  .feedback{margin-top:14px;padding:14px 16px;border-radius:12px;display:none;animation:fadeIn .2s ease}.feedback.show{display:block}
+  .feedback.ok{background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.5)}.feedback.ng{background:rgba(239,68,68,.14);border:1px solid rgba(239,68,68,.5)}
+  .feedback-title{font-weight:800;font-size:1.05rem;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
+  .feedback-exp{font-size:.9rem;line-height:1.55;color:#e2e8f0;margin-bottom:12px}
+  .modal-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.84);display:none;align-items:center;justify-content:center;padding:16px;z-index:100}.modal-backdrop.open{display:flex}
+  .modal{background:var(--bg-card);border:1px solid var(--primary);border-radius:18px;max-width:560px;width:100%;padding:22px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,.5);animation:popIn .22s ease}
+  @keyframes popIn{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+  .tut-step-dots{display:flex;gap:6px;justify-content:center;margin:14px 0}
+  .tut-dot{width:9px;height:9px;border-radius:50%;background:var(--border);transition:all .2s}.tut-dot.active{background:var(--primary);width:22px;border-radius:99px}
+  .tut-box{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:16px;line-height:1.6;font-size:.93rem;color:#e2e8f0}
+  .tut-list{margin:8px 0 0;padding-left:18px}.tut-list li{margin-bottom:6px}
+  .report-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center}
+  @media(max-width:640px){.report-grid{grid-template-columns:1fr}}
+  .radar-box{display:flex;justify-content:center;align-items:center}
+  .cheat-sec{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+  .cheat-sec h4{margin:0 0 6px;color:var(--primary);font-size:.98rem}.cheat-sec p{margin:0;font-size:.87rem;line-height:1.55;color:#cbd5e1}
+  .form-table{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:6px;margin-top:8px}
+  .form-pill{background:var(--bg-card2);border:1px solid var(--border);border-radius:8px;padding:6px 8px;font-size:.79rem;line-height:1.35}
+  .form-pill b{color:#fde047}
+  code{background:#334155;padding:2px 6px;border-radius:5px;font-family:monospace;color:#fde047}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="logo" onclick="goHome()">
+      <img src="https://32and1.com/logo.png" alt="Logo" class="site-logo" onerror="this.style.display='none'">
+      <div class="logo-text-wrap"><span>GRAMMAR QUEST</span><span class="badge">中3・3学期</span></div>
+    </div>
+    <div class="hud">
+          <div class="pill xp" title="正解するとたまる経験値">✨ <span id="hud-xp">0</span> XP</div>
+          <div class="pill combo" title="連続正解数">🔥 <span id="hud-combo">0</span></div>
+          <a href="index.html" class="icon-btn" style="text-decoration:none;">🏠 一覧</a>
+          <button class="icon-btn" onclick="openTutorial(0)">❓ 使い方</button>
+          <button class="icon-btn" onclick="openVoiceSettings()">🎙 音声</button>
+          <button class="icon-btn" onclick="toggleSound()" id="btn-sound">🔊 ON</button>
+          <button class="icon-btn" onclick="openCheatSheet()">📖 まとめ</button>
+        </div>
+  </header>
+
+  <section id="screen-home" class="screen active">
+    <div class="card hero">
+      <h1>中3英語 3学期（学年末・卒業テスト＆入試総仕上げ）</h1>
+      <p>中学英語3年間の総決算！「知覚動詞・使役動詞（原形不定詞）」「付加疑問文・否定疑問文」「感嘆文・不可算名詞」「so ~ that ⇔ too ~ to 等の重要連語・書き換え」に加え、分詞・関係代名詞・仮定法の総復習、対話表現＆自由英作文テンプレートまで完全網羅！<br>毎回主語・動詞・状況が自動生成されるため、丸暗記を防いで本番で通用する実力を鍛えます。</p>
+      <div class="stat-chips">
+        <span class="stat-chip">⚡ 文法生成 15,000通り以上</span>
+        <span class="stat-chip">🔤 必須単語・熟語 240語×4パターン</span>
+        <span class="stat-chip">🔄 総仕上げ 180変化道場</span>
+      </div>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="startDiagnostic()">🔍 まずは実力アナライズ診断（16問）</button>
+        <button class="btn btn-secondary" id="btn-continue-adaptive" onclick="startAdaptiveDrill()" style="display:none;">🚀 弱点攻略ドリルを続ける</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin:0; font-size:1.05rem;">🎮 学習メニュー（目的に合わせて選ぼう）</h3>
+      <p class="section-note">まずは上の「実力アナライズ診断」がおすすめ！3学期の新出文法と入試総復習のどこが弱点かを分析します。</p>
+      <div class="mode-grid">
+        <div class="mode-card" onclick="startAdaptiveDrill()"><span class="step-tag">STEP 2・弱点集中</span><h3>🎯 おまかせ弱点ドリル</h3><p>苦手な単元から毎回違う問題パターンで出題。3連続正解で次の単元へ自動スキップ！</p></div>
+        <div class="mode-card" onclick="openVocabSelector()"><span class="step-tag">単語・熟語・英作 240語</span><h3>🔤 3学期＆入試 必須単語・熟語クイズ</h3><p>so ~ that / look forward to / information / society / 自由英作フレーズ等240語を4パターンで特訓！</p></div>
+        <div class="mode-card" onclick="startSurvivalTest()"><span class="step-tag">STEP 3・仕上げ</span><h3>🏆 学年末・卒業テスト模擬（15問）</h3><p>3学期＆中学3年間の全範囲からランダム15問を出題。毎回違う問題で本番前の実力試し！</p></div>
+        <div class="mode-card" onclick="openCheatSheet()"><span class="step-tag">テスト直前確認</span><h3>📖 10秒まとめノート</h3><p>知覚動詞、否定疑問文のYes/No、WhatとHowの感嘆文、書き換え公式・自由英作の型を即確認。</p></div>
+        <div class="mode-card featured" onclick="openFormSelector()"><span class="step-tag warn">入試・卒業テスト生命線・全180変化完全網羅</span><h3>🔄 原形不定詞・付加疑問・感嘆・書き換え＆動詞 180変化道場</h3><p>知覚/使役動詞の「原形 vs ~ing vs to不定詞」（45問）＋ 付加疑問タグ＆感嘆文What/How＆否定疑問（45問）＋ 書き換え＆不可算・比較（45問）＋ 入試必出不規則動詞総復習（45問）の全180変化を完全網羅！</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <div><h3 style="margin:0; font-size:1.05rem;">🗺 単元別マスター状況</h3><p class="section-note" style="margin:2px 0 10px;">各単元の理解度ゲージです。カードを直接タップするとその単元だけ集中特訓（10問）ができます。</p></div>
+        <button class="btn btn-secondary btn-sm" onclick="resetProgress()">🗑 データリセット</button>
+      </div>
+      <div id="unit-map" class="unit-grid"></div>
+    </div>
+  </section>
+
+  <section id="screen-quiz" class="screen">
+    <div class="hint-bar"><div class="hint-icon">💡</div><div class="hint-msg" id="hint-msg">ヒント：迷ったら下の「ヒントを見る」を押してね。</div></div>
+    <div class="card">
+      <div class="q-meta">
+        <div><span class="q-type-badge" id="q-mode-label">実力アナライズ</span><span id="q-unit-label" style="margin-left:6px; font-weight:700;">Unit 1</span><span class="q-gen-badge" id="q-source-badge">⚡ランダム生成</span></div>
+        <div>問題 <span id="q-num">1</span> / <span id="q-total">16</span></div>
+      </div>
+      <div class="progress-wrap"><div class="progress-fill" id="q-progress" style="width:0%"></div></div>
+      <div class="q-jp" id="q-jp">日本語訳</div>
+      <div class="q-en-box"><span id="q-en">Question text</span><button class="speak-btn" onclick="speakCurrent()" title="音声を聞く">🔊 発音</button></div>
+      <div id="q-interact"></div>
+      <div id="feedback" class="feedback">
+        <div class="feedback-title"><span id="fb-status">⭕ 正解！</span><button class="btn btn-secondary btn-sm" onclick="speakAnswer()">🔊 正しい英文を聞く</button></div>
+        <div class="feedback-exp" id="fb-exp"></div>
+        <button class="btn btn-primary" style="width:100%;" id="btn-next" onclick="nextQuestion()">次の問題へ ➡</button>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <button class="btn btn-secondary btn-sm" onclick="goHome()">🏠 ホームに戻る</button>
+      <button class="btn btn-secondary btn-sm" id="btn-hint" onclick="showHint()">💡 ヒントを見る</button>
+    </div>
+  </section>
+
+  <section id="screen-report" class="screen">
+    <div class="card">
+      <h2 style="margin:0 0 6px;">📊 実力アナライズ完了！</h2>
+      <p style="margin:0 0 16px; color:var(--text-muted); font-size:0.9rem;" id="report-summary"></p>
+      <div class="report-grid"><div class="radar-box"><svg id="radar-svg" width="280" height="280" viewBox="0 0 280 280"></svg></div><div id="report-list" style="display:flex; flex-direction:column; gap:8px;"></div></div>
+      <div style="display:flex; gap:10px; margin-top:20px; flex-wrap:wrap;">
+        <button class="btn btn-primary" style="flex:1;" onclick="startAdaptiveDrill()">🚀 弱点克服ドリルをスタート！</button>
+        <button class="btn btn-secondary" onclick="startDiagnostic()">🔄 別問題で再診断</button>
+        <button class="btn btn-secondary" onclick="goHome()">🏠 マップ</button>
+      </div>
+    </div>
+    <div id="pr-slot-diag"></div>
+  </section>
+
+  <section id="screen-result" class="screen">
+    <div class="card" style="text-align:center; padding:30px 20px;">
+      <div style="font-size:3rem; margin-bottom:8px;" id="res-emoji">🎉</div>
+      <h2 style="margin:0 0 8px;" id="res-title">クエストクリア！</h2>
+      <p style="color:var(--text-muted); margin:0 0 18px;" id="res-desc"></p>
+      <div style="display:flex; justify-content:center; gap:16px; margin-bottom:22px; flex-wrap:wrap;">
+        <div class="pill xp" style="font-size:1rem; padding:8px 16px;">正答率 <span id="res-acc">0%</span></div>
+        <div class="pill combo" style="font-size:1rem; padding:8px 16px;">獲得XP +<span id="res-xp">0</span></div>
+      </div>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn btn-primary" id="btn-retry-same" onclick="retryLastMode()">🔥 新しい問題で続けて攻略</button>
+        <button class="btn btn-secondary" onclick="goHome()">🏠 ホームへ</button>
+      </div>
+    </div>
+    <div id="pr-slot-result"></div>
+  </section>
+
+  <footer id="site-footer" class="site-footer">
+    © 32and1.com ｜ ※本サイトはプロモーション（PR・アフィリエイト広告）を含みます。<br>
+    Amazonのアソシエイトとして、32and1.comは適格販売により収入を得ています。
+  </footer>
+</div>
+
+<div id="modal-backdrop" class="modal-backdrop" onclick="if(event.target===this) closeModal()">
+  <div class="modal">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+      <h3 style="margin:0;" id="modal-title">タイトル</h3>
+      <button class="icon-btn" id="modal-close-btn" onclick="closeModal()">✕ 閉じる</button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+const AFFILIATE_ITEMS = [
+  { shop:'amazon', tag:'🎓 高校入試に向けた3年間の総整理に', title:'高校入試 中学3年間の総復習 英語 新装改訂版', desc:'3学期の学年末テスト対策と並行して、中1〜中3の抜け漏れを最速で総チェックできる入試直前マスト問題集です。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4010222816?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'📖 「理解する」英語学習におすすめ', title:'改訂第２版 中３英語が面白いほどわかる本（中学 面白いほどシリーズ）', desc:'丸暗記ではなく納得しながら学べる人気参考書。知覚動詞・付加疑問・感嘆文や入試書き換えもスッと理解できます！', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/B0FPTY9B1L?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'✏️ 超基礎からのやり直し・定着におすすめ', title:'中3英語をひとつひとつわかりやすく。改訂版', desc:'やさしい解説＋書き込み式練習が見開きで学べる定番！3学期の新出文法と重要構文の基礎固めに最適です。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4053052491?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'📘 教科書の要点整理・予習復習におすすめ', title:'ニューコース参考書 中3英語 新装版（学研ニューコース参考書）', desc:'教科書の要点がひと目でわかる豊富なビジュアル！学年末テスト前の総整理に頼れる参考書です。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4053063302?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'📝 学年末テスト・入試の良問演習に', title:'中3 標準問題集 英語：2025年の教科書改訂に対応（受験研究社）', desc:'定期テストや入試でよく出る良問を厳選！書き換え問題や長文・対話文の空所補充で得点力を伸ばそう。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4424638057?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'🎯 学年末の高得点・上位校対策に', title:'中3 ハイクラステスト 英語：2025年の教科書改訂に対応（受験研究社）', desc:'定期テストの応用〜高校入試本番レベルまで徹底攻略！90点以上・第一志望合格を狙う実戦演習に最適です。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4424638227?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'🏆 定期テスト〜入試基礎の徹底攻略に', title:'完全攻略 中3 英語（完全攻略 学年別・領域別）', desc:'基礎から応用までステップアップ式に攻略！3年間の文法ミックス問題や英作文対策にも解説が丁寧です。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/458110968X?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'💡 基礎がため100%反復ドリルにおすすめ', title:'できた!中3英語 文法（中学基礎がため100%）', desc:'スモールステップで中3英文法の基礎を確実に定着！抜けやすい重要構文を漏れなく身につけられます。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4774331139?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'⚡ 英文の「型」を体で覚える練習に', title:'中３英文法 パターンドリル（シグマベスト）', desc:'くり返し書くことで英文の語順が自然と身につく！並び替えや書き換え問題が苦手な人に最適です。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4578221377?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'✍️ 「解ける力」を伸ばす実践演習に', title:'アウトプット専用問題集 中３英語［文法］（シグマベスト）', desc:'覚えた文法を使いこなすアウトプット特化ドリル！学年末テストと入試の総仕上げにぴったりです。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4578234886?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'🌱 苦手意識をなくしたい人におすすめ', title:'わからないをわかるにかえる 中3 英語', desc:'イラストや図解が豊富で読みやすい！英語に苦手意識があっても無理なく3年間の重要単元を仕上げられます。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4581111633?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'🔤 中3英単語をイラスト＆音声で楽しく暗記', title:'音声DL BOOK 30日で完成! イラストで覚える 中3の英単語550（NHKテキスト）', desc:'イラストと音声でスピード定着！社会・環境・教育・進路など入試長文で必出の語彙が一気に身につきます。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4142133721?tag=goodjobsale-22' }
+];
+
+function renderRandomPrCard(containerId) {
+  const el = document.getElementById(containerId);
+  if (!el || AFFILIATE_ITEMS.length === 0) return;
+  const offer = AFFILIATE_ITEMS[Math.floor(Math.random() * AFFILIATE_ITEMS.length)];
+  const noteText = offer.shop === 'amazon' ? '※PR（広告）：Amazonのアソシエイトとして、32and1.comは適格販売により収入を得ています。' : '※PR（広告）：楽天アフィリエイトのプロモーションを含みます。';
+  el.innerHTML = `<div class="pr-card"><div class="pr-header"><span class="pr-tag">${offer.tag}</span><span class="pr-badge">PR・広告</span></div><div class="pr-body"><div style="flex:1;min-width:220px;"><h4 class="pr-title">${offer.title}</h4><p class="pr-desc">${offer.desc}</p></div><a href="${offer.url}" target="_blank" rel="nofollow sponsored noopener noreferrer" class="btn btn-pr">${offer.btnText}</a></div><p class="pr-note">${noteText}</p></div>`;
+}
+
+const UNITS = [
+  { id:'u1', name:'知覚動詞・使役動詞（原形不定詞 / ~ing）＆ 接続詞 that', short:'知覚・使役・that', tip:'【3学期 新出文法①】目的語の後ろに <b>to をつけない（原形不定詞）</b>のが最重要！<br>①<b>知覚動詞</b>：<code>see / hear / watch / feel ＋ 人 ＋ <b>原形 または ~ing</b></code>（例：<code>I saw him run / running.</code>）<br>②<b>使役動詞</b>：<code>make / let ＋ 人 ＋ <b>動詞の原形</b></code>（<code>help ＋ 人 ＋ (to) 原形</code>）／<code>make ＋ 人 ＋ 形容詞</code><br>③<b>接続詞 that（省略可）</b>：<code>I think (that) ~</code> / <code>I\'m glad (that) ~</code> / <code>I\'m sure (that) ~</code>' },
+  { id:'u2', name:'付加疑問文（isn\'t it? / don\'t you?）＆ 否定疑問文（Yes/No）', short:'付加・否定疑問', tip:'【3学期 新出文法②】ひっかけ率No.1！<br>①<b>付加疑問文</b>：肯定文→<b>否定の短縮</b>、否定文→<b>肯定</b>（主語は代名詞 <code>he/she/it</code> に！）。<br>・特別：<code>Let\'s ~, <b>shall we?</b></code> / 命令文 <code>~, <b>will you?</b></code><br>②<b>否定疑問文（Don\'t you ~? / Isn\'t he ~?）</b>：<br>日本語の「はい/いいえ」につられず、<b>答えが肯定なら Yes、否定なら No</b>！（例：<code>Don\'t you like music? — <b>Yes, I do.</b></code> いいえ、好きです）' },
+  { id:'u3', name:'感嘆文（What a(n) ~! / How ~!）＆ 不可算名詞のルール', short:'感嘆文・不可算', tip:'【3学期 新出文法③】「なんて〜なんだろう！」<br>①<b>What vs How</b>：後ろに<b>名詞がある → What</b>（<code>What a(n) 形 単数名詞!</code> / <code>What 形 複数・不可算!</code>）、<b>形容詞・副詞だけ → How</b>（<code>How 形/副 (S V)!</code>）<br>②<b>不可算名詞</b>：<code>information / advice / homework / news</code> には<b>「a」も複数形「-s」も絶対につけない！</b>（<code>much / some</code> を使用）' },
+  { id:'u4', name:'3学期・入試超頻出 重要連語（so~that / not only / both / reach）', short:'重要連語・構文', tip:'【長文・並び替え直結】<br>①<code>so ~ that S can\'t ...</code> ＝ <code>too ~ to 原形</code><br>②<code>both A and B</code>「AとBの両方」→ 主語なら<b>複数扱い（are等）</b>！<br>③<code>not only A but also B</code>「AだけでなくBも」／<code>either A or B</code>「どちらか一方」→ 動詞は<b>Bに一致</b>！<br>④<code>arrive at [in] ~</code> ＝ <code>get to ~</code> ＝ <code>reach ~</code>（<b>reachは前置詞なし</b>）<br>⑤<code>look forward to <b>~ing</b></code> / <code>in order to 原形</code> / <code>make a decision</code>' },
+  { id:'u5', name:'入試・学年末 書き換え総点検（受動・完了・比較・will be able to）', short:'書き換え総点検', tip:'【配点最大！同じ意味の書き換え】<br>①<code>too ~ to 原形</code> ⇔ <code>so ~ that S can\'t [couldn\'t] 原形</code><br>②<code>can</code> ⇔ <code>be able to</code>（未来は <code><b>will be able to</b></code>、× will can）<br>③<code>A because B</code> ⇔ <code>B, so A</code> ／ <code>If ~ not</code> ⇔ <code>unless</code><br>④<b>受動態⇔能動態</b>／<b>比較級（than any other 単数）⇔ 最上級</b>' },
+  { id:'u6', name:'中学3年間の文法ミックス（分詞・関係代名詞・間接疑問文・仮定法）', short:'中3文法ミックス', tip:'【入試本番・総合大問対策】4大文法の最終確認！<br>①<b>分詞</b>：能動→<code>~ing</code>、受動→<code>過去分詞</code>（2語以上は名詞の後ろ）<br>②<b>関係代名詞</b>：<code>who / which / that</code>（目的格は省略可・先行詞に動詞を一致）<br>③<b>間接疑問文</b>：<code>疑問詞 ＋ 主語 ＋ 動詞</code>（do/does/did を消す！）<br>④<b>仮定法過去</b>：<code>If ＋ S ＋ <b>were / 過去形</b>, S ＋ <b>would/could ＋ 原形</b></code> / <code>I wish ＋ S ＋ 過去形</code>' },
+  { id:'u7', name:'3学期・入試 最重要会話表現（同意・意見・応援・お祝い）', short:'会話・対話表現', tip:'【対話文 空所補充 鉄板フレーズ】<br>・賛成：<code>I agree with you.</code> / <code>That\'s a good idea.</code><br>・確信がない：<code>I\'m not sure, but ~.</code><br>・意見を聞く：<code>What do you think of [about] ~?</code><br>・場合による：<code>It depends on ~.</code><br>・挨拶・応援：<code>Take care of yourself.</code> / <code>Good luck!</code><br>・お祝い：<code>Congratulations <b>on</b> ~!</code>（※前置詞 <b>on</b> 注意）' },
+  { id:'u8', name:'長文接続表現 ＆ 自由英作文（意見論述）万能テンプレート', short:'長文・自由英作', tip:'【英作文＆長文要旨の必勝型】<br>①<b>自由英作文3ステップ</b>：<br>・<b>主張</b>：<code>I think (that) ~.</code> / <code>In my opinion, ~.</code><br>・<b>理由</b>：<code>I have two reasons.</code> → <code>First, ~. Second, ~.</code><br>・<b>結び</b>：<code>For these reasons, I think (that) ~.</code><br>②<b>論理の接続詞</b>：<code>For example</code>（たとえば）／<code>However</code>（しかし）／<code>Therefore</code>（それゆえに）' }
+];
+
+const FORM_BANK = [
+  ['inf_ing','see + 人 + (run)','知覚動詞（走り抜けるのを見る）','run','I saw him ~ across the street.',['to run','ran','runs'],'see＋人＋<b>原形（または~ing）</b>'],
+  ['inf_ing','see + 人 + (play)','知覚動詞（遊んでいるのを見る）','playing','We saw the children ~ in the park.',['to play','played','plays'],'「〜している」＝ <b>playing</b>'],
+  ['inf_ing','hear + 人 + (sing)','知覚動詞（歌うのを聞く）','sing','I heard her ~ an English song.',['to sing','sang','sings'],'hear＋人＋<b>原形（または~ing）</b>'],
+  ['inf_ing','hear + 人 + (cry)','知覚動詞（泣いているのを聞く）','crying','Did you hear the baby ~ last night?',['to cry','cried','cries'],'「泣いているの」＝ <b>crying</b>'],
+  ['inf_ing','watch + 人 + (practice)','知覚動詞（練習するのを見る）','practice','I watched them ~ soccer after school.',['to practice','practiced','practices'],'watch＋人＋<b>原形</b>'],
+  ['inf_ing','watch + 人 + (dance)','知覚動詞（踊っているのを見る）','dancing','She watched the girls ~ on the stage.',['to dance','danced','danceing'],'eをとって+ing：<b>dancing</b>'],
+  ['inf_ing','feel + 物 + (shake)','知覚動詞（揺れるのを感じる）','shake','I felt the building ~.',['to shake','shook','shaken'],'feel＋もの＋<b>原形</b>'],
+  ['inf_ing','make + 人 + (clean)','使役動詞（〜させる）','clean','My mother made me ~ my room.',['to clean','cleaning','cleaned'],'make＋人＋<b>原形（clean）</b>'],
+  ['inf_ing','make + 人 + (wait)','使役動詞（待たせる）','wait','Sorry to make you ~ so long.',['to wait','waiting','waited'],'make you <b>wait</b>'],
+  ['inf_ing','make + 人 + (laugh)','使役動詞（笑わせる）','laugh','His funny story made us ~.',['to laugh','laughing','laughed'],'make＋人＋<b>原形（laugh）</b>'],
+  ['inf_ing','make + 人 + (study)','使役動詞（勉強させる）','study','The teacher made the students ~ hard.',['to study','studying','studied'],'make＋人＋<b>原形（study）</b>'],
+  ['inf_ing','let + 人 + (go)','使役動詞（行かせてあげる）','go','Please let me ~ to the concert.',['to go','going','went'],'let＋人＋<b>原形（go）</b>'],
+  ['inf_ing','let + 人 + (use)','使役動詞（使わせてあげる）','use','My father let me ~ his computer.',['to use','using','used'],'let＋人＋<b>原形（use）</b>'],
+  ['inf_ing','let + 人 + (know)','使役動詞（知らせる）','know','Please let me ~ your answer.',['to know','knowing','knew'],'let me <b>know</b>'],
+  ['inf_ing','help + 人 + (carry)','help（運ぶのを手伝う・原形）','carry','Ken helped me ~ the heavy box.',['carrying','carried','carries'],'help＋人＋<b>(to) 原形</b>'],
+  ['inf_ing','look forward to + (meet)','動名詞必須（楽しみに待つ）','meeting','I am looking forward to ~ you.',['meet','to meet','met'],'look forward to ＋ <b>~ing</b>'],
+  ['inf_ing','look forward to + (see)','動名詞必須（会うのを楽しみに）','seeing','We look forward to ~ you again.',['see','saw','seen'],'look forward to <b>seeing</b>'],
+  ['inf_ing','look forward to + (visit)','動名詞必須（訪れるのを楽しみに）','visiting','She is looking forward to ~ Kyoto.',['visit','visited','visits'],'look forward to <b>visiting</b>'],
+  ['inf_ing','decide + (join)','to不定詞をとる動詞','to join','I decided ~ the volunteer group.',['joining','join','joined'],'decide ＋ <b>to 原形</b>'],
+  ['inf_ing','hope + (become)','to不定詞をとる動詞','to become','He hopes ~ a doctor in the future.',['becoming','become','became'],'hope ＋ <b>to 原形</b>'],
+  ['inf_ing','want + 人 + (read)','want 人 to 原形','to read','My teacher wants me ~ this book.',['read','reading','reads'],'want＋人＋<b>to 原形</b>'],
+  ['inf_ing','tell + 人 + (come)','tell 人 to 原形','to come','She told me ~ early tomorrow.',['come','coming','came'],'tell＋人＋<b>to 原形</b>'],
+  ['inf_ing','ask + 人 + (help)','ask 人 to 原形','to help','I asked Ken ~ me with my homework.',['help','helping','helped'],'ask＋人＋<b>to 原形</b>'],
+  ['inf_ing','enjoy + (listen)','動名詞をとる動詞','listening','I enjoy ~ to English songs.',['to listen','listen','listened'],'enjoy ＋ <b>~ing</b>'],
+  ['inf_ing','finish + (write)','動名詞をとる動詞','writing','Have you finished ~ your report?',['to write','write','wrote'],'finish ＋ <b>~ing</b>'],
+  ['inf_ing','stop + (talk)','動名詞（話すのをやめる）','talking','Please stop ~ in the library.',['talk','talked','talks'],'「〜するのをやめる」＝ stop <b>~ing</b>'],
+  ['inf_ing','give up + (try)','前置詞の後ろは動名詞','trying','Never give up ~!',['to try','try','tried'],'up の後ろは <b>~ing</b>'],
+  ['inf_ing','without + (say)','前置詞の後ろは動名詞','saying','He left the room without ~ goodbye.',['to say','say','said'],'without ＋ <b>~ing</b>'],
+  ['inf_ing','in order + (pass)','〜するために','to pass','I study hard in order ~ the exam.',['passing','pass','passed'],'in order <b>to 原形</b>'],
+  ['inf_ing','too ~ + (walk)','too ~ to 構文','to walk','I was too tired ~ home.',['walking','walk','walked'],'too 〜 <b>to 原形</b>'],
+  ['inf_ing','be able + (speak)','will の後ろの「できる」','to speak','You will be able ~ English well.',['speaking','speak','spoke'],'will be able <b>to 原形</b>'],
+  ['inf_ing','used + (live)','以前はよく〜した','to live','I used ~ in Hokkaido.',['living','live','lived'],'used <b>to 原形</b>'],
+  ['inf_ing','It is important + (protect)','It is ~ to 構文','to protect','It is important ~ the environment.',['protecting','protect','protected'],'It is 〜 <b>to 原形</b>'],
+  ['inf_ing','how + (solve)','疑問詞＋to不定詞','to solve','Do you know how ~ this problem?',['solving','solve','solved'],'疑問詞 ＋ <b>to 原形</b>'],
+  ['inf_ing','something + (drink)','形容詞的用法','to drink','Would you like something ~?',['drinking','drink','drank'],'something <b>to 原形</b>'],
+  ['inf_ing','see + 人 + (swim)','知覚動詞の~ing','swimming','Look! I can see a dog ~ in the river.',['swiming','swam','to swim'],'mを重ねて+ing：<b>swimming</b>'],
+  ['inf_ing','see + 人 + (run)','知覚動詞の~ing','running','I saw Ken ~ to the station.',['runing','ran','to run'],'nを重ねて+ing：<b>running</b>'],
+  ['inf_ing','hear + 人 + (lie)','知覚動詞の~ing','lying','I heard him ~ on the sofa.',['lieing','liing','to lie'],'ie→yにして+ing：<b>lying</b>'],
+  ['inf_ing','watch + 人 + (sit)','知覚動詞の~ing','sitting','We watched the cat ~ on the chair.',['siting','sat','to sit'],'tを重ねて+ing：<b>sitting</b>'],
+  ['inf_ing','mind + (open)','〜するのを気にする','opening','Would you mind ~ the window?',['to open','open','opened'],'mind ＋ <b>~ing</b>'],
+  ['inf_ing','practice + (speak)','練習する','speaking','I practice ~ English every day.',['to speak','speak','spoke'],'practice ＋ <b>~ing</b>'],
+  ['inf_ing','be interested in + (learn)','〜に興味がある','learning','I am interested in ~ Japanese history.',['to learn','learn','learned'],'前置詞 in ＋ <b>~ing</b>'],
+  ['inf_ing','Thank you for + (invite)','〜してくれてありがとう','inviting','Thank you for ~ me to the party.',['to invite','invite','invited'],'前置詞 for ＋ <b>~ing</b>'],
+  ['inf_ing','make + 人 + (happy)','make＋人＋形容詞','happy','This song always makes me ~.',['happily','happiness','to happy'],'make＋人＋<b>形容詞（happy）</b>'],
+  ['inf_ing','I\'m glad + (hear)','感情の原因','to hear','I am very glad ~ the good news.',['hearing','hear','heard'],'glad <b>to hear</b>'],
+
+  ['tag_ex','are (肯定文の付加疑問)','You are a student, ~?','aren\'t you','（肯定→否定短縮）',['are you','don\'t you','isn\'t you'],'be動詞 are → <b>aren\'t you</b>'],
+  ['tag_ex','is (名詞主語の付加疑問)','Ken is from Tokyo, ~?','isn\'t he','（Ken → 代名詞 he）',['isn\'t Ken','is he','doesn\'t he'],'Ken → <b>isn\'t he</b>'],
+  ['tag_ex','is (This主語の付加疑問)','This is your pen, ~?','isn\'t it','（This → it）',['isn\'t this','is it','aren\'t it'],'This → <b>isn\'t it</b>'],
+  ['tag_ex','isn\'t (否定文の付加疑問)','She isn\'t busy today, ~?','is she','（否定→肯定）',['isn\'t she','does she','doesn\'t she'],'否定文 → 肯定 <b>is she</b>'],
+  ['tag_ex','was (過去be動詞の付加疑問)','It was cold yesterday, ~?','wasn\'t it','（過去の肯定→否定）',['isn\'t it','was it','didn\'t it'],'was → <b>wasn\'t it</b>'],
+  ['tag_ex','weren\'t (過去の否定付加疑問)','They weren\'t at home, ~?','were they','（過去の否定→肯定）',['weren\'t they','are they','did they'],'weren\'t → <b>were they</b>'],
+  ['tag_ex','like (一般動詞現在の付加疑問)','You like music, ~?','don\'t you','（一般動詞→don\'t）',['aren\'t you','do you','didn\'t you'],'like → <b>don\'t you</b>'],
+  ['tag_ex','lives (三単現の付加疑問)','Yumi lives in Osaka, ~?','doesn\'t she','（Yumi → she）',['don\'t she','isn\'t she','doesn\'t Yumi'],'三単現＋Yumi → <b>doesn\'t she</b>'],
+  ['tag_ex','don\'t (否定文の付加疑問)','You don\'t know him, ~?','do you','（否定→肯定）',['don\'t you','are you','did you'],'don\'t → <b>do you</b>'],
+  ['tag_ex','doesn\'t (三単現否定の付加疑問)','He doesn\'t play soccer, ~?','does he','（否定→肯定）',['doesn\'t he','is he','do he'],'doesn\'t → <b>does he</b>'],
+  ['tag_ex','went (過去形の付加疑問)','Tom went to Kyoto, ~?','didn\'t he','（過去形→didn\'t）',['doesn\'t he','wasn\'t he','did he'],'went → <b>didn\'t he</b>'],
+  ['tag_ex','didn\'t (過去否定の付加疑問)','You didn\'t see Ken, ~?','did you','（過去否定→肯定）',['didn\'t you','do you','were you'],'didn\'t → <b>did you</b>'],
+  ['tag_ex','can (助動詞の付加疑問)','She can swim fast, ~?','can\'t she','（can→can\'t）',['doesn\'t she','can she','isn\'t she'],'can → <b>can\'t she</b>'],
+  ['tag_ex','can\'t (助動詞否定の付加疑問)','He can\'t drive a car, ~?','can he','（can\'t→can）',['can\'t he','does he','is he'],'can\'t → <b>can he</b>'],
+  ['tag_ex','will (未来の付加疑問)','It will be sunny tomorrow, ~?','won\'t it','（will否定→won\'t）',['willn\'t it','isn\'t it','doesn\'t it'],'will → <b>won\'t it</b>'],
+  ['tag_ex','won\'t (未来否定の付加疑問)','You won\'t forget it, ~?','will you','（won\'t→will）',['won\'t you','don\'t you','are you'],'won\'t → <b>will you</b>'],
+  ['tag_ex','have (現在完了の付加疑問)','You have visited Nara, ~?','haven\'t you','（have→haven\'t）',['don\'t you','aren\'t you','have you'],'現在完了 → <b>haven\'t you</b>'],
+  ['tag_ex','hasn\'t (現在完了否定の付加疑問)','He hasn\'t finished yet, ~?','has he','（hasn\'t→has）',['hasn\'t he','does he','is he'],'hasn\'t → <b>has he</b>'],
+  ['tag_ex','There is (付加疑問)','There is a park near here, ~?','isn\'t there','（There is→isn\'t there）',['isn\'t it','is there','doesn\'t there'],'There is → <b>isn\'t there</b>'],
+  ['tag_ex','Let\'s ~ (特別な付加疑問)','Let\'s play tennis, ~?','shall we','（Let\'s の決まり）',['will you','don\'t we','aren\'t we'],'Let\'s 〜, <b>shall we?</b>'],
+  ['tag_ex','Open the window (命令文)','Open the window, ~?','will you','（命令文のタグ）',['shall we','don\'t you','aren\'t you'],'命令文 〜, <b>will you?</b>'],
+  ['tag_ex','Don\'t be late (否定命令)','Don\'t be late, ~?','will you','（否定命令のタグ）',['shall we','do you','are you'],'否定命令も <b>will you?</b>'],
+  ['tag_ex','cute dog (感嘆文)','~ a cute dog this is!','What','（名詞がある！）',['How','Which','Who'],'名詞あり → <b>What</b>'],
+  ['tag_ex','interesting book (感嘆文)','What ~ interesting book it is!','an','（母音 i の前）',['a','the','（不要）'],'母音の前 → <b>an</b>'],
+  ['tag_ex','tall (感嘆文)','~ tall Mt. Fuji is!','How','（形容詞だけ！）',['What','What a','Very'],'形容詞だけ → <b>How</b>'],
+  ['tag_ex','fast (感嘆文)','~ fast he runs!','How','（副詞だけ！）',['What','What a','So'],'副詞だけ → <b>How</b>'],
+  ['tag_ex','beautiful flowers (感嘆文)','~ beautiful flowers these are!','What','（複数名詞がある！）',['How','What a','What an'],'複数名詞 → aなし <b>What</b>'],
+  ['tag_ex','good news (感嘆文)','~ good news this is!','What','（不可算名詞がある！）',['How','What a','What an'],'不可算名詞 → aなし <b>What</b>'],
+  ['tag_ex','kind (感嘆文)','~ kind you are!','How','（形容詞だけ！）',['What','What a','So'],'形容詞だけ → <b>How</b>'],
+  ['tag_ex','exciting game (感嘆文)','What ~ exciting game it was!','an','（母音 e の前）',['a','（不要）','the'],'母音の前 → <b>an</b>'],
+  ['tag_ex','old temple (感嘆文)','What ~ old temple that is!','an','（母音 o の前）',['a','（不要）','the'],'母音の前 → <b>an</b>'],
+  ['tag_ex','wonderful day (感嘆文)','~ a wonderful day!','What','（名詞がある）',['How','So','Very'],'名詞あり → <b>What</b>'],
+  ['tag_ex','否定疑問への答え（肯定）','Don\'t you like sushi? — ~, I do.（いいえ、好きです）','Yes','（内容が肯定！）',['No','Not','Sure'],'肯定（I do）なら <b>Yes</b>'],
+  ['tag_ex','否定疑問への答え（否定）','Don\'t you know him? — ~, I don\'t.（はい、知りません）','No','（内容が否定！）',['Yes','Sure','Not'],'否定（I don\'t）なら <b>No</b>'],
+  ['tag_ex','否定疑問への答え（肯定）','Isn\'t she from Canada? — ~, she is.（いいえ、そうです）','Yes','（内容が肯定）',['No','Not','Never'],'肯定（she is）なら <b>Yes</b>'],
+  ['tag_ex','否定疑問への答え（否定）','Isn\'t this your bag? — ~, it isn\'t.（はい、違います）','No','（内容が否定）',['Yes','Sure','Right'],'否定（it isn\'t）なら <b>No</b>'],
+  ['tag_ex','否定疑問への答え（肯定）','Didn\'t you watch it? — ~, I did.（いいえ、見ました）','Yes','（内容が肯定）',['No','Not','Nothing'],'肯定（I did）なら <b>Yes</b>'],
+  ['tag_ex','否定疑問への答え（否定）','Can\'t you swim? — ~, I can\'t.（はい、泳げません）','No','（内容が否定）',['Yes','Sure','So'],'否定（I can\'t）なら <b>No</b>'],
+  ['tag_ex','付加疑問への答え（否定）','You aren\'t tired, are you? — ~, I\'m not.（はい、違います）','No','（内容が否定）',['Yes','Sure','Fine'],'否定（I\'m not）なら <b>No</b>'],
+  ['tag_ex','付加疑問への答え（肯定）','He didn\'t go, did he? — ~, he did.（いいえ、行きました）','Yes','（内容が肯定）',['No','Not','Never'],'肯定（he did）なら <b>Yes</b>'],
+  ['tag_ex','感嘆文の語順','How happy (she is / is she)!','she is','（主語＋動詞の順）',['is she','she was','does she'],'感嘆文末＝<b>主語＋動詞（she is）</b>'],
+  ['tag_ex','感嘆文の語順','What a nice bike (it is / is it)!','it is','（主語＋動詞の順）',['is it','was it','it'],'感嘆文末＝<b>主語＋動詞（it is）</b>'],
+  ['tag_ex','should (付加疑問)','We should help them, ~?','shouldn\'t we','（should→shouldn\'t）',['don\'t we','aren\'t we','should we'],'should → <b>shouldn\'t we</b>'],
+  ['tag_ex','mustn\'t (付加疑問)','You mustn\'t run here, ~?','must you','（否定→肯定）',['mustn\'t you','don\'t you','can you'],'mustn\'t → <b>must you</b>'],
+  ['tag_ex','I am (付加疑問・慣用)','I\'m right, ~?','aren\'t I','（I am の慣用）',['amn\'t I','isn\'t I','don\'t I'],'I am 〜, <b>aren\'t I?</b>'],
+
+  ['rewrite_gram','can (未来への書き換え)','You ~ speak English well next year.','will be able to','（will can は不可）',['will can','can will','are able to'],'<b>will be able to</b>'],
+  ['rewrite_gram','must (過去の書き換え)','I ~ study hard yesterday.','had to','（mustに過去形なし）',['musted','have to','was must'],'must の過去＝<b>had to</b>'],
+  ['rewrite_gram','so ~ that → too ~ to','He is ~ young to drive a car.','too','（so young that he can\'t →）',['so','very','much'],'<b>too</b> 〜 to 原形'],
+  ['rewrite_gram','too ~ to → so ~ that','She was so tired ~ she couldn\'t walk.','that','（too tired to walk →）',['to','which','so'],'so 〜 <b>that</b> S couldn\'t'],
+  ['rewrite_gram','too ~ to（目的語あり）','This box is so heavy that I can\'t lift ~.','it','（This box is too heavy to lift. →）',['one','this','（不要）'],'that節には目的語 <b>it</b> が必要'],
+  ['rewrite_gram','If ~ not → 1語で','~ it rains tomorrow, we will go.','Unless','（If it doesn\'t rain →）',['If','Though','Because'],'「もし〜でなければ」＝ <b>Unless</b>'],
+  ['rewrite_gram','because → 1語で','It was raining, ~ I stayed home.','so','（I stayed home because it rained.）',['because','though','but'],'原因, <b>so</b> 結果'],
+  ['rewrite_gram','though → 1語で','~ he was tired, he kept working.','Although','（〜だけれども）',['Because','If','Unless'],'「〜だけれども」＝ <b>Although</b>'],
+  ['rewrite_gram','information (不可算)','I got ~ useful information.','much','（s・a不可）',['many','a','an'],'不可算名詞には <b>much</b>（some）'],
+  ['rewrite_gram','advice (不可算)','Thank you for your good ~.','advice','（× advices）',['advices','an advice','a advice'],'不可算名詞なので s なし <b>advice</b>'],
+  ['rewrite_gram','homework (不可算)','I have a lot of ~ today.','homework','（× homeworks）',['homeworks','a homework','an homework'],'不可算名詞なので s なし <b>homework</b>'],
+  ['rewrite_gram','news (不可算)','This ~ is very surprising.','news','（単数扱い）',['new','newses','a news'],'news は不可算で単数扱い <b>news</b>'],
+  ['rewrite_gram','both A and B','Both Ken and Yumi ~ good at English.','are','（複数扱い！）',['is','was','am'],'Both A and B → 複数 <b>are</b>'],
+  ['rewrite_gram','not only A but also B','Not only Ken but also Yumi ~ soccer.','likes','（Bに一致）',['like','liking','to like'],'B（Yumi）に一致 → <b>likes</b>'],
+  ['rewrite_gram','either A or B','Either you or he ~ to go there.','has','（Bに一致）',['have','having','are'],'B（he）に一致 → <b>has</b>'],
+  ['rewrite_gram','reach (到着する)','He ~ the station at eight.','reached','（前置詞不要）',['reached to','reached at','arrived'],'reach は前置詞なし <b>reached</b>'],
+  ['rewrite_gram','arrive (都市に到着)','We arrived ~ Kyoto yesterday.','in','（広い都市は in）',['at','to','on'],'都市・国＝arrive <b>in</b>'],
+  ['rewrite_gram','get (到着する)','How can I get ~ the museum?','to','（get to 〜）',['at','in','for'],'get <b>to</b> 〜'],
+  ['rewrite_gram','tall (比較級→最上級)','Ken is taller than any other ~ in his class.','boy','（any other＋単数）',['boys','a boy','the boys'],'than any other＋<b>単数名詞</b>'],
+  ['rewrite_gram','as ~ as (比較書き換え)','This river is not ~ long as that one.','as','（not as ~ as）',['more','than','most'],'not <b>as</b> 〜 as'],
+  ['rewrite_gram','much (比較級強調)','This book is ~ more interesting than that one.','much','（× very）',['very','more','many'],'比較級を強める＝<b>much</b>'],
+  ['rewrite_gram','one of the 最上級','Mt. Fuji is one of the highest ~ in Japan.','mountains','（＋複数名詞！）',['mountain','a mountain','mount'],'one of the 最上級＋<b>複数名詞</b>'],
+  ['rewrite_gram','受動態（現在）','Many people speak English. ＝ English ~ by many people.','is spoken','（現在の受動態）',['speaks','was spoken','is speaking'],'現在受動態＝<b>is spoken</b>'],
+  ['rewrite_gram','受動態（過去）','Bell invented the telephone. ＝ The telephone ~ by Bell.','was invented','（過去の受動態）',['is invented','invented','were invented'],'過去受動態＝<b>was invented</b>'],
+  ['rewrite_gram','現在完了（経験）','I have ~ to Okinawa twice.','been','（行ったことがある）',['gone','went','was'],'have <b>been</b> to'],
+  ['rewrite_gram','現在完了（期間）','She has lived here ~ five years.','for','（期間の長さ）',['since','in','during'],'期間の長さ＝<b>for</b>'],
+  ['rewrite_gram','現在完了（起点）','I have known him ~ 2020.','since','（過去の起点）',['for','from','in'],'過去の起点＝<b>since</b>'],
+  ['rewrite_gram','現在完了（疑問）','Have you ~ read this book?','ever','（今までに）',['already','yet','never'],'疑問文「今までに」＝<b>ever</b>'],
+  ['rewrite_gram','現在完了（否定）','I haven\'t finished my homework ~.','yet','（まだ〜ない）',['already','just','ever'],'否定文末「まだ」＝<b>yet</b>'],
+  ['rewrite_gram','現在完了進行形','It ~ raining since this morning.','has been','（ずっと降り続けている）',['is','was','have been'],'<b>has been</b> ~ing'],
+  ['rewrite_gram','間接疑問文（where）','Do you know where ~?（彼はどこに住んでいるか）','he lives','（doesを消す）',['does he live','lives he','he live'],'疑問詞＋主語＋動詞：<b>he lives</b>'],
+  ['rewrite_gram','間接疑問文（what）','Tell me what ~ yesterday.（彼女は何を買ったか）','she bought','（didを消して過去）',['did she buy','she buy','bought she'],'疑問詞＋主語＋過去：<b>she bought</b>'],
+  ['rewrite_gram','疑問詞＋to不定詞','I don\'t know what I should do. ＝ I don\'t know ~.','what to do','（what to 原形）',['how to do','what doing','that to do'],'<b>what to do</b>'],
+  ['rewrite_gram','分詞の後置修飾（能動）','The girl ~ the piano is Yumi.','playing','（弾いている）',['played','plays','play'],'能動＝<b>playing</b>'],
+  ['rewrite_gram','分詞の後置修飾（受動）','The festival ~ in Kyoto is famous.','held','（開かれる）',['holding','holds','hold'],'受動＝<b>held</b>'],
+  ['rewrite_gram','関係代名詞（主格・人）','I have a friend ~ speaks three languages.','who','（人＋動詞）',['which','whom','whose'],'人の主格＝<b>who</b>'],
+  ['rewrite_gram','関係代名詞（主格・物）','Look at the train ~ goes to Osaka.','which','（物＋動詞）',['who','whom','where'],'ものの主格＝<b>which</b>'],
+  ['rewrite_gram','関係代名詞（所有格）','I know a boy ~ father is a pilot.','whose','（〜の父）',['who','whom','which'],'所有格＝<b>whose</b>'],
+  ['rewrite_gram','仮定法過去（If I ~）','If I ~ a bird, I could fly to you.','were','（仮定法のbe動詞）',['am','was','will be'],'仮定法be動詞＝<b>were</b>'],
+  ['rewrite_gram','仮定法過去（I wish ~）','I wish I ~ speak French.','could','（話せたらなあ）',['can','will','am'],'I wish ＋ 主語 ＋ <b>could</b>'],
+  ['rewrite_gram','It ~ for 人 to ...','It is difficult ~ me to solve this.','for','（人の性質以外）',['of','to','by'],'difficult → <b>for</b>'],
+  ['rewrite_gram','It ~ of 人 to ...','It is very kind ~ you to help me.','of','（人の性質）',['for','to','by'],'kind / nice → <b>of</b>'],
+  ['rewrite_gram','show + 物 + to 人','He showed his photos ~ me.','to','（show A to B）',['for','of','at'],'show A <b>to</b> B'],
+  ['rewrite_gram','buy + 物 + for 人','My father bought a new bike ~ me.','for','（buy A for B）',['to','of','by'],'buy A <b>for</b> B'],
+  ['rewrite_gram','Congratulations','Congratulations ~ winning the prize!','on','（お祝いの前置詞）',['for','to','at'],'Congratulations <b>on</b> 〜'],
+
+  ['verb_all','write','過去分詞','written','write-wrote-~',['wrote','writed','writen'],'<b>write-wrote-written</b>'],
+  ['verb_all','speak','過去分詞','spoken','speak-spoke-~',['spoke','speaked','spoked'],'<b>speak-spoke-spoken</b>'],
+  ['verb_all','break','過去分詞','broken','break-broke-~',['broke','breaked','broked'],'<b>break-broke-broken</b>'],
+  ['verb_all','take','過去分詞','taken','take-took-~',['took','taked','tooken'],'<b>take-took-taken</b>'],
+  ['verb_all','give','過去分詞','given','give-gave-~',['gave','gived','gaven'],'<b>give-gave-given</b>'],
+  ['verb_all','see','過去分詞','seen','see-saw-~',['saw','seed','sawed'],'<b>see-saw-seen</b>'],
+  ['verb_all','know','過去分詞','known','know-knew-~',['knew','knowed','knewn'],'<b>know-knew-known</b>'],
+  ['verb_all','eat','過去分詞','eaten','eat-ate-~',['ate','eated','aten'],'<b>eat-ate-eaten</b>'],
+  ['verb_all','choose','過去分詞','chosen','choose-chose-~',['chose','choosed','choosen'],'<b>choose-chose-chosen</b>'],
+  ['verb_all','forget','過去分詞','forgotten','forget-forgot-~',['forgot','forgetted','forgoten'],'<b>forget-forgot-forgotten</b>'],
+  ['verb_all','fall','過去分詞','fallen','fall-fell-~',['fell','falled','fellen'],'<b>fall-fell-fallen</b>'],
+  ['verb_all','draw','過去分詞','drawn','draw-drew-~',['drew','drawed','drewn'],'<b>draw-drew-drawn</b>'],
+  ['verb_all','grow','過去分詞','grown','grow-grew-~',['grew','growed','grewn'],'<b>grow-grew-grown</b>'],
+  ['verb_all','throw','過去分詞','thrown','throw-threw-~',['threw','throwed','threwn'],'<b>throw-threw-thrown</b>'],
+  ['verb_all','fly','過去分詞','flown','fly-flew-~',['flew','flied','flewn'],'<b>fly-flew-flown</b>'],
+  ['verb_all','wear','過去分詞','worn','wear-wore-~',['wore','weared','waren'],'<b>wear-wore-worn</b>'],
+  ['verb_all','show','過去分詞','shown','show-showed-~',['showed','shew','showen'],'<b>show-showed-shown</b>'],
+  ['verb_all','sing','過去分詞','sung','sing-sang-~',['sang','singed','sangen'],'<b>sing-sang-sung</b>'],
+  ['verb_all','swim','過去分詞','swum','swim-swam-~',['swam','swimmed','swammen'],'<b>swim-swam-swum</b>'],
+  ['verb_all','drink','過去分詞','drunk','drink-drank-~',['drank','drinked','dranken'],'<b>drink-drank-drunk</b>'],
+  ['verb_all','begin','過去分詞','begun','begin-began-~',['began','beginned','begunen'],'<b>begin-began-begun</b>'],
+  ['verb_all','go','過去分詞','gone','go-went-~',['went','goed','goen'],'<b>go-went-gone</b>'],
+  ['verb_all','do','過去分詞','done','do-did-~',['did','doed','dden'],'<b>do-did-done</b>'],
+  ['verb_all','run','過去分詞','run','run-ran-~',['ran','runned','runen'],'<b>run-ran-run</b>'],
+  ['verb_all','come','過去分詞','come','come-came-~',['came','comed','comen'],'<b>come-came-come</b>'],
+  ['verb_all','become','過去分詞','become','become-became-~',['became','becomed','becomen'],'<b>become-became-become</b>'],
+  ['verb_all','build','過去分詞','built','build-built-~',['builded','bilded','builten'],'<b>build-built-built</b>'],
+  ['verb_all','hold','過去分詞','held','hold-held-~',['holded','holden','hald'],'<b>hold-held-held</b>'],
+  ['verb_all','send','過去分詞','sent','send-sent-~',['sended','sented','senden'],'<b>send-sent-sent</b>'],
+  ['verb_all','spend','過去分詞','spent','spend-spent-~',['spended','spented','spenden'],'<b>spend-spent-spent</b>'],
+  ['verb_all','teach','過去分詞','taught','teach-taught-~',['teached','tought','taugt'],'<b>teach-taught-taught</b>'],
+  ['verb_all','catch','過去分詞','caught','catch-caught-~',['catched','cought','caugt'],'<b>catch-caught-caught</b>'],
+  ['verb_all','buy','過去分詞','bought','buy-bought-~',['buyed','baught','boughten'],'<b>buy-bought-bought</b>'],
+  ['verb_all','bring','過去分詞','brought','bring-brought-~',['bringed','braught','broght'],'<b>bring-brought-brought</b>'],
+  ['verb_all','think','過去分詞','thought','think-thought-~',['thinked','thaught','thoght'],'<b>think-thought-thought</b>'],
+  ['verb_all','find','過去分詞','found','find-found-~',['finded','founded','founden'],'<b>find-found-found</b>'],
+  ['verb_all','hear','過去分詞','heard','hear-heard-~',['heared','hearded','hert'],'<b>hear-heard-heard</b>'],
+  ['verb_all','leave','過去分詞','left','leave-left-~',['leaved','lefted','leaven'],'<b>leave-left-left</b>'],
+  ['verb_all','feel','過去分詞','felt','feel-felt-~',['feeled','felted','feelen'],'<b>feel-felt-felt</b>'],
+  ['verb_all','sell','過去分詞','sold','sell-sold-~',['selled','seld','sellen'],'<b>sell-sold-sold</b>'],
+  ['verb_all','tell','過去分詞','told','tell-told-~',['telled','teld','tellen'],'<b>tell-told-told</b>'],
+  ['verb_all','win','過去分詞','won','win-won-~',['winned','woned','winnen'],'<b>win-won-won</b>'],
+  ['verb_all','lose','過去分詞','lost','lose-lost-~',['losed','losten','loosed'],'<b>lose-lost-lost</b>'],
+  ['verb_all','understand','過去分詞','understood','understand-understood-~',['understanded','understod','understanden'],'<b>understand-understood-understood</b>'],
+  ['verb_all','read','過去分詞','read','読む（発音レッド）',['readed','red','readen'],'発音「レッド」！<b>read-read-read</b>','read. red. red.']
+].map(([cat,base,target,ans,jp,wrongs,exp,speak]) => ({cat,base,target,ans,jp,wrongs,exp,speak}));
+
+const VOCAB_BANK = [
+  // idiom3_3 (40)
+  ['so ~ that','とても〜なので…（too ~ to に書き換え）','idiom3_3',0,['such ~ that','too ~ that','very ~ that']],
+  ['too ~ to','〜すぎて…できない（so ~ that に書き換え）','idiom3_3',0,['so ~ to','very ~ to','too ~ for']],
+  ['not only A but also B','AだけでなくBも（動詞はBに一致）','idiom3_3',0,['not only A and also B','not A but also B','only A but also B']],
+  ['both A and B','AとBの両方（主語なら複数扱い）','idiom3_3',0,['both A or B','both A with B','each A and B']],
+  ['either A or B','AかBのどちらか一方','idiom3_3',0,['either A and B','neither A or B','either A nor B']],
+  ['neither A nor B','AもBもどちらも〜ない','idiom3_3',0,['neither A or B','either A nor B','neither A and B']],
+  ['arrive at','（駅などに）到着する（＝get to / reach）','idiom3_3',0,['arrive to','arrive on','arrive for']],
+  ['arrive in','（都市・国に）到着する','idiom3_3',0,['arrive to','arrive on','arrive for']],
+  ['get to','〜に到着する（＝arrive at / reach）','idiom3_3',0,['get at','get in','get for']],
+  ['reach','〜に到着する（前置詞なし！）','idiom3_3',0,['reach to','reach at','reach in']],
+  ['look forward to','〜するのを楽しみに待つ（後ろは~ing！）','idiom3_3',0,['look forward for','look forword to','looks forward at']],
+  ['be able to','〜することができる（will be able to）','idiom3_3',0,['be able for','is able of','be able at']],
+  ['in order to','〜するために（不定詞の強調）','idiom3_3',0,['in order for','on order to','in order that']],
+  ['make a decision','決心する・決定を下す','idiom3_3',0,['do a decision','take a decision','make decision']],
+  ['decide to','〜することを決める','idiom3_3',0,['decide for','decide of','decide on to']],
+  ['for example','例えば','idiom3_3',0,['at example','for examples','by example']],
+  ['depend on','〜に頼る・〜次第だ','idiom3_3',0,['depend in','depend at','depend to']],
+  ['agree with','（人・意見）に賛成する','idiom3_3',0,['agree to','agree on','agree at']],
+  ['take care of','〜の世話をする（＝look after）','idiom3_3',0,['take care for','make care of','take care at']],
+  ['be proud of','〜を誇りに思う','idiom3_3',0,['be proud for','be proud in','be proud at']],
+  ['be interested in','〜に興味がある','idiom3_3',0,['be interesting in','be interested at','be interested on']],
+  ['be famous for','〜で有名だ','idiom3_3',0,['be famous to','be famous at','be famous of']],
+  ['be surprised at','〜に驚く','idiom3_3',0,['be surprised to','be surprising at','be surprised for']],
+  ['be different from','〜と異なっている','idiom3_3',0,['be different to','be different of','be different with']],
+  ['be filled with','〜でいっぱいである','idiom3_3',0,['be filled of','be full with','be filled by']],
+  ['be made of','〜で作られている（材料が見える）','idiom3_3',0,['be made by','be make of','be made in']],
+  ['be made from','〜で作られている（原料が変化）','idiom3_3',0,['be made by','be make from','be made at']],
+  ['instead of','〜の代わりに','idiom3_3',0,['instead for','instead to','in stead of']],
+  ['without ~ing','〜しないで・〜せずに','idiom3_3',0,['without to','with out ~ing','without for']],
+  ['thanks to','〜のおかげで','idiom3_3',0,['thank to','thanks for','thankful to']],
+  ['because of','〜が原因で・〜のために（＋名詞）','idiom3_3',0,['because for','because to','because from']],
+  ['according to','〜によれば','idiom3_3',0,['according for','according with','accord to']],
+  ['such as','たとえば〜のような','idiom3_3',0,['so as','such like','as such']],
+  ['each other','お互いに','idiom3_3',0,['each others','one other','each another']],
+  ['one after another','次々と','idiom3_3',0,['one by another','one after other','one and another']],
+  ['more and more','ますます多くの・だんだん〜','idiom3_3',0,['more or more','many and many','much and more']],
+  ['used to','以前はよく〜したものだ','idiom3_3',0,['use to','using to','was used']],
+  ['had better','〜したほうがよい','idiom3_3',0,['have better','had best','was better']],
+  ['give up','あきらめる・やめる','idiom3_3',0,['give out','give off','gave up to']],
+  ['all over the world','世界中で','idiom3_3',0,['all on the world','over all world','all in the world']],
+
+  // conv_essay3_3 (40)
+  ['I agree with you','あなたに賛成です','conv_essay3_3',1,['I agree to you','I am agree with you','I agreed to you']],
+  ['That\'s a good idea','それはいい考えですね','conv_essay3_3',1,['That\'s good idea','It\'s a well idea','That good idea']],
+  ['I\'m not sure, but','確信はありませんが／よく分かりませんが〜','conv_essay3_3',1,['I\'m no sure, but','I don\'t sure, but','I\'m not surely, but']],
+  ['What do you think of','〜についてどう思いますか？','conv_essay3_3',1,['How do you think of','What are you think of','What do you think to']],
+  ['It depends on','〜次第です／場合によります','conv_essay3_3',1,['It depends in','It depend on','It is depend on']],
+  ['Take care of yourself','お大事に／気をつけてね','conv_essay3_3',1,['Take care yourself','Take care for yourself','Look care of yourself']],
+  ['Good luck!','頑張って！／幸運を祈るよ！','conv_essay3_3',1,['Good lucks!','Have good luck!','Well luck!']],
+  ['Congratulations on','〜おめでとう！（前置詞on注意）','conv_essay3_3',1,['Congratulations for','Congratulation on','Congratulations to']],
+  ['I think that','私は〜だと思います（主張の型）','conv_essay3_3',1,['I\'m think that','I thinking that','I thought to']],
+  ['I have two reasons','理由は2つあります（英作文の型）','conv_essay3_3',1,['I have two reason','There are two reason','I had two reasons for']],
+  ['For these reasons','これらの理由から（結びの型）','conv_essay3_3',1,['For this reasons','By these reasons','With these reasons']],
+  ['In my opinion','私の意見では','conv_essay3_3',1,['On my opinion','At my opinion','By my opinion']],
+  ['First, ~. Second, ~.','1つ目は〜。2つ目は〜。','conv_essay3_3',1,['First, ~. Two, ~.','One, ~. Second, ~.','Firstly, ~. Twoly, ~.']],
+  ['I\'m glad to hear that','それを聞いてうれしいです','conv_essay3_3',1,['I\'m glad hearing that','I glad to hear that','I\'m glad to listen that']],
+  ['I\'m sorry to hear that','それは残念です','conv_essay3_3',1,['I\'m sorry hearing that','I sorry to hear that','I\'m sorry for hear that']],
+  ['I have no idea','まったく分かりません','conv_essay3_3',1,['I have not idea','I don\'t have idea','I know no idea']],
+  ['Not at all','どういたしまして／まったく〜ない','conv_essay3_3',1,['No at all','Not in all','Never at all']],
+  ['You\'re welcome','どういたしまして','conv_essay3_3',1,['Your welcome','You welcome','You\'re welcomed']],
+  ['No problem','問題ないよ／どういたしまして','conv_essay3_3',1,['No problems','Not problem','None problem']],
+  ['Of course','もちろんです','conv_essay3_3',1,['Of cource','Off course','Of cause']],
+  ['Sure','いいですよ／もちろん','conv_essay3_3',1,['Shure','Suer','Sur']],
+  ['Sounds good!','いいね！／よさそうだね！','conv_essay3_3',1,['Sound good!','Sounds well!','Listen good!']],
+  ['How about ~ing?','〜するのはどうですか？','conv_essay3_3',1,['What about to ~?','How about to ~?','How do you ~ing?']],
+  ['Why don\'t we ~?','一緒に〜しませんか？（＝Let\'s）','conv_essay3_3',1,['Why don\'t us ~?','Why not we ~?','How don\'t we ~?']],
+  ['Shall I ~?','（私が）〜しましょうか？','conv_essay3_3',1,['Will I ~?','Should I to ~?','Shall me ~?']],
+  ['May I ~?','〜してもいいですか？','conv_essay3_3',1,['Am I may ~?','May I to ~?','Can I to ~?']],
+  ['Could you tell me','〜を教えていただけますか？','conv_essay3_3',1,['Could you say me','Could you tell to me','Can you speak me']],
+  ['Hold on, please','そのままお待ちください','conv_essay3_3',1,['Hold in, please','Keep on, please','Wait on, please']],
+  ['Here you are','はい、どうぞ','conv_essay3_3',1,['Here are you','There you are here','Here you is']],
+  ['Help yourself','ご自由にどうぞ（召し上がれ）','conv_essay3_3',1,['Help you','Help your self','Take yourself']],
+  ['Me too','私もです','conv_essay3_3',1,['I too','My too','Me also']],
+  ['I hope so','そうだとよいのですが','conv_essay3_3',1,['I hope it','I wish so','I\'m hope so']],
+  ['I\'m afraid not','残念ながらそうではありません','conv_essay3_3',1,['I\'m afraid no','I afraid not','I\'m sorry not']],
+  ['That\'s too bad','それは残念ですね','conv_essay3_3',1,['That\'s so bad','It\'s too badly','That too bad']],
+  ['Never mind','気にしないで','conv_essay3_3',1,['Don\'t mind it','Never minds','No mind']],
+  ['Pardon me?','もう一度言っていただけますか？','conv_essay3_3',1,['Excuse?','Pardon you?','Repeat me?']],
+  ['By the way','ところで','conv_essay3_3',1,['On the way','In the way','For the way']],
+  ['In fact','実は・実際は','conv_essay3_3',1,['At fact','On fact','For fact']],
+  ['As a result','その結果','conv_essay3_3',1,['As result','By a result','For a result']],
+  ['In addition','さらに・加えて','conv_essay3_3',1,['On addition','At addition','For addition']],
+
+  // uncount_noun3_3 (40)
+  ['information','情報（不可算・s不可）','uncount_noun3_3',0,['informations','informasion','infomation']],
+  ['advice','助言・アドバイス（不可算・s不可）','uncount_noun3_3',0,['advices','advise','adivce']],
+  ['homework','宿題（不可算・s不可）','uncount_noun3_3',0,['homeworks','homwork','homeworke']],
+  ['news','ニュース・知らせ（不可算・単数扱い）','uncount_noun3_3',0,['newses','neuse','nuws']],
+  ['society','社会','uncount_noun3_3',0,['sosiety','socety','sociaty']],
+  ['community','地域社会・コミュニティ','uncount_noun3_3',0,['comunity','communty','commynity']],
+  ['environment','環境','uncount_noun3_3',0,['enviroment','invironment','envilonment']],
+  ['education','教育','uncount_noun3_3',0,['educasion','edukation','edicuation']],
+  ['knowledge','知識（不可算・k無音）','uncount_noun3_3',0,['knowlege','knowledges','nowlege']],
+  ['volunteer','ボランティア','uncount_noun3_3',0,['volonteer','bolunteer','volunter']],
+  ['dream','夢','uncount_noun3_3',0,['dreem','drem','dleam']],
+  ['challenge','挑戦・課題','uncount_noun3_3',0,['chalenge','challange','charenge']],
+  ['effort','努力','uncount_noun3_3',0,['efort','effart','affort']],
+  ['goal','目標・ゴール','uncount_noun3_3',0,['gole','gool','goel']],
+  ['future','未来・将来','uncount_noun3_3',0,['futuer','fuchure','futur']],
+  ['experience','経験・体験','uncount_noun3_3',0,['experence','exprience','experiance']],
+  ['culture','文化','uncount_noun3_3',0,['calture','cultuer','kulture']],
+  ['tradition','伝統','uncount_noun3_3',0,['tradision','traditon','tradtion']],
+  ['peace','平和','uncount_noun3_3',0,['peece','pease','pece']],
+  ['nature','自然','uncount_noun3_3',0,['nacher','natuer','natyre']],
+  ['earth','地球','uncount_noun3_3',0,['earthe','erth','arth']],
+  ['energy','エネルギー','uncount_noun3_3',0,['enargy','energi','enegy']],
+  ['pollution','汚染・公害','uncount_noun3_3',0,['polusion','pollusion','porrution']],
+  ['technology','科学技術','uncount_noun3_3',0,['tecnology','technorogy','techonology']],
+  ['science','科学','uncount_noun3_3',0,['sience','scence','scince']],
+  ['history','歴史','uncount_noun3_3',0,['histry','histoly','hestory']],
+  ['language','言語・ことば','uncount_noun3_3',0,['langage','languge','languege']],
+  ['communication','意思疎通・コミュニケーション','uncount_noun3_3',0,['comunication','communicaton','communicasion']],
+  ['opinion','意見','uncount_noun3_3',0,['opinnion','opinon','oponion']],
+  ['reason','理由','uncount_noun3_3',0,['reeson','reasen','reazon']],
+  ['result','結果','uncount_noun3_3',0,['resalt','rezult','lesult']],
+  ['problem','問題','uncount_noun3_3',0,['problm','ploblem','probream']],
+  ['solution','解決策','uncount_noun3_3',0,['solusion','soluton','sorution']],
+  ['decision','決定・決心','uncount_noun3_3',0,['desision','decition','dicision']],
+  ['chance','機会・チャンス','uncount_noun3_3',0,['chanse','chans','shance']],
+  ['opportunity','機会（＝chance）','uncount_noun3_3',0,['oportunity','opportunty','oppotunity']],
+  ['success','成功','uncount_noun3_3',0,['sucess','succes','saccess']],
+  ['memory','思い出・記憶','uncount_noun3_3',0,['memoly','memori','memry']],
+  ['graduation','卒業','uncount_noun3_3',0,['graduasion','gradution','gladuaton']],
+  ['population','人口','uncount_noun3_3',0,['popuration','populasion','populetion']],
+
+  // verb3_3 (40)
+  ['see','見る（知覚動詞：＋人＋原形/~ing）','verb3_3',0,['sea','se','sie']],
+  ['hear','聞く（知覚動詞：＋人＋原形/~ing）','verb3_3',0,['heer','here','heir']],
+  ['watch','じっと見る（知覚動詞）','verb3_3',0,['wach','whatch','watsh']],
+  ['feel','感じる（知覚動詞）','verb3_3',0,['feal','fell','fiil']],
+  ['make','〜させる（使役動詞：＋人＋原形）','verb3_3',0,['maik','mak','meik']],
+  ['let','〜させてあげる（使役動詞：＋人＋原形）','verb3_3',0,['lett','lat','ret']],
+  ['protect','守る・保護する','verb3_3',0,['ploteckt','protec','protekt']],
+  ['support','支える・応援する','verb3_3',0,['suport','suppot','sapport']],
+  ['decide','決める・決心する','verb3_3',0,['deside','decid','decyde']],
+  ['achieve','達成する・成し遂げる','verb3_3',0,['acheive','achive','acheve']],
+  ['improve','改善する・上達させる','verb3_3',0,['inprove','improbe','implove']],
+  ['solve','解く・解決する','verb3_3',0,['solbe','solv','sorve']],
+  ['encourage','励ます・勇気づける','verb3_3',0,['encorage','incurage','encourege']],
+  ['respect','尊敬する','verb3_3',0,['respekt','rispect','lespect']],
+  ['realize','気づく・実現する','verb3_3',0,['realise','rialize','lealize']],
+  ['believe','信じる','verb3_3',0,['beleive','belive','bileive']],
+  ['agree','賛成する','verb3_3',0,['agre','aglee','aggree']],
+  ['disagree','反対する','verb3_3',0,['disagre','desagree','disaglee']],
+  ['communicate','意思疎通をする','verb3_3',0,['comunicate','communikate','commnicate']],
+  ['express','表現する','verb3_3',0,['ekspress','expres','exples']],
+  ['explain','説明する','verb3_3',0,['explane','eksplain','explayn']],
+  ['share','分かち合う・共有する','verb3_3',0,['sheer','shere','shair']],
+  ['create','創り出す・創造する','verb3_3',0,['creait','criate','cleate']],
+  ['invent','発明する','verb3_3',0,['inbent','envent','invant']],
+  ['discover','発見する','verb3_3',0,['discovar','discorver','descover']],
+  ['develop','発展させる・開発する','verb3_3',0,['debelop','devellop','divelop']],
+  ['produce','生産する・生み出す','verb3_3',0,['produse','produs','ploduce']],
+  ['save','救う・節約する','verb3_3',0,['saive','seve','sabe']],
+  ['recycle','リサイクルする','verb3_3',0,['recicle','resycle','lecycle']],
+  ['reduce','減らす','verb3_3',0,['reduse','riduce','leduce']],
+  ['reuse','再利用する','verb3_3',0,['riuse','reuze','leuse']],
+  ['remember','覚えている・思い出す','verb3_3',0,['remembar','remenber','rimember']],
+  ['forget','忘れる','verb3_3',0,['forgat','foget','forgget']],
+  ['imagine','想像する','verb3_3',0,['imazine','imagen','imajine']],
+  ['continue','続ける','verb3_3',0,['continiew','continew','continyu']],
+  ['prepare','準備する','verb3_3',0,['prepair','pripare','plepare']],
+  ['attend','出席する・通う','verb3_3',0,['atend','attand','attende']],
+  ['choose','選ぶ','verb3_3',0,['chose','chooze','chuse']],
+  ['understand','理解する','verb3_3',0,['understend','understad','understant']],
+  ['depend','頼る・次第である','verb3_3',0,['dipend','depand','depent']],
+
+  // adj_adv3_3 (40)
+  ['foreign','外国の（g無音）','adj_adv3_3',0,['foriegn','forein','forign']],
+  ['international','国際的な','adj_adv3_3',0,['internasional','intarnational','internatonal']],
+  ['necessary','必要な（c1・s2）','adj_adv3_3',0,['neccessary','necesary','nessessary']],
+  ['important','重要な','adj_adv3_3',0,['inportant','importent','improtant']],
+  ['useful','役に立つ','adj_adv3_3',0,['usefull','usful','yuseful']],
+  ['helpful','助けになる','adj_adv3_3',0,['helpfull','herpful','helful']],
+  ['wonderful','すばらしい','adj_adv3_3',0,['wanderful','wonderfull','wondarful']],
+  ['amazing','驚くほどすばらしい','adj_adv3_3',0,['amazeing','amesing','amazeng']],
+  ['exciting','わくわくさせる','adj_adv3_3',0,['exiting','exciteing','eksciting']],
+  ['excited','わくわくした（人が主語）','adj_adv3_3',0,['exited','exciteed','ecsited']],
+  ['surprised','驚いた（人が主語）','adj_adv3_3',0,['suprised','surprized','sirprised']],
+  ['proud','誇りに思う','adj_adv3_3',0,['prowd','ploud','proude']],
+  ['glad','うれしい','adj_adv3_3',0,['gled','gladd','grad']],
+  ['sure','確信している・確かな','adj_adv3_3',0,['shure','suer','syur']],
+  ['different','違った・さまざまな','adj_adv3_3',0,['diferent','differant','diffrent']],
+  ['similar','似た・類似した','adj_adv3_3',0,['similer','simillar','cemilar']],
+  ['possible','可能な','adj_adv3_3',0,['posible','possibel','possibul']],
+  ['impossible','不可能な','adj_adv3_3',0,['inpossible','imposible','impossibel']],
+  ['traditional','伝統的な','adj_adv3_3',0,['tradisional','traditonal','traditinal']],
+  ['modern','現代の・近代的な','adj_adv3_3',0,['morden','modarn','moden']],
+  ['convenient','便利な','adj_adv3_3',0,['convinient','convenent','comvenient']],
+  ['dangerous','危険な','adj_adv3_3',0,['dangerus','danzerous','dengerous']],
+  ['safe','安全な','adj_adv3_3',0,['saif','sfe','saef']],
+  ['serious','深刻な・まじめな','adj_adv3_3',0,['serius','seriuos','cilious']],
+  ['common','共通の・一般的な','adj_adv3_3',0,['comon','commen','cammon']],
+  ['local','地元の・地域の','adj_adv3_3',0,['rocal','locall','lokal']],
+  ['global','世界的な・地球規模の','adj_adv3_3',0,['grobal','globall','gloval']],
+  ['however','しかしながら','adj_adv3_3',0,['howevar','hawever','howver']],
+  ['therefore','それゆえに・したがって','adj_adv3_3',0,['therfore','therefor','tharefore']],
+  ['actually','実は・実際に','adj_adv3_3',0,['actualy','actuary','actuallly']],
+  ['especially','特に','adj_adv3_3',0,['espesially','especally','expecially']],
+  ['finally','ついに・最後に','adj_adv3_3',0,['finaly','finallly','finarry']],
+  ['recently','最近','adj_adv3_3',0,['rescently','recentry','recenly']],
+  ['suddenly','突然・急に','adj_adv3_3',0,['sudenly','suddenry','suddnly']],
+  ['probably','おそらく','adj_adv3_3',0,['probabry','probablly','plobably']],
+  ['perhaps','たぶん・もしかすると','adj_adv3_3',0,['parhaps','perhups','perhapes']],
+  ['almost','ほとんど','adj_adv3_3',0,['allmost','almos','armost']],
+  ['hardly','ほとんど〜ない','adj_adv3_3',0,['hardry','herdly','hardley']],
+  ['together','一緒に','adj_adv3_3',0,['togehter','togather','togethor']],
+  ['abroad','海外へ・海外で','adj_adv3_3',0,['abrode','abroaded','avroad']],
+
+  // gram_func3_3 (40)
+  ['though','〜だけれども','gram_func3_3',0,['thoug','thougt','thogh']],
+  ['although','〜だけれども（文頭頻出）','gram_func3_3',0,['allthough','althoug','alghough']],
+  ['unless','もし〜でなければ（＝if ~ not）','gram_func3_3',0,['unles','onless','unress']],
+  ['whether','〜かどうか','gram_func3_3',0,['wether','wheather','wheter']],
+  ['while','〜する間に・一方で','gram_func3_3',0,['whyle','wile','whil']],
+  ['since','〜以来・〜なので','gram_func3_3',0,['sence','sinse','cince']],
+  ['until','〜まで（ずっと）','gram_func3_3',0,['untill','ontil','antil']],
+  ['during','〜の間（＋名詞）','gram_func3_3',0,['dureing','duling','durring']],
+  ['through','〜を通して・通り抜けて','gram_func3_3',0,['throught','throug','throgh']],
+  ['without','〜なしで','gram_func3_3',0,['withot','whitout','withuot']],
+  ['against','〜に反対して','gram_func3_3',0,['agenst','aginst','againest']],
+  ['between','（2つの）間に','gram_func3_3',0,['betwen','betwean','batween']],
+  ['among','（3つ以上の）間に・中に','gram_func3_3',0,['amang','amoung','amung']],
+  ['across','〜を横切って','gram_func3_3',0,['acros','accross','acloss']],
+  ['around','〜のまわりに・約〜','gram_func3_3',0,['arond','arround','alound']],
+  ['beside','〜のそばに','gram_func3_3',0,['besides','besid','becide']],
+  ['behind','〜の後ろに','gram_func3_3',0,['bihind','behined','behaind']],
+  ['who','（関係代名詞・人）〜する人','gram_func3_3',0,['whoo','hoo','wh']],
+  ['which','（関係代名詞・もの）〜するもの','gram_func3_3',0,['wich','whitch','whych']],
+  ['whom','（関係代名詞・人の目的格）','gram_func3_3',0,['whoom','whome','whon']],
+  ['whose','（関係代名詞・所有格）〜の','gram_func3_3',0,['whos',"who's",'whoes']],
+  ['what','（感嘆文・名詞）なんと〜／何','gram_func3_3',0,['whot','wat','wha']],
+  ['how','（感嘆文・形容詞/副詞）なんと〜／どのように','gram_func3_3',0,['hou','haw','ho']],
+  ['myself','私自身','gram_func3_3',0,['meself','myselves','myslef']],
+  ['yourself','あなた自身','gram_func3_3',0,['youself','yourselves','yorself']],
+  ['himself','彼自身','gram_func3_3',0,['hisself','heself','himslef']],
+  ['herself','彼女自身','gram_func3_3',0,['sheself','herselves','herslef']],
+  ['ourselves','私たち自身','gram_func3_3',0,['ourself','usself','usselves']],
+  ['themselves','彼ら自身','gram_func3_3',0,['themself','theirself','theirselves']],
+  ['everyone','みんな（単数扱い）','gram_func3_3',0,['every one','evryone','everybody']],
+  ['everything','すべてのこと（単数扱い）','gram_func3_3',0,['evrything','every thing','everythng']],
+  ['something','何か（肯定文）','gram_func3_3',0,['somthing','some thing','samething']],
+  ['anything','何か（疑問文）・何も〜ない（not ~）','gram_func3_3',0,['any thing','enything','anythng']],
+  ['nothing','何も〜ない','gram_func3_3',0,['nothng','no thing','nuthing']],
+  ['both','両方とも','gram_func3_3',0,['bothe','bouth','boath']],
+  ['either','どちらか一方','gram_func3_3',0,['eather','ither','eithor']],
+  ['neither','どちらも〜ない','gram_func3_3',0,['niether','nether','neithor']],
+  ['another','もう1つの・別の','gram_func3_3',0,['anather','anothar','unother']],
+  ['other','ほかの','gram_func3_3',0,['othar','ather','othre']],
+  ['several','いくつかの','gram_func3_3',0,['sevaral','severel','saberal']]
+].map(([en,jp,cat,cap,typos]) => ({en,jp,cat,cap:!!cap,typos}));
+
+const STATIC_QUESTIONS = [
+  { id:'t33_u1_1', unit:'u1', diff:2, type:'choice', jp:'「私は彼が通りを走っていくのを見ました。」', q:'I saw him (   ) across the street.', opts:['run','to run','ran','runs'], ans:0, exp:'知覚動詞 see ＋ 人 ＋ <b>動詞の原形（または ~ing）</b>！to はつけません。', speak:'I saw him run across the street.' },
+  { id:'t33_u1_2', unit:'u1', diff:2, type:'choice', jp:'「母は私に部屋を掃除させました。」', q:'My mother made me (   ) my room.', opts:['clean','to clean','cleaning','cleaned'], ans:0, exp:'使役動詞 make ＋ 人 ＋ <b>動詞の原形</b>！', speak:'My mother made me clean my room.' },
+  { id:'t33_u1_3', unit:'u1', diff:2, type:'input', jp:'「私は妹がピアノを弾いているのを聞きました。」(play の適切な形で 1語)', q:'I heard my sister (         ) the piano.', placeholder:'~ing形 または 原形（1語）', ansList:['playing','play'], caseSensitive:false, exp:'hear ＋ 人 ＋ <b>playing（または play）</b>！', speak:'I heard my sister playing the piano.' },
+  { id:'t33_u1_4', unit:'u1', diff:2, type:'sort', jp:'「あなたにまた会えて私はうれしいです。」', words:['am','I','glad','that','again.','I can see you'], ans:'I am glad that I can see you again.', exp:'<b>I am glad that ＋ 主語 ＋ 動詞</b>「〜してうれしい」の語順！', speak:'I am glad that I can see you again.' },
+  { id:'t33_u1_5', unit:'u1', diff:3, type:'error', jp:'「先生は私たちに英語を勉強させました。」間違いを見つけよう。', segs:['The teacher','made','us','to study','English.'], errIdx:3, fixOpts:['study','studying','studied'], fixAns:0, exp:'使役動詞 make の後ろは to をつけず原形 <b>study</b> にします！', speak:'The teacher made us study English.' },
+
+  { id:'t33_u2_1', unit:'u2', diff:2, type:'choice', jp:'「あなたは音楽が好きですよね。」', q:'You like music, (   )?', opts:["don't you","aren't you",'do you','are you'], ans:0, exp:'一般動詞（like）の肯定文の後ろには <b>don\'t you</b> をつけます！', speak:"You like music, don't you?" },
+  { id:'t33_u2_2', unit:'u2', diff:3, type:'choice', jp:'「ケンは東京出身ですよね。」', q:'Ken is from Tokyo, (   )?', opts:["isn't he","isn't Ken",'is he',"doesn't he"], ans:0, exp:'主語が名詞（Ken）のとき、付加疑問では代名詞 <b>he</b> を使います！', speak:"Ken is from Tokyo, isn't he?" },
+  { id:'t33_u2_3', unit:'u2', diff:3, type:'choice', jp:'【超重要ひっかけ】「英語は好きではないのですか。」「いいえ、好きです。」', q:"Don't you like English? — (   ), I do.", opts:['Yes','No','Not','Sure'], ans:0, exp:'否定疑問文への答えは日本語の「いいえ」につられず、<b>肯定の内容（I do）なら Yes</b>！', speak:"Don't you like English? Yes, I do." },
+  { id:'t33_u2_4', unit:'u2', diff:3, type:'input', jp:'「一緒に英語を勉強しましょうね。」(2語で)', q:"Let's study English together, (               )?", placeholder:'Let\'s の付加疑問（2語）', ansList:['shall we'], caseSensitive:false, exp:'Let\'s 〜 の付加疑問は必ず <b>shall we</b>！', speak:"Let's study English together, shall we?" },
+  { id:'t33_u2_5', unit:'u2', diff:3, type:'error', jp:'「彼は昨日公園へ行きませんでしたよね。」間違いを見つけよう。', segs:['He',"didn't",'go','to the park','yesterday,',"didn't he?"], errIdx:5, fixOpts:['did he?','does he?','was he?'], fixAns:0, exp:'前の文が否定文（didn\'t）なので、後ろは肯定の <b>did he?</b> にします！', speak:"He didn't go to the park yesterday, did he?" },
+
+  { id:'t33_u3_1', unit:'u3', diff:2, type:'choice', jp:'「なんて背が高い少年なのだろう！」', q:'(   ) a tall boy he is!', opts:['What','How','Which','Who'], ans:0, exp:'後ろに名詞（a tall boy）があるので <b>What</b>！', speak:'What a tall boy he is!' },
+  { id:'t33_u3_2', unit:'u3', diff:2, type:'choice', jp:'「なんて速くケンは走るのでしょう！」', q:'(   ) fast Ken runs!', opts:['How','What','What a','So'], ans:0, exp:'後ろが副詞（fast）＋主語＋動詞だけなので <b>How</b>！', speak:'How fast Ken runs!' },
+  { id:'t33_u3_3', unit:'u3', diff:3, type:'choice', jp:'【不可算名詞トラップ】「私はインターネットで多くの役立つ情報を得ました。」', q:'I got (   ) on the internet.', opts:['much useful information','many useful informations','a useful information','useful informations'], ans:0, exp:'information は不可算名詞！a や -s はつけず <b>much useful information</b> にします。', speak:'I got much useful information on the internet.' },
+  { id:'t33_u3_4', unit:'u3', diff:3, type:'input', jp:'「これはなんて面白い本なのだろう！」(2語で)', q:'(               ) interesting book this is!（2語で）', placeholder:'What ＋ 冠詞（2語）', ansList:['What an'], caseSensitive:true, exp:'interesting は母音で始まるので <b>What an</b>！', speak:'What an interesting book this is!' },
+  { id:'t33_u3_5', unit:'u3', diff:3, type:'error', jp:'「すてきなアドバイスをありがとう。」間違いを見つけよう。', segs:['Thank you','for','your','good','advices.'], errIdx:4, fixOpts:['advice.','an advice.','advise.'], fixAns:0, exp:'advice は不可算名詞なので複数形の -s をつけず <b>advice.</b> にします！', speak:'Thank you for your good advice.' },
+
+  { id:'t33_u4_1', unit:'u4', diff:2, type:'choice', jp:'「私はあなたにまた会うのを楽しみに待っています。」', q:'I am looking forward to (   ) you again.', opts:['seeing','see','saw','seen'], ans:0, exp:'look forward to の後ろは必ず動名詞 <b>seeing</b>！', speak:'I am looking forward to seeing you again.' },
+  { id:'t33_u4_2', unit:'u4', diff:3, type:'choice', jp:'「ケンとユミの両方が英語を上手に話します。」', q:'Both Ken and Yumi (   ) English well.', opts:['speak','speaks','speaking','to speak'], ans:0, exp:'Both A and B が主語のときは<b>複数扱い</b>なので <b>speak</b>！', speak:'Both Ken and Yumi speak English well.' },
+  { id:'t33_u4_3', unit:'u4', diff:3, type:'input', jp:'「彼は8時に駅に到着しました。」(reach を使って 1語で)', q:'He (         ) the station at eight.', placeholder:'前置詞不要の動詞過去形（1語）', ansList:['reached'], caseSensitive:false, exp:'<b>reach</b> は後ろに at / to をつけない他動詞！過去形は <b>reached</b>。', speak:'He reached the station at eight.' },
+  { id:'t33_u4_4', unit:'u4', diff:3, type:'sort', jp:'「彼はとても疲れていたので歩くことができませんでした。」', words:['walk.',"couldn't",'so tired','that','He was','he'], ans:"He was so tired that he couldn't walk.", exp:'<b>so ＋ 形容詞 ＋ that ＋ 主語 ＋ couldn\'t 原形</b> の語順！', speak:"He was so tired that he couldn't walk." },
+  { id:'t33_u4_5', unit:'u4', diff:3, type:'error', jp:'「ケンだけでなくユミもテニスが好きです。」間違いを見つけよう。', segs:['Not only','Ken','but also','Yumi','like','tennis.'], errIdx:4, fixOpts:['likes','liking','to like'], fixAns:0, exp:'Not only A but also B は <b>B（Yumi）に動詞を一致</b>させるので <b>likes</b>！', speak:'Not only Ken but also Yumi likes tennis.' },
+
+  { id:'t33_u5_1', unit:'u5', diff:3, type:'choice', jp:'【書き換え】He is too young to drive a car. と同じ意味になるように。', q:'He is (   ) he cannot drive a car.', opts:['so young that','too young that','so young to','very young that'], ans:0, exp:'<b>too 〜 to 原形</b> ＝ <b>so 〜 that 主語 can\'t 原形</b>！', speak:'He is so young that he cannot drive a car.' },
+  { id:'t33_u5_2', unit:'u5', diff:2, type:'choice', jp:'【未来の「〜できる」】「あなたは来年にはもっと上手に英語を話せるようになるでしょう。」', q:'You (   ) speak English better next year.', opts:['will be able to','will can','can will','be able to'], ans:0, exp:'will と can は並べられないので <b>will be able to</b> にします！', speak:'You will be able to speak English better next year.' },
+  { id:'t33_u5_3', unit:'u5', diff:3, type:'input', jp:'【書き換え】If it does not rain tomorrow, we will go. (1語で)', q:'(         ) it rains tomorrow, we will go.', placeholder:'「もし〜でなければ」（1語）', ansList:['Unless'], caseSensitive:true, exp:'If 〜 not ... ＝ <b>Unless</b> 〜 ...！文頭なので大文字に注意。', speak:'Unless it rains tomorrow, we will go.' },
+  { id:'t33_u5_4', unit:'u5', diff:3, type:'sort', jp:'【比較級⇔最上級】富士山は日本で他のどの山よりも高い。', words:['any other','is higher','mountain','than','in Japan.','Mt. Fuji'], ans:'Mt. Fuji is higher than any other mountain in Japan.', exp:'「比較級 ＋ than any other ＋ <b>単数名詞</b>」＝ 最上級と同じ意味！', speak:'Mt. Fuji is higher than any other mountain in Japan.' },
+  { id:'t33_u5_5', unit:'u5', diff:3, type:'error', jp:'【受動態の書き換え】「その本は多くの人々に読まれています。」間違いを見つけよう。', segs:['The book','is','reading','by','many people.'], errIdx:2, fixOpts:['read','reads','to read'], fixAns:0, exp:'受動態は「be動詞 ＋ 過去分詞」なので <b>read</b>（発音レッド）にします！', speak:'The book is red by many people.' },
+
+  { id:'t33_u6_1', unit:'u6', diff:2, type:'choice', jp:'【分詞の識別】「カナダで話されている言語は英語とフランス語です。」', q:'The languages (   ) in Canada are English and French.', opts:['spoken','speaking','spoke','speak'], ans:0, exp:'言語は「話される（受動）」側なので過去分詞 <b>spoken</b>！', speak:'The languages spoken in Canada are English and French.' },
+  { id:'t33_u6_2', unit:'u6', diff:3, type:'choice', jp:'【間接疑問文】「駅がどこにあるか教えていただけますか。」', q:'Could you tell me (   )?', opts:['where the station is','where is the station','is where the station','where does the station'], ans:0, exp:'間接疑問文は <b>疑問詞 ＋ 主語 ＋ 動詞</b>（肯定文の語順）！', speak:'Could you tell me where the station is?' },
+  { id:'t33_u6_3', unit:'u6', diff:3, type:'input', jp:'【仮定法過去】「もし私が鳥なら、あなたのところへ飛んでいけるのに。」(1語で)', q:'If I (         ) a bird, I could fly to you.', placeholder:'仮定法のbe動詞（1語）', ansList:['were'], caseSensitive:false, exp:'仮定法過去のbe動詞は原則 <b>were</b>！', speak:'If I were a bird, I could fly to you.' },
+  { id:'t33_u6_4', unit:'u6', diff:3, type:'sort', jp:'【関係代名詞の省略】「母が作ったケーキはとてもおいしかったです。」', words:['was','made','The cake','my mother','very delicious.'], ans:'The cake my mother made was very delicious.', exp:'目的格の関係代名詞を省略した接触節：<b>The cake my mother made</b>！', speak:'The cake my mother made was very delicious.' },
+  { id:'t33_u6_5', unit:'u6', diff:3, type:'error', jp:'【関係代名詞】「私には京都に住んでいる友人がいます。」間違いを見つけよう。', segs:['I have','a friend','which','lives','in Kyoto.'], errIdx:2, fixOpts:['who','whom','whose'], fixAns:0, exp:'先行詞 a friend は「人」なので <b>who</b>（または that）にします！', speak:'I have a friend who lives in Kyoto.' },
+
+  { id:'t33_u7_1', unit:'u7', diff:2, type:'choice', jp:'「コンテストでの優勝おめでとう！」', q:'Congratulations (   ) winning the contest!', opts:['on','for','to','at'], ans:0, exp:'お祝いの表現は <b>Congratulations on 〜!</b>（前置詞 on に注意！）', speak:'Congratulations on winning the contest!' },
+  { id:'t33_u7_2', unit:'u7', diff:2, type:'choice', jp:'「明日ピクニックに行く？」「天気次第だよ。」', q:'Will you go on a picnic tomorrow? — It (   ) the weather.', opts:['depends on','agrees with','looks forward to','takes care of'], ans:0, exp:'「〜次第です／場合によります」＝ <b>It depends on 〜.</b>！', speak:'Will you go on a picnic tomorrow? It depends on the weather.' },
+  { id:'t33_u7_3', unit:'u7', diff:2, type:'input', jp:'「私はあなたに賛成です。」(2語で)', q:'I (               ) you.（2語で）', placeholder:'agree ＋ 前置詞（2語）', ansList:['agree with'], caseSensitive:false, exp:'「（人・意見）に賛成する」＝ <b>agree with 〜</b>！', speak:'I agree with you.' },
+  { id:'t33_u7_4', unit:'u7', diff:2, type:'sort', jp:'「この映画についてどう思いますか。」', words:['think of','do you','What','this movie?'], ans:'What do you think of this movie?', exp:'相手の意見を聞く定番：<b>What do you think of [about] 〜?</b>', speak:'What do you think of this movie?' },
+  { id:'t33_u7_5', unit:'u7', diff:2, type:'error', jp:'「お体に気をつけて（お大事に）。」間違いを見つけよう。', segs:['Take','care','for','yourself.'], errIdx:2, fixOpts:['of','to','with'], fixAns:0, exp:'「気をつけて／お大事に」＝ <b>Take care of yourself.</b>！', speak:'Take care of yourself.' },
+
+  { id:'t33_u8_1', unit:'u8', diff:2, type:'choice', jp:'【自由英作文・結び】「これらの理由から、私は英語は重要だと思います。」', q:'(   ) these reasons, I think English is important.', opts:['For','By','With','At'], ans:0, exp:'結びの鉄板フレーズ＝ <b>For these reasons, I think 〜.</b>！', speak:'For these reasons, I think English is important.' },
+  { id:'t33_u8_2', unit:'u8', diff:2, type:'choice', jp:'【自由英作文・理由】「私には2つの理由があります。」', q:'I have two (   ). First, it is fun. Second, it is useful.', opts:['reasons','ideas','decisions','efforts'], ans:0, exp:'意見論述の定番＝ <b>I have two reasons. First, ~. Second, ~.</b>！', speak:'I have two reasons. First, it is fun. Second, it is useful.' },
+  { id:'t33_u8_3', unit:'u8', diff:2, type:'input', jp:'「たとえば、私は毎日英語の本を読みます。」(2語で)', q:'(               ), I read English books every day.', placeholder:'「たとえば」（2語）', ansList:['For example'], caseSensitive:true, exp:'文頭の「たとえば」＝ <b>For example</b>！', speak:'For example, I read English books every day.' },
+  { id:'t33_u8_4', unit:'u8', diff:2, type:'sort', jp:'「私の意見では、ボランティア活動はとても大切です。」', words:['is','In my opinion,','very important.','volunteer work'], ans:'In my opinion, volunteer work is very important.', exp:'<b>In my opinion, 〜</b>「私の意見では〜」！', speak:'In my opinion, volunteer work is very important.' },
+  { id:'t33_u8_5', unit:'u8', diff:2, type:'error', jp:'「1つ目は面白く、2つ目は役に立ちます。」間違いを見つけよう。', segs:['First,','it is interesting.','Two,','it is useful.'], errIdx:2, fixOpts:['Second,','Twice,','Nextly,'], fixAns:0, exp:'順序を示すときは First, ... <b>Second, ...</b> を使います！', speak:'First, it is interesting. Second, it is useful.' }
+];
+
+const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+const pickN = (arr, n) => [...arr].sort(() => Math.random() - 0.5).slice(0, n);
+
+const BANK = {
+  names: ['Ken','Yumi','Emi','Taro','Kenta','Mika'],
+  peopleObj: [{ en:'him', jp:'彼' },{ en:'her', jp:'彼女' },{ en:'Ken', jp:'ケン' },{ en:'Yumi', jp:'ユミ' },{ en:'the boys', jp:'その少年たち' }],
+  perceptActs: [
+    { base:'run', ing:'running', tail:'in the park', jpBase:'公園を走る', jpIng:'公園を走っている' },
+    { base:'play', ing:'playing', tail:'the piano', jpBase:'ピアノを弾く', jpIng:'ピアノを弾いている' },
+    { base:'sing', ing:'singing', tail:'a song', jpBase:'歌を歌う', jpIng:'歌を歌っている' },
+    { base:'practice', ing:'practicing', tail:'tennis', jpBase:'テニスを練習する', jpIng:'テニスを練習している' },
+    { base:'dance', ing:'dancing', tail:'on the stage', jpBase:'ステージで踊る', jpIng:'ステージで踊っている' }
+  ],
+  exclItems: [
+    { adj:'tall', an:'a', noun:'boy', subj:'he', be:'is', jp:'背が高い少年' },
+    { adj:'cute', an:'a', noun:'dog', subj:'this', be:'is', jp:'かわいい犬' },
+    { adj:'interesting', an:'an', noun:'book', subj:'it', be:'is', jp:'面白い本' },
+    { adj:'exciting', an:'an', noun:'game', subj:'that', be:'was', jp:'わくわくする試合' },
+    { adj:'kind', an:'a', noun:'teacher', subj:'she', be:'is', jp:'親切な先生' }
+  ],
+  uncountables: [
+    { w:'information', jp:'情報', adj:'useful', adjJp:'役立つ' },
+    { w:'advice', jp:'アドバイス', adj:'good', adjJp:'よい' },
+    { w:'homework', jp:'宿題', adj:'difficult', adjJp:'難しい' },
+    { w:'news', jp:'知らせ', adj:'surprising', adjJp:'驚くべき' }
+  ],
+  tooSoItems: [
+    { adj:'tired', jpAdj:'疲れていた', v:'walk', jpV:'歩く', subj:'he', subjJp:'彼', canNeg:"couldn't", be:'was' },
+    { adj:'young', jpAdj:'幼い', v:'drive a car', jpV:'車を運転する', subj:'she', subjJp:'彼女', canNeg:"can't", be:'is' },
+    { adj:'busy', jpAdj:'忙しい', v:'watch TV', jpV:'テレビを見る', subj:'Ken', subjJp:'ケン', canNeg:"can't", be:'is' },
+    { adj:'sleepy', jpAdj:'眠かった', v:'study math', jpV:'数学を勉強する', subj:'I', subjJp:'私', canNeg:"couldn't", be:'was' }
+  ]
+};
+
+function generateFormQuestion(category = 'all', usedSet = new Set()) {
+  const pool = category === 'all' ? FORM_BANK : FORM_BANK.filter(f => f.cat === category);
+  let item = pick(pool);
+  for (let i = 0; i < 15; i++) { const c = pick(pool); if (!usedSet.has(c.base + '|' + c.target + '|' + c.ans)) { item = c; break; } }
+  usedSet.add(item.base + '|' + item.target + '|' + item.ans);
+  const catLabels = { inf_ing:'原形不定詞・~ing・to不定詞', tag_ex:'付加疑問・感嘆文・否定疑問', rewrite_gram:'入試書き換え・不可算・一致', verb_all:'重要不規則動詞 総復習' };
+  const unitLabel = catLabels[item.cat] || '総仕上げ道場';
+  const canInput = !item.ans.includes('（') && item.ans.length <= 18;
+  const mode = (canInput && Math.random() < 0.48) ? 'input' : 'choice';
+  const uid = 'f_' + item.base.slice(0,8) + '_' + mode + '_' + Math.random().toString(36).slice(2, 5);
+  const isCap = /^[A-Z]/.test(item.ans);
+  const speakPhrase = item.speak || item.jp.replace(/~/g, item.ans).replace(/（.*?）/g, '');
+  if (mode === 'choice') return shuffleChoices({ id: uid, unit: 'forms', unitLabel, diff: 2, isGen: true, type: 'choice', jp: `<b>${item.base}</b>｜${item.target} として正しいものは？`, q: `${item.jp}`, qSpeak: speakPhrase, hintChar: item.ans[0], hintLen: item.ans.length, opts: [item.ans, ...item.wrongs.slice(0, 3)], ans: 0, exp: item.exp, speak: speakPhrase });
+  return { id: uid, unit: 'forms', unitLabel, diff: 2, isGen: true, type: 'input', jp: `<b>${item.base}</b>｜${item.target} を入力しよう！`, q: `${item.jp}`, qSpeak: speakPhrase, hintChar: item.ans[0], hintLen: item.ans.length, placeholder: `${item.target}を入力`, ansList: [item.ans], caseSensitive: isCap, exp: item.exp, speak: speakPhrase };
+}
+
+function generateVocabQuestion(category = 'all', usedSet = new Set()) {
+  const pool = category === 'all' ? VOCAB_BANK : VOCAB_BANK.filter(w => w.cat === category);
+  let item = pick(pool);
+  for (let i = 0; i < 12; i++) { const c = pick(pool); if (!usedSet.has(c.en)) { item = c; break; } }
+  usedSet.add(item.en);
+  const mode = pick(['jp2en_choice', 'en2jp_choice', 'spell_choice', 'spell_input']);
+  const uid = 'v_' + item.en.replace(/\s+/g, '_') + '_' + mode + '_' + Math.random().toString(36).slice(2, 5);
+  const catNames = { idiom3_3:'3学期・入試 重要熟語・構文', conv_essay3_3:'対話表現・自由英作文テンプレート', uncount_noun3_3:'不可算名詞・社会・進路名詞', verb3_3:'知覚・使役・長文頻出動詞', adj_adv3_3:'感嘆・比較・長文形容詞・副詞', gram_func3_3:'接続・前置詞・代名詞総まとめ' };
+  const catLabel = catNames[item.cat] || '3学期重要単語';
+  if (mode === 'jp2en_choice') {
+    const sameCat = pool.filter(x => x.en !== item.en), distractors = pickN(sameCat.length >= 3 ? sameCat : VOCAB_BANK.filter(x => x.en !== item.en), 3).map(x => x.en);
+    return shuffleChoices({ id: uid, unit: 'vocab', unitLabel: `単語：${catLabel}`, diff: 1, isGen: true, type: 'choice', jp: '次の日本語に合う英語を選ぼう', q: `「${item.jp}」 ＝ (   )`, opts: [item.en, ...distractors], ans: 0, exp: `「${item.jp}」は <b>${item.en}</b> です！`, speak: item.en.replace(/~/g, 'something') });
+  }
+  if (mode === 'en2jp_choice') {
+    const sameCat = pool.filter(x => x.en !== item.en), distractors = pickN(sameCat.length >= 3 ? sameCat : VOCAB_BANK.filter(x => x.en !== item.en), 3).map(x => x.jp);
+    return shuffleChoices({ id: uid, unit: 'vocab', unitLabel: `単語：${catLabel}`, diff: 1, isGen: true, type: 'choice', jp: 'この英語の意味はどれ？（🔊ボタンで発音も聞けるよ）', q: `${item.en}`, opts: [item.jp, ...distractors], ans: 0, exp: `<b>${item.en}</b> ＝「${item.jp}」です。`, speak: item.en.replace(/~/g, 'something') });
+  }
+  if (mode === 'spell_choice' || item.en.includes('~')) return shuffleChoices({ id: uid, unit: 'vocab', unitLabel: `単語：${catLabel}`, diff: 2, isGen: true, type: 'choice', jp: 'テスト頻出！正しいつづり・形はどれ？', q: `「${item.jp}」の正しい英語は？`, opts: [item.en, ...item.typos.slice(0, 3)], ans: 0, exp: `正しい英語は <b>${item.en}</b> です！`, speak: item.en.replace(/~/g, 'something') });
+  const isPhrase = item.en.includes(' '), masked = item.en.split(' ').map(w => w[0] + w.slice(1).replace(/[a-zA-Z]/g, ' _')).join('  /  ');
+  const lenHint = isPhrase ? `${item.en.split(' ').length}語` : `${item.en.length}文字`;
+  return { id: uid, unit: 'vocab', unitLabel: `単語：${catLabel}`, diff: 2, isGen: true, type: 'input', jp: 'テストで書けるかな？英語を入力しよう', q: `「${item.jp}」 ＝ ${masked} (${lenHint})`, placeholder: isPhrase ? `${lenHint}の表現を入力（スペース区切り）` : `${item.en[0]} から始まる ${lenHint}`, ansList: [item.en], caseSensitive: item.cap, exp: `正解は <b>${item.en}</b> です！`, speak: item.en };
+}
+
+function generateQuestionForUnit(unitId, preferredType = null) {
+  const uid = 'g_' + unitId + '_' + Math.random().toString(36).slice(2, 7), name = pick(BANK.names);
+
+  if (unitId === 'u1') {
+    const mode = preferredType || pick(['percept_base', 'percept_ing', 'make_let', 'that_clause', 'u1_input', 'u1_sort', 'u1_error']);
+    const p = pick(BANK.peopleObj), act = pick(BANK.perceptActs);
+    if (mode === 'percept_base') {
+      const pv = pick([{v:'saw',jp:'見ました'},{v:'watched',jp:'じっと見ました'}]);
+      return { id: uid, unit:'u1', diff:2, isGen:true, type:'choice', jp:`私は${p.jp}が${act.jpBase}のを${pv.jp}。`, q:`I ${pv.v} ${p.en} (   ) ${act.tail}.`, opts:[act.base, 'to ' + act.base, act.base + 's', act.base === 'run' ? 'ran' : act.base + 'd'], ans:0, exp:`知覚動詞 ${pv.v} ＋ 人 ＋ <b>動詞の原形（${act.base}）</b>！to は不要です。`, speak:`I ${pv.v} ${p.en} ${act.base} ${act.tail}.` };
+    }
+    if (mode === 'percept_ing') return { id: uid, unit:'u1', diff:2, isGen:true, type:'choice', jp:`私は${p.jp}が${act.jpIng}のを見ました。`, q:`I saw ${p.en} (   ) ${act.tail}.`, opts:[act.ing, 'to ' + act.base, act.base + 's', 'was ' + act.ing], ans:0, exp:`「〜している最中を見る」は <b>see ＋ 人 ＋ ~ing（${act.ing}）</b>！`, speak:`I saw ${p.en} ${act.ing} ${act.tail}.` };
+    if (mode === 'make_let') {
+      const it = pick([
+        { jp:`お父さんは${name}に自転車を洗わせました。`, q:`His father made ${name} (   ) the bike.`, ans:'wash', wrongs:['to wash','washing','washed'], speak:`His father made ${name} wash the bike.`, exp:'使役動詞 make ＋ 人 ＋ <b>動詞の原形（wash）</b>！' },
+        { jp:'私にあなたの写真を見させてください。', q:'Please let me (   ) your pictures.', ans:'see', wrongs:['to see','seeing','saw'], speak:'Please let me see your pictures.', exp:'使役動詞 let ＋ 人 ＋ <b>動詞の原形（see）</b>！' },
+        { jp:`このニュースは${name}をとても幸せにしました。`, q:`This news made ${name} very (   ).`, ans:'happy', wrongs:['happily','happiness','to happy'], speak:`This news made ${name} very happy.`, exp:'「人を〜な状態にする」＝ make ＋ 人 ＋ <b>形容詞（happy）</b>！' }
+      ]);
+      return { id: uid, unit:'u1', diff:2, isGen:true, type:'choice', jp:it.jp, q:it.q, opts:[it.ans, ...it.wrongs], ans:0, exp:it.exp, speak:it.speak };
+    }
+    if (mode === 'that_clause') {
+      const it = pick([
+        { jp:`私は${name}がスピーチコンテストで優勝すると確信しています。`, q:`I am (   ) that ${name} will win the speech contest.`, ans:'sure', wrongs:['kind','difficult','useful'], speak:`I am sure that ${name} will win the speech contest.`, exp:'「〜と確信している」＝ <b>I am sure (that) 〜</b>！' },
+        { jp:'その話を聞いて残念です。', q:"I'm (   ) to hear that story.", ans:'sorry', wrongs:['sure','proud','important'], speak:"I'm sorry to hear that story.", exp:'「聞いて残念です」＝ <b>I\'m sorry to hear 〜</b>！' }
+      ]);
+      return { id: uid, unit:'u1', diff:2, isGen:true, type:'choice', jp:it.jp, q:it.q, opts:[it.ans, ...it.wrongs], ans:0, exp:it.exp, speak:it.speak };
+    }
+    if (mode === 'u1_input') return { id: uid, unit:'u1', diff:3, isGen:true, type:'input', jp:`「私は${name}がギターを弾いているのを聞きました。」(play の適切な形で 1語)`, q:`I heard ${name} (         ) the guitar.`, placeholder:'~ing形 または 原形（1語）', ansList:['playing','play'], caseSensitive:false, exp:'hear ＋ 人 ＋ <b>playing（または play）</b>！', speak:`I heard ${name} playing the guitar.` };
+    if (mode === 'u1_sort') {
+      const sent = pick([`I saw ${name} running in the park.`, `My mother made me clean my room.`, `I am glad that you liked it.`]);
+      const jpMap = { [`I saw ${name} running in the park.`]:`私は${name}が公園を走っているのを見ました。`, 'My mother made me clean my room.':'母は私に部屋を掃除させました。', 'I am glad that you liked it.':'あなたがそれを気に入ってくれて私はうれしいです。' };
+      return { id: uid, unit:'u1', diff:3, isGen:true, type:'sort', jp:jpMap[sent], words:sent.split(' '), ans:sent, exp:'知覚動詞・使役動詞（＋人＋原形/~ing）または that節の語順！', speak:sent };
+    }
+    const err = pick([
+      { jp:`「私は${name}が歌うのを聞きました。」間違いを見つけよう。`, segs:['I','heard',name,'to sing','a song.'], errIdx:3, fixOpts:['sing (または singing)','sang','sings'], exp:'知覚動詞 hear の後ろに to は不要！原形 <b>sing</b>（または singing）にします。', speak:`I heard ${name} sing a song.` },
+      { jp:'「その先生は私たちに静かにさせました。」間違いを見つけよう。', segs:['The teacher','made','us','to be','quiet.'], errIdx:3, fixOpts:['be','being','were'], exp:'使役動詞 make ＋ 人 ＋ <b>原形（be）</b>！', speak:'The teacher made us be quiet.' }
+    ]);
+    return { id: uid, unit:'u1', diff:3, isGen:true, type:'error', jp:err.jp, segs:err.segs, errIdx:err.errIdx, fixOpts:err.fixOpts, fixAns:0, exp:err.exp, speak:err.speak };
+  }
+
+  if (unitId === 'u2') {
+    const mode = preferredType || pick(['tag_pos', 'tag_neg', 'tag_sp', 'neg_q', 'u2_input', 'u2_sort', 'u2_error']);
+    if (mode === 'tag_pos') {
+      const it = pick([
+        { jp:`${name}は毎日英語を勉強しますよね。`, q:`${name} studies English every day, (   )?`, ans:"doesn't he", wrongs:["don't he","isn't he","does he"], speak:`${name} studies English every day, doesn't he?`, exp:'三単現の肯定文なので <b>doesn\'t he [she]</b>！' },
+        { jp:'これはあなたのノートですよね。', q:'This is your notebook, (   )?', ans:"isn't it", wrongs:["isn't this","is it","doesn't it"], speak:"This is your notebook, isn't it?", exp:'This / That を受ける付加疑問の代名詞は <b>it</b>！' },
+        { jp:`${name}は昨日京都へ行きましたよね。`, q:`${name} went to Kyoto yesterday, (   )?`, ans:"didn't he", wrongs:["doesn't he","wasn't he","did he"], speak:`${name} went to Kyoto yesterday, didn't he?`, exp:'過去形の肯定文なので <b>didn\'t he</b>！' }
+      ]);
+      return { id: uid, unit:'u2', diff:3, isGen:true, type:'choice', jp:it.jp, q:it.q, opts:[it.ans, ...it.wrongs], ans:0, exp:it.exp, speak:it.speak };
+    }
+    if (mode === 'tag_neg') {
+      const it = pick([
+        { jp:'あなたは納豆が好きではありませんよね。', q:"You don't like natto, (   )?", ans:'do you', wrongs:["don't you",'are you','did you'], speak:"You don't like natto, do you?", exp:'否定文の後ろは肯定の <b>do you</b>！' },
+        { jp:'彼女は泳げませんよね。', q:"She can't swim, (   )?", ans:'can she', wrongs:["can't she",'does she','is she'], speak:"She can't swim, can she?", exp:"can't の後ろは肯定の <b>can she</b>！" }
+      ]);
+      return { id: uid, unit:'u2', diff:2, isGen:true, type:'choice', jp:it.jp, q:it.q, opts:[it.ans, ...it.wrongs], ans:0, exp:it.exp, speak:it.speak };
+    }
+    if (mode === 'tag_sp') {
+      const it = pick([
+        { jp:'一緒に昼食を食べましょうね。', q:"Let's have lunch together, (   )?", ans:'shall we', wrongs:['will you',"don't we",'are we'], speak:"Let's have lunch together, shall we?", exp:"Let's 〜 の付加疑問は必ず <b>shall we</b>！" },
+        { jp:'ドアを開けてくれますね。', q:'Open the door, (   )?', ans:'will you', wrongs:['shall we',"don't you",'do you'], speak:'Open the door, will you?', exp:'命令文の付加疑問は <b>will you</b>！' }
+      ]);
+      return { id: uid, unit:'u2', diff:2, isGen:true, type:'choice', jp:it.jp, q:it.q, opts:[it.ans, ...it.wrongs], ans:0, exp:it.exp, speak:it.speak };
+    }
+    if (mode === 'neg_q') {
+      const it = pick([
+        { jp:'「テニスをしないのですか。」「いいえ、します。」', q:"Don't you play tennis? — (   ), I do.", ans:'Yes', wrongs:['No','Not','Sure'], speak:"Don't you play tennis? Yes, I do.", exp:'「いいえ、します」＝内容が肯定（I do）なので <b>Yes</b>！' },
+        { jp:'「彼は学生ではないのですか。」「はい、学生ではありません。」', q:"Isn't he a student? — (   ), he isn't.", ans:'No', wrongs:['Yes','Sure','Right'], speak:"Isn't he a student? No, he isn't.", exp:'「はい、ではありません」＝内容が否定（he isn\'t）なので <b>No</b>！' },
+        { jp:'「昨日その試合を見なかったのですか。」「いいえ、見ました。」', q:"Didn't you watch the game yesterday? — (   ), I did.", ans:'Yes', wrongs:['No','Never','Not'], speak:"Didn't you watch the game yesterday? Yes, I did.", exp:'内容が肯定（I did）なので <b>Yes</b>！' }
+      ]);
+      return { id: uid, unit:'u2', diff:3, isGen:true, type:'choice', jp:it.jp, q:it.q, opts:[it.ans, ...it.wrongs], ans:0, exp:it.exp, speak:it.speak };
+    }
+    if (mode === 'u2_input') return { id: uid, unit:'u2', diff:3, isGen:true, type:'input', jp:'「明日は晴れるでしょうね。」(2語で)', q:'It will be sunny tomorrow, (               )?（2語で）', placeholder:"will の否定短縮 ＋ 主語（2語）", ansList:["won't it"], caseSensitive:false, exp:"will の否定短縮は <b>won't</b>！よって <b>won't it</b>。", speak:"It will be sunny tomorrow, won't it?" };
+    if (mode === 'u2_sort') {
+      const sent = pick(["You know his name, don't you?", "He wasn't busy yesterday, was he?", "Let's go home now, shall we?"]);
+      const jpMap = { "You know his name, don't you?":'あなたは彼の名前を知っていますよね。', "He wasn't busy yesterday, was he?":'彼は昨日忙しくありませんでしたよね。', "Let's go home now, shall we?":'さあ家に帰りましょうね。' };
+      return { id: uid, unit:'u2', diff:2, isGen:true, type:'sort', jp:jpMap[sent], words:sent.split(' '), ans:sent, exp:'文の後ろにカンマ＋付加疑問を置く語順！', speak:sent };
+    }
+    const err = pick([
+      { jp:'「彼女はピアノを上手に弾けますよね。」間違いを見つけよう。', segs:['She','can','play the piano','well,',"doesn't she?"], errIdx:4, fixOpts:["can't she?","isn't she?",'can she?'], exp:'助動詞 can の文なので付加疑問は <b>can\'t she?</b> にします！', speak:"She can play the piano well, can't she?" },
+      { jp:'「駅へ行きましょうね。」間違いを見つけよう。', segs:["Let's",'go','to the station,','will we?'], errIdx:3, fixOpts:['shall we?','do we?','are we?'], exp:"Let's 〜 の付加疑問は必ず <b>shall we?</b> にします！", speak:"Let's go to the station, shall we?" }
+    ]);
+    return { id: uid, unit:'u2', diff:3, isGen:true, type:'error', jp:err.jp, segs:err.segs, errIdx:err.errIdx, fixOpts:err.fixOpts, fixAns:0, exp:err.exp, speak:err.speak };
+  }
+
+  if (unitId === 'u3') {
+    const mode = preferredType || pick(['excl_what_how', 'excl_an', 'excl_pl', 'uncount', 'u3_input', 'u3_sort', 'u3_error']);
+    const ex = pick(BANK.exclItems), uc = pick(BANK.uncountables);
+    if (mode === 'excl_what_how') {
+      if (Math.random() < 0.5) return { id: uid, unit:'u3', diff:2, isGen:true, type:'choice', jp:`なんて${ex.jp}なのだろう！`, q:`(   ) ${ex.an} ${ex.adj} ${ex.noun} ${ex.subj} ${ex.be}!`, opts:['What','How','Which','So'], ans:0, exp:`後ろに名詞（${ex.an} ${ex.adj} ${ex.noun}）があるので <b>What</b>！`, speak:`What ${ex.an} ${ex.adj} ${ex.noun} ${ex.subj} ${ex.be}!` };
+      return { id: uid, unit:'u3', diff:2, isGen:true, type:'choice', jp:`${ex.subj}はなんて${ex.adj}なのでしょう！`, q:`(   ) ${ex.adj} ${ex.subj} ${ex.be}!`, opts:['How','What','What a','Very'], ans:0, exp:`後ろが形容詞（${ex.adj}）＋主語＋動詞だけなので <b>How</b>！`, speak:`How ${ex.adj} ${ex.subj} ${ex.be}!` };
+    }
+    if (mode === 'excl_an') return { id: uid, unit:'u3', diff:2, isGen:true, type:'choice', jp:`なんて${ex.jp}なのだろう！`, q:`What (   ) ${ex.adj} ${ex.noun} ${ex.subj} ${ex.be}!`, opts:[ex.an, ex.an === 'an' ? 'a' : 'an', 'the', '（不要）'], ans:0, exp:`${ex.adj} の最初の音に合わせて <b>${ex.an}</b> を使います！`, speak:`What ${ex.an} ${ex.adj} ${ex.noun} ${ex.subj} ${ex.be}!` };
+    if (mode === 'excl_pl') return { id: uid, unit:'u3', diff:3, isGen:true, type:'choice', jp:'これはなんて良いニュースなのでしょう！', q:'(   ) good news this is!', opts:['What','What a','How','What an'], ans:0, exp:'news は不可算名詞なので a をつけない <b>What</b>！', speak:'What good news this is!' };
+    if (mode === 'uncount') return { id: uid, unit:'u3', diff:3, isGen:true, type:'choice', jp:`私は${uc.adjJp}${uc.jp}がたくさんあります。`, q:`I have a lot of (   ).`, opts:[`${uc.adj} ${uc.w}`, `${uc.adj} ${uc.w}s`, `a ${uc.adj} ${uc.w}`, `many ${uc.w}s`], ans:0, exp:`${uc.w} は不可算名詞！a や複数形の -s をつけず <b>${uc.adj} ${uc.w}</b> にします。`, speak:`I have a lot of ${uc.adj} ${uc.w}.` };
+    if (mode === 'u3_input') return { id: uid, unit:'u3', diff:2, isGen:true, type:'input', jp:`「なんて親切な${name}なんでしょう！」(1語で)`, q:`(         ) kind ${name} is!`, placeholder:'感嘆文の1語目', ansList:['How'], caseSensitive:true, exp:'後ろが形容詞 kind だけなので文頭は <b>How</b>！', speak:`How kind ${name} is!` };
+    if (mode === 'u3_sort') {
+      const sent = `What ${ex.an} ${ex.adj} ${ex.noun} ${ex.subj} ${ex.be}!`;
+      return { id: uid, unit:'u3', diff:2, isGen:true, type:'sort', jp:`なんて${ex.jp}なのだろう！`, words:sent.split(' '), ans:sent, exp:'<b>What ＋ a(n) ＋ 形容詞 ＋ 名詞 ＋ 主語 ＋ 動詞!</b> の語順！', speak:sent };
+    }
+    const err = pick([
+      { jp:'「なんてきれいな花なんでしょう！（複数）」間違いを見つけよう。', segs:['What a','beautiful','flowers','these are!'], errIdx:0, fixOpts:['What','How','How a'], exp:'flowers が複数なので a をとって <b>What</b> にします！', speak:'What beautiful flowers these are!' },
+      { jp:'「先生は私にいくつか良いアドバイスをくれました。」間違いを見つけよう。', segs:['My teacher','gave me','some','good','advices.'], errIdx:4, fixOpts:['advice.','an advice.','advise.'], exp:'advice は不可算名詞なので s をつけず <b>advice.</b> にします！', speak:'My teacher gave me some good advice.' }
+    ]);
+    return { id: uid, unit:'u3', diff:3, isGen:true, type:'error', jp:err.jp, segs:err.segs, errIdx:err.errIdx, fixOpts:err.fixOpts, fixAns:0, exp:err.exp, speak:err.speak };
+  }
+
+  if (unitId === 'u4') {
+    const mode = preferredType || pick(['so_that', 'both_notonly', 'arrive_reach', 'forward_ing', 'u4_input', 'u4_sort', 'u4_error']);
+    const ts = pick(BANK.tooSoItems);
+    if (mode === 'so_that') return { id: uid, unit:'u4', diff:3, isGen:true, type:'choice', jp:`${ts.subjJp}はとても${ts.jpAdj}ので${ts.jpV}ことができませんでした。`, q:`${ts.subj[0].toUpperCase()+ts.subj.slice(1)} ${ts.be} (   ) ${ts.adj} that ${ts.subj} ${ts.canNeg} ${ts.v}.`, opts:['so','too','very','such'], ans:0, exp:'「とても〜なので…できない」＝ <b>so 〜 that 主語 can\'t [couldn\'t]</b>！', speak:`${ts.subj} ${ts.be} so ${ts.adj} that ${ts.subj} ${ts.canNeg} ${ts.v}.` };
+    if (mode === 'both_notonly') {
+      if (Math.random() < 0.5) return { id: uid, unit:'u4', diff:3, isGen:true, type:'choice', jp:`${name}とユミの両方が京都出身です。`, q:`Both ${name} and Yumi (   ) from Kyoto.`, opts:['are','is','was','am'], ans:0, exp:'Both A and B が主語なら複数扱いなので <b>are</b>！', speak:`Both ${name} and Yumi are from Kyoto.` };
+      return { id: uid, unit:'u4', diff:3, isGen:true, type:'choice', jp:`${name}だけでなく彼らもテニスが好きです。`, q:`Not only ${name} but also they (   ) tennis.`, opts:['like','likes','liking','to like'], ans:0, exp:'Not only A but also B は <b>B（they）</b>に合わせて <b>like</b>！', speak:`Not only ${name} but also they like tennis.` };
+    }
+    if (mode === 'arrive_reach') return { id: uid, unit:'u4', diff:2, isGen:true, type:'choice', jp:'私たちは午前9時に空港に到着しました。', q:'We (   ) the airport at 9:00 a.m.', opts:['reached','arrived','got','went'], ans:0, exp:'空所の後ろに前置詞（at / in / to）がないので、前置詞不要の <b>reached</b>！', speak:'We reached the airport at 9:00 a.m.' };
+    if (mode === 'forward_ing') {
+      const act = pick([{v:'visiting',o:'Japan'},{v:'meeting',o:'my friends'},{v:'hearing',o:'from you'}]);
+      return { id: uid, unit:'u4', diff:2, isGen:true, type:'choice', jp:'私はそれを楽しみに待っています。', q:`I am looking forward to (   ) ${act.o}.`, opts:[act.v, act.v.replace('ing',''), 'to ' + act.v.replace('ing',''), act.v.replace('ing','s')], ans:0, exp:`look forward to の後ろは必ず動名詞 <b>${act.v}</b>！`, speak:`I am looking forward to ${act.v} ${act.o}.` };
+    }
+    if (mode === 'u4_input') return { id: uid, unit:'u4', diff:2, isGen:true, type:'input', jp:'「私たちはそのことについて決心をしました。」(2語で)', q:'We made (               ) about it.（2語で）', placeholder:'a ＋ 名詞（2語）', ansList:['a decision'], caseSensitive:false, exp:'「決心する」＝ <b>make a decision</b>！', speak:'We made a decision about it.' };
+    if (mode === 'u4_sort') {
+      const sent = pick(['I am looking forward to seeing you.', 'Both Ken and Yumi like music.', 'I study hard in order to pass the exam.']);
+      const jpMap = { 'I am looking forward to seeing you.':'私はあなたに会うのを楽しみに待っています。', 'Both Ken and Yumi like music.':'ケンとユミの両方が音楽が好きです。', 'I study hard in order to pass the exam.':'私は試験に合格するために一生懸命勉強します。' };
+      return { id: uid, unit:'u4', diff:3, isGen:true, type:'sort', jp:jpMap[sent], words:sent.split(' '), ans:sent, exp:'重要連語（look forward to ~ing / both A and B / in order to）の語順！', speak:sent };
+    }
+    const err = pick([
+      { jp:'「彼らは昨日東京に到着しました。」間違いを見つけよう。', segs:['They','reached','in','Tokyo','yesterday.'], errIdx:2, fixOpts:['（inを消す）','at','to'], exp:'reach は前置詞が不要です！（arrive なら arrived in Tokyo）', speak:'They reached Tokyo yesterday.' },
+      { jp:'「あなたか彼女のどちらかが掃除をする必要があります。」間違いを見つけよう。', segs:['Either','you','or','she','have','to clean it.'], errIdx:4, fixOpts:['has','having','are'], exp:'Either A or B は <b>B（she）</b>に合わせるので <b>has</b> にします！', speak:'Either you or she has to clean it.' }
+    ]);
+    return { id: uid, unit:'u4', diff:3, isGen:true, type:'error', jp:err.jp, segs:err.segs, errIdx:err.errIdx, fixOpts:err.fixOpts, fixAns:0, exp:err.exp, speak:err.speak };
+  }
+
+  if (unitId === 'u5') {
+    const mode = preferredType || pick(['rw_too_so', 'rw_can', 'rw_pass', 'rw_comp', 'u5_input', 'u5_sort', 'u5_error']);
+    const ts = pick(BANK.tooSoItems);
+    if (mode === 'rw_too_so') return { id: uid, unit:'u5', diff:3, isGen:true, type:'choice', jp:`【書き換え】${ts.subj} ${ts.be} so ${ts.adj} that ${ts.subj} ${ts.canNeg} ${ts.v}. ＝`, q:`${ts.subj[0].toUpperCase()+ts.subj.slice(1)} ${ts.be} (   ) ${ts.v}.`, opts:[`too ${ts.adj} to`, `so ${ts.adj} to`, `very ${ts.adj} to`, `too ${ts.adj} that`], ans:0, exp:`<b>so 〜 that S can't [couldn't]</b> ＝ <b>too ${ts.adj} to</b>！`, speak:`${ts.subj} ${ts.be} too ${ts.adj} to ${ts.v}.` };
+    if (mode === 'rw_can') return { id: uid, unit:'u5', diff:2, isGen:true, type:'choice', jp:`【未来の書き換え】「${name}は来年車を運転できるようになるでしょう。」`, q:`${name} (   ) drive a car next year.`, opts:['will be able to','will can','can will','is able'], ans:0, exp:'will の後ろに can は置けないので <b>will be able to</b>！', speak:`${name} will be able to drive a car next year.` };
+    if (mode === 'rw_pass') return { id: uid, unit:'u5', diff:3, isGen:true, type:'choice', jp:'【書き換え】Tom painted this picture. ＝', q:'This picture (   ) by Tom.', opts:['was painted','is painted','painted','were painted'], ans:0, exp:'過去の能動態（painted）の書き換え＝ <b>was painted</b>！', speak:'This picture was painted by Tom.' };
+    if (mode === 'rw_comp') return { id: uid, unit:'u5', diff:3, isGen:true, type:'choice', jp:'【書き換え】Ken is the fastest runner in his class. ＝', q:'Ken runs faster than (   ) in his class.', opts:['any other runner','any other runners','all runner','other runner'], ans:0, exp:'「比較級 ＋ than <b>any other ＋ 単数名詞</b>」で最上級と同じ意味！', speak:'Ken runs faster than any other runner in his class.' };
+    if (mode === 'u5_input') return { id: uid, unit:'u5', diff:3, isGen:true, type:'input', jp:'【書き換え】Because I was busy, I couldn\'t go. ＝ I was busy, (   ) I couldn\'t go.', q:"I was busy, (         ) I couldn't go.（1語で）", placeholder:'「だから」（1語）', ansList:['so'], caseSensitive:false, exp:'「原因, <b>so</b> 結果」＝ because の文の書き換え！', speak:"I was busy, so I couldn't go." };
+    if (mode === 'u5_sort') {
+      const sent = pick(['This box is too heavy for me to carry.', 'English is spoken in many countries.', 'She is not as tall as her sister.']);
+      const jpMap = { 'This box is too heavy for me to carry.':'この箱は重すぎて私には運べません。', 'English is spoken in many countries.':'英語は多くの国で話されています。', 'She is not as tall as her sister.':'彼女は姉ほど背が高くありません。' };
+      return { id: uid, unit:'u5', diff:3, isGen:true, type:'sort', jp:jpMap[sent], words:sent.split(' '), ans:sent, exp:'too ~ for 人 to / 受動態 / not as ~ as の重要書き換え構文！', speak:sent };
+    }
+    const err = pick([
+      { jp:'「明日雨が降らなければ、サッカーをします。」間違いを見つけよう。', segs:['Unless','it',"doesn't",'rain','tomorrow,','we will play soccer.'], errIdx:2, fixOpts:['rains (doesn\'tを消して三単現)','will rain','rained'], exp:'Unless 自体に「もし〜でなければ」という否定が含まれるので <b>Unless it rains</b> にします！', speak:'Unless it rains tomorrow, we will play soccer.' },
+      { jp:'「私は昨日早く起きなければなりませんでした。」間違いを見つけよう。', segs:['I','musted','get up','early','yesterday.'], errIdx:1, fixOpts:['had to','have to','was must'], exp:'must に過去形はないので <b>had to</b> を使います！', speak:'I had to get up early yesterday.' }
+    ]);
+    return { id: uid, unit:'u5', diff:3, isGen:true, type:'error', jp:err.jp, segs:err.segs, errIdx:err.errIdx, fixOpts:err.fixOpts, fixAns:0, exp:err.exp, speak:err.speak };
+  }
+
+  if (unitId === 'u6') {
+    const mode = preferredType || pick(['mix_part', 'mix_rel', 'mix_ind', 'mix_if', 'u6_input', 'u6_sort', 'u6_error']);
+    if (mode === 'mix_part') {
+      if (Math.random() < 0.5) return { id: uid, unit:'u6', diff:2, isGen:true, type:'choice', jp:`ベンチに座っている少年は${name}です。`, q:`The boy (   ) on the bench is ${name}.`, opts:['sitting','sat','sits','sit'], ans:0, exp:'「座っている（能動）」なので現在分詞 <b>sitting</b>！', speak:`The boy sitting on the bench is ${name}.` };
+      return { id: uid, unit:'u6', diff:2, isGen:true, type:'choice', jp:'これは100年前に建てられたお寺です。', q:'This is a temple (   ) 100 years ago.', opts:['built','building','builds','build'], ans:0, exp:'お寺は「建てられた（受動）」なので過去分詞 <b>built</b>！', speak:'This is a temple built 100 years ago.' };
+    }
+    if (mode === 'mix_rel') return { id: uid, unit:'u6', diff:3, isGen:true, type:'choice', jp:`昨日${name}が撮った写真はとてもきれいです。`, q:`The picture (   ) yesterday is very beautiful.`, opts:[`${name} took`, `who ${name} took`, `what ${name} took`, `took ${name}`], ans:0, exp:`目的格の関係代名詞を省略した接触節 <b>${name} took</b>！`, speak:`The picture ${name} took yesterday is very beautiful.` };
+    if (mode === 'mix_ind') return { id: uid, unit:'u6', diff:3, isGen:true, type:'choice', jp:`${name}がなぜ遅れたのか知っていますか。`, q:'Do you know (   )?', opts:[`why ${name} was late`, `why was ${name} late`, `why did ${name} late`, `was why ${name} late`], ans:0, exp:`間接疑問文＝ <b>疑問詞 ＋ 主語（${name}）＋ 動詞（was）</b>！`, speak:`Do you know why ${name} was late?` };
+    if (mode === 'mix_if') return { id: uid, unit:'u6', diff:3, isGen:true, type:'choice', jp:'もしもっと時間があれば、京都を訪れるのに。', q:'If I (   ) more time, I would visit Kyoto.', opts:['had','have','will have','having'], ans:0, exp:'仮定法過去の If節は過去形 <b>had</b>！', speak:'If I had more time, I would visit Kyoto.' };
+    if (mode === 'u6_input') return { id: uid, unit:'u6', diff:3, isGen:true, type:'input', jp:'「英語を話せたらいいのになあ。」(2語で)', q:'I wish I (               ) English.（2語で）', placeholder:'仮定法の助動詞 ＋ 原形（2語）', ansList:['could speak'], caseSensitive:false, exp:'I wish ＋ 主語 ＋ 過去形：<b>could speak</b>！', speak:'I wish I could speak English.' };
+    if (mode === 'u6_sort') {
+      const sent = pick([`I have a friend who lives in London.`, `Tell me where he lives.`, `The girl playing tennis is Yumi.`]);
+      const jpMap = { 'I have a friend who lives in London.':'私にはロンドンに住んでいる友人がいます。', 'Tell me where he lives.':'彼がどこに住んでいるか教えてください。', 'The girl playing tennis is Yumi.':'テニスをしている少女はユミです。' };
+      return { id: uid, unit:'u6', diff:3, isGen:true, type:'sort', jp:jpMap[sent], words:sent.split(' '), ans:sent, exp:'関係代名詞・間接疑問文・分詞の後置修飾の語順！', speak:sent };
+    }
+    const err = pick([
+      { jp:'「私が昨日買った本は面白いです。」間違いを見つけよう。', segs:['The book','which','I bought','it','yesterday','is interesting.'], errIdx:3, fixOpts:['（itを消す）','one','them'], exp:'関係代名詞 which が目的語を表しているので <b>it</b> は不要です！', speak:'The book which I bought yesterday is interesting.' },
+      { jp:'「もし私があなたなら、そんなことは言わないのに。」間違いを見つけよう。', segs:['If','I','am','you,',"I wouldn't say that."], errIdx:2, fixOpts:['were','will be','have been'], exp:'仮定法過去なので If節のbe動詞は <b>were</b> にします！', speak:"If I were you, I wouldn't say that." }
+    ]);
+    return { id: uid, unit:'u6', diff:3, isGen:true, type:'error', jp:err.jp, segs:err.segs, errIdx:err.errIdx, fixOpts:err.fixOpts, fixAns:0, exp:err.exp, speak:err.speak };
+  }
+
+  if (unitId === 'u7') {
+    const mode = preferredType || pick(['conv_agree', 'conv_depend', 'conv_congrats', 'conv_op', 'u7_input', 'u7_sort', 'u7_error']);
+    if (mode === 'conv_agree') return { id: uid, unit:'u7', diff:1, isGen:true, type:'choice', jp:'「もっとリサイクルすべきだと思います。」「私もそう思います（賛成です）。」', q:'We should recycle more. — (   ).', opts:['I agree with you', 'It depends on you', 'Congratulations on that', 'Take care of yourself'], ans:0, exp:'賛成するとき＝ <b>I agree with you.</b>（That\'s a good idea.）！', speak:'We should recycle more. I agree with you.' };
+    if (mode === 'conv_depend') return { id: uid, unit:'u7', diff:2, isGen:true, type:'choice', jp:'「この仕事どのくらい時間がかかる？」「人によります（場合によります）。」', q:'How long does it take? — Well, it (   ) the person.', opts:['depends on','agrees with','looks after','is proud of'], ans:0, exp:'「〜次第です」＝ <b>It depends on 〜.</b>！', speak:'How long does it take? Well, it depends on the person.' };
+    if (mode === 'conv_congrats') return { id: uid, unit:'u7', diff:2, isGen:true, type:'choice', jp:'「ご卒業おめでとうございます！」', q:'(   ) on your graduation!', opts:['Congratulations','Good luck','Thank you','Welcome'], ans:0, exp:'お祝い＝ <b>Congratulations on 〜!</b>！', speak:'Congratulations on your graduation!' };
+    if (mode === 'conv_op') return { id: uid, unit:'u7', diff:2, isGen:true, type:'choice', jp:'「制服についてどう思いますか。」', q:'What do you (   ) school uniforms?', opts:['think of','agree to','depend on','look at'], ans:0, exp:'「〜についてどう思いますか」＝ <b>What do you think of [about] 〜?</b>！', speak:'What do you think of school uniforms?' };
+    if (mode === 'u7_input') return { id: uid, unit:'u7', diff:2, isGen:true, type:'input', jp:'「試験、頑張ってね！（幸運を祈るよ！）」(2語で)', q:'(               ) on your exam!（2語で）', placeholder:'応援の2語', ansList:['Good luck'], caseSensitive:true, exp:'「頑張って！／幸運を祈るよ！」＝ <b>Good luck!</b>！', speak:'Good luck on your exam!' };
+    if (mode === 'u7_sort') {
+      const sent = pick(["That's a good idea.", "I'm not sure, but I think so.", 'Please take care of yourself.']);
+      const jpMap = { "That's a good idea.":'それはいい考えですね。', "I'm not sure, but I think so.":'確信はありませんが、そう思います。', 'Please take care of yourself.':'どうかお体に気をつけてください。' };
+      return { id: uid, unit:'u7', diff:2, isGen:true, type:'sort', jp:jpMap[sent], words:sent.split(' '), ans:sent, exp:'対話文で頻出の基本フレーズを正確に覚えよう！', speak:sent };
+    }
+    const err = pick([
+      { jp:'「優勝おめでとう！」間違いを見つけよう。', segs:['Congratulations','for','winning','the first prize!'], errIdx:1, fixOpts:['on','at','to'], exp:'Congratulations の後ろの前置詞は必ず <b>on</b>！', speak:'Congratulations on winning the first prize!' },
+      { jp:'「君の意見に賛成です。」間違いを見つけよう。', segs:['I','am agree','with','your opinion.'], errIdx:1, fixOpts:['agree','agreed to','agreeing'], exp:'agree は一般動詞なので be動詞は不要！<b>I agree</b> with 〜 にします。', speak:'I agree with your opinion.' }
+    ]);
+    return { id: uid, unit:'u7', diff:3, isGen:true, type:'error', jp:err.jp, segs:err.segs, errIdx:err.errIdx, fixOpts:err.fixOpts, fixAns:0, exp:err.exp, speak:err.speak };
+  }
+
+  const mode = preferredType || pick(['es_claim', 'es_reason', 'es_end', 'es_conn', 'u8_input', 'u8_sort', 'u8_error']);
+  if (mode === 'es_claim') return { id: uid, unit:'u8', diff:2, isGen:true, type:'choice', jp:'【自由英作文・主張】「私の意見では、学生はもっと本を読むべきです。」', q:'In my (   ), students should read more books.', opts:['opinion','reason','decision','challenge'], ans:0, exp:'「私の意見では」＝ <b>In my opinion, 〜</b>！', speak:'In my opinion, students should read more books.' };
+  if (mode === 'es_reason') return { id: uid, unit:'u8', diff:2, isGen:true, type:'choice', jp:'【自由英作文・理由】「理由は2つあります。1つ目は〜、2つ目は〜。」', q:'I have two reasons. (   ), it helps us learn new words. Second, it is fun.', opts:['First','One','Once','Start'], ans:0, exp:'<b>First, ~. Second, ~.</b> で理由を2つ並べよう！', speak:'I have two reasons. First, it helps us learn new words. Second, it is fun.' };
+  if (mode === 'es_end') return { id: uid, unit:'u8', diff:2, isGen:true, type:'choice', jp:'【自由英作文・結び】「これらの理由から、私はそれが大切だと思います。」', q:'For (   ) reasons, I think it is important.', opts:['these','this','that','it'], ans:0, exp:'「これらの理由から」＝ <b>For these reasons, 〜</b>（reasonsが複数なので these）！', speak:'For these reasons, I think it is important.' };
+  if (mode === 'es_conn') {
+    const it = pick([
+      { jp:'「地球環境を守ることは大切です。それゆえに、私たちはごみを減らすべきです。」', q:'Protecting the earth is important. (   ), we should reduce garbage.', ans:'Therefore', wrongs:['However','For example','Although'], speak:'Protecting the earth is important. Therefore, we should reduce garbage.', exp:'順接「それゆえに・したがって」＝ <b>Therefore</b>！' },
+      { jp:'「多くの人がその映画を見ました。しかし、好きではない人もいました。」', q:'Many people saw the movie. (   ), some did not like it.', ans:'However', wrongs:['Therefore','For example','Also'], speak:'Many people saw the movie. However, some did not like it.', exp:'逆接「しかしながら」＝ <b>However</b>！' }
+    ]);
+    return { id: uid, unit:'u8', diff:2, isGen:true, type:'choice', jp:it.jp, q:it.q, opts:[it.ans, ...it.wrongs], ans:0, exp:it.exp, speak:it.speak };
+  }
+  if (mode === 'u8_input') return { id: uid, unit:'u8', diff:2, isGen:true, type:'input', jp:'「これらの理由から、私は英語を勉強すべきだと思います。」(3語で)', q:'(                    ), I think we should study English.（3語で）', placeholder:'結びの定型表現（3語）', ansList:['For these reasons'], caseSensitive:true, exp:'自由英作文の結び＝ <b>For these reasons</b>！', speak:'For these reasons, I think we should study English.' };
+  if (mode === 'u8_sort') {
+    const sent = pick(['I think that volunteering is very useful.', 'For these reasons, I agree with this idea.', 'For example, we can reuse plastic bags.']);
+    const jpMap = { 'I think that volunteering is very useful.':'ボランティア活動はとても役に立つと思います。', 'For these reasons, I agree with this idea.':'これらの理由から、私はこの考えに賛成です。', 'For example, we can reuse plastic bags.':'たとえば、私たちはレジ袋を再利用できます。' };
+    return { id: uid, unit:'u8', diff:2, isGen:true, type:'sort', jp:jpMap[sent], words:sent.split(' '), ans:sent, exp:'自由英作文でそのまま使える万能テンプレートを身につけよう！', speak:sent };
+  }
+  const err = pick([
+    { jp:'「私には2つの理由があります。」間違いを見つけよう。', segs:['I','have','two','reason.'], errIdx:3, fixOpts:['reasons.','reasones.','a reason.'], exp:'two の後ろは複数形 <b>reasons.</b> にします！', speak:'I have two reasons.' },
+    { jp:'「たとえば、私はボランティア活動をしたいです。」間違いを見つけよう。', segs:['At','example,','I want','to do volunteer work.'], errIdx:0, fixOpts:['For','By','On'], exp:'「たとえば」＝ <b>For example,</b> にします！', speak:'For example, I want to do volunteer work.' }
+  ]);
+  return { id: uid, unit:'u8', diff:3, isGen:true, type:'error', jp:err.jp, segs:err.segs, errIdx:err.errIdx, fixOpts:err.fixOpts, fixAns:0, exp:err.exp, speak:err.speak };
+}
+
+function shuffleChoices(q) {
+  const copy = { ...q };
+  if (copy.type === 'choice') {
+    const tagged = copy.opts.map((text, i) => ({ text, isCorrect: i === copy.ans })).sort(() => Math.random() - 0.5);
+    copy.opts = tagged.map(t => t.text); copy.ans = tagged.findIndex(t => t.isCorrect);
+  } else if (copy.type === 'error' && Array.isArray(copy.fixOpts)) {
+    const tagged = copy.fixOpts.map((text, i) => ({ text, isCorrect: i === copy.fixAns })).sort(() => Math.random() - 0.5);
+    copy.fixOpts = tagged.map(t => t.text); copy.fixAns = tagged.findIndex(t => t.isCorrect);
+  }
+  return copy;
+}
+
+function drawUniqueQuestion(unitId, usedPrompts, preferGenProb = 0.78) {
+  for (let tries = 0; tries < 20; tries++) {
+    const staticPool = STATIC_QUESTIONS.filter(x => x.unit === unitId && !usedPrompts.has(x.jp + (x.q || x.ans || '')));
+    const q = (staticPool.length > 0 && Math.random() > preferGenProb) ? pick(staticPool) : generateQuestionForUnit(unitId);
+    const key = (q.jp || '') + (q.q || q.ans || '');
+    if (!usedPrompts.has(key)) { usedPrompts.add(key); return shuffleChoices(q); }
+  }
+  return shuffleChoices(generateQuestionForUnit(unitId));
+}
+
+const STORAGE_KEY = 'grammar_quest_jhs3_term3_v1';
+let state = { xp: 0, combo: 0, soundOn: true, speed: 0.95, preferredVoiceName: '', diagDone: false, tutorialDone: false, unitStats: {}, missedQuestions: [] };
+
+function initUnitStats() { UNITS.forEach(u => { if (!state.unitStats[u.id]) state.unitStats[u.id] = { mastery: 0, attempts: 0, correct: 0, streak: 0, status: 'new' }; }); }
+function loadState() { try { const raw = localStorage.getItem(STORAGE_KEY); if (raw) state = { ...state, ...JSON.parse(raw) }; } catch (e) {} initUnitStats(); }
+function saveState() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {} }
+
+let audioCtx = null;
+function getAudioCtx() {
+  if (!audioCtx) { const AC = window.AudioContext || window.webkitAudioContext; if (AC) audioCtx = new AC(); }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+function playTone(freq, dur, type='sine', delay=0, vol=0.12) {
+  if (!state.soundOn) return;
+  const ctx = getAudioCtx(); if (!ctx) return;
+  const osc = ctx.createOscillator(), gain = ctx.createGain();
+  osc.type = type; osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+  gain.gain.setValueAtTime(vol, ctx.currentTime + delay);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + dur);
+  osc.connect(gain); gain.connect(ctx.destination);
+  osc.start(ctx.currentTime + delay); osc.stop(ctx.currentTime + delay + dur);
+}
+function sfxCorrect() { playTone(523.25, 0.12, 'triangle', 0); playTone(659.25, 0.12, 'triangle', 0.08); playTone(783.99, 0.22, 'triangle', 0.16); }
+function sfxWrong() { playTone(220, 0.18, 'sawtooth', 0, 0.08); playTone(180, 0.25, 'sawtooth', 0.14, 0.08); }
+function sfxSkip() { [523, 659, 784, 1046].forEach((f, i) => playTone(f, 0.16, 'sine', i * 0.07, 0.13)); }
+
+function scoreVoice(v) {
+  const lang = (v.lang || '').toLowerCase(); if (!lang.startsWith('en')) return -1000;
+  let score = lang === 'en-us' || lang === 'en_us' ? 25 : 15;
+  const n = (v.name || '').toLowerCase();
+  if (n.includes('natural') || n.includes('neural') || n.includes('online')) score += 120;
+  if (n.includes('google us english')) score += 110; else if (n.includes('google')) score += 95;
+  if (n.includes('enhanced') || n.includes('premium') || n.includes('siri')) score += 85;
+  if (n.includes('aria') || n.includes('jenny') || n.includes('ava') || n.includes('samantha') || n.includes('daniel') || n.includes('allison')) score += 45;
+  if (n.includes('espeak') || n.includes('compact')) score -= 40;
+  if (n.includes('david') || n.includes('zira') || n.includes('mark')) score -= 10;
+  return score;
+}
+function getSortedEnglishVoices() {
+  if (!('speechSynthesis' in window)) return [];
+  return window.speechSynthesis.getVoices().filter(v => (v.lang || '').toLowerCase().startsWith('en')).sort((a, b) => scoreVoice(b) - scoreVoice(a));
+}
+function pickBestVoice() {
+  const list = getSortedEnglishVoices(); if (list.length === 0) return null;
+  if (state.preferredVoiceName) { const f = list.find(v => v.name === state.preferredVoiceName); if (f) return f; }
+  return list[0];
+}
+if ('speechSynthesis' in window) { window.speechSynthesis.getVoices(); window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); }; }
+
+function fixReadPronunciation(str) {
+  const adv = '(?:never|already|just|ever|always|often|usually|sometimes|still|not|widely|well|really)\\s+';
+  let s = str;
+  s = s.replace(new RegExp(`(\\b(?:have|has|had|haven't|hasn't|hadn't)|'ve|'s|'d)\\s+(${adv})?read\\b`, 'gi'), (_, v, a) => `${v} ${a || ''}red`);
+  s = s.replace(new RegExp(`\\b(Have|Has|Had)\\s+(?!to\\b)([A-Za-z]+)\\s+(${adv})?read\\b`, 'g'), (_, v, subj, a) => `${v} ${subj} ${a || ''}red`);
+  s = s.replace(new RegExp(`(\\b(?:am|is|are|was|were|be|been|being)|'m|'s|'re)\\s+(${adv})?read\\b`, 'gi'), (_, be, a) => `${be} ${a || ''}red`);
+  s = s.replace(/\bread\s+by\b/gi, 'red by');
+  s = s.replace(new RegExp(`(^|[.!?]\\s+)(He|She|It)\\s+(${adv})?read\\b`, 'g'), (_, p, subj, a) => `${p}${subj} ${a || ''}red`);
+  if (/\b(yesterday|ago|last\s+(?:night|week|month|year|summer|winter|sunday|monday|tuesday|wednesday|thursday|friday|saturday))\b/i.test(s) &&
+      !/\b(do|does|did|don't|doesn't|didn't|can|can't|could|couldn't|will|won't|would|should|may|might|must|to)\s+(?:[A-Za-z]+\s+)?read\b/i.test(s)) {
+    s = s.replace(/\bread\b/gi, 'red');
+  }
+  return s;
+}
+
+function speakText(text) {
+  if (!state.soundOn || !('speechSynthesis' in window) || !text) return;
+  window.speechSynthesis.cancel();
+  const clean = fixReadPronunciation(text.replace(/<u>|<\/u>/g, '').replace(/\(\s*\)/g, ' ... ').replace(/\s*—\s*/g, '. ... ').replace(/\s+/g, ' ').trim());
+  const utt = new SpeechSynthesisUtterance(clean), voice = pickBestVoice();
+  if (voice) { utt.voice = voice; utt.lang = voice.lang; } else utt.lang = 'en-US';
+  utt.rate = state.speed; utt.pitch = 1.0; window.speechSynthesis.speak(utt);
+}
+
+function toggleSound() { state.soundOn = !state.soundOn; document.getElementById('btn-sound').textContent = state.soundOn ? '🔊 ON' : '🔇 OFF'; saveState(); }
+function openVoiceSettings() {
+  const voices = getSortedEnglishVoices(), current = pickBestVoice();
+  const optsHtml = voices.length > 0 ? voices.map(v => `<option value="${v.name}" ${current && v.name === current.name ? 'selected' : ''}>${v.name} (${v.lang})${scoreVoice(v) >= 80 ? ' ★高音質' : ''}</option>`).join('') : '<option value="">英語音声が見つかりません（OS標準を使用）</option>';
+  document.getElementById('modal-title').textContent = '🎙 英語音声の設定・聞き比べ';
+  document.getElementById('modal-close-btn').textContent = '✕ 閉じる';
+  document.getElementById('modal-body').innerHTML = `<p style="font-size:0.86rem; color:var(--text-muted); margin-top:0; line-height:1.5;">※ブラウザ・端末の音声機能を利用しています。<b>「Natural」「Google」「Enhanced」</b>が付いた音声を選ぶと自然な発音になります。</p><div style="margin-bottom:12px;"><label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:6px;">使用する英語の声：</label><select id="voice-select" class="select-input" onchange="changeVoice(this.value)">${optsHtml}</select></div><div style="margin-bottom:14px;"><label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:6px;">話すスピード：<span id="speed-label">${state.speed.toFixed(2)}x</span></label><input type="range" min="0.7" max="1.15" step="0.05" value="${state.speed}" style="width:100%;" oninput="changeSpeed(this.value)"></div><button class="btn btn-primary" style="width:100%;" onclick="speakText('I saw him running in the park. What a wonderful day it is!')">🔊 この声でテスト再生する</button>`;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+function changeVoice(name) { state.preferredVoiceName = name; saveState(); }
+function changeSpeed(val) { state.speed = parseFloat(val); document.getElementById('speed-label').textContent = state.speed.toFixed(2) + 'x'; saveState(); }
+
+const TUTORIAL_STEPS = [
+  { title:'① まずは「実力アナライズ診断」から！', body:'<p style="margin-top:0;">中3の3学期は、学年末（卒業）テスト＆高校入試本番に向けた総仕上げ！「知覚・使役動詞」「付加疑問・否定疑問」「感嘆文・不可算名詞」「重要連語・書き換え総点検」「文法ミックス」「対話＆自由英作」の全8分野を<strong>「🔍 実力アナライズ診断（16問）」</strong>でチェックしよう！</p><ul class="tut-list"><li>3学期新出文法＋入試総復習の8単元からランダムに問題が出ます。</li><li>「否定疑問のYes/No」や「書き換え」など、自分の弱点がレーダーチャートで一目でわかります。</li></ul>' },
+  { title:'② 毎回ちがう問題が出る！弱点ドリル', body:'<p style="margin-top:0;">診断が終わったら<strong>「🎯 おまかせ弱点ドリル」</strong>に進もう！</p><ul class="tut-list"><li>苦手な単元から優先的に出題され、主語・名詞・動詞・書き換えパターンが毎回変わるから丸暗記できません！</li><li><strong>3問連続で正解</strong>すると「完全理解」と判定し、残りを<strong>自動でスキップ</strong>して次に進みます！</li><li>同じ単元で2回つまずくと、10秒レスキュー解説が自動で開きます。</li></ul>' },
+  { title:'③ 必須単語240語＋総仕上げ180変化道場', body:'<p style="margin-top:0;">学年末テスト＆入試の配点を左右する重要表現と語形変化も完全カバー！</p><ul class="tut-list"><li><strong>🔄 総仕上げ 180変化道場</strong>：原形不定詞・付加疑問・感嘆文・書き換え・不規則動詞の全180変化を徹底網羅！</li><li><strong>🔤 3学期＆入試 必須単語・熟語クイズ</strong>：so ~ that / look forward to / information / 自由英作文フレーズなど240語を4パターンで特訓！</li><li><strong>🏆 学年末・卒業テスト模擬（15問）</strong>：全範囲から15問の総合テストで本番前の実力試しができます。</li></ul>' },
+  { title:'④ 画面の各ボタン・ゲージの見方', body:'<ul class="tut-list" style="margin-top:0;"><li><strong>✨ XP / 🔥 コンボ</strong>：正解や連続正解でたまるスコアです。</li><li><strong>🎙 音声設定</strong>：ネイティブ発音の声の種類やスピードを変えられます。</li><li><strong>📖 まとめ帳</strong>：知覚動詞、否定疑問のYes/No、WhatとHowの感嘆文、自由英作の型などをいつでも確認できます。</li><li><strong>🗺 単元別マスター状況</strong>：下の単元カードをタップすると、特定の単元だけ10問集中特訓できます。</li></ul>' }
+];
+
+function openTutorial(step = 0) {
+  const s = TUTORIAL_STEPS[step], dots = TUTORIAL_STEPS.map((_, i) => `<span class="tut-dot ${i === step ? 'active' : ''}"></span>`).join(''), isLast = step === TUTORIAL_STEPS.length - 1;
+  document.getElementById('modal-title').textContent = '🎓 学習の進め方ガイド';
+  document.getElementById('modal-close-btn').textContent = 'スキップ ✕';
+  document.getElementById('modal-body').innerHTML = `<div class="tut-box"><h4 style="margin:0 0 8px; color:var(--primary); font-size:1.05rem;">${s.title}</h4>${s.body}</div><div class="tut-step-dots">${dots}</div><div style="display:flex; gap:8px; justify-content:space-between; flex-wrap:wrap;">${step > 0 ? `<button class="btn btn-secondary btn-sm" onclick="openTutorial(${step - 1})">⬅ 戻る</button>` : `<button class="btn btn-secondary btn-sm" onclick="finishTutorial(false)">スキップする</button>`}${isLast ? `<div style="display:flex; gap:8px; flex:1; justify-content:flex-end;"><button class="btn btn-secondary btn-sm" onclick="finishTutorial(false)">ホームを見る</button><button class="btn btn-primary btn-sm" onclick="finishTutorial(true)">🔍 診断を始める</button></div>` : `<button class="btn btn-primary btn-sm" onclick="openTutorial(${step + 1})">次へ (${step + 1}/${TUTORIAL_STEPS.length}) ➡</button>`}</div>`;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+function finishTutorial(startDiag) { state.tutorialDone = true; saveState(); closeModal(); if (startDiag) startDiagnostic(); }
+
+let session = { mode: 'diag', targetUnit: null, vocabCat: 'all', queue: [], idx: 0, correctCount: 0, earnedXp: 0, answered: false, currentQ: null, unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {}, sortPicked: [], usedPrompts: new Set() };
+let lastPlayedConfig = { mode: 'adaptive', param: null };
+
+function showScreen(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+function updateHud() {
+  document.getElementById('hud-xp').textContent = state.xp;
+  document.getElementById('hud-combo').textContent = state.combo;
+  document.getElementById('btn-sound').textContent = state.soundOn ? '🔊 ON' : '🔇 OFF';
+  document.getElementById('btn-continue-adaptive').style.display = state.diagDone ? 'inline-flex' : 'none';
+}
+function renderUnitMap() {
+  const map = document.getElementById('unit-map'); map.innerHTML = '';
+  UNITS.forEach((u, idx) => {
+    const st = state.unitStats[u.id], tagMap = { master:['mastered','tag-master','#22c55e'], weak:['要特訓','tag-weak','#ef4444'], mid:['あと少し','tag-mid','#f59e0b'], new:['未診断','tag-new','#64748b'] };
+    const [label, cls, color] = tagMap[st.status] || tagMap.new;
+    const el = document.createElement('div'); el.className = 'unit-item'; el.onclick = () => startUnitDrill(u.id);
+    el.innerHTML = `<div class="unit-top"><span>Unit ${idx + 1}</span><span class="tag ${cls}">${label} (${st.mastery}%)</span></div><div class="unit-title">${u.name}</div><div class="bar-bg"><div class="bar-fill" style="width:${st.mastery}%; background:${color};"></div></div>`;
+    map.appendChild(el);
+  });
+}
+function goHome() { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); updateHud(); renderUnitMap(); showScreen('screen-home'); }
+
+function startDiagnostic() {
+  getAudioCtx(); lastPlayedConfig = { mode: 'diag', param: null };
+  const used = new Set(), qList = [];
+  UNITS.forEach(u => { qList.push(drawUniqueQuestion(u.id, used, 0.7)); qList.push(drawUniqueQuestion(u.id, used, 0.85)); });
+  qList.sort(() => Math.random() - 0.5);
+  session = { mode: 'diag', targetUnit: null, vocabCat: 'all', queue: qList, idx: 0, correctCount: 0, earnedXp: 0, answered: false, currentQ: null, unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {}, sortPicked: [], usedPrompts: used };
+  setHintText('3学期（学年末・入試総仕上げ）全範囲16問の実力アナライズ診断中！分からない問題も正直に選んでOKだよ。');
+  showScreen('screen-quiz'); renderQuestion();
+}
+
+function startAdaptiveDrill() {
+  getAudioCtx(); lastPlayedConfig = { mode: 'adaptive', param: null };
+  const used = new Set(), sortedUnits = [...UNITS].sort((a, b) => state.unitStats[a.id].mastery - state.unitStats[b.id].mastery);
+  let targetUnits = sortedUnits.filter(u => state.unitStats[u.id].mastery < 90);
+  if (targetUnits.length === 0) targetUnits = sortedUnits;
+  const qList = [];
+  state.missedQuestions.filter(m => m.unit !== 'vocab' && m.unit !== 'forms').slice(0, 1).forEach(mq => { used.add((mq.jp || '') + (mq.q || mq.ans || '')); qList.push(shuffleChoices(mq)); });
+  targetUnits.slice(0, 3).forEach(u => { for (let i = 0; i < 4; i++) qList.push(drawUniqueQuestion(u.id, used, 0.85)); });
+  session = { mode: 'adaptive', targetUnit: null, vocabCat: 'all', queue: qList.slice(0, 12), idx: 0, correctCount: 0, earnedXp: 0, answered: false, currentQ: null, unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {}, sortPicked: [], usedPrompts: used };
+  setHintText(`「<b>${targetUnits[0].name}</b>」から優先出題中！3問連続正解すると自動で次の単元へスキップするよ。`);
+  showScreen('screen-quiz'); renderQuestion();
+}
+
+function startUnitDrill(unitId) {
+  getAudioCtx(); lastPlayedConfig = { mode: 'unit', param: unitId };
+  const used = new Set(), u = UNITS.find(x => x.id === unitId), qList = [];
+  for (let i = 0; i < 10; i++) qList.push(drawUniqueQuestion(unitId, used, 0.82));
+  session = { mode: 'unit', targetUnit: unitId, vocabCat: 'all', queue: qList, idx: 0, correctCount: 0, earnedXp: 0, answered: false, currentQ: null, unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {}, sortPicked: [], usedPrompts: used };
+  setHintText(`「<b>${u.name}</b>」の個別特訓中！迷ったら下の「💡 ヒントを見る」を押してね。`);
+  showScreen('screen-quiz'); renderQuestion();
+}
+
+function startSurvivalTest() {
+  getAudioCtx(); lastPlayedConfig = { mode: 'survival', param: null };
+  const used = new Set(), qList = [];
+  for (let i = 0; i < 15; i++) qList.push(drawUniqueQuestion(UNITS[i % UNITS.length].id, used, 0.8));
+  qList.sort(() => Math.random() - 0.5);
+  session = { mode: 'survival', targetUnit: null, vocabCat: 'all', queue: qList, idx: 0, correctCount: 0, earnedXp: 0, answered: false, currentQ: null, unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {}, sortPicked: [], usedPrompts: used };
+  setHintText('学年末・入試総仕上げの全範囲からランダム15問出題中！否定疑問文のYes/No、不可算名詞、書き換えに気をつけよう。');
+  showScreen('screen-quiz'); renderQuestion();
+}
+
+function openFormSelector() {
+  document.getElementById('modal-title').textContent = '🔄 3学期＆入試 総仕上げ 180変化道場';
+  document.getElementById('modal-close-btn').textContent = '✕ 閉じる';
+  document.getElementById('modal-body').innerHTML = `<p style="font-size:0.88rem; color:var(--text-muted); margin-top:0; line-height:1.5;">学年末テスト＆高校入試の生命線である全180項目（知覚/使役の原形不定詞、付加疑問・感嘆・否定疑問、書き換え・不可算・一致、重要不規則動詞）を徹底確認！毎回ランダムで15問出題します。</p><div style="display:flex; flex-direction:column; gap:8px;"><button class="btn btn-primary" onclick="closeModal(); startFormQuiz('all')">🌟 全カテゴリMIX（180変化・ランダム15問）</button><button class="btn btn-secondary" onclick="closeModal(); startFormQuiz('inf_ing')">⚡ 知覚・使役（原形不定詞）vs ~ing vs to不定詞（45問）</button><button class="btn btn-secondary" onclick="closeModal(); startFormQuiz('tag_ex')">❓ 付加疑問タグ＆感嘆文What/How＆否定疑問Yes/No（45問）</button><button class="btn btn-secondary" onclick="closeModal(); startFormQuiz('rewrite_gram')">🔄 書き換え公式＆不可算名詞＆動詞一致（45問）</button><button class="btn btn-secondary" onclick="closeModal(); startFormQuiz('verb_all')">🔨 入試必出 不規則動詞・過去分詞 総復習（45問）</button><button class="btn btn-secondary" style="border-color:var(--primary); color:#7dd3fc; margin-top:4px;" onclick="openFormTable()">📋 全180項目 チート一覧表を見る</button></div>`;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+
+function openFormTable() {
+  const secs = [['inf_ing','⚡ 知覚・使役・原形不定詞 vs ~ing vs to不定詞（45項目）'],['tag_ex','❓ 付加疑問・感嘆文・否定疑問（45項目）'],['rewrite_gram','🔄 書き換え・不可算名詞・比較・関係詞（45項目）'],['verb_all','🔨 入試必出 不規則動詞・過去分詞 総復習（45項目）']];
+  document.getElementById('modal-title').textContent = '📋 3学期＆入試 全180項目 チート一覧表';
+  document.getElementById('modal-close-btn').textContent = '✕ 閉じる';
+  document.getElementById('modal-body').innerHTML = `<div style="margin-bottom:12px;"><button class="btn btn-secondary btn-sm" onclick="openFormSelector()">⬅ クイズ選択に戻る</button></div>${secs.map(([cat, title]) => `<div class="cheat-sec"><h4>${title}</h4><div class="form-table">${FORM_BANK.filter(f => f.cat === cat).map(f => `<div class="form-pill">${f.base} → <b>${f.ans}</b><br><span style="color:var(--text-muted);font-size:.7rem;">${f.target}</span></div>`).join('')}</div></div>`).join('')}`;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+
+function startFormQuiz(category = 'all') {
+  getAudioCtx(); lastPlayedConfig = { mode: 'forms', param: category };
+  const used = new Set(), qList = [];
+  for (let i = 0; i < 15; i++) qList.push(generateFormQuestion(category, used));
+  session = { mode: 'forms', targetUnit: null, vocabCat: category, queue: qList, idx: 0, correctCount: 0, earnedXp: 0, answered: false, currentQ: null, unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {}, sortPicked: [], usedPrompts: used };
+  setHintText('3学期＆高校入試で100%狙われる語形変化・文末タグ・書き換えパーツを確認しよう！');
+  showScreen('screen-quiz'); renderQuestion();
+}
+
+function openVocabSelector() {
+  document.getElementById('modal-title').textContent = '🔤 3学期＆入試 必須単語・熟語クイズ（全240語）';
+  document.getElementById('modal-close-btn').textContent = '✕ 閉じる';
+  document.getElementById('modal-body').innerHTML = `<p style="font-size:0.88rem; color:var(--text-muted); margin-top:0; line-height:1.5;">中3・3学期＆高校入試に出る重要単語・熟語・会話表現・自由英作フレーズ240語から、毎回ランダムで12問出題します（意味4択・スペル正誤・スペル入力）。</p><div style="display:flex; flex-direction:column; gap:8px;"><button class="btn btn-primary" onclick="closeModal(); startVocabQuiz('all')">🌟 全カテゴリからランダム出題（240語・12問）</button><button class="btn btn-secondary" onclick="closeModal(); startVocabQuiz('idiom3_3')">🔗 入試・3学期 超頻出熟語・連語（40語）</button><button class="btn btn-secondary" onclick="closeModal(); startVocabQuiz('conv_essay3_3')">💬 最重要 会話表現＆自由英作文フレーズ（40語）</button><button class="btn btn-secondary" onclick="closeModal(); startVocabQuiz('uncount_noun3_3')">🌍 不可算名詞＆社会・環境・進路 名詞（40語）</button><button class="btn btn-secondary" onclick="closeModal(); startVocabQuiz('verb3_3')">🏃 知覚・使役・長文頻出 重要動詞（40語）</button><button class="btn btn-secondary" onclick="closeModal(); startVocabQuiz('adj_adv3_3')">✨ 感嘆・比較・長文 重要形容詞・副詞（40語）</button><button class="btn btn-secondary" onclick="closeModal(); startVocabQuiz('gram_func3_3')">⚡ 接続詞・前置詞・代名詞 総まとめ（40語）</button></div>`;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+
+function startVocabQuiz(category = 'all') {
+  getAudioCtx(); lastPlayedConfig = { mode: 'vocab', param: category };
+  const used = new Set(), qList = [];
+  for (let i = 0; i < 12; i++) qList.push(generateVocabQuestion(category, used));
+  session = { mode: 'vocab', targetUnit: null, vocabCat: category, queue: qList, idx: 0, correctCount: 0, earnedXp: 0, answered: false, currentQ: null, unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {}, sortPicked: [], usedPrompts: used };
+  setHintText('3学期＆高校入試の必須単語・熟語クイズ！information / advice / foreign / necessary のスペルや前置詞に注意しよう。');
+  showScreen('screen-quiz'); renderQuestion();
+}
+
+function retryLastMode() {
+  if (lastPlayedConfig.mode === 'vocab') startVocabQuiz(lastPlayedConfig.param || 'all');
+  else if (lastPlayedConfig.mode === 'forms') startFormQuiz(lastPlayedConfig.param || 'all');
+  else if (lastPlayedConfig.mode === 'unit') startUnitDrill(lastPlayedConfig.param);
+  else if (lastPlayedConfig.mode === 'survival') startSurvivalTest();
+  else startAdaptiveDrill();
+}
+
+function setHintText(html) { document.getElementById('hint-msg').innerHTML = 'ヒント：' + html; }
+
+function renderQuestion() {
+  const q = session.queue[session.idx];
+  session.currentQ = q; session.answered = false; session.sortPicked = [];
+  const u = UNITS.find(x => x.id === q.unit);
+  const modeNames = { diag:'🔍 実力アナライズ', adaptive:'🎯 弱点アダプティブ', unit:'📘 単元特訓', survival:'🏆 学年末・入試模擬', vocab:'🔤 単語・熟語クイズ', forms:'🔄 180変化道場' };
+  document.getElementById('q-mode-label').textContent = modeNames[session.mode];
+  document.getElementById('q-unit-label').textContent = q.unitLabel || (u ? u.name : '3学期復習');
+  document.getElementById('q-source-badge').textContent = q.isGen ? '⚡ランダム生成' : '⭐テスト厳選';
+  document.getElementById('q-num').textContent = session.idx + 1;
+  document.getElementById('q-total').textContent = session.queue.length;
+  document.getElementById('q-progress').style.width = `${(session.idx / session.queue.length) * 100}%`;
+
+  document.getElementById('q-jp').innerHTML = q.jp;
+  const enBox = document.getElementById('q-en');
+  if (q.type === 'sort') enBox.textContent = '下の単語カードをタップして正しい語順に並べよう';
+  else if (q.type === 'error') enBox.textContent = '下の文の中で「文法的に間違っている箇所」をタップしよう';
+  else enBox.innerHTML = q.q;
+
+  const fb = document.getElementById('feedback'); fb.classList.remove('show', 'ok', 'ng');
+  document.getElementById('btn-hint').style.display = 'inline-flex';
+  const area = document.getElementById('q-interact'); area.innerHTML = '';
+
+  if (q.type === 'choice') {
+    const grid = document.createElement('div'); grid.className = 'opts-grid';
+    q.opts.forEach((opt, i) => {
+      const btn = document.createElement('button'); btn.className = 'opt-btn';
+      btn.innerHTML = `<span class="opt-num">${i + 1}</span><span>${opt}</span>`;
+      btn.onclick = () => checkChoice(i, btn); grid.appendChild(btn);
+    });
+    area.appendChild(grid);
+  } else if (q.type === 'sort') {
+    const shuffled = q.words.map((w, i) => ({ w, id: i })).sort(() => Math.random() - 0.5);
+    area.innerHTML = `<div class="sort-zone" id="sort-zone"><span style="color:#64748b; font-size:0.88rem;">ここに単語が並びます...</span></div><div class="word-bank" id="word-bank"></div><div style="display:flex; gap:8px;"><button class="btn btn-secondary btn-sm" onclick="clearSort()">↺ やり直す</button><button class="btn btn-primary" style="flex:1;" onclick="checkSort()">決定する ✓</button></div>`;
+    const bank = document.getElementById('word-bank');
+    shuffled.forEach(item => {
+      const chip = document.createElement('button'); chip.className = 'word-chip'; chip.textContent = item.w; chip.dataset.id = item.id;
+      chip.onclick = () => pickSortWord(item.id, item.w, chip); bank.appendChild(chip);
+    });
+  } else if (q.type === 'input') {
+    area.innerHTML = `<div class="input-wrap"><input type="text" id="ans-input" class="text-input" placeholder="${q.placeholder || 'ここに入力...'}" autocomplete="off" autocapitalize="off" spellcheck="false"><div class="helper-keys"><span style="font-size:0.8rem; color:var(--text-muted);">記号入力補助:</span><button type="button" class="key-chip" onclick="insertChar('\'')">'</button><button type="button" class="key-chip" onclick="insertChar('~')">~</button><button type="button" class="key-chip" onclick="insertChar('?')">?</button><button type="button" class="key-chip" onclick="insertChar('.')">.</button></div><button class="btn btn-primary" onclick="checkInput()">解答する ✓</button></div>`;
+    const inp = document.getElementById('ans-input'); inp.focus();
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter' && !session.answered) checkInput(); });
+  } else if (q.type === 'error') {
+    area.innerHTML = `<div class="seg-row" id="seg-row"></div><div id="fix-area" style="display:none; margin-top:10px;"><div style="font-size:0.9rem; color:var(--warning); font-weight:700; margin-bottom:8px;">👇 正しく直すとどうなる？</div><div class="opts-grid" id="fix-opts"></div></div>`;
+    const row = document.getElementById('seg-row');
+    q.segs.forEach((seg, i) => {
+      const btn = document.createElement('button'); btn.className = 'seg-btn'; btn.textContent = seg;
+      btn.onclick = () => pickErrorSeg(i, btn); row.appendChild(btn);
+    });
+  }
+}
+
+function speakCurrent() {
+  const q = session.currentQ; if (!q) return;
+  if (q.unit === 'vocab') speakText(q.speak);
+  else if (q.type === 'sort' || q.type === 'error') speakText(q.speak);
+  else if (q.qSpeak) speakText(q.qSpeak);
+  else speakText(q.q);
+}
+function speakAnswer() { if (session.currentQ) speakText(session.currentQ.speak); }
+
+function showHint() {
+  const q = session.currentQ;
+  if (q.unit === 'vocab') { setHintText(`最初の文字は「<b>${q.speak[0]}</b>」（長さ: ${q.speak.includes(' ') ? q.speak.split(' ').length + '語' : q.speak.length + '文字'}）だよ！🔊 発音ボタンもヒントになるよ。`); return; }
+  if (q.unit === 'forms') { setHintText(`最初の文字は「<b>${q.hintChar}</b>」（文字数: ${q.hintLen}文字）だよ！3学期・入試ルールを思い出そう。`); return; }
+  const u = UNITS.find(x => x.id === q.unit);
+  let hintText = u ? u.tip : '';
+  if (q.type === 'input') hintText = `最初の文字は「<b>${q.ansList[0][0]}</b>」（文字数: ${q.ansList[0].length}文字）だよ！`;
+  else if (q.type === 'sort') hintText = `最初の単語は「<b>${q.ans.split(' ')[0]}</b>」から始まるよ！`;
+  else if (q.type === 'error' && u) hintText = `「<b>${u.short}</b>」のルールをチェック！`;
+  setHintText(hintText);
+}
+
+function checkChoice(idx, btn) {
+  if (session.answered) return;
+  const q = session.currentQ, buttons = document.querySelectorAll('#q-interact .opt-btn');
+  buttons.forEach(b => b.disabled = true);
+  const isOk = idx === q.ans; btn.classList.add(isOk ? 'correct' : 'wrong');
+  if (!isOk) buttons[q.ans].classList.add('correct');
+  finishQuestion(isOk);
+}
+function pickSortWord(id, word, bankChip) { if (session.answered) return; bankChip.classList.add('used'); session.sortPicked.push({ id, word }); renderSortZone(); }
+function renderSortZone() {
+  const zone = document.getElementById('sort-zone');
+  if (session.sortPicked.length === 0) { zone.innerHTML = '<span style="color:#64748b; font-size:0.88rem;">ここに単語が並びます...</span>'; return; }
+  zone.innerHTML = '';
+  session.sortPicked.forEach((item, idx) => {
+    const chip = document.createElement('button'); chip.className = 'word-chip placed'; chip.textContent = item.word;
+    chip.onclick = () => { if (session.answered) return; session.sortPicked.splice(idx, 1); const b = document.querySelector(`#word-bank .word-chip[data-id="${item.id}"]`); if (b) b.classList.remove('used'); renderSortZone(); };
+    zone.appendChild(chip);
+  });
+}
+function clearSort() { if (session.answered) return; session.sortPicked = []; document.querySelectorAll('#word-bank .word-chip').forEach(c => c.classList.remove('used')); renderSortZone(); }
+function checkSort() {
+  if (session.answered || session.sortPicked.length === 0) return;
+  const q = session.currentQ, built = session.sortPicked.map(x => x.word).join(' ').replace(/\s+/g, ' ').trim(), isOk = built === q.ans;
+  finishQuestion(isOk, isOk ? null : `正しい語順：<b>${q.ans}</b>`);
+}
+function insertChar(ch) { const inp = document.getElementById('ans-input'); if (inp) { inp.value += ch; inp.focus(); } }
+function checkInput() {
+  if (session.answered) return;
+  const q = session.currentQ, inp = document.getElementById('ans-input'); if (!inp.value.trim()) return;
+  const userVal = inp.value.trim().replace(/[’‘]/g, "'").replace(/\s+/g, ' ');
+  let isOk = false, almostMsg = null;
+  for (const ans of q.ansList) {
+    if (q.caseSensitive) {
+      if (userVal === ans) { isOk = true; break; }
+      if (userVal.toLowerCase() === ans.toLowerCase()) almostMsg = `スペルは合っていますが、<b>大文字・小文字</b>に注意！（正解：<b>${ans}</b>）`;
+    } else if (userVal.toLowerCase() === ans.toLowerCase()) { isOk = true; break; }
+  }
+  inp.disabled = true;
+  finishQuestion(isOk, almostMsg || (isOk ? null : `正解例：<b>${q.ansList[0]}</b>`));
+}
+function pickErrorSeg(idx, btn) {
+  if (session.answered) return;
+  const q = session.currentQ, btns = document.querySelectorAll('#seg-row .seg-btn');
+  if (idx !== q.errIdx) { btns.forEach(b => b.disabled = true); btn.classList.add('wrong'); btns[q.errIdx].classList.add('correct'); finishQuestion(false, `間違いは「<b>${q.segs[q.errIdx]}</b>」の部分だよ！`); return; }
+  btns.forEach(b => b.disabled = true); btn.classList.add('selected');
+  document.getElementById('fix-area').style.display = 'block';
+  const fixOpts = document.getElementById('fix-opts'); fixOpts.innerHTML = '';
+  q.fixOpts.forEach((opt, i) => {
+    const ob = document.createElement('button'); ob.className = 'opt-btn'; ob.innerHTML = `<span class="opt-num">${i + 1}</span><span>${opt}</span>`;
+    ob.onclick = () => {
+      if (session.answered) return;
+      document.querySelectorAll('#fix-opts .opt-btn').forEach(x => x.disabled = true);
+      const isOk = i === q.fixAns; ob.classList.add(isOk ? 'correct' : 'wrong');
+      if (!isOk) document.querySelectorAll('#fix-opts .opt-btn')[q.fixAns].classList.add('correct');
+      btn.classList.remove('selected'); btn.classList.add(isOk ? 'correct' : 'wrong');
+      finishQuestion(isOk);
+    };
+    fixOpts.appendChild(ob);
+  });
+}
+
+function finishQuestion(isOk, extraMsg = null) {
+  session.answered = true;
+  const q = session.currentQ, isSpecial = q.unit === 'vocab' || q.unit === 'forms', st = !isSpecial ? state.unitStats[q.unit] : null;
+  if (st) st.attempts++;
+  if (session.mode === 'diag' && !isSpecial) {
+    if (!session.diagResults[q.unit]) session.diagResults[q.unit] = { total: 0, ok: 0 };
+    session.diagResults[q.unit].total++; if (isOk) session.diagResults[q.unit].ok++;
+  }
+  let gain = 0;
+  if (isOk) {
+    sfxCorrect(); session.correctCount++; state.combo++;
+    gain = 10 + Math.min(state.combo * 2, 20); state.xp += gain; session.earnedXp += gain;
+    if (st) { st.correct++; st.streak++; if (session.mode !== 'diag') st.mastery = Math.min(100, st.mastery + 25); }
+    state.missedQuestions = state.missedQuestions.filter(m => m.id !== q.id);
+    session.unitSessionStreak[q.unit] = (session.unitSessionStreak[q.unit] || 0) + 1; session.unitSessionMiss[q.unit] = 0;
+  } else {
+    sfxWrong(); state.combo = 0;
+    if (st) { st.streak = 0; if (session.mode !== 'diag') st.mastery = Math.max(0, st.mastery - 10); }
+    if (!isSpecial && !state.missedQuestions.some(m => m.id === q.id)) { state.missedQuestions.unshift(q); if (state.missedQuestions.length > 10) state.missedQuestions.pop(); }
+    session.unitSessionStreak[q.unit] = 0; session.unitSessionMiss[q.unit] = (session.unitSessionMiss[q.unit] || 0) + 1;
+  }
+  if (st && session.mode !== 'diag') st.status = st.mastery >= 80 ? 'master' : st.mastery >= 45 ? 'mid' : 'weak';
+  saveState(); updateHud();
+  setTimeout(() => speakText(q.speak), 220);
+
+  const fb = document.getElementById('feedback'); fb.className = 'feedback show ' + (isOk ? 'ok' : 'ng');
+  document.getElementById('fb-status').textContent = isOk ? `⭕ 正解！ (+${gain} XP)` : '❌ おしい！チェックしよう';
+  document.getElementById('fb-exp').innerHTML = (extraMsg ? extraMsg + '<br>' : '') + q.exp;
+  document.getElementById('btn-hint').style.display = 'none';
+
+  if (!isSpecial && session.mode === 'adaptive' && isOk && session.unitSessionStreak[q.unit] >= 3) {
+    if (session.queue.slice(session.idx + 1).some(nq => nq.unit === q.unit)) {
+      session.queue = [...session.queue.slice(0, session.idx + 1), ...session.queue.slice(session.idx + 1).filter(nq => nq.unit !== q.unit)];
+      st.mastery = Math.max(st.mastery, 90); st.status = 'master'; saveState(); sfxSkip();
+      const u = UNITS.find(x => x.id === q.unit);
+      showAlertModal('⚡ AUTO SKIP発動！', `<p style="font-size:1rem; line-height:1.6;">「<b>${u.name}</b>」を3問連続パーフェクト！<br><strong>『完全理解』</strong>と判定し、残りをスキップして次の単元へ進みます！</p>`);
+    }
+  } else if (!isSpecial && !isOk && session.mode !== 'diag') {
+    if (session.unitSessionMiss[q.unit] >= 2) {
+      session.unitSessionMiss[q.unit] = 0;
+      const u = UNITS.find(x => x.id === q.unit);
+      showAlertModal('💡 10秒レスキュー解説！', `<p style="color:var(--warning); font-weight:700; margin-top:0;">「${u.name}」のポイントを確認しよう！</p><div class="cheat-sec"><p>${u.tip}</p></div>`);
+    }
+    if (session.queue.length < 18) session.queue.splice(Math.min(session.idx + 3, session.queue.length), 0, drawUniqueQuestion(q.unit, session.usedPrompts, 0.95));
+  }
+  document.getElementById('btn-next').textContent = (session.idx + 1 >= session.queue.length) ? '結果を見る 🏁' : '次の問題へ ➡';
+}
+
+function nextQuestion() { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); session.idx++; if (session.idx >= session.queue.length) finishSession(); else renderQuestion(); }
+
+function finishSession() {
+  if (session.mode === 'diag') {
+    state.diagDone = true;
+    UNITS.forEach(u => {
+      const r = session.diagResults[u.id] || { total: 1, ok: 0 }, m = (r.ok / r.total) >= 1 ? 90 : (r.ok / r.total) >= 0.5 ? 50 : 15;
+      state.unitStats[u.id].mastery = m; state.unitStats[u.id].status = m >= 80 ? 'master' : m >= 45 ? 'mid' : 'weak';
+    });
+    saveState(); renderDiagnosticReport(); showScreen('screen-report');
+  } else {
+    const acc = Math.round((session.correctCount / session.queue.length) * 100);
+    document.getElementById('res-emoji').textContent = acc >= 80 ? '🏆' : acc >= 50 ? '👍' : '💪';
+    document.getElementById('res-title').textContent = acc >= 80 ? '素晴らしい！学年末テスト＆入試合格レベル！' : 'ナイスチャレンジ！着実に力がついてるよ';
+    document.getElementById('res-desc').textContent = `${session.queue.length}問中 ${session.correctCount}問正解しました！次はまた違う主語・単語・例文パターンが出題されるよ。`;
+    document.getElementById('res-acc').textContent = acc + '%';
+    document.getElementById('res-xp').textContent = session.earnedXp;
+    document.getElementById('btn-retry-same').textContent = session.mode === 'vocab' ? '🔤 新しい単語問題でもう一度' : session.mode === 'forms' ? '🔄 新しい180変化問題でもう一度' : '🔥 新しい問題で続けて攻略';
+    renderRandomPrCard('pr-slot-result'); showScreen('screen-result');
+  }
+}
+
+function renderDiagnosticReport() {
+  const weakUnits = UNITS.filter(u => state.unitStats[u.id].mastery < 60);
+  document.getElementById('report-summary').innerHTML = weakUnits.length > 0 ? `分析の結果、<b>${weakUnits.map(u=>u.short).join('・')}</b> にテストでの要注意ポイントが見つかりました！自動でここを優先するドリルを作成したよ。` : 'すごい！中3・3学期＆高校入試総仕上げの基礎がしっかりできています！さらに別パターンの応用問題で100点を目指そう！';
+  renderRandomPrCard('pr-slot-diag');
+  const list = document.getElementById('report-list'); list.innerHTML = '';
+  UNITS.forEach((u, i) => {
+    const st = state.unitStats[u.id], badge = st.mastery >= 80 ? '<span class="tag tag-master">OK / スキップ候補</span>' : st.mastery >= 45 ? '<span class="tag tag-mid">あと少し</span>' : '<span class="tag tag-weak">要注意・重点特訓</span>';
+    const row = document.createElement('div'); row.style.cssText = 'display:flex; justify-content:space-between; align-items:center; background:var(--bg); padding:8px 12px; border-radius:10px; border:1px solid var(--border); font-size:0.86rem;';
+    row.innerHTML = `<span><b>U${i+1}.</b> ${u.short}</span>${badge}`; list.appendChild(row);
+  });
+  const svg = document.getElementById('radar-svg'), cx = 140, cy = 140, maxR = 92, n = UNITS.length; let html = '';
+  [0.33, 0.66, 1].forEach(rScale => {
+    const pts = UNITS.map((_, i) => { const a = (Math.PI * 2 * i) / n - Math.PI / 2; return `${cx + Math.cos(a)*maxR*rScale},${cy + Math.sin(a)*maxR*rScale}`; }).join(' ');
+    html += `<polygon points="${pts}" fill="none" stroke="#334155" stroke-width="1"/>`;
+  });
+  UNITS.forEach((u, i) => {
+    const a = (Math.PI * 2 * i) / n - Math.PI / 2;
+    html += `<line x1="${cx}" y1="${cy}" x2="${cx + Math.cos(a)*maxR}" y2="${cy + Math.sin(a)*maxR}" stroke="#334155" stroke-width="1"/>`;
+    html += `<text x="${cx + Math.cos(a)*(maxR+24)}" y="${cy + Math.sin(a)*(maxR+20)}" fill="#cbd5e1" font-size="10" font-weight="700" text-anchor="middle" dominant-baseline="middle">${u.short}</text>`;
+  });
+  const dataPts = UNITS.map((u, i) => { const val = Math.max(15, state.unitStats[u.id].mastery)/100, a = (Math.PI*2*i)/n - Math.PI/2; return `${cx+Math.cos(a)*maxR*val},${cy+Math.sin(a)*maxR*val}`; }).join(' ');
+  html += `<polygon points="${dataPts}" fill="rgba(56,189,248,0.28)" stroke="#38bdf8" stroke-width="2.5"/>`;
+  svg.innerHTML = html;
+}
+
+function openCheatSheet() {
+  document.getElementById('modal-title').textContent = '📖 中3・3学期 学年末＆高校入試必勝まとめノート';
+  document.getElementById('modal-close-btn').textContent = '✕ 閉じる';
+  document.getElementById('modal-body').innerHTML = UNITS.map((u, i) => `<div class="cheat-sec"><h4>Unit ${i+1}: ${u.name}</h4><p>${u.tip}</p></div>`).join('') + '<button class="btn btn-secondary" style="width:100%;" onclick="openFormTable()">📋 全180項目 チート一覧表を開く</button>';
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+function showAlertModal(title, html) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-close-btn').textContent = '✕ 閉じる';
+  document.getElementById('modal-body').innerHTML = html + '<button class="btn btn-primary" style="width:100%; margin-top:12px;" onclick="closeModal()">OK！続ける</button>';
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+function closeModal() {
+  if (!state.tutorialDone && document.getElementById('modal-title').textContent.includes('学習の進め方')) { state.tutorialDone = true; saveState(); }
+  document.getElementById('modal-backdrop').classList.remove('open');
+}
+function resetProgress() {
+  if (!confirm('中3・3学期の学習データ（XP・単元マスター度・診断結果）をリセットしますか？')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  state = { xp: 0, combo: 0, soundOn: state.soundOn, speed: state.speed, preferredVoiceName: state.preferredVoiceName, diagDone: false, tutorialDone: true, unitStats: {}, missedQuestions: [] };
+  initUnitStats(); saveState(); goHome();
+}
+
+loadState();
+goHome();
+if (!state.tutorialDone) openTutorial(0);
+</script>
+</body>
+</html>
