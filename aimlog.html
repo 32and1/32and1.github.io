@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="あみログ">
+  <title>あみログ - Knitting Counter &amp; Log</title>
+  <style>
+    :root {
+      --bg: #FAF7F2;
+      --surface: #FFFFFF;
+      --surface-soft: #F2ECE4;
+      --primary: #C86D51;
+      --primary-dark: #AD563C;
+      --primary-light: #F9EAE5;
+      --secondary: #5C7C6B;
+      --secondary-light: #EAF1ED;
+      --accent: #D69B3A;
+      --accent-light: #FCF4E3;
+      --text: #2C2724;
+      --text-muted: #7D746D;
+      --border: #E6DDD2;
+      --danger: #C24D4D;
+      --shadow: 0 2px 12px rgba(44, 39, 36, 0.05);
+      --radius: 16px;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Meiryo", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      letter-spacing: 0.015em;
+      -webkit-font-smoothing: antialiased;
+      overscroll-behavior-y: contain;
+    }
+
+    button, input, textarea, select {
+      font-family: inherit;
+      letter-spacing: inherit;
+    }
+
+    .app-container {
+      max-width: 540px;
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: calc(76px + var(--safe-bottom));
+    }
+
+    /* ヘッダー */
+    header {
+      background: var(--surface);
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+
+    .icon-btn {
+      background: var(--surface-soft);
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    .icon-btn:active { transform: scale(0.94); }
+
+    /* ミニタイマーバー */
+    .timer-bar {
+      background: var(--secondary-light);
+      color: var(--text);
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      border-bottom: 1px solid #D9E5DF;
+    }
+
+    .timer-display {
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      font-size: 0.98rem;
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .timer-controls { display: flex; gap: 6px; align-items: center; }
+
+    .chip-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .chip-btn.active {
+      background: var(--secondary);
+      color: #fff;
+      border-color: var(--secondary);
+    }
+
+    /* タブ・カード */
+    .tab-content { display: none; padding: 14px; flex: 1; }
+    .tab-content.active { display: block; }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+    }
+
+    /* プロジェクト選択 */
+    .project-selector {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .project-select-btn {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 9px 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.94rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    /* YouTubeカード */
+    .yt-card { padding: 12px; overflow: hidden; }
+    .yt-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .yt-player-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: #181818;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .yt-player-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .yt-warn-box {
+      background: var(--accent-light);
+      color: #7A5210;
+      font-size: 0.78rem;
+      padding: 8px 10px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      display: none;
+    }
+
+    .yt-fallback-note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .bookmarks-scroll {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+    .bookmarks-scroll::-webkit-scrollbar { display: none; }
+
+    .bookmark-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border: 1px solid #ECCAC0;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .bookmark-chip.add-btn {
+      background: var(--surface-soft);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    /* パーツ切り替え */
+    .parts-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+      scrollbar-width: none;
+    }
+    .parts-scroll::-webkit-scrollbar { display: none; }
+
+    .part-pill {
+      white-space: nowrap;
+      padding: 6px 13px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .part-pill.active {
+      background: var(--text);
+      color: #fff;
+      border-color: var(--text);
+    }
+
+    /* メインカウンター */
+    .counter-card { text-align: center; padding: 18px 16px; }
+
+    .active-step-banner {
+      background: var(--secondary-light);
+      color: #2B4A3A;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-align: left;
+      display: none;
+    }
+
+    .next-reminder-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-light);
+      color: #8A5D12;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+
+    .next-reminder-badge.empty {
+      background: var(--surface-soft);
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .counter-number {
+      font-size: 4.5rem;
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+      margin: 6px 0;
+      letter-spacing: -0.03em;
+    }
+
+    .counter-unit {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-left: 4px;
+      letter-spacing: 0;
+    }
+
+    .progress-wrap { margin: 12px 0 16px; }
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .progress-bar-bg {
+      height: 8px;
+      background: var(--surface-soft);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 999px;
+      transition: width 0.25s ease;
+    }
+
+    .counter-controls { display: flex; gap: 10px; align-items: stretch; }
+    .btn-minus {
+      width: 68px;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-plus {
+      flex: 1;
+      height: 78px;
+      background: var(--primary);
+      border: none;
+      border-radius: 16px;
+      color: #fff;
+      font-size: 1.55rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(200, 109, 81, 0.28);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-plus span { font-size: 0.72rem; font-weight: 500; opacity: 0.88; margin-top: 2px; }
+    .btn-plus:active, .btn-minus:active { transform: scale(0.97); }
+
+    .counter-sub-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px solid var(--surface-soft);
+    }
+
+    .text-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 5px 8px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 8px;
+    }
+    .section-title { font-size: 0.92rem; font-weight: 700; color: var(--text); margin: 0; }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 11px;
+      background: var(--bg);
+      border-radius: 10px;
+      margin-bottom: 7px;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .step-item.current-step {
+      background: var(--secondary-light);
+      border-color: var(--secondary);
+    }
+    .step-range {
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: var(--surface);
+      color: var(--text);
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-right: 8px;
+      white-space: nowrap;
+      border: 1px solid var(--border);
+    }
+    .step-item.current-step .step-range {
+      background: var(--secondary);
+      color: #fff;
+      border-color: var(--secondary);
+    }
+
+    .reminder-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 11px;
+      background: var(--bg);
+      border-radius: 10px;
+      margin-bottom: 7px;
+      border: 1px solid var(--border);
+    }
+    .reminder-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: var(--accent-light);
+      color: #8A5D12;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-right: 8px;
+    }
+
+    .pattern-img-preview {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin-top: 8px;
+      display: block;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 0.92rem;
+      margin-bottom: 10px;
+    }
+    .filter-pills { display: flex; gap: 8px; margin-bottom: 14px; }
+    .project-card { cursor: pointer; }
+    .project-card.current { border: 1.5px solid var(--primary); background: #FFFCFA; }
+    .project-meta { font-size: 0.82rem; color: var(--text-muted); margin-top: 6px; white-space: pre-wrap; }
+    .badge-done {
+      background: var(--secondary-light);
+      color: var(--secondary);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.74rem;
+      font-weight: 600;
+    }
+
+    .cal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; }
+    .cal-weekday { font-size: 0.74rem; font-weight: 600; color: var(--text-muted); padding-bottom: 6px; }
+    .cal-day {
+      aspect-ratio: 1;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+    }
+    .cal-day.today { border-color: var(--primary); }
+    .cal-day.selected { background: var(--primary-light); border-color: var(--primary); }
+    .cal-day.has-log { background: var(--secondary-light); color: #2B4A3A; }
+    .cal-day.selected.has-log { background: var(--primary-light); color: var(--text); }
+    .cal-dot { font-size: 0.65rem; line-height: 1; margin-top: 2px; color: var(--secondary); }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0 calc(8px + var(--safe-bottom));
+      z-index: 40;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+    .nav-item {
+      background: none;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 16px;
+      cursor: pointer;
+    }
+    .nav-item.active { color: var(--primary); }
+    .nav-icon { font-size: 1.2rem; line-height: 1; }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(44, 39, 36, 0.45);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 100;
+      padding: 12px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-backdrop.center { align-items: center; }
+
+    .modal-box {
+      background: var(--surface);
+      width: 100%;
+      max-width: 480px;
+      border-radius: 20px;
+      padding: 20px;
+      max-height: 86vh;
+      overflow-y: auto;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.18);
+      animation: slideUp 0.2s ease-out;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(16px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 0 0 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .form-group { margin-bottom: 13px; }
+    .form-label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 5px; color: var(--text); }
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.92rem;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .preset-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+    .preset-chip {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 12px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-secondary {
+      width: 100%;
+      padding: 11px;
+      background: var(--surface-soft);
+      color: var(--text);
+      border: none;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-danger { background: #FBEAEA; color: var(--danger); }
+    .btn-row { display: flex; gap: 10px; margin-top: 10px; }
+
+    .alert-box { text-align: center; padding: 24px 18px; border: 2px solid var(--accent); }
+    .alert-emoji { font-size: 2.4rem; margin-bottom: 8px; }
+    .alert-msg { font-size: 1.25rem; font-weight: 700; color: var(--text); margin-bottom: 8px; white-space: pre-wrap; }
+    .alert-sub { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+
+<div class="app-container">
+  <header>
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span>あみログ</span>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" id="soundToggleBtn" title="サウンド切り替え" onclick="toggleSound()">🔊</button>
+      <button class="icon-btn" title="タイマー設定" onclick="openTimerModal()">⏱</button>
+      <button class="icon-btn" title="データ管理" onclick="openBackupModal()">⚙</button>
+    </div>
+  </header>
+
+  <div class="timer-bar">
+    <div class="timer-display" onclick="openTimerModal()">
+      <span>⏱</span>
+      <span id="timerText">25:00</span>
+      <span id="timerModeLabel" style="font-size:0.74rem; font-weight:500; opacity:0.8;">(休憩タイマー)</span>
+    </div>
+    <div class="timer-controls">
+      <button class="chip-btn" id="timerStartBtn" onclick="toggleTimer()">開始</button>
+      <button class="chip-btn" onclick="resetTimer()">リセット</button>
+    </div>
+  </div>
+
+  <main id="tab-counter" class="tab-content active">
+    <div class="project-selector">
+      <button class="project-select-btn" onclick="switchTab('projects')">
+        <span id="currentProjectName" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">作品名</span>
+        <span style="font-size:0.78rem; color:var(--text-muted); margin-left:6px; flex-shrink:0;">切替 ▾</span>
+      </button>
+      <button class="chip-btn" style="padding:9px 11px;" onclick="openYoutubeModal()">YouTube</button>
+      <button class="chip-btn" style="padding:9px 11px;" onclick="openProjectModal(currentProjectId())">メモ</button>
+    </div>
+
+    <div class="card yt-card" id="ytCard" style="display:none;">
+      <div class="yt-header">
+        <strong style="font-size:0.86rem; color:var(--text);">参考動画</strong>
+        <div style="display:flex; gap:6px;">
+          <button class="chip-btn" onclick="openYoutubeModal()">URL変更</button>
+          <button class="chip-btn" id="ytCollapseBtn" onclick="toggleYtCollapse()">非表示 ▴</button>
+        </div>
+      </div>
+
+      <div id="ytBody">
+        <div class="yt-warn-box" id="ytWarnBox"></div>
+        <div class="yt-player-wrap" id="ytPlayerWrap"></div>
+        <div class="yt-fallback-note">
+          <span>見返したい場面をしおり登録できます</span>
+          <a id="ytExternalLink" href="#" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600; text-decoration:none;">YouTubeで開く ↗</a>
+        </div>
+        <div class="bookmarks-scroll" id="bookmarksList"></div>
+      </div>
+    </div>
+
+    <div class="parts-scroll" id="partsList"></div>
+
+    <div class="card counter-card">
+      <div class="active-step-banner" id="activeStepBanner"></div>
+
+      <div id="nextReminderBadge" class="next-reminder-badge empty" onclick="openReminderModal()">
+        リマインド設定なし（タップで追加）
+      </div>
+
+      <div class="counter-number">
+        <span id="rowCountDisplay">0</span><span class="counter-unit">段</span>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-info">
+          <span id="progressText">目標: 未設定</span>
+          <span id="progressPercent"></span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressBar" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <div class="counter-controls">
+        <button class="btn-minus" onclick="changeCount(-1)">−1</button>
+        <button class="btn-plus" onclick="changeCount(1)">
+          ＋1 段
+          <span>タップでカウント</span>
+        </button>
+      </div>
+
+      <div class="counter-sub-actions">
+        <button class="text-btn" onclick="openPartEditModal()">パーツ・目標設定</button>
+        <button class="text-btn" onclick="confirmResetCount()">0にリセット</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-header">
+        <h3 class="section-title">作り方ステップ</h3>
+        <div style="display:flex; gap:6px;">
+          <button class="chip-btn" onclick="openAutoImportModal()">文章から自動取込</button>
+          <button class="chip-btn" onclick="openStepModal()">＋ 追加</button>
+        </div>
+      </div>
+      <div id="stepsList"></div>
+    </div>
+
+    <div class="card">
+      <div class="section-header">
+        <h3 class="section-title">リマインダー</h3>
+        <button class="chip-btn" onclick="openReminderModal()">＋ 追加</button>
+      </div>
+      <div id="reminderList"></div>
+    </div>
+
+    <div class="card">
+      <div class="section-header">
+        <h3 class="section-title">編み図・画像メモ</h3>
+        <label class="chip-btn" style="cursor:pointer;">
+          画像を選択
+          <input type="file" accept="image/*" style="display:none;" onchange="handlePatternImage(event)">
+        </label>
+      </div>
+      <div id="patternImgArea"></div>
+    </div>
+  </main>
+
+  <main id="tab-projects" class="tab-content">
+    <div class="section-header" style="margin-bottom:12px;">
+      <h2 class="section-title" style="font-size:1.08rem;">プロジェクト一覧</h2>
+      <button class="chip-btn active" onclick="openProjectModal(null)">＋ 新規作成</button>
+    </div>
+
+    <input type="text" class="search-box" id="projectSearch" placeholder="作品名やメモで検索..." oninput="renderProjects()">
+
+    <div class="filter-pills">
+      <button class="chip-btn active" id="filter-all" onclick="setProjectFilter('all')">すべて</button>
+      <button class="chip-btn" id="filter-active" onclick="setProjectFilter('active')">進行中</button>
+      <button class="chip-btn" id="filter-done" onclick="setProjectFilter('done')">完成済み</button>
+    </div>
+
+    <div id="projectList"></div>
+  </main>
+
+  <main id="tab-calendar" class="tab-content">
+    <div class="card">
+      <div class="cal-header">
+        <button class="icon-btn" onclick="moveMonth(-1)">‹</button>
+        <strong id="calMonthTitle" style="font-size:1.02rem;"></strong>
+        <button class="icon-btn" onclick="moveMonth(1)">›</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+
+    <div class="card">
+      <div class="section-header">
+        <h3 class="section-title" id="selectedDateTitle">日付を選択</h3>
+        <span id="selectedDateRows" style="font-weight:700; color:var(--primary);">0 段</span>
+      </div>
+      <div class="form-group" style="margin-top:10px; margin-bottom:8px;">
+        <label class="form-label">メモ・作業記録</label>
+        <textarea class="form-textarea" id="diaryInput" rows="3" placeholder="使用した毛糸のロット番号や、作業メモを残せます"></textarea>
+      </div>
+      <button class="btn-primary" style="padding:10px;" onclick="saveDiary()">保存する</button>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-item active" id="nav-counter" onclick="switchTab('counter')">
+      <span class="nav-icon">🧶</span>
+      <span>カウンター</span>
+    </button>
+    <button class="nav-item" id="nav-projects" onclick="switchTab('projects')">
+      <span class="nav-icon">📚</span>
+      <span>作品一覧</span>
+    </button>
+    <button class="nav-item" id="nav-calendar" onclick="switchTab('calendar')">
+      <span class="nav-icon">📅</span>
+      <span>記録</span>
+    </button>
+  </nav>
+</div>
+
+<!-- モーダル群 -->
+<div class="modal-backdrop" id="youtubeModal">
+  <div class="modal-box">
+    <h3 class="modal-title">
+      <span>YouTube動画の設定</span>
+      <button class="icon-btn" onclick="closeModal('youtubeModal')">✕</button>
+    </h3>
+    <div class="form-group">
+      <label class="form-label">動画URLを貼り付け</label>
+      <input type="text" class="form-input" id="ytUrlInput" placeholder="https://youtu.be/...">
+      <p style="font-size:0.78rem; color:var(--text-muted); margin:6px 0 0;">
+        YouTubeの「共有」→「リンクをコピー」したURLを貼り付けてください。空欄で保存すると動画を非表示にします。
+      </p>
+    </div>
+    <button class="btn-primary" onclick="saveYoutubeUrl()">設定する</button>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="bookmarkModal">
+  <div class="modal-box">
+    <h3 class="modal-title">
+      <span>動画のしおりを追加</span>
+      <button class="icon-btn" onclick="closeModal('bookmarkModal')">✕</button>
+    </h3>
+    <div class="form-group">
+      <label class="form-label">再生時間（例：04:20 または 1:05:30）</label>
+      <div style="display:flex; gap:8px;">
+        <input type="text" class="form-input" id="bmTimeInput" placeholder="04:20">
+        <button type="button" class="chip-btn" onclick="fillCurrentYtTime()" style="flex-shrink:0;">現在位置を取得</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">ラベル</label>
+      <div class="preset-chips">
+        <button type="button" class="preset-chip" onclick="document.getElementById('bmLabelInput').value='作り目'">作り目</button>
+        <button type="button" class="preset-chip" onclick="document.getElementById('bmLabelInput').value='増し目'">増し目</button>
+        <button type="button" class="preset-chip" onclick="document.getElementById('bmLabelInput').value='減らし目'">減らし目</button>
+        <button type="button" class="preset-chip" onclick="document.getElementById('bmLabelInput').value='色替え'">色替え</button>
+        <button type="button" class="preset-chip" onclick="document.getElementById('bmLabelInput').value='糸処理・仕上げ'">糸処理・仕上げ</button>
+      </div>
+      <input type="text" class="form-input" id="bmLabelInput" placeholder="例：増し目の編み方">
+    </div>
+    <button class="btn-primary" onclick="saveBookmark()">保存する</button>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="stepModal">
+  <div class="modal-box">
+    <h3 class="modal-title">
+      <span>作り方ステップを追加</span>
+      <button class="icon-btn" onclick="closeModal('stepModal')">✕</button>
+    </h3>
+    <div style="display:flex; gap:10px;">
+      <div class="form-group" style="flex:1;">
+        <label class="form-label">開始段</label>
+        <input type="number" class="form-input" id="stepStartInput" min="0" value="1">
+      </div>
+      <div class="form-group" style="flex:1;">
+        <label class="form-label">終了段</label>
+        <input type="number" class="form-input" id="stepEndInput" min="0" value="10">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">作業内容</label>
+      <input type="text" class="form-input" id="stepTextInput" placeholder="例：細編み 24目（増減なし）">
+    </div>
+    <button class="btn-primary" onclick="saveStep()">追加する</button>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="autoImportModal">
+  <div class="modal-box">
+    <h3 class="modal-title">
+      <span>文章から自動取り込み</span>
+      <button class="icon-btn" onclick="closeModal('autoImportModal')">✕</button>
+    </h3>
+    <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0;">
+      YouTubeの概要欄やレシピのメモを貼り付けると、段数の作り方・リマインド・しおりを自動で抽出します。
+    </p>
+    <div class="form-group">
+      <textarea class="form-textarea" id="autoImportText" rows="7" placeholder="例：
+00:45 作り目
+05:10 模様編みの解説
+1〜10段：細編み
+11段目：増し目
+4段ごと：色を変える
+目標 30段"></textarea>
+    </div>
+    <button class="btn-primary" onclick="runAutoImport()">取り込む</button>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="partModal">
+  <div class="modal-box">
+    <h3 class="modal-title">
+      <span id="partModalTitle">パーツ設定</span>
+      <button class="icon-btn" onclick="closeModal('partModal')">✕</button>
+    </h3>
+    <div class="form-group">
+      <label class="form-label">パーツ名（例：本体、袖、襟）</label>
+      <input type="text" class="form-input" id="partNameInput" placeholder="本体">
+    </div>
+    <div class="form-group">
+      <label class="form-label">目標段数（空欄または0で設定なし）</label>
+      <input type="number" class="form-input" id="partTargetInput" min="0" placeholder="例：40">
+    </div>
+    <div class="form-group">
+      <label class="form-label">現在の段数を直接入力</label>
+      <input type="number" class="form-input" id="partCountInput" min="0">
+    </div>
+    <button class="btn-primary" onclick="savePart()">保存する</button>
+    <div class="btn-row" id="partDeleteWrap">
+      <button class="btn-secondary btn-danger" onclick="deleteCurrentPart()">このパーツを削除</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="reminderModal">
+  <div class="modal-box">
+    <h3 class="modal-title">
+      <span>リマインダーを追加</span>
+      <button class="icon-btn" onclick="closeModal('reminderModal')">✕</button>
+    </h3>
+    <div class="form-group">
+      <label class="form-label">通知タイミング</label>
+      <select class="form-select" id="remType" onchange="toggleRemFields()">
+        <option value="exact">指定した段数（例：20段目）</option>
+        <option value="repeat">一定間隔ごと（例：4段ごと）</option>
+      </select>
+    </div>
+    <div class="form-group" id="remExactWrap">
+      <label class="form-label">通知する段数</label>
+      <input type="number" class="form-input" id="remExactRow" min="1" placeholder="例：15">
+    </div>
+    <div id="remRepeatWrap" style="display:none;">
+      <div class="form-group">
+        <label class="form-label">間隔（何段ごと）</label>
+        <input type="number" class="form-input" id="remInterval" min="1" placeholder="例：4">
+      </div>
+      <div class="form-group">
+        <label class="form-label">開始段（0の場合は 4, 8, 12... 段目）</label>
+        <input type="number" class="form-input" id="remStartRow" min="0" value="0">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">メッセージ</label>
+      <div class="preset-chips">
+        <button type="button" class="preset-chip" onclick="setRemMsg('増し目')">増し目</button>
+        <button type="button" class="preset-chip" onclick="setRemMsg('減らし目')">減らし目</button>
+        <button type="button" class="preset-chip" onclick="setRemMsg('色替え')">色替え</button>
+        <button type="button" class="preset-chip" onclick="setRemMsg('模様切り替え')">模様切り替え</button>
+        <button type="button" class="preset-chip" onclick="setRemMsg('サイズ確認')">サイズ確認</button>
+      </div>
+      <input type="text" class="form-input" id="remMessage" placeholder="例：両端で1目ずつ増し目">
+    </div>
+    <button class="btn-primary" onclick="saveReminder()">登録する</button>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="projectModal">
+  <div class="modal-box">
+    <h3 class="modal-title">
+      <span id="projModalTitle">作品の設定</span>
+      <button class="icon-btn" onclick="closeModal('projectModal')">✕</button>
+    </h3>
+    <div class="form-group">
+      <label class="form-label">作品名</label>
+      <input type="text" class="form-input" id="projNameInput" placeholder="例：モヘアのカーディガン">
+    </div>
+    <div class="form-group">
+      <label class="form-label">YouTube動画のURL（任意）</label>
+      <input type="text" class="form-input" id="projYtInput" placeholder="https://youtu.be/...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">メモ（使用毛糸・針の号数・ゲージなど）</label>
+      <textarea class="form-textarea" id="projNoteInput" rows="3" placeholder="例：並太 2本取り、かぎ針 7号"></textarea>
+    </div>
+    <div class="form-group" style="display:flex; align-items:center; gap:8px;">
+      <input type="checkbox" id="projDoneInput" style="width:18px; height:18px;">
+      <label for="projDoneInput" style="font-weight:600; font-size:0.9rem;">完成済みにする</label>
+    </div>
+    <button class="btn-primary" onclick="saveProject()">保存する</button>
+    <div class="btn-row" id="projDeleteWrap">
+      <button class="btn-secondary btn-danger" onclick="deleteEditingProject()">この作品を削除</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="timerModal">
+  <div class="modal-box">
+    <h3 class="modal-title">
+      <span>タイマー設定</span>
+      <button class="icon-btn" onclick="closeModal('timerModal')">✕</button>
+    </h3>
+    <div class="preset-chips" style="margin-bottom:14px;">
+      <button class="preset-chip" onclick="setTimerPreset(15)">15分</button>
+      <button class="preset-chip" onclick="setTimerPreset(25)">25分</button>
+      <button class="preset-chip" onclick="setTimerPreset(45)">45分</button>
+      <button class="preset-chip" onclick="setTimerMode('stopwatch')">経過時間（ストップウォッチ）</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">カスタム時間（分）</label>
+      <div style="display:flex; gap:8px;">
+        <input type="number" class="form-input" id="customTimerMin" min="1" max="180" value="25">
+        <button class="btn-primary" style="width:120px;" onclick="setTimerCustom()">設定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="backupModal">
+  <div class="modal-box">
+    <h3 class="modal-title">
+      <span>データ管理</span>
+      <button class="icon-btn" onclick="closeModal('backupModal')">✕</button>
+    </h3>
+    <p style="font-size:0.84rem; color:var(--text-muted);">
+      データはこの端末のブラウザに自動保存されます。機種変更時などはJSONファイルとして書き出し・読み込みが可能です。
+    </p>
+    <button class="btn-secondary" style="margin-bottom:10px;" onclick="exportData()">バックアップを書き出す（JSON）</button>
+    <label class="btn-secondary" style="display:block; text-align:center; cursor:pointer;">
+      バックアップを読み込む
+      <input type="file" accept=".json" style="display:none;" onchange="importData(event)">
+    </label>
+  </div>
+</div>
+
+<div class="modal-backdrop center" id="alertModal">
+  <div class="modal-box alert-box">
+    <div class="alert-emoji" id="alertEmoji">🔔</div>
+    <div class="alert-msg" id="alertMsg"></div>
+    <div class="alert-sub" id="alertSub"></div>
+    <button class="btn-primary" onclick="closeModal('alertModal')">OK</button>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'amilog_data_v2';
+
+  const defaultState = {
+    soundEnabled: true,
+    currentProjectId: 'proj_1',
+    projects: [
+      {
+        id: 'proj_1',
+        name: 'サンプル作品',
+        note: '使用毛糸や針の号数などをメモできます。\n上部の「YouTube」ボタンから参考動画を紐づけられます。',
+        youtubeUrl: '',
+        youtubeId: '',
+        bookmarks: [],
+        patternImage: '',
+        done: false,
+        currentPartId: 'part_1',
+        parts: [
+          {
+            id: 'part_1',
+            name: '本体',
+            count: 0,
+            target: 30,
+            steps: [
+              { id: 'st_1', startRow: 1, endRow: 10, text: '10段まで増減なしで編む' },
+              { id: 'st_2', startRow: 11, endRow: 30, text: '模様を確認しながら30段まで編む' }
+            ],
+            reminders: [
+              { id: 'rem_1', type: 'exact', row: 10, message: '10段目：サイズ・ゲージ確認' }
+            ]
+          }
+        ]
+      }
+    ],
+    logs: {}
+  };
+
+  let state = loadState();
+  let projectFilter = 'all';
+  let editingProjectId = null;
+  let editingPartId = null;
+  let ytCollapsed = false;
+
+  const now = new Date();
+  let calYear = now.getFullYear();
+  let calMonth = now.getMonth();
+  let selectedDateStr = formatDate(now);
+
+  let timerMode = 'countdown';
+  let timerDefaultSeconds = 25 * 60;
+  let timerSeconds = 25 * 60;
+  let timerInterval = null;
+
+  let ytPlayer = null;
+  let ytApiReady = false;
+  let loadedYtVideoId = '';
+
+  (function loadYtApi() {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  })();
+
+  window.onYouTubeIframeAPIReady = function() {
+    ytApiReady = true;
+    syncYoutubePlayer();
+  };
+
+  let audioCtx = null;
+  function getAudioCtx() {
+    if (!audioCtx) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (AudioContext) audioCtx = new AudioContext();
+    }
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+  }
+
+  function playTone(freq, duration = 0.08, type = 'sine', delay = 0) {
+    if (!state.soundEnabled) return;
+    try {
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+      gain.gain.setValueAtTime(0.14, ctx.currentTime + delay);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + duration);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(ctx.currentTime + delay);
+      osc.stop(ctx.currentTime + delay + duration);
+    } catch (e) {}
+  }
+
+  function playClickSound() { playTone(587.33, 0.06, 'sine'); }
+  function playAlertSound() {
+    playTone(523.25, 0.14, 'triangle', 0);
+    playTone(659.25, 0.14, 'triangle', 0.12);
+    playTone(783.99, 0.28, 'triangle', 0.24);
+  }
+
+  function loadState() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('amilog_data_v1');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed && Array.isArray(parsed.projects) && parsed.projects.length > 0) {
+          parsed.projects.forEach(p => {
+            if (!p.bookmarks) p.bookmarks = [];
+            if (!p.youtubeUrl) p.youtubeUrl = '';
+            if (!p.youtubeId) p.youtubeId = extractYoutubeId(p.youtubeUrl);
+            if (!p.patternImage) p.patternImage = '';
+            p.parts.forEach(pt => {
+              if (!pt.steps) pt.steps = [];
+              if (!pt.reminders) pt.reminders = [];
+            });
+          });
+          return parsed;
+        }
+      }
+    } catch (e) {}
+    return JSON.parse(JSON.stringify(defaultState));
+  }
+
+  function saveState() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/[&<>"']/g, s => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[s]));
+  }
+
+  function formatDate(d) {
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  }
+
+  function formatSecToTime(totalSec) {
+    totalSec = Math.max(0, Math.floor(totalSec));
+    const h = Math.floor(totalSec / 3600);
+    const m = Math.floor((totalSec % 3600) / 60);
+    const s = totalSec % 60;
+    if (h > 0) return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  }
+
+  function parseTimeToSec(str) {
+    const parts = String(str).trim().split(':').map(n => parseInt(n, 10));
+    if (parts.some(isNaN)) return null;
+    if (parts.length === 2) return parts[0] * 60 + parts[1];
+    if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    if (parts.length === 1) return parts[0];
+    return null;
+  }
+
+  function extractYoutubeId(url) {
+    if (!url) return '';
+    const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+    return match ? match[1] : '';
+  }
+
+  function currentProjectId() { return state.currentProjectId; }
+  function getCurrentProject() {
+    let proj = state.projects.find(p => p.id === state.currentProjectId);
+    if (!proj) { proj = state.projects[0]; state.currentProjectId = proj.id; }
+    return proj;
+  }
+  function getCurrentPart() {
+    const proj = getCurrentProject();
+    let part = proj.parts.find(pt => pt.id === proj.currentPartId);
+    if (!part) { part = proj.parts[0]; proj.currentPartId = part.id; }
+    return part;
+  }
+
+  function switchTab(tabName) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    document.getElementById(`tab-${tabName}`).classList.add('active');
+    document.getElementById(`nav-${tabName}`).classList.add('active');
+    if (tabName === 'projects') renderProjects();
+    if (tabName === 'calendar') renderCalendar();
+    if (tabName === 'counter') renderCounter();
+  }
+
+  function toggleSound() {
+    state.soundEnabled = !state.soundEnabled;
+    saveState();
+    updateSoundIcon();
+    if (state.soundEnabled) playClickSound();
+  }
+  function updateSoundIcon() {
+    document.getElementById('soundToggleBtn').textContent = state.soundEnabled ? '🔊' : '🔇';
+  }
+
+  function buildYoutubeIframeHtml(videoId, startSec = 0) {
+    const hasOrigin = window.location.protocol.startsWith('http') && window.location.origin && window.location.origin !== 'null';
+    const originParam = hasOrigin ? `&origin=${encodeURIComponent(window.location.origin)}` : '';
+    const startParam = startSec > 0 ? `&start=${startSec}&autoplay=1` : '';
+    const src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&playsinline=1&rel=0${originParam}${startParam}`;
+    return `<iframe id="ytIframe" src="${src}" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+  }
+
+  function syncYoutubePlayer(forceStartSec = 0) {
+    const proj = getCurrentProject();
+    const ytCard = document.getElementById('ytCard');
+    const warnBox = document.getElementById('ytWarnBox');
+
+    if (!proj.youtubeId) {
+      ytCard.style.display = 'none';
+      loadedYtVideoId = '';
+      ytPlayer = null;
+      return;
+    }
+
+    ytCard.style.display = 'block';
+    document.getElementById('ytExternalLink').href = `https://youtu.be/${proj.youtubeId}`;
+
+    if (window.location.protocol === 'file:') {
+      warnBox.style.display = 'block';
+      warnBox.innerHTML = 'ローカルファイルを直接開いているためYouTubeの仕様で再生エラー(153)が出ます。「YouTubeで開く」を使用するか、Netlify等にアップロードしたURLから開くとここで再生できます。';
+    } else {
+      warnBox.style.display = 'none';
+    }
+
+    if (proj.youtubeId !== loadedYtVideoId || forceStartSec > 0) {
+      loadedYtVideoId = proj.youtubeId;
+      ytPlayer = null;
+      const wrap = document.getElementById('ytPlayerWrap');
+      wrap.innerHTML = buildYoutubeIframeHtml(proj.youtubeId, forceStartSec);
+
+      if (ytApiReady && window.YT && window.YT.Player) {
+        try {
+          ytPlayer = new YT.Player('ytIframe', {
+            events: {
+              onError: function(e) {
+                warnBox.style.display = 'block';
+                if (e.data === 153 || e.data === 150 || e.data === 101) {
+                  warnBox.innerHTML = `埋め込み再生が制限されている動画です（エラー${e.data}）。右下の「YouTubeで開く ↗」から視聴してください。`;
+                } else {
+                  warnBox.innerHTML = `動画の読み込みエラー（${e.data}）。「YouTubeで開く ↗」から視聴してください。`;
+                }
+              }
+            }
+          });
+        } catch (err) {}
+      }
+    }
+    renderBookmarks();
+  }
+
+  function toggleYtCollapse() {
+    ytCollapsed = !ytCollapsed;
+    document.getElementById('ytBody').style.display = ytCollapsed ? 'none' : 'block';
+    document.getElementById('ytCollapseBtn').textContent = ytCollapsed ? '表示 ▾' : '非表示 ▴';
+  }
+
+  function openYoutubeModal() {
+    document.getElementById('ytUrlInput').value = getCurrentProject().youtubeUrl || '';
+    openModal('youtubeModal');
+  }
+
+  function saveYoutubeUrl() {
+    const url = document.getElementById('ytUrlInput').value.trim();
+    const proj = getCurrentProject();
+    if (!url) {
+      proj.youtubeUrl = '';
+      proj.youtubeId = '';
+    } else {
+      const id = extractYoutubeId(url);
+      if (!id) {
+        alert('YouTubeのURLを認識できませんでした。\nyoutu.be/... または youtube.com/watch?v=... の形式で入力してください。');
+        return;
+      }
+      proj.youtubeUrl = url;
+      proj.youtubeId = id;
+    }
+    ytCollapsed = false;
+    loadedYtVideoId = '';
+    document.getElementById('ytBody').style.display = 'block';
+    saveState();
+    closeModal('youtubeModal');
+    syncYoutubePlayer();
+  }
+
+  function renderBookmarks() {
+    const proj = getCurrentProject();
+    const el = document.getElementById('bookmarksList');
+    let html = `<button class="bookmark-chip add-btn" onclick="openBookmarkModal()">＋ しおり追加</button>`;
+    const sorted = [...(proj.bookmarks || [])].sort((a, b) => a.timeSec - b.timeSec);
+    sorted.forEach(bm => {
+      html += `
+        <span class="bookmark-chip" onclick="seekYoutube(${bm.timeSec})">
+          🔖 ${formatSecToTime(bm.timeSec)} ${escapeHtml(bm.label)}
+          <span onclick="event.stopPropagation(); deleteBookmark('${bm.id}')" style="opacity:0.6; margin-left:3px;">✕</span>
+        </span>
+      `;
+    });
+    el.innerHTML = html;
+  }
+
+  function seekYoutube(sec) {
+    const proj = getCurrentProject();
+    document.getElementById('ytExternalLink').href = `https://youtu.be/${proj.youtubeId}?t=${sec}`;
+    if (ytPlayer && typeof ytPlayer.seekTo === 'function') {
+      ytPlayer.seekTo(sec, true);
+      if (typeof ytPlayer.playVideo === 'function') ytPlayer.playVideo();
+    } else {
+      syncYoutubePlayer(sec);
+    }
+  }
+
+  function openBookmarkModal() {
+    document.getElementById('bmTimeInput').value = '';
+    document.getElementById('bmLabelInput').value = '';
+    fillCurrentYtTime();
+    openModal('bookmarkModal');
+  }
+
+  function fillCurrentYtTime() {
+    if (ytPlayer && typeof ytPlayer.getCurrentTime === 'function') {
+      const t = Math.floor(ytPlayer.getCurrentTime() || 0);
+      document.getElementById('bmTimeInput').value = formatSecToTime(t);
+    } else if (!document.getElementById('bmTimeInput').value) {
+      document.getElementById('bmTimeInput').value = '00:00';
+    }
+  }
+
+  function saveBookmark() {
+    const sec = parseTimeToSec(document.getElementById('bmTimeInput').value);
+    if (sec === null) { alert('「04:20」の形式で時間を入力してください'); return; }
+    const label = document.getElementById('bmLabelInput').value.trim() || 'しおり';
+    const proj = getCurrentProject();
+    if (!proj.bookmarks) proj.bookmarks = [];
+    proj.bookmarks.push({ id: 'bm_' + Date.now(), timeSec: sec, label });
+    saveState();
+    closeModal('bookmarkModal');
+    renderBookmarks();
+  }
+
+  function deleteBookmark(id) {
+    const proj = getCurrentProject();
+    proj.bookmarks = proj.bookmarks.filter(b => b.id !== id);
+    saveState();
+    renderBookmarks();
+  }
+
+  function renderCounter() {
+    const proj = getCurrentProject();
+    const part = getCurrentPart();
+
+    document.getElementById('currentProjectName').textContent = proj.name;
+    document.getElementById('rowCountDisplay').textContent = part.count;
+
+    syncYoutubePlayer();
+
+    const partsEl = document.getElementById('partsList');
+    let partsHtml = '';
+    proj.parts.forEach(pt => {
+      const active = pt.id === part.id ? 'active' : '';
+      partsHtml += `<button class="part-pill ${active}" onclick="selectPart('${pt.id}')">${escapeHtml(pt.name)} (${pt.count})</button>`;
+    });
+    partsHtml += `<button class="part-pill" onclick="openNewPartModal()">＋ パーツ追加</button>`;
+    partsEl.innerHTML = partsHtml;
+
+    const curSteps = (part.steps || []).filter(s => part.count >= s.startRow && part.count <= s.endRow);
+    const stepBanner = document.getElementById('activeStepBanner');
+    if (curSteps.length > 0) {
+      stepBanner.style.display = 'block';
+      stepBanner.textContent = `現在の工程 (${curSteps[0].startRow}〜${curSteps[0].endRow}段): ${curSteps[0].text}`;
+    } else {
+      stepBanner.style.display = 'none';
+    }
+
+    const pText = document.getElementById('progressText');
+    const pPercent = document.getElementById('progressPercent');
+    const pBar = document.getElementById('progressBar');
+    if (part.target && part.target > 0) {
+      const pct = Math.min(100, Math.round((part.count / part.target) * 100));
+      pText.textContent = `目標: ${part.count} / ${part.target} 段`;
+      pPercent.textContent = `${pct}%`;
+      pBar.style.width = `${pct}%`;
+    } else {
+      pText.textContent = '目標段数: 未設定';
+      pPercent.textContent = '';
+      pBar.style.width = '0%';
+    }
+
+    const nextRem = findNextReminder(part);
+    const badge = document.getElementById('nextReminderBadge');
+    if (nextRem) {
+      const diff = nextRem.row - part.count;
+      badge.className = 'next-reminder-badge';
+      badge.textContent = `🔔 あと ${diff} 段（${nextRem.row}段目）：${nextRem.message}`;
+    } else {
+      badge.className = 'next-reminder-badge empty';
+      badge.textContent = 'リマインド設定なし（タップで追加）';
+    }
+
+    const stepsEl = document.getElementById('stepsList');
+    if (!part.steps || part.steps.length === 0) {
+      stepsEl.innerHTML = `<p style="font-size:0.82rem; color:var(--text-muted); margin:4px 0;">「1〜10段：細編み」などを登録すると、現在編んでいる段が自動でハイライトされます。</p>`;
+    } else {
+      const sortedSteps = [...part.steps].sort((a, b) => a.startRow - b.startRow);
+      stepsEl.innerHTML = sortedSteps.map(s => {
+        const isCurrent = part.count >= s.startRow && part.count <= s.endRow;
+        const rangeLabel = s.startRow === s.endRow ? `${s.startRow}段目` : `${s.startRow}〜${s.endRow}段`;
+        return `
+          <div class="step-item ${isCurrent ? 'current-step' : ''}">
+            <div style="display:flex; align-items:center;">
+              <span class="step-range">${escapeHtml(rangeLabel)}</span>
+              <span style="font-size:0.86rem; font-weight:600;">${escapeHtml(s.text)}</span>
+            </div>
+            <button class="text-btn" onclick="deleteStep('${s.id}')" aria-label="削除">✕</button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    const remListEl = document.getElementById('reminderList');
+    if (!part.reminders || part.reminders.length === 0) {
+      remListEl.innerHTML = `<p style="font-size:0.82rem; color:var(--text-muted); margin:4px 0;">増し目・減らし目・色替えの段数を登録しておけます。</p>`;
+    } else {
+      remListEl.innerHTML = part.reminders.map(r => {
+        const label = r.type === 'exact'
+          ? `${r.row}段目`
+          : `${r.startRow > 0 ? r.startRow + '段から ' : ''}${r.interval}段ごと`;
+        return `
+          <div class="reminder-item">
+            <div>
+              <span class="reminder-tag">${escapeHtml(label)}</span>
+              <span style="font-size:0.86rem; font-weight:600;">${escapeHtml(r.message)}</span>
+            </div>
+            <button class="text-btn" onclick="deleteReminder('${r.id}')" aria-label="削除">✕</button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    const imgArea = document.getElementById('patternImgArea');
+    if (proj.patternImage) {
+      imgArea.innerHTML = `
+        <img src="${proj.patternImage}" class="pattern-img-preview" alt="編み図メモ">
+        <div style="text-align:right; margin-top:6px;">
+          <button class="text-btn" onclick="removePatternImage()">画像を削除</button>
+        </div>
+      `;
+    } else {
+      imgArea.innerHTML = `<p style="font-size:0.82rem; color:var(--text-muted); margin:4px 0;">編み図のスクリーンショットや写真を添付できます。</p>`;
+    }
+  }
+
+  function selectPart(partId) {
+    getCurrentProject().currentPartId = partId;
+    saveState();
+    renderCounter();
+  }
+
+  function changeCount(delta) {
+    const part = getCurrentPart();
+    const newCount = part.count + delta;
+    if (newCount < 0) return;
+
+    part.count = newCount;
+    const todayStr = formatDate(new Date());
+    if (!state.logs[todayStr]) state.logs[todayStr] = { rows: 0, diary: '' };
+    state.logs[todayStr].rows = Math.max(0, (state.logs[todayStr].rows || 0) + delta);
+
+    saveState();
+    renderCounter();
+
+    if (delta > 0) {
+      const hitMessages = checkRemindersAtRow(part, newCount);
+      const reachedTarget = part.target > 0 && newCount === part.target;
+
+      if (hitMessages.length > 0 || reachedTarget) {
+        playAlertSound();
+        let msg = hitMessages.join('\n');
+        if (reachedTarget) {
+          msg = msg ? `${msg}\n目標の${part.target}段に到達しました` : `目標の${part.target}段に到達しました`;
+        }
+        showAlert('🔔', msg, `${getCurrentProject().name}（${part.name}）: ${newCount}段目`);
+      } else {
+        playClickSound();
+      }
+    } else {
+      playTone(392, 0.05, 'sine');
+    }
+  }
+
+  function checkRemindersAtRow(part, row) {
+    if (!part.reminders || row <= 0) return [];
+    const hits = [];
+    part.reminders.forEach(r => {
+      if (r.type === 'exact' && r.row === row) hits.push(r.message);
+      else if (r.type === 'repeat' && r.interval > 0) {
+        if (row >= r.startRow && (row - r.startRow) % r.interval === 0 && !(r.startRow === 0 && row === 0)) {
+          hits.push(r.message);
+        }
+      }
+    });
+    return hits;
+  }
+
+  function findNextReminder(part) {
+    if (!part.reminders || part.reminders.length === 0) return null;
+    const cur = part.count;
+    let best = null;
+    part.reminders.forEach(r => {
+      let nextRow = null;
+      if (r.type === 'exact') {
+        if (r.row > cur) nextRow = r.row;
+      } else if (r.type === 'repeat' && r.interval > 0) {
+        if (cur < r.startRow) nextRow = r.startRow === 0 ? r.interval : r.startRow;
+        else {
+          const steps = Math.floor((cur - r.startRow) / r.interval) + 1;
+          nextRow = r.startRow + steps * r.interval;
+        }
+      }
+      if (nextRow !== null && (!best || nextRow < best.row)) best = { row: nextRow, message: r.message };
+    });
+    return best;
+  }
+
+  function confirmResetCount() {
+    const part = getCurrentPart();
+    if (part.count === 0) return;
+    if (confirm(`「${part.name}」の段数を 0 にリセットしますか？`)) {
+      part.count = 0;
+      saveState();
+      renderCounter();
+    }
+  }
+
+  function openStepModal() {
+    const cur = getCurrentPart().count;
+    document.getElementById('stepStartInput').value = cur + 1;
+    document.getElementById('stepEndInput').value = cur + 10;
+    document.getElementById('stepTextInput').value = '';
+    openModal('stepModal');
+  }
+
+  function saveStep() {
+    const s = Math.max(0, parseInt(document.getElementById('stepStartInput').value, 10) || 0);
+    const e = Math.max(s, parseInt(document.getElementById('stepEndInput').value, 10) || s);
+    const text = document.getElementById('stepTextInput').value.trim();
+    if (!text) { alert('作業内容を入力してください'); return; }
+    const part = getCurrentPart();
+    if (!part.steps) part.steps = [];
+    part.steps.push({ id: 'st_' + Date.now(), startRow: s, endRow: e, text });
+    saveState();
+    closeModal('stepModal');
+    renderCounter();
+  }
+
+  function deleteStep(id) {
+    const part = getCurrentPart();
+    part.steps = part.steps.filter(s => s.id !== id);
+    saveState();
+    renderCounter();
+  }
+
+  function openAutoImportModal() {
+    document.getElementById('autoImportText').value = '';
+    openModal('autoImportModal');
+  }
+
+  function runAutoImport() {
+    const raw = document.getElementById('autoImportText').value;
+    if (!raw.trim()) return;
+
+    const proj = getCurrentProject();
+    const part = getCurrentPart();
+    if (!part.steps) part.steps = [];
+    if (!part.reminders) part.reminders = [];
+    if (!proj.bookmarks) proj.bookmarks = [];
+
+    let addedSteps = 0, addedRems = 0, addedBms = 0, setTarget = 0;
+    const lines = raw.split(/\r?\n/);
+
+    lines.forEach((line, idx) => {
+      const l = line.trim();
+      if (!l) return;
+
+      const bmMatch = l.match(/^(\d{1,2}:\d{2}(?::\d{2})?)\s*[-:：]?\s*(.+)$/);
+      if (bmMatch) {
+        const sec = parseTimeToSec(bmMatch[1]);
+        if (sec !== null) {
+          proj.bookmarks.push({ id: `bm_${Date.now()}_${idx}`, timeSec: sec, label: bmMatch[2].trim() });
+          addedBms++;
+          return;
+        }
+      }
+
+      const rangeMatch = l.match(/(\d+)\s*[〜~\-ーから]+\s*(\d+)\s*段[目]?\s*[:：]?\s*(.+)/);
+      if (rangeMatch) {
+        const s = parseInt(rangeMatch[1], 10);
+        const e = parseInt(rangeMatch[2], 10);
+        const text = rangeMatch[3].trim();
+        part.steps.push({ id: `st_${Date.now()}_${idx}`, startRow: s, endRow: Math.max(s, e), text });
+        addedSteps++;
+        return;
+      }
+
+      const repMatch = l.match(/(\d+)\s*段ごと[に]?\s*[:：]?\s*(.+)/);
+      if (repMatch) {
+        const iv = parseInt(repMatch[1], 10);
+        if (iv > 0) {
+          part.reminders.push({ id: `rem_${Date.now()}_${idx}`, type: 'repeat', interval: iv, startRow: 0, message: repMatch[2].trim() });
+          addedRems++;
+          return;
+        }
+      }
+
+      const targetMatch = l.match(/(?:目標|合計|全)\s*(\d+)\s*段/);
+      if (targetMatch) {
+        part.target = parseInt(targetMatch[1], 10);
+        setTarget = part.target;
+        return;
+      }
+
+      const exactMatch = l.match(/(\d+)\s*段[目]?\s*[:：]?\s*(.+)/);
+      if (exactMatch) {
+        const r = parseInt(exactMatch[1], 10);
+        const msg = exactMatch[2].trim();
+        if (r > 0 && msg) {
+          part.steps.push({ id: `st_${Date.now()}_${idx}`, startRow: r, endRow: r, text: msg });
+          part.reminders.push({ id: `rem_${Date.now()}_${idx}`, type: 'exact', row: r, message: msg });
+          addedSteps++;
+          addedRems++;
+        }
+      }
+    });
+
+    saveState();
+    closeModal('autoImportModal');
+    renderCounter();
+
+    const summary = [];
+    if (addedSteps) summary.push(`作り方ステップ: ${addedSteps}件`);
+    if (addedRems) summary.push(`リマインド: ${addedRems}件`);
+    if (addedBms) summary.push(`動画しおり: ${addedBms}件`);
+    if (setTarget) summary.push(`目標段数: ${setTarget}段`);
+
+    if (summary.length > 0) {
+      showAlert('✓', '取り込みが完了しました', summary.join(' / '));
+    } else {
+      alert('段数や時間の形式が見つかりませんでした。\n「1〜10段：細編み」「03:20 作り目」などの形式で入力してください。');
+    }
+  }
+
+  function handlePatternImage(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const maxW = 900;
+        let w = img.width, h = img.height;
+        if (w > maxW) { h = Math.round(h * (maxW / w)); w = maxW; }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        getCurrentProject().patternImage = canvas.toDataURL('image/jpeg', 0.75);
+        saveState();
+        renderCounter();
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function removePatternImage() {
+    if (confirm('この画像を削除しますか？')) {
+      getCurrentProject().patternImage = '';
+      saveState();
+      renderCounter();
+    }
+  }
+
+  function openPartEditModal() {
+    const proj = getCurrentProject();
+    const part = getCurrentPart();
+    editingPartId = part.id;
+    document.getElementById('partModalTitle').textContent = 'パーツ設定';
+    document.getElementById('partNameInput').value = part.name;
+    document.getElementById('partTargetInput').value = part.target || '';
+    document.getElementById('partCountInput').value = part.count;
+    document.getElementById('partDeleteWrap').style.display = proj.parts.length > 1 ? 'flex' : 'none';
+    openModal('partModal');
+  }
+
+  function openNewPartModal() {
+    editingPartId = null;
+    document.getElementById('partModalTitle').textContent = 'パーツを追加';
+    document.getElementById('partNameInput').value = '';
+    document.getElementById('partTargetInput').value = '';
+    document.getElementById('partCountInput').value = 0;
+    document.getElementById('partDeleteWrap').style.display = 'none';
+    openModal('partModal');
+  }
+
+  function savePart() {
+    const proj = getCurrentProject();
+    const name = document.getElementById('partNameInput').value.trim() || 'パーツ';
+    const target = Math.max(0, parseInt(document.getElementById('partTargetInput').value, 10) || 0);
+    const count = Math.max(0, parseInt(document.getElementById('partCountInput').value, 10) || 0);
+
+    if (editingPartId) {
+      const part = proj.parts.find(p => p.id === editingPartId);
+      if (part) { part.name = name; part.target = target; part.count = count; }
+    } else {
+      const newPart = { id: 'part_' + Date.now(), name, target, count, steps: [], reminders: [] };
+      proj.parts.push(newPart);
+      proj.currentPartId = newPart.id;
+    }
+    saveState();
+    closeModal('partModal');
+    renderCounter();
+  }
+
+  function deleteCurrentPart() {
+    const proj = getCurrentProject();
+    if (proj.parts.length <= 1) return;
+    if (confirm('このパーツを削除しますか？')) {
+      proj.parts = proj.parts.filter(p => p.id !== editingPartId);
+      proj.currentPartId = proj.parts[0].id;
+      saveState();
+      closeModal('partModal');
+      renderCounter();
+    }
+  }
+
+  function openReminderModal() {
+    document.getElementById('remType').value = 'exact';
+    document.getElementById('remExactRow').value = getCurrentPart().count + 5;
+    document.getElementById('remInterval').value = 4;
+    document.getElementById('remStartRow').value = 0;
+    document.getElementById('remMessage').value = '';
+    toggleRemFields();
+    openModal('reminderModal');
+  }
+
+  function toggleRemFields() {
+    const type = document.getElementById('remType').value;
+    document.getElementById('remExactWrap').style.display = type === 'exact' ? 'block' : 'none';
+    document.getElementById('remRepeatWrap').style.display = type === 'repeat' ? 'block' : 'none';
+  }
+
+  function setRemMsg(msg) { document.getElementById('remMessage').value = msg; }
+
+  function saveReminder() {
+    const type = document.getElementById('remType').value;
+    const message = document.getElementById('remMessage').value.trim() || 'リマインダー';
+    const part = getCurrentPart();
+    if (type === 'exact') {
+      const row = parseInt(document.getElementById('remExactRow').value, 10);
+      if (!row || row < 1) { alert('1以上の段数を入力してください'); return; }
+      part.reminders.push({ id: 'rem_' + Date.now(), type: 'exact', row, message });
+    } else {
+      const interval = parseInt(document.getElementById('remInterval').value, 10);
+      const startRow = Math.max(0, parseInt(document.getElementById('remStartRow').value, 10) || 0);
+      if (!interval || interval < 1) { alert('1以上の間隔を入力してください'); return; }
+      part.reminders.push({ id: 'rem_' + Date.now(), type: 'repeat', interval, startRow, message });
+    }
+    saveState();
+    closeModal('reminderModal');
+    renderCounter();
+  }
+
+  function deleteReminder(remId) {
+    const part = getCurrentPart();
+    part.reminders = part.reminders.filter(r => r.id !== remId);
+    saveState();
+    renderCounter();
+  }
+
+  function setProjectFilter(f) {
+    projectFilter = f;
+    document.querySelectorAll('.filter-pills .chip-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(`filter-${f}`).classList.add('active');
+    renderProjects();
+  }
+
+  function renderProjects() {
+    const query = (document.getElementById('projectSearch').value || '').toLowerCase();
+    const listEl = document.getElementById('projectList');
+
+    const filtered = state.projects.filter(p => {
+      if (projectFilter === 'active' && p.done) return false;
+      if (projectFilter === 'done' && !p.done) return false;
+      if (query && !`${p.name} ${p.note}`.toLowerCase().includes(query)) return false;
+      return true;
+    });
+
+    if (filtered.length === 0) {
+      listEl.innerHTML = `<div class="card" style="text-align:center; color:var(--text-muted);">該当する作品がありません</div>`;
+      return;
+    }
+
+    listEl.innerHTML = filtered.map(p => {
+      const isCur = p.id === state.currentProjectId;
+      const totalRows = p.parts.reduce((sum, pt) => sum + pt.count, 0);
+      return `
+        <div class="card project-card ${isCur ? 'current' : ''}" onclick="selectProject('${p.id}')">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong style="font-size:1rem;">${isCur ? '● ' : ''}${escapeHtml(p.name)}</strong>
+            <div style="display:flex; gap:6px; align-items:center;">
+              ${p.youtubeId ? '<span style="font-size:0.75rem; color:var(--text-muted);">動画あり</span>' : ''}
+              ${p.done ? '<span class="badge-done">完成</span>' : ''}
+              <button class="chip-btn" onclick="event.stopPropagation(); openProjectModal('${p.id}')">編集</button>
+            </div>
+          </div>
+          <div style="font-size:0.8rem; color:var(--primary); font-weight:600; margin-top:4px;">
+            パーツ ${p.parts.length} / 合計 ${totalRows}段
+          </div>
+          ${p.note ? `<div class="project-meta">${escapeHtml(p.note)}</div>` : ''}
+        </div>
+      `;
+    }).join('');
+  }
+
+  function selectProject(projId) {
+    state.currentProjectId = projId;
+    loadedYtVideoId = '';
+    saveState();
+    switchTab('counter');
+  }
+
+  function openProjectModal(projId) {
+    editingProjectId = projId;
+    if (projId) {
+      const proj = state.projects.find(p => p.id === projId);
+      document.getElementById('projModalTitle').textContent = '作品の編集・メモ';
+      document.getElementById('projNameInput').value = proj.name;
+      document.getElementById('projYtInput').value = proj.youtubeUrl || '';
+      document.getElementById('projNoteInput').value = proj.note || '';
+      document.getElementById('projDoneInput').checked = !!proj.done;
+      document.getElementById('projDeleteWrap').style.display = state.projects.length > 1 ? 'flex' : 'none';
+    } else {
+      document.getElementById('projModalTitle').textContent = '新規プロジェクト';
+      document.getElementById('projNameInput').value = '';
+      document.getElementById('projYtInput').value = '';
+      document.getElementById('projNoteInput').value = '';
+      document.getElementById('projDoneInput').checked = false;
+      document.getElementById('projDeleteWrap').style.display = 'none';
+    }
+    openModal('projectModal');
+  }
+
+  function saveProject() {
+    const name = document.getElementById('projNameInput').value.trim() || '無題のプロジェクト';
+    const ytUrl = document.getElementById('projYtInput').value.trim();
+    const ytId = extractYoutubeId(ytUrl);
+    const note = document.getElementById('projNoteInput').value;
+    const done = document.getElementById('projDoneInput').checked;
+
+    if (editingProjectId) {
+      const proj = state.projects.find(p => p.id === editingProjectId);
+      if (proj) {
+        proj.name = name;
+        proj.youtubeUrl = ytUrl;
+        proj.youtubeId = ytId;
+        proj.note = note;
+        proj.done = done;
+      }
+    } else {
+      const partId = 'part_' + Date.now();
+      const newProj = {
+        id: 'proj_' + Date.now(),
+        name,
+        youtubeUrl: ytUrl,
+        youtubeId: ytId,
+        bookmarks: [],
+        patternImage: '',
+        note,
+        done,
+        currentPartId: partId,
+        parts: [{ id: partId, name: '本体', count: 0, target: 0, steps: [], reminders: [] }]
+      };
+      state.projects.unshift(newProj);
+      state.currentProjectId = newProj.id;
+    }
+    loadedYtVideoId = '';
+    saveState();
+    closeModal('projectModal');
+    renderProjects();
+    renderCounter();
+  }
+
+  function deleteEditingProject() {
+    if (state.projects.length <= 1) return;
+    if (confirm('この作品と記録を削除しますか？')) {
+      state.projects = state.projects.filter(p => p.id !== editingProjectId);
+      if (state.currentProjectId === editingProjectId) state.currentProjectId = state.projects[0].id;
+      loadedYtVideoId = '';
+      saveState();
+      closeModal('projectModal');
+      renderProjects();
+      renderCounter();
+    }
+  }
+
+  function moveMonth(delta) {
+    calMonth += delta;
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    renderCalendar();
+  }
+
+  function renderCalendar() {
+    document.getElementById('calMonthTitle').textContent = `${calYear}年 ${calMonth + 1}月`;
+    const grid = document.getElementById('calGrid');
+    const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
+    let html = weekdays.map(w => `<div class="cal-weekday">${w}</div>`).join('');
+
+    const firstDay = new Date(calYear, calMonth, 1).getDay();
+    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+    const todayStr = formatDate(new Date());
+
+    for (let i = 0; i < firstDay; i++) html += `<div></div>`;
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+      const log = state.logs[dateStr];
+      const hasLog = log && (log.rows > 0 || (log.diary && log.diary.trim() !== ''));
+      const isToday = dateStr === todayStr;
+      const isSelected = dateStr === selectedDateStr;
+
+      html += `
+        <div class="cal-day ${hasLog ? 'has-log' : ''} ${isToday ? 'today' : ''} ${isSelected ? 'selected' : ''}"
+             onclick="selectCalendarDate('${dateStr}')">
+          <span>${d}</span>
+          ${log && log.rows > 0 ? `<span class="cal-dot">${log.rows}段</span>` : (hasLog ? `<span class="cal-dot">●</span>` : '')}
+        </div>
+      `;
+    }
+    grid.innerHTML = html;
+    renderSelectedDateDetail();
+  }
+
+  function selectCalendarDate(dateStr) {
+    selectedDateStr = dateStr;
+    renderCalendar();
+  }
+
+  function renderSelectedDateDetail() {
+    const [y, m, d] = selectedDateStr.split('-');
+    document.getElementById('selectedDateTitle').textContent = `${y}年${Number(m)}月${Number(d)}日の記録`;
+    const log = state.logs[selectedDateStr] || { rows: 0, diary: '' };
+    document.getElementById('selectedDateRows').textContent = `${log.rows || 0} 段`;
+    document.getElementById('diaryInput').value = log.diary || '';
+  }
+
+  function saveDiary() {
+    const text = document.getElementById('diaryInput').value;
+    if (!state.logs[selectedDateStr]) state.logs[selectedDateStr] = { rows: 0, diary: '' };
+    state.logs[selectedDateStr].diary = text;
+    saveState();
+    renderCalendar();
+    showAlert('✓', '記録を保存しました', selectedDateStr);
+  }
+
+  function updateTimerDisplay() {
+    const mins = Math.floor(timerSeconds / 60);
+    const secs = timerSeconds % 60;
+    document.getElementById('timerText').textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    document.getElementById('timerModeLabel').textContent = timerMode === 'countdown' ? '(休憩タイマー)' : '(経過時間)';
+  }
+
+  function toggleTimer() {
+    const btn = document.getElementById('timerStartBtn');
+    getAudioCtx();
+    if (timerInterval) {
+      clearInterval(timerInterval); timerInterval = null;
+      btn.textContent = '開始'; btn.classList.remove('active');
+    } else {
+      btn.textContent = '停止'; btn.classList.add('active');
+      timerInterval = setInterval(() => {
+        if (timerMode === 'countdown') {
+          if (timerSeconds > 0) {
+            timerSeconds--; updateTimerDisplay();
+            if (timerSeconds === 0) {
+              clearInterval(timerInterval); timerInterval = null;
+              btn.textContent = '開始'; btn.classList.remove('active');
+              playAlertSound();
+              showAlert('☕', 'タイマー終了', '設定した時間になりました。少し休憩しましょう。');
+            }
+          }
+        } else {
+          timerSeconds++; updateTimerDisplay();
+        }
+      }, 1000);
+    }
+  }
+
+  function resetTimer() {
+    if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+    const btn = document.getElementById('timerStartBtn');
+    btn.textContent = '開始'; btn.classList.remove('active');
+    timerSeconds = timerMode === 'countdown' ? timerDefaultSeconds : 0;
+    updateTimerDisplay();
+  }
+
+  function openTimerModal() { openModal('timerModal'); }
+  function setTimerPreset(mins) { timerMode = 'countdown'; timerDefaultSeconds = mins * 60; resetTimer(); closeModal('timerModal'); }
+  function setTimerMode(mode) { timerMode = mode; resetTimer(); closeModal('timerModal'); }
+  function setTimerCustom() {
+    const mins = Math.max(1, Math.min(180, parseInt(document.getElementById('customTimerMin').value, 10) || 25));
+    setTimerPreset(mins);
+  }
+
+  function openBackupModal() { openModal('backupModal'); }
+  function exportData() {
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `amilog-backup-${formatDate(new Date())}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function importData(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      try {
+        const parsed = JSON.parse(e.target.result);
+        if (parsed && Array.isArray(parsed.projects)) {
+          state = parsed; saveState(); renderCounter(); closeModal('backupModal');
+          alert('バックアップを読み込みました');
+        } else {
+          alert('正しいバックアップファイルではありません');
+        }
+      } catch (err) {
+        alert('ファイルの読み込みに失敗しました');
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  function openModal(id) { document.getElementById(id).classList.add('open'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+  function showAlert(emoji, msg, sub) {
+    document.getElementById('alertEmoji').textContent = emoji;
+    document.getElementById('alertMsg').textContent = msg;
+    document.getElementById('alertSub').textContent = sub;
+    openModal('alertModal');
+  }
+
+  updateSoundIcon();
+  updateTimerDisplay();
+  renderCounter();
+</script>
+</body>
+</html>
