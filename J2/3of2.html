@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>GRAMMAR QUEST｜中2英語 3学期（学年末）マスター</title>
+<style>
+  :root{--bg:#0f172a;--bg-card:#1e293b;--bg-card2:#283548;--text:#f8fafc;--text-muted:#94a3b8;--primary:#38bdf8;--primary-dark:#0284c7;--accent:#a855f7;--success:#22c55e;--warning:#f59e0b;--danger:#ef4444;--border:#334155;--radius:16px}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans','Meiryo',system-ui,sans-serif;background:radial-gradient(circle at top right,#1e1b4b,var(--bg) 60%);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center}
+  .container{width:100%;max-width:860px;padding:16px;flex:1;display:flex;flex-direction:column}
+  header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(30,41,59,.9);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:14px;gap:12px;flex-wrap:wrap}
+  .logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:1.08rem;letter-spacing:.4px;cursor:pointer}
+  .site-logo{height:60px;width:auto;max-width:240px;object-fit:contain;border-radius:10px;background:rgba(255,255,255,.08);padding:4px 8px}
+  .logo-text-wrap{display:flex;flex-direction:column;gap:3px}
+  .logo span.badge{background:linear-gradient(135deg,var(--primary),var(--accent));padding:2px 8px;border-radius:7px;font-size:.7rem;color:#fff;width:fit-content}
+  .hud{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  @media(max-width:640px){header{justify-content:center}.logo,.hud{width:100%;justify-content:center}}
+  .pill{background:var(--bg);border:1px solid var(--border);padding:5px 10px;border-radius:999px;font-size:.8rem;font-weight:700;display:flex;align-items:center;gap:4px}
+  .pill.xp{color:#fde047}.pill.combo{color:#fb923c}
+  .icon-btn{background:var(--bg-card2);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:6px 9px;cursor:pointer;font-size:.8rem;font-weight:600;transition:transform .1s,background .2s}
+  .icon-btn:hover{background:#334155}.icon-btn:active{transform:scale(.95)}
+  .screen{display:none;animation:fadeIn .25s ease}.screen.active{display:flex;flex-direction:column;gap:14px}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:0 10px 25px rgba(0,0,0,.25)}
+  .hero{text-align:center;padding:24px 20px;background:linear-gradient(145deg,rgba(56,189,248,.12),rgba(168,85,247,.12));border:1px solid rgba(56,189,248,.3)}
+  .hero h1{margin:0 0 8px;font-size:1.65rem;background:linear-gradient(90deg,#38bdf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .hero p{margin:0 auto 14px;color:var(--text-muted);max-width:660px;line-height:1.6;font-size:.93rem}
+  .stat-chips{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .stat-chip{background:rgba(15,23,42,.7);border:1px solid rgba(56,189,248,.3);padding:4px 10px;border-radius:999px;font-size:.78rem;color:#bae6fd;font-weight:700}
+  .btn{border:none;border-radius:12px;padding:13px 20px;font-size:.96rem;font-weight:700;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;justify-content:center;gap:8px;color:#fff;text-decoration:none}
+  .btn:active{transform:scale(.97)}
+  .btn-primary{background:linear-gradient(135deg,var(--primary-dark),var(--accent));box-shadow:0 4px 15px rgba(56,189,248,.3)}.btn-primary:hover{filter:brightness(1.1)}
+  .btn-secondary{background:var(--bg-card2);border:1px solid var(--border);color:var(--text)}.btn-secondary:hover{background:#334155}
+  .btn-pr{background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 4px 14px rgba(16,185,129,.28)}.btn-pr:hover{filter:brightness(1.08)}
+  .btn-sm{padding:8px 12px;font-size:.84rem;border-radius:9px}
+  .section-note{font-size:.84rem;color:var(--text-muted);margin:4px 0 12px;line-height:1.5}
+  .mode-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+  .mode-card{background:var(--bg-card2);border:1px solid var(--border);border-radius:14px;padding:15px;cursor:pointer;transition:transform .15s,border-color .2s;text-align:left;display:flex;flex-direction:column;gap:6px}
+  .mode-card:hover{transform:translateY(-2px);border-color:var(--primary)}
+  .mode-card.featured{grid-column:1/-1;background:linear-gradient(135deg,rgba(245,158,11,.14),rgba(56,189,248,.1));border:1px solid rgba(245,158,11,.45)}
+  .mode-card.featured:hover{border-color:var(--warning)}
+  .step-tag{display:inline-block;width:fit-content;font-size:.7rem;font-weight:800;padding:2px 7px;border-radius:6px;background:rgba(56,189,248,.16);color:#7dd3fc}
+  .step-tag.warn{background:rgba(245,158,11,.22);color:#fcd34d}
+  .mode-card h3{margin:2px 0;font-size:1rem;display:flex;align-items:center;gap:6px}
+  .mode-card p{margin:0;font-size:.82rem;color:var(--text-muted);line-height:1.5}
+  .pr-card{background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(56,189,248,.1));border:1px solid rgba(16,185,129,.4);border-radius:16px;padding:18px;text-align:left;display:flex;flex-direction:column;gap:10px}
+  .pr-header{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .pr-badge{background:rgba(148,163,184,.2);color:#cbd5e1;font-size:.7rem;font-weight:700;padding:2px 7px;border-radius:5px;border:1px solid rgba(148,163,184,.3)}
+  .pr-tag{font-size:.78rem;font-weight:800;color:#34d399}
+  .pr-body{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .pr-title{margin:0 0 4px;font-size:1.04rem;font-weight:800;color:#f8fafc;line-height:1.4}
+  .pr-desc{margin:0;font-size:.85rem;color:#cbd5e1;line-height:1.55}
+  .pr-note{font-size:.73rem;color:var(--text-muted);margin:2px 0 0;line-height:1.45}
+  .site-footer{margin-top:20px;padding:12px 10px 6px;border-top:1px solid var(--border);text-align:center;font-size:.76rem;color:var(--text-muted);line-height:1.6}
+  .unit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+  .unit-item{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;cursor:pointer;transition:border-color .2s,transform .1s;display:flex;flex-direction:column;gap:6px}
+  .unit-item:hover{border-color:var(--primary);transform:translateY(-2px)}
+  .unit-top{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--text-muted)}
+  .unit-title{font-weight:700;font-size:.94rem}
+  .bar-bg{height:7px;background:#1e293b;border-radius:99px;overflow:hidden}.bar-fill{height:100%;border-radius:99px;transition:width .4s ease}
+  .tag{font-size:.72rem;padding:2px 7px;border-radius:6px;font-weight:700}
+  .tag-master{background:rgba(34,197,94,.2);color:#4ade80}.tag-weak{background:rgba(239,68,68,.2);color:#f87171}.tag-mid{background:rgba(245,158,11,.2);color:#fbbf24}.tag-new{background:rgba(148,163,184,.2);color:#cbd5e1}
+  .hint-bar{display:flex;align-items:center;gap:10px;background:linear-gradient(90deg,rgba(56,189,248,.1),rgba(168,85,247,.08));border:1px solid rgba(56,189,248,.32);border-radius:14px;padding:10px 14px}
+  .hint-icon{width:34px;height:34px;border-radius:10px;background:rgba(56,189,248,.18);border:1px solid rgba(56,189,248,.4);display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0}
+  .hint-msg{font-size:.88rem;line-height:1.45}.hint-msg strong{color:var(--primary)}
+  .q-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:.82rem;color:var(--text-muted);gap:8px;flex-wrap:wrap}
+  .q-type-badge{background:rgba(168,85,247,.2);color:#d8b4fe;padding:3px 9px;border-radius:7px;font-weight:700}
+  .q-gen-badge{background:rgba(56,189,248,.16);color:#7dd3fc;padding:2px 7px;border-radius:6px;font-size:.72rem;font-weight:700;margin-left:6px}
+  .progress-wrap{height:8px;background:var(--bg);border-radius:99px;overflow:hidden;margin-bottom:14px}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .3s ease}
+  .q-jp{font-size:1.02rem;color:#cbd5e1;margin-bottom:8px;font-weight:600}
+  .q-en-box{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:16px;font-size:1.2rem;font-weight:700;line-height:1.5;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}
+  .speak-btn{background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.4);color:var(--primary);border-radius:10px;padding:8px 11px;cursor:pointer;font-size:.95rem;flex-shrink:0}
+  .speak-btn:hover{background:rgba(56,189,248,.28)}
+  .opts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+  .opt-btn{background:var(--bg-card2);border:2px solid var(--border);color:var(--text);border-radius:12px;padding:14px 16px;font-size:1.02rem;font-weight:700;cursor:pointer;text-align:left;transition:all .15s;display:flex;align-items:center;gap:10px}
+  .opt-btn:hover:not(:disabled){border-color:var(--primary);background:#334155}
+  .opt-btn.correct{border-color:var(--success);background:rgba(34,197,94,.2);color:#86efac}
+  .opt-btn.wrong{border-color:var(--danger);background:rgba(239,68,68,.2);color:#fca5a5}
+  .opt-num{width:26px;height:26px;border-radius:7px;background:var(--bg);display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--text-muted);flex-shrink:0}
+  .sort-zone{min-height:60px;background:var(--bg);border:2px dashed var(--border);border-radius:12px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+  .word-bank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .word-chip{background:var(--bg-card2);border:1px solid #475569;color:var(--text);padding:9px 14px;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;user-select:none}
+  .word-chip:hover{background:#3b4c66}.word-chip.used{opacity:.28;pointer-events:none}.word-chip.placed{background:rgba(56,189,248,.2);border-color:var(--primary)}
+  .input-wrap{display:flex;flex-direction:column;gap:10px}
+  .text-input,.select-input{width:100%;background:var(--bg);border:2px solid var(--border);color:var(--text);border-radius:12px;padding:12px 14px;font-size:1.05rem;font-weight:700;outline:none}
+  .text-input:focus,.select-input:focus{border-color:var(--primary)}
+  .helper-keys{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .key-chip{background:var(--bg-card2);border:1px solid var(--border);color:var(--text-muted);padding:5px 10px;border-radius:8px;font-size:.85rem;cursor:pointer}
+  .seg-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .seg-btn{background:var(--bg);border:2px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-size:1.08rem;font-weight:700;cursor:pointer}
+  .seg-btn.selected{border-color:var(--warning);background:rgba(245,158,11,.2)}.seg-btn.correct{border-color:var(--success);background:rgba(34,197,94,.2)}.seg-btn.wrong{border-color:var(--danger);background:rgba(239,68,68,.2)}
+  .feedback{margin-top:14px;padding:14px 16px;border-radius:12px;display:none;animation:fadeIn .2s ease}.feedback.show{display:block}
+  .feedback.ok{background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.5)}.feedback.ng{background:rgba(239,68,68,.14);border:1px solid rgba(239,68,68,.5)}
+  .feedback-title{font-weight:800;font-size:1.05rem;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
+  .feedback-exp{font-size:.9rem;line-height:1.55;color:#e2e8f0;margin-bottom:12px}
+  .modal-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.84);display:none;align-items:center;justify-content:center;padding:16px;z-index:100}.modal-backdrop.open{display:flex}
+  .modal{background:var(--bg-card);border:1px solid var(--primary);border-radius:18px;max-width:560px;width:100%;padding:22px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,.5);animation:popIn .22s ease}
+  @keyframes popIn{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+  .tut-step-dots{display:flex;gap:6px;justify-content:center;margin:14px 0}
+  .tut-dot{width:9px;height:9px;border-radius:50%;background:var(--border);transition:all .2s}.tut-dot.active{background:var(--primary);width:22px;border-radius:99px}
+  .tut-box{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:16px;line-height:1.6;font-size:.93rem;color:#e2e8f0}
+  .tut-list{margin:8px 0 0;padding-left:18px}.tut-list li{margin-bottom:6px}
+  .report-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center}
+  @media(max-width:640px){.report-grid{grid-template-columns:1fr}}
+  .radar-box{display:flex;justify-content:center;align-items:center}
+  .cheat-sec{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+  .cheat-sec h4{margin:0 0 6px;color:var(--primary);font-size:.98rem}.cheat-sec p{margin:0;font-size:.87rem;line-height:1.55;color:#cbd5e1}
+  .form-table{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:6px;margin-top:8px}
+  .form-pill{background:var(--bg-card2);border:1px solid var(--border);border-radius:8px;padding:6px 8px;font-size:.79rem;line-height:1.35}
+  .form-pill b{color:#fde047}
+  code{background:#334155;padding:2px 6px;border-radius:5px;font-family:monospace;color:#fde047}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="logo" onclick="goHome()">
+      <img src="https://32and1.com/logo.png" alt="Logo" class="site-logo" onerror="this.style.display='none'">
+      <div class="logo-text-wrap"><span>GRAMMAR QUEST</span><span class="badge">中2・3学期</span></div>
+    </div>
+    <div class="hud">
+          <div class="pill xp" title="正解するとたまる経験値">✨ <span id="hud-xp">0</span> XP</div>
+          <div class="pill combo" title="連続正解数">🔥 <span id="hud-combo">0</span></div>
+          <a href="https://32and1.com/index.html" class="icon-btn" style="text-decoration:none;">🏠 一覧</a>
+          <button class="icon-btn" onclick="openTutorial(0)">❓ 使い方</button>
+          <button class="icon-btn" onclick="openVoiceSettings()">🎙 音声</button>
+          <button class="icon-btn" onclick="toggleSound()" id="btn-sound">🔊 ON</button>
+          <button class="icon-btn" onclick="openCheatSheet()">📖 まとめ</button>
+        </div>
+  </header>
+
+  <section id="screen-home" class="screen active">
+    <div class="card hero">
+      <h1>中2英語 3学期（学年末テスト）マスタークエスト</h1>
+      <p>配点の半分近くを占める重要単元「比較の3パターン（比較級・最上級・as ~ as）＆3パターン書き換え」から、学年末テストの勝負所「受け身（be動詞＋過去分詞・by以外の前置詞）」＆「第5文型（call / name / make + A + B）」まで完全網羅！<br>毎回ゼロから新しい単語・文法パターンで出題されるため、丸暗記では解けない「テスト本番力」が身につきます。</p>
+      <div class="stat-chips">
+        <span class="stat-chip">⚡ 文法生成 6,000通り以上</span>
+        <span class="stat-chip">🔤 必須単語・熟語 200語×4パターン</span>
+        <span class="stat-chip">🔄 比較＆過去分詞 180変化道場</span>
+      </div>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="startDiagnostic()">🔍 まずは実力アナライズ診断（16問）</button>
+        <button class="btn btn-secondary" id="btn-continue-adaptive" onclick="startAdaptiveDrill()" style="display:none;">🚀 弱点攻略ドリルを続ける</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin:0; font-size:1.05rem;">🎮 学習メニュー（目的に合わせて選ぼう）</h3>
+      <p class="section-note">初めての方はまず上の「実力アナライズ診断」がおすすめ！3学期の重要単元「比較3パターン・比較書き換え・受け身・第5文型」のどこが弱点かを分析します。</p>
+      <div class="mode-grid">
+        <div class="mode-card" onclick="startAdaptiveDrill()"><span class="step-tag">STEP 2・弱点集中</span><h3>🎯 おまかせ弱点ドリル</h3><p>苦手な単元から毎回違う問題パターンで出題。3連続正解で次の単元へ自動スキップ！</p></div>
+        <div class="mode-card" onclick="openVocabSelector()"><span class="step-tag">単語・熟語 200語</span><h3>🔤 3学期 必須単語・熟語クイズ</h3><p>one of the 最上級・as ~ as possible・be known to・be made of/from など重要表現を4パターンで特訓！</p></div>
+        <div class="mode-card" onclick="startSurvivalTest()"><span class="step-tag">STEP 3・仕上げ</span><h3>🏆 3学期 学年末テスト模擬</h3><p>3学期の全範囲からランダム15問を出題。毎回違う問題で本番前の実力試し！</p></div>
+        <div class="mode-card" onclick="openCheatSheet()"><span class="step-tag">テスト直前確認</span><h3>📖 10秒まとめノート</h3><p>in/ofの区別、比較の3パターン書き換え、受け身のby以外の前置詞、call/name/makeの語順を即確認。</p></div>
+        <div class="mode-card featured" onclick="openFormSelector()"><span class="step-tag warn">学年末必出・全180変化完全網羅</span><h3>🔄 比較変化 ＆ 過去分詞 パーフェクト復習</h3><p>不規則比較（good/well/bad/many/much）・つづり注意の比較級/最上級（60問）＋ 受け身に必須の不規則・規則動詞の過去分詞（85問）＋ 代名詞目的格＆複数形（35問）の全180変化を徹底網羅！</p></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <div><h3 style="margin:0; font-size:1.05rem;">🗺 単元別マスター状況</h3><p class="section-note" style="margin:2px 0 10px;">各単元の理解度ゲージです。カードを直接タップするとその単元だけ集中特訓（10問）ができます。</p></div>
+        <button class="btn btn-secondary btn-sm" onclick="resetProgress()">🗑 データリセット</button>
+      </div>
+      <div id="unit-map" class="unit-grid"></div>
+    </div>
+  </section>
+
+  <section id="screen-quiz" class="screen">
+    <div class="hint-bar"><div class="hint-icon">💡</div><div class="hint-msg" id="hint-msg">ヒント：迷ったら下の「ヒントを見る」を押してね。</div></div>
+    <div class="card">
+      <div class="q-meta">
+        <div><span class="q-type-badge" id="q-mode-label">実力アナライズ</span><span id="q-unit-label" style="margin-left:6px; font-weight:700;">Unit 1</span><span class="q-gen-badge" id="q-source-badge">⚡ランダム生成</span></div>
+        <div>問題 <span id="q-num">1</span> / <span id="q-total">16</span></div>
+      </div>
+      <div class="progress-wrap"><div class="progress-fill" id="q-progress" style="width:0%"></div></div>
+      <div class="q-jp" id="q-jp">日本語訳</div>
+      <div class="q-en-box"><span id="q-en">Question text</span><button class="speak-btn" onclick="speakCurrent()" title="音声を聞く">🔊 発音</button></div>
+      <div id="q-interact"></div>
+      <div id="feedback" class="feedback">
+        <div class="feedback-title"><span id="fb-status">⭕ 正解！</span><button class="btn btn-secondary btn-sm" onclick="speakAnswer()">🔊 正しい英文を聞く</button></div>
+        <div class="feedback-exp" id="fb-exp"></div>
+        <button class="btn btn-primary" style="width:100%;" id="btn-next" onclick="nextQuestion()">次の問題へ ➡</button>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <button class="btn btn-secondary btn-sm" onclick="goHome()">🏠 ホームに戻る</button>
+      <button class="btn btn-secondary btn-sm" id="btn-hint" onclick="showHint()">💡 ヒントを見る</button>
+    </div>
+  </section>
+
+  <section id="screen-report" class="screen">
+    <div class="card">
+      <h2 style="margin:0 0 6px;">📊 実力アナライズ完了！</h2>
+      <p style="margin:0 0 16px; color:var(--text-muted); font-size:0.9rem;" id="report-summary"></p>
+      <div class="report-grid"><div class="radar-box"><svg id="radar-svg" width="280" height="280" viewBox="0 0 280 280"></svg></div><div id="report-list" style="display:flex; flex-direction:column; gap:8px;"></div></div>
+      <div style="display:flex; gap:10px; margin-top:20px; flex-wrap:wrap;">
+        <button class="btn btn-primary" style="flex:1;" onclick="startAdaptiveDrill()">🚀 弱点克服ドリルをスタート！</button>
+        <button class="btn btn-secondary" onclick="startDiagnostic()">🔄 別問題で再診断</button>
+        <button class="btn btn-secondary" onclick="goHome()">🏠 マップ</button>
+      </div>
+    </div>
+    <div id="pr-slot-diag"></div>
+  </section>
+
+  <section id="screen-result" class="screen">
+    <div class="card" style="text-align:center; padding:30px 20px;">
+      <div style="font-size:3rem; margin-bottom:8px;" id="res-emoji">🎉</div>
+      <h2 style="margin:0 0 8px;" id="res-title">クエストクリア！</h2>
+      <p style="color:var(--text-muted); margin:0 0 18px;" id="res-desc"></p>
+      <div style="display:flex; justify-content:center; gap:16px; margin-bottom:22px; flex-wrap:wrap;">
+        <div class="pill xp" style="font-size:1rem; padding:8px 16px;">正答率 <span id="res-acc">0%</span></div>
+        <div class="pill combo" style="font-size:1rem; padding:8px 16px;">獲得XP +<span id="res-xp">0</span></div>
+      </div>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn btn-primary" id="btn-retry-same" onclick="retryLastMode()">🔥 新しい問題で続けて攻略</button>
+        <button class="btn btn-secondary" onclick="goHome()">🏠 ホームへ</button>
+      </div>
+    </div>
+    <div id="pr-slot-result"></div>
+  </section>
+
+  <footer id="site-footer" class="site-footer">
+    © 32and1.com ｜ ※本サイトはプロモーション（PR・アフィリエイト広告）を含みます。<br>
+    Amazonのアソシエイトとして、32and1.comは適格販売により収入を得ています。
+  </footer>
+</div>
+
+<div id="modal-backdrop" class="modal-backdrop" onclick="if(event.target===this) closeModal()">
+  <div class="modal">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+      <h3 style="margin:0;" id="modal-title">タイトル</h3>
+      <button class="icon-btn" id="modal-close-btn" onclick="closeModal()">✕ 閉じる</button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+const AFFILIATE_ITEMS = [
+  { shop:'amazon', tag:'📖 「理解する」英語学習におすすめ', title:'改訂第２版 中２英語が面白いほどわかる本（中学 面白いほどシリーズ）', desc:'丸暗記ではなく「なるほど！」と納得しながら学べる人気参考書。比較の3パターンや受け身・第5文型も授業実況でスッと理解できます！', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/B0FPVPPHZ8?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'✏️ 超基礎からのやり直し・定着におすすめ', title:'中2英語をひとつひとつわかりやすく。改訂版', desc:'やさしい解説＋書き込み式練習問題が見開きで効率よく学べる定番シリーズ！苦手単元の復習から学年末テスト前の基礎固めまで大活躍します。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4053052459?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'📘 教科書の要点整理・予習復習におすすめ', title:'ニューコース参考書 中2英語 新装版（Gakken）', desc:'教科書の要点がひと目でわかる豊富なビジュアル！学年末テスト前のポイント整理に頼れる定番参考書です。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4053063272?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'📝 定期テストの良問演習におすすめ', title:'中2 標準問題集 英語：2025年の教科書改訂に対応（受験研究社）', desc:'定期テストや高校入試でよく出る良問を厳選！実戦的な問題演習で、3学期テストの得点力を一気に引き上げよう。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4424638049?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'🎯 学年末テストの得点アップに', title:'中学定期テスト 得点アップ問題集 中２英語 新装三訂版', desc:'定期テストで狙われやすい出題形式を徹底収録！比較の書き換えや受け身の対策にぴったりの1冊です。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4010222174?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'🏆 定期テストの高得点対策におすすめ', title:'完全攻略 中2 英語（学年別・領域別）', desc:'基礎から応用までステップアップ式に徹底攻略！つまずきやすい単元も解説が丁寧で、テスト対策の強い味方です。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4581109671?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'💡 基礎がため100%反復ドリルにおすすめ', title:'できた!中2英語 文法（中学基礎がため100%）', desc:'スモールステップで中2英文法の基礎を確実に定着！3学期の重要文法を漏れなく身につけたい人におすすめです。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4774331112?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'⚡ 英文の「型」を体で覚える練習に', title:'中２英文法 パターンドリル（シグマベスト）', desc:'くり返し書くことで英文の語順やルールが自然と身につく！並べ替え問題や書き換え問題が苦手な人の強い味方です。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4578221369?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'🔤 中2英単語のスピード暗記におすすめ', title:'中２英単語 パターンドリル６７０（シグマベスト）', desc:'中2で必須の英単語670語をパターン練習で効率よくマスター！不規則変化のスペルミスを減らして確実に得点しよう。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4578221407?tag=goodjobsale-22' },
+  { shop:'amazon', tag:'🌱 苦手意識をなくしたい人におすすめ', title:'わからないをわかるにかえる 中2 英語', desc:'イラストや図解が豊富で読みやすい！英語に少し苦手意識がある人でも、無理なく3学期の重要単元が理解できます。', btnText:'Amazonで見る ↗', url:'https://www.amazon.co.jp/dp/4581111625?tag=goodjobsale-22' }
+];
+
+function renderRandomPrCard(containerId) {
+  const el = document.getElementById(containerId);
+  if (!el || AFFILIATE_ITEMS.length === 0) return;
+  const offer = AFFILIATE_ITEMS[Math.floor(Math.random() * AFFILIATE_ITEMS.length)];
+  const noteText = offer.shop === 'amazon'
+    ? '※PR（広告）：Amazonのアソシエイトとして、32and1.comは適格販売により収入を得ています。'
+    : '※PR（広告）：楽天アフィリエイトのプロモーションを含みます。';
+  el.innerHTML = `<div class="pr-card"><div class="pr-header"><span class="pr-tag">${offer.tag}</span><span class="pr-badge">PR・広告</span></div><div class="pr-body"><div style="flex:1;min-width:220px;"><h4 class="pr-title">${offer.title}</h4><p class="pr-desc">${offer.desc}</p></div><a href="${offer.url}" target="_blank" rel="nofollow sponsored noopener noreferrer" class="btn btn-pr">${offer.btnText}</a></div><p class="pr-note">${noteText}</p></div>`;
+}
+
+const UNITS = [
+  { id:'u1', name:'比較級（-er / more ~ than）＆ 2択の疑問文', short:'比較級', tip:'【3学期前半100%出題】<br>①<b>基本</b>：<code>比較級 ＋ than ...</code>「…よりも〜」。<code>than</code>（〜より）を <code>then</code>（そのとき）と書かない！<br>②<b>長い単語</b>：<code>famous, interesting, popular, difficult, beautiful</code> などは <code>more ＋ 原級</code>。<br>③<b>2つの選択</b>：<code>Which is ＋ 比較級, A or B?</code> / <code>Which do you like better, A or B?</code>（2つなので <code>best</code> ではなく <b>better</b>！）<br>④<b>強調</b>：比較級を強める「ずっと〜」は <code>much ＋ 比較級</code>（<code>more</code> は重ねない！）。' },
+  { id:'u2', name:'最上級（the -est / most ~）＆ in / of の区別', short:'最上級・in/of', tip:'【最頻出ポイント】<br>①<b>基本</b>：必ず前に <code>the</code> をつける！<code>the -est</code> / <code>the most ＋ 原級</code> / <code>the best / worst</code>。<br>②<b>in と of の使い分け（超頻出）</b>：<br>・<code>in</code> ＋ <b>場所・範囲・単数の集団</b>（例：<code>in Japan, in the world, in my class</code>）<br>・<code>of</code> ＋ <b>複数名詞・数字</b>（例：<code>of all, of the three, of the five boys</code>）<br>③<b>疑問文</b>：<code>Who [Which / What] is the ＋ 最上級 〜?</code>' },
+  { id:'u3', name:'同等比較（as 原級 as / not as ~ as / possible）', short:'同等比較', tip:'【ひっかけ注意】<br>①<b>肯定</b>：<code>as ＋ <b>原級</b> ＋ as ...</code>「…と同じくらい〜」。<code>as</code> と <code>as</code> の間は絶対に原級（元の形）！<br>②<b>否定</b>：<code>not as [so] ＋ 原級 ＋ as ...</code>「…ほど〜ではない」。<code>A is taller than B.</code> ⇔ <code>B is not as tall as A.</code> の書き換えが鉄板！<br>③<b>as ~ as possible</b>：「できるだけ〜」⇔ <code>as ~ as 主語 can [could]</code>（過去の文なら <code>could</code> にする！）。' },
+  { id:'u4', name:'比較の書き換え＆応用表現（any other / one of）', short:'比較応用', tip:'【学年末・差がつく3大パターン】<br>①<b>最上級＝比較級書き換え（3文すべて同じ意味）</b>：<br>1. <code>Mt. Fuji is the highest mountain in Japan.</code><br>2. <code>Mt. Fuji is higher than <b>any other ＋ 単数名詞</b> in Japan.</code><br>3. <code><b>No other ＋ 単数名詞</b> in Japan is as high as Mt. Fuji.</code><br>②<b>one of the 最上級 ＋ 複数名詞</b>：「最も〜な…の1つ」。<code>the</code> と最後の<b>複数形のs</b>を絶対忘れない！（主語なら動詞は <code>is</code>）<br>③<b>more and more ~ / 比較級 and 比較級</b>：「ますます〜」「だんだん〜」。' },
+  { id:'u5', name:'受け身①（be動詞 ＋ 過去分詞・時制・疑問否定）', short:'受け身・基本', tip:'【学年末の目玉①】<br>①<b>基本形</b>：<b>be動詞（am/is/are/was/were）＋ 過去分詞 (＋ by 〜)</b>「（〜によって）…される」。<br>②<b>主語と時制</b>：主語が複数なら <code>are / were</code>、過去（<code>ago / yesterday / last ~</code>）なら <code>was / were</code>！<br>③<b>疑問・否定</b>：be動詞のルールと同じ！<code>Is English spoken 〜?</code> / <code>This room isn\'t used 〜.</code><br>④<b>不規則過去分詞</b>：<code>speak-spoke-<b>spoken</b></code>, <code>write-wrote-<b>written</b></code>, <code>take-took-<b>taken</b></code>, <code>make-made-<b>made</b></code> は丸暗記必須！' },
+  { id:'u6', name:'受け身②（能動⇔受動書き換え ＆ by以外の前置詞）', short:'受け身・応用', tip:'【学年末の目玉②】<br>①<b>能動⇔受動の書き換え</b>：目的語を主語にし、もとの主語を <code>by ＋ <b>目的格</b></code>（<code>me/him/her/us/them</code>）にする。過去の文なら <code>was/were ＋ 過去分詞</code>！<br>②<b>by 以外の前置詞を使う受け身（超頻出）</b>：<br>・<code>be known <b>to</b> 〜</code>（〜に知られている）<br>・<code>be covered <b>with</b> 〜</code>（〜で覆われている）<br>・<code>be made <b>of</b> 〜</code>（〜で作られている：材料が見てわかる・木/紙/ガラス）<br>・<code>be made <b>from</b> 〜</code>（〜で作られている：材料が見えない・牛乳→チーズ/ぶどう→ワイン）' },
+  { id:'u7', name:'目的語＋補語をとる文（第5文型：call / name / make）', short:'第5文型', tip:'【巻末ユニット必出】<b>動詞 ＋ A ＋ B</b>「AをBと呼ぶ／名づける／Bの状態にする」！<br>①<code>call A B</code>（AをBと呼ぶ）：<code>We call this cat Tama.</code><br>②<code>name A B</code>（AをBと名づける）：<code>They named the baby Hana.</code><br>③<code>make A ＋ 形容詞</code>（Aを〜な状態にする）：<code>This song makes me happy.</code>（※<code>happily</code> にしない！また A の位置に代名詞を置くときは目的格 <code>me/him/her/us/them</code> にする！）。<br>※受け身：<code>This cat is called Tama.</code>' },
+  { id:'u8', name:'3学期 重要熟語 ＆ 実戦総合（比較×受け身）', short:'熟語・総合', tip:'【テスト総仕上げ】<br>・<code>Which do you like better, A or B?</code>（2つなので better）<br>・<code>the best of all</code>（すべての中で一番良い）<br>・<code>better than 〜</code>（〜より良い/上手）<br>・<code>be famous for 〜</code>（〜で有名だ）<br>・<code>each other</code>（お互いに）<br>・<code>more and more ~</code>（ますます〜）<br>比較表現・受け身・熟語を組み合わせた長文・並べ替え・書き換えをミスなく解こう！' }
+];
+
+const FORM_BANK = [
+  ['comp_form','good','比較級','better','より良い（good）',['gooder','more good','best'],'不規則変化：<b>good → better → best</b>'],
+  ['comp_form','good','最上級','best','最も良い（good）',['goodest','most good','better'],'不規則変化：<b>good → better → best</b>'],
+  ['comp_form','well','比較級','better','より上手に/健康で（well）',['weller','more well','best'],'不規則変化：<b>well → better → best</b>'],
+  ['comp_form','well','最上級','best','最も上手に/健康で（well）',['wellest','most well','better'],'不規則変化：<b>well → better → best</b>'],
+  ['comp_form','many','比較級','more','より多くの（many）',['manyer','more many','most'],'不規則変化：<b>many → more → most</b>'],
+  ['comp_form','many','最上級','most','最も多くの（many）',['manyest','most many','more'],'不規則変化：<b>many → more → most</b>'],
+  ['comp_form','much','比較級','more','より多くの/もっと（much）',['mucher','more much','most'],'不規則変化：<b>much → more → most</b>'],
+  ['comp_form','much','最上級','most','最も多くの/いちばん（much）',['muchest','most much','more'],'不規則変化：<b>much → more → most</b>'],
+  ['comp_form','bad','比較級','worse','より悪い（bad）',['badder','more bad','worst'],'不規則変化：<b>bad → worse → worst</b>'],
+  ['comp_form','bad','最上級','worst','最も悪い（bad）',['baddest','most bad','worse'],'不規則変化：<b>bad → worse → worst</b>'],
+  ['comp_form','ill','比較級','worse','より悪い（ill）',['iller','more ill','worst'],'不規則変化：<b>ill → worse → worst</b>'],
+  ['comp_form','ill','最上級','worst','最も悪い（ill）',['illest','most ill','worse'],'不規則変化：<b>ill → worse → worst</b>'],
+  ['comp_form','little','比較級','less','より少ない（little）',['littler','more little','least'],'不規則変化：<b>little → less → least</b>'],
+  ['comp_form','little','最上級','least','最も少ない（little）',['littlest','most little','less'],'不規則変化：<b>little → less → least</b>'],
+  ['comp_form','big','比較級','bigger','より大きい（big）',['biger','more big','biggest'],'短母音＋子音 → gを重ねて+er：<b>bigger</b>'],
+  ['comp_form','big','最上級','biggest','最も大きい（big）',['bigest','most big','bigger'],'短母音＋子音 → gを重ねて+est：<b>biggest</b>'],
+  ['comp_form','hot','比較級','hotter','より暑い（hot）',['hoter','more hot','hottest'],'短母音＋子音 → tを重ねて+er：<b>hotter</b>'],
+  ['comp_form','hot','最上級','hottest','最も暑い（hot）',['hotest','most hot','hotter'],'短母音＋子音 → tを重ねて+est：<b>hottest</b>'],
+  ['comp_form','thin','比較級','thinner','より薄い/やせた（thin）',['thiner','more thin','thinnest'],'短母音＋子音 → nを重ねて+er：<b>thinner</b>'],
+  ['comp_form','thin','最上級','thinnest','最も薄い/やせた（thin）',['thinest','most thin','thinner'],'短母音＋子音 → nを重ねて+est：<b>thinnest</b>'],
+  ['comp_form','wet','比較級','wetter','より濡れた（wet）',['weter','more wet','wettest'],'短母音＋子音 → tを重ねて+er：<b>wetter</b>'],
+  ['comp_form','sad','最上級','saddest','最も悲しい（sad）',['sadest','most sad','sadder'],'短母音＋子音 → dを重ねて+est：<b>saddest</b>'],
+  ['comp_form','easy','比較級','easier','より簡単な（easy）',['easyer','more easy','easire'],'子音＋y → yをiに変えて+er：<b>easier</b>'],
+  ['comp_form','easy','最上級','easiest','最も簡単な（easy）',['easyest','most easy','easist'],'子音＋y → yをiに変えて+est：<b>easiest</b>'],
+  ['comp_form','early','比較級','earlier','より早い（early）',['earlyer','more early','earler'],'子音＋y → yをiに変えて+er：<b>earlier</b>'],
+  ['comp_form','early','最上級','earliest','最も早い（early）',['earlyest','most early','earlist'],'子音＋y → yをiに変えて+est：<b>earliest</b>'],
+  ['comp_form','busy','比較級','busier','より忙しい（busy）',['busyer','more busy','bussier'],'子音＋y → yをiに変えて+er：<b>busier</b>'],
+  ['comp_form','happy','比較級','happier','より幸せな（happy）',['happyer','more happy','hapier'],'子音＋y → yをiに変えて+er：<b>happier</b>'],
+  ['comp_form','heavy','最上級','heaviest','最も重い（heavy）',['heavyest','most heavy','heavist'],'子音＋y → yをiに変えて+est：<b>heaviest</b>'],
+  ['comp_form','pretty','最上級','prettiest','最もかわいい（pretty）',['prettyest','most pretty','prettist'],'子音＋y → yをiに変えて+est：<b>prettiest</b>'],
+  ['comp_form','healthy','比較級','healthier','より健康な（healthy）',['healthyer','more healthy','healther'],'子音＋y → yをiに変えて+er：<b>healthier</b>'],
+  ['comp_form','large','比較級','larger','より大きい（large）',['largeer','more large','largger'],'eで終わる → rだけつける：<b>larger</b>'],
+  ['comp_form','large','最上級','largest','最も大きい（large）',['largeest','most large','larggest'],'eで終わる → stだけつける：<b>largest</b>'],
+  ['comp_form','nice','比較級','nicer','よりすてきな（nice）',['niceer','more nice','niccer'],'eで終わる → rだけつける：<b>nicer</b>'],
+  ['comp_form','late','最上級','latest','最も遅い/最新の（late）',['lateest','most late','lattest'],'eで終わる → stだけつける：<b>latest</b>'],
+  ['comp_form','wise','比較級','wiser','より賢い（wise）',['wiseer','more wise','wisser'],'eで終わる → rだけつける：<b>wiser</b>'],
+  ['comp_form','tall','比較級','taller','より高い（tall）',['more tall','tallest','taler'],'短い形容詞 → +er：<b>taller</b>'],
+  ['comp_form','tall','最上級','tallest','最も高い（tall）',['most tall','taller','tallst'],'短い形容詞 → +est：<b>tallest</b>'],
+  ['comp_form','fast','比較級','faster','より速い（fast）',['more fast','fastest','fastter'],'短い形容詞/副詞 → +er：<b>faster</b>'],
+  ['comp_form','fast','最上級','fastest','最も速い（fast）',['most fast','faster','fasttest'],'短い形容詞/副詞 → +est：<b>fastest</b>'],
+  ['comp_form','long','比較級','longer','より長い（long）',['more long','longest','longger'],'短い形容詞 → +er：<b>longer</b>'],
+  ['comp_form','long','最上級','longest','最も長い（long）',['most long','longer','longgest'],'短い形容詞 → +est：<b>longest</b>'],
+  ['comp_form','old','比較級','older','より古い/年上の（old）',['more old','oldest','oldder'],'短い形容詞 → +er：<b>older</b>'],
+  ['comp_form','young','最上級','youngest','最も若い（young）',['most young','younger','younggest'],'短い形容詞 → +est：<b>youngest</b>'],
+  ['comp_form','small','比較級','smaller','より小さい（small）',['more small','smallest','smaler'],'短い形容詞 → +er：<b>smaller</b>'],
+  ['comp_form','cold','最上級','coldest','最も寒い（cold）',['most cold','colder','colddest'],'短い形容詞 → +est：<b>coldest</b>'],
+  ['comp_form','warm','比較級','warmer','より暖かい（warm）',['more warm','warmest','warmmer'],'短い形容詞 → +er：<b>warmer</b>'],
+  ['comp_form','hard','比較級','harder','より一生懸命に/硬い（hard）',['more hard','hardest','hardder'],'短い副詞/形容詞 → +er：<b>harder</b>'],
+  ['comp_form','high','最上級','highest','最も高い（high）',['most high','higher','higest'],'短い形容詞 → +est：<b>highest</b>'],
+  ['comp_form','strong','比較級','stronger','より強い（strong）',['more strong','strongest','strongger'],'短い形容詞 → +er：<b>stronger</b>'],
+  ['comp_form','famous','比較級','more famous','より有名な（famous）',['famouser','most famous','famousser'],'2音節(-ous)の長い語 → <b>more famous</b>'],
+  ['comp_form','famous','最上級','most famous','最も有名な（famous）',['famousest','more famous','famousst'],'2音節(-ous)の長い語 → <b>most famous</b>'],
+  ['comp_form','interesting','比較級','more interesting','より興味深い（interesting）',['interestinger','most interesting','interestingger'],'長い形容詞 → <b>more interesting</b>'],
+  ['comp_form','interesting','最上級','most interesting','最も興味深い（interesting）',['interestingest','more interesting','interestingst'],'長い形容詞 → <b>most interesting</b>'],
+  ['comp_form','popular','比較級','more popular','より人気のある（popular）',['popularer','most popular','populer'],'長い形容詞 → <b>more popular</b>'],
+  ['comp_form','popular','最上級','most popular','最も人気のある（popular）',['popularest','more popular','popularst'],'長い形容詞 → <b>most popular</b>'],
+  ['comp_form','difficult','比較級','more difficult','より難しい（difficult）',['difficulter','most difficult','difficultr'],'長い形容詞 → <b>more difficult</b>'],
+  ['comp_form','difficult','最上級','most difficult','最も難しい（difficult）',['difficultest','more difficult','difficultst'],'長い形容詞 → <b>most difficult</b>'],
+  ['comp_form','beautiful','比較級','more beautiful','より美しい（beautiful）',['beautifuler','most beautiful','beautifuller'],'長い形容詞 → <b>more beautiful</b>'],
+  ['comp_form','beautiful','最上級','most beautiful','最も美しい（beautiful）',['beautifulest','more beautiful','beautifullest'],'長い形容詞 → <b>most beautiful</b>'],
+  ['pp_abc','speak','過去分詞','spoken','話す（speak-spoke-?）',['speaked','spoke','spoked'],'A-B-C型：<b>speak - spoke - spoken</b>'],
+  ['pp_abc','write','過去分詞','written','書く（write-wrote-?）',['writed','wrote','writen'],'tが2つ！：<b>write - wrote - written</b>'],
+  ['pp_abc','take','過去分詞','taken','撮る/取る（take-took-?）',['taked','took','tooken'],'A-B-C型：<b>take - took - taken</b>'],
+  ['pp_abc','give','過去分詞','given','与える（give-gave-?）',['gived','gave','gaven'],'A-B-C型：<b>give - gave - given</b>'],
+  ['pp_abc','see','過去分詞','seen','見る（see-saw-?）',['seed','saw','sawen'],'A-B-C型：<b>see - saw - seen</b>'],
+  ['pp_abc','eat','過去分詞','eaten','食べる（eat-ate-?）',['eated','ate','aten'],'A-B-C型：<b>eat - ate - eaten</b>'],
+  ['pp_abc','know','過去分詞','known','知る（know-knew-?）',['knowed','knew','knewn'],'be known to ~ で頻出！<b>know - knew - known</b>'],
+  ['pp_abc','show','過去分詞','shown','見せる（show-showed-?）',['shew','shewn','showen'],'A-B-C型：<b>show - showed - shown</b>'],
+  ['pp_abc','break','過去分詞','broken','壊す（break-broke-?）',['breaked','broke','broked'],'A-B-C型：<b>break - broke - broken</b>'],
+  ['pp_abc','choose','過去分詞','chosen','選ぶ（choose-chose-?）',['choosed','chose','choosen'],'oが1つになる！：<b>choose - chose - chosen</b>'],
+  ['pp_abc','drive','過去分詞','driven','運転する（drive-drove-?）',['drived','drove','droven'],'iに注意：<b>drive - drove - driven</b>'],
+  ['pp_abc','fall','過去分詞','fallen','落ちる（fall-fell-?）',['falled','fell','fellen'],'A-B-C型：<b>fall - fell - fallen</b>'],
+  ['pp_abc','forget','過去分詞','forgotten','忘れる（forget-forgot-?）',['forgetted','forgot','forgoten'],'tを重ねる！：<b>forget - forgot - forgotten</b>'],
+  ['pp_abc','ride','過去分詞','ridden','乗る（ride-rode-?）',['rided','rode','riden'],'dを2つ重ねる！：<b>ride - rode - ridden</b>'],
+  ['pp_abc','rise','過去分詞','risen','上がる（rise-rose-?）',['rised','rose','rosen'],'A-B-C型：<b>rise - rose - risen</b>'],
+  ['pp_abc','wake','過去分詞','woken','目覚める（wake-woke-?）',['waked','woke','waken'],'A-B-C型：<b>wake - woke - woken</b>'],
+  ['pp_abc','sing','過去分詞','sung','歌う（sing-sang-?）',['singed','sang','sangen'],'i-a-u型：<b>sing - sang - sung</b>'],
+  ['pp_abc','swim','過去分詞','swum','泳ぐ（swim-swam-?）',['swimmed','swam','swammen'],'i-a-u型：<b>swim - swam - swum</b>'],
+  ['pp_abc','drink','過去分詞','drunk','飲む（drink-drank-?）',['drinked','drank','dranken'],'i-a-u型：<b>drink - drank - drunk</b>'],
+  ['pp_abc','begin','過去分詞','begun','始める（begin-began-?）',['beginned','began','begunen'],'i-a-u型：<b>begin - began - begun</b>'],
+  ['pp_abc','ring','過去分詞','rung','鳴る/鳴らす（ring-rang-?）',['ringed','rang','rungen'],'i-a-u型：<b>ring - rang - rung</b>'],
+  ['pp_abc','go','過去分詞','gone','行く（go-went-?）',['goed','went','goen'],'A-B-C型：<b>go - went - gone</b>'],
+  ['pp_abc','do','過去分詞','done','する（do-did-?）',['doed','did','dden'],'A-B-C型：<b>do - did - done</b>'],
+  ['pp_abc','be','過去分詞','been','〜である（am/is/are-was/were-?）',['beed','being','ben'],'A-B-C型：<b>be - was/were - been</b>'],
+  ['pp_abc','fly','過去分詞','flown','飛ぶ（fly-flew-?）',['flied','flew','flewn'],'A-B-C型：<b>fly - flew - flown</b>'],
+  ['pp_abc','grow','過去分詞','grown','育てる/育つ（grow-grew-?）',['growed','grew','grewn'],'A-B-C型：<b>grow - grew - grown</b>'],
+  ['pp_abc','throw','過去分詞','thrown','投げる（throw-threw-?）',['throwed','threw','threwn'],'A-B-C型：<b>throw - threw - thrown</b>'],
+  ['pp_abc','draw','過去分詞','drawn','描く（draw-drew-?）',['drawed','drew','drewn'],'A-B-C型：<b>draw - drew - drawn</b>'],
+  ['pp_abc','wear','過去分詞','worn','着ている（wear-wore-?）',['weared','wore','waren'],'A-B-C型：<b>wear - wore - worn</b>'],
+  ['pp_abc','steal','過去分詞','stolen','盗む（steal-stole-?）',['stealed','stole','stalen'],'A-B-C型：<b>steal - stole - stolen</b>'],
+  ['pp_abc','hide','過去分詞','hidden','隠す（hide-hid-?）',['hided','hid','hiden'],'dを2つ重ねる！：<b>hide - hid - hidden</b>'],
+  ['pp_abc','bite','過去分詞','bitten','噛む（bite-bit-?）',['bited','bit','biten'],'tを2つ重ねる！：<b>bite - bit - bitten</b>'],
+  ['pp_abc','blow','過去分詞','blown','吹く（blow-blew-?）',['blowed','blew','blewn'],'A-B-C型：<b>blow - blew - blown</b>'],
+  ['pp_abc','freeze','過去分詞','frozen','凍る（freeze-froze-?）',['freezed','froze','frozzen'],'A-B-C型：<b>freeze - froze - frozen</b>'],
+  ['pp_abc','shake','過去分詞','shaken','振る（shake-shook-?）',['shaked','shook','shooken'],'A-B-C型：<b>shake - shook - shaken</b>'],
+  ['pp_abc','tear','過去分詞','torn','破る（tear-tore-?）',['teared','tore','toren'],'A-B-C型：<b>tear - tore - torn</b>'],
+  ['pp_abc','lie','過去分詞','lain','横になる（lie-lay-?）',['lied','lay','lien'],'A-B-C型：<b>lie - lay - lain</b>'],
+  ['pp_abc','run','過去分詞','run','走る（run-ran-?）',['runned','ran','runen'],'A-B-A型（原形と同じ！）：<b>run - ran - run</b>'],
+  ['pp_abc','come','過去分詞','come','来る（come-came-?）',['comed','came','comen'],'A-B-A型（原形と同じ！）：<b>come - came - come</b>'],
+  ['pp_abc','become','過去分詞','become','〜になる（become-became-?）',['becomed','became','becomen'],'A-B-A型（原形と同じ！）：<b>become - became - become</b>'],
+  ['pp_abb_aaa','make','過去分詞','made','作る（be made of/from で頻出）',['maked','maded','maken'],'A-B-B型：<b>make - made - made</b>'],
+  ['pp_abb_aaa','build','過去分詞','built','建てる（was built で頻出）',['builded','bilded','builten'],'A-B-B型（dがtに）：<b>build - built - built</b>'],
+  ['pp_abb_aaa','send','過去分詞','sent','送る',['sended','sented','senden'],'A-B-B型（dがtに）：<b>send - sent - sent</b>'],
+  ['pp_abb_aaa','spend','過去分詞','spent','費やす/過ごす',['spended','spented','spenden'],'A-B-B型（dがtに）：<b>spend - spent - spent</b>'],
+  ['pp_abb_aaa','lend','過去分詞','lent','貸す',['lended','lented','lenden'],'A-B-B型（dがtに）：<b>lend - lent - lent</b>'],
+  ['pp_abb_aaa','teach','過去分詞','taught','教える',['teached','tought','taugt'],'-aught型（aに注意）：<b>teach - taught - taught</b>'],
+  ['pp_abb_aaa','catch','過去分詞','caught','捕まえる',['catched','cought','caugt'],'-aught型（aに注意）：<b>catch - caught - caught</b>'],
+  ['pp_abb_aaa','buy','過去分詞','bought','買う',['buyed','baught','boughten'],'-ought型：<b>buy - bought - bought</b>'],
+  ['pp_abb_aaa','bring','過去分詞','brought','持ってくる',['bringed','braught','broght'],'-ought型：<b>bring - brought - brought</b>'],
+  ['pp_abb_aaa','think','過去分詞','thought','考える',['thinked','thaught','thoght'],'-ought型：<b>think - thought - thought</b>'],
+  ['pp_abb_aaa','fight','過去分詞','fought','戦う',['fighted','faught','foght'],'-ought型：<b>fight - fought - fought</b>'],
+  ['pp_abb_aaa','find','過去分詞','found','見つける',['finded','founded','founden'],'A-B-B型：<b>find - found - found</b>'],
+  ['pp_abb_aaa','have','過去分詞','had','持つ/食べる',['haved','has','hadden'],'A-B-B型：<b>have - had - had</b>'],
+  ['pp_abb_aaa','hear','過去分詞','heard','聞く',['heared','hearded','hert'],'dをつける：<b>hear - heard - heard</b>'],
+  ['pp_abb_aaa','hold','過去分詞','held','持つ/開く（開かれる）',['holded','holden','hald'],'A-B-B型：<b>hold - held - held</b>'],
+  ['pp_abb_aaa','keep','過去分詞','kept','保つ',['keeped','kepted','keepen'],'A-B-B型：<b>keep - kept - kept</b>'],
+  ['pp_abb_aaa','sleep','過去分詞','slept','眠る',['sleeped','slepted','slapt'],'A-B-B型：<b>sleep - slept - slept</b>'],
+  ['pp_abb_aaa','leave','過去分詞','left','去る/残す',['leaved','lefted','leaven'],'A-B-B型：<b>leave - left - left</b>'],
+  ['pp_abb_aaa','feel','過去分詞','felt','感じる',['feeled','felted','feelen'],'A-B-B型：<b>feel - felt - felt</b>'],
+  ['pp_abb_aaa','meet','過去分詞','met','会う',['meeted','meted','meeten'],'eが1つ減る！：<b>meet - met - met</b>'],
+  ['pp_abb_aaa','feed','過去分詞','fed','エサをやる',['feeded','feded','feeden'],'eが1つ減る！：<b>feed - fed - fed</b>'],
+  ['pp_abb_aaa','pay','過去分詞','paid','支払う',['payed','paied','payd'],'yをiに変えてd：<b>pay - paid - paid</b>'],
+  ['pp_abb_aaa','say','過去分詞','said','言う',['sayed','saied','sayd'],'yをiに変えてd：<b>say - said - said</b>'],
+  ['pp_abb_aaa','sell','過去分詞','sold','売る（is sold で頻出）',['selled','seld','sellen'],'A-B-B型：<b>sell - sold - sold</b>'],
+  ['pp_abb_aaa','tell','過去分詞','told','伝える',['telled','teld','tellen'],'A-B-B型：<b>tell - told - told</b>'],
+  ['pp_abb_aaa','win','過去分詞','won','勝つ',['winned','woned','winnen'],'A-B-B型：<b>win - won - won</b>'],
+  ['pp_abb_aaa','lose','過去分詞','lost','失う/負ける',['losed','losten','loosed'],'A-B-B型：<b>lose - lost - lost</b>'],
+  ['pp_abb_aaa','sit','過去分詞','sat','座る',['sitted','sitten','saten'],'A-B-B型：<b>sit - sat - sat</b>'],
+  ['pp_abb_aaa','stand','過去分詞','stood','立つ',['standed','stooded','standen'],'A-B-B型：<b>stand - stood - stood</b>'],
+  ['pp_abb_aaa','understand','過去分詞','understood','理解する',['understanded','understod','understanden'],'A-B-B型：<b>understand - understood - understood</b>'],
+  ['pp_abb_aaa','read','過去分詞','read','読む（発音は「レッド」）',['readed','red','readen'],'A-A-A型（つづり同じ・発音だけレッド！）：<b>read - read - read</b>','read. red. red.'],
+  ['pp_abb_aaa','cut','過去分詞','cut','切る',['cutted','cuted','cutten'],'A-A-A型：<b>cut - cut - cut</b>'],
+  ['pp_abb_aaa','put','過去分詞','put','置く',['putted','puted','putten'],'A-A-A型：<b>put - put - put</b>'],
+  ['pp_abb_aaa','hit','過去分詞','hit','打つ',['hitted','hited','hitten'],'A-A-A型：<b>hit - hit - hit</b>'],
+  ['pp_abb_aaa','set','過去分詞','set','置く/セットする',['setted','seted','setten'],'A-A-A型：<b>set - set - set</b>'],
+  ['pp_abb_aaa','hurt','過去分詞','hurt','傷つける',['hurted','hurten','hart'],'A-A-A型：<b>hurt - hurt - hurt</b>'],
+  ['pp_abb_aaa','use','過去分詞','used','使う',['useed','usied','usen'],'eで終わる規則変化 → dだけ：<b>used</b>'],
+  ['pp_abb_aaa','love','過去分詞','loved','愛する',['loveed','lovd','loven'],'eで終わる規則変化 → dだけ：<b>loved</b>'],
+  ['pp_abb_aaa','cover','過去分詞','covered','覆う（be covered with）',['coverred','covred','coverd'],'規則変化 → +ed：<b>covered</b>'],
+  ['pp_abb_aaa','call','過去分詞','called','呼ぶ（is called で頻出）',['caled','calld','callen'],'規則変化 → +ed：<b>called</b>'],
+  ['pp_abb_aaa','name','過去分詞','named','名づける（is named で頻出）',['nameed','namd','namen'],'eで終わる規則変化 → dだけ：<b>named</b>'],
+  ['pp_abb_aaa','study','過去分詞','studied','勉強する',['studyed','studid','studed'],'子音＋y → yをiに変えて+ed：<b>studied</b>'],
+  ['pp_abb_aaa','try','過去分詞','tried','試す',['tryed','trid','triyed'],'子音＋y → yをiに変えて+ed：<b>tried</b>'],
+  ['pp_abb_aaa','stop','過去分詞','stopped','止める',['stoped','stopd','stoppen'],'短母音＋子音 → pを重ねて+ed：<b>stopped</b>'],
+  ['pp_abb_aaa','plan','過去分詞','planned','計画する',['planed','pland','planen'],'短母音＋子音 → nを重ねて+ed：<b>planned</b>'],
+  ['pron_plural','I','目的格（私によって/私を）','me','by ~ / make ~ happy の形',['my','mine','we'],'I - my - <b>me</b> - mine（byや動詞の後ろは目的格！）'],
+  ['pron_plural','you','目的格（あなたによって/あなたを）','you','by ~ / make ~ happy の形',['your','yours',"you're"],'you - your - <b>you</b> - yours'],
+  ['pron_plural','he','目的格（彼によって/彼を）','him','by ~ / call ~ ... の形',['his','he','hers'],'he - his - <b>him</b> - his'],
+  ['pron_plural','she','目的格（彼女によって/彼女を）','her','by ~ / make ~ happy の形',['she','hers',"she's"],'she - her - <b>her</b> - hers'],
+  ['pron_plural','we','目的格（私たちによって/私たちを）','us','by ~ / make ~ happy の形',['our','ours','we'],'we - our - <b>us</b> - ours'],
+  ['pron_plural','they','目的格（彼らによって/彼らを）','them','by ~ / call ~ ... の形',['their','theirs','they'],'they - their - <b>them</b> - theirs'],
+  ['pron_plural','it','目的格（それによって/それを）','it','by ~ / call ~ ... の形',['its',"it's",'them'],'it - its - <b>it</b>'],
+  ['pron_plural','he','所有格（彼の）','his','he の所有格',['him','he',"he's"],'he - <b>his</b> - him - his'],
+  ['pron_plural','they','所有格（彼らの）','their','they の所有格',['them','theirs','there'],'they - <b>their</b> - them - theirs'],
+  ['pron_plural','it','所有格（それの）','its','it の所有格',["it's",'it',"its'"],'アポストロフィなし！<b>its</b>'],
+  ['pron_plural','city','複数形','cities','都市→都市（one of ~で頻出）',['citys','cityes','cites'],'子音＋y → ies：<b>cities</b>'],
+  ['pron_plural','country','複数形','countries','国→国々（one of ~で頻出）',['countrys','countryes','countres'],'子音＋y → ies：<b>countries</b>'],
+  ['pron_plural','story','複数形','stories','物語→物語（複数）',['storys','storyes','stores'],'子音＋y → ies：<b>stories</b>'],
+  ['pron_plural','library','複数形','libraries','図書館→複数',['librarys','libraryes','libraris'],'子音＋y → ies：<b>libraries</b>'],
+  ['pron_plural','dictionary','複数形','dictionaries','辞書→複数',['dictionarys','dictionaryes','dictionaris'],'子音＋y → ies：<b>dictionaries</b>'],
+  ['pron_plural','hobby','複数形','hobbies','趣味→複数',['hobbys','hobbyes','hobbis'],'子音＋y → ies：<b>hobbies</b>'],
+  ['pron_plural','movie','複数形','movies','映画→複数',['movis','moviees','movys'],'そのまま+s：<b>movies</b>'],
+  ['pron_plural','language','複数形','languages','言語→複数',['languags','languagees','languges'],'そのまま+s：<b>languages</b>'],
+  ['pron_plural','mountain','複数形','mountains','山→複数',['mountaines','mountan','mountins'],'そのまま+s：<b>mountains</b>'],
+  ['pron_plural','river','複数形','rivers','川→複数',['riveres','rives','riverss'],'そのまま+s：<b>rivers</b>'],
+  ['pron_plural','child','複数形','children','子ども→子どもたち',['childs','childrens','chirdren'],'不規則複数：<b>child → children</b>'],
+  ['pron_plural','man','複数形','men','男性→男性たち',['mans','mens','mean'],'不規則複数：<b>man → men</b>'],
+  ['pron_plural','woman','複数形','women','女性→女性たち',['womans','womens','wimen'],'不規則複数：<b>woman → women</b>'],
+  ['pron_plural','person','複数形','people','人→人々',['persons','peoples','peple'],'通常は <b>person → people</b>'],
+  ['pron_plural','foot','複数形','feet','足→両足',['foots','footes','feets'],'不規則複数：<b>foot → feet</b>'],
+  ['pron_plural','tooth','複数形','teeth','歯→歯（複数）',['tooths','toothes','teethes'],'不規則複数：<b>tooth → teeth</b>'],
+  ['pron_plural','mouse','複数形','mice','ネズミ→複数',['mouses','mices','mous'],'不規則複数：<b>mouse → mice</b>'],
+  ['pron_plural','sheep','複数形','sheep','羊→羊たち',['sheeps','sheepes','shoop'],'単複同形：<b>sheep → sheep</b>'],
+  ['pron_plural','fish','複数形','fish','魚→魚たち（複数）',['fishs','fishes','fishe'],'基本は単複同形：<b>fish → fish</b>'],
+  ['pron_plural','leaf','複数形','leaves','葉→複数',['leafs','leafes','leavs'],'fをvに変えて+es：<b>leaves</b>'],
+  ['pron_plural','knife','複数形','knives','ナイフ→複数',['knifes','knifees','knivs'],'feをvに変えて+es：<b>knives</b>'],
+  ['pron_plural','tomato','複数形','tomatoes','トマト→複数',['tomatos','tomato','tomatoss'],'oで終わる+es：<b>tomatoes</b>'],
+  ['pron_plural','potato','複数形','potatoes','ジャガイモ→複数',['potatos','potato','potatoss'],'oで終わる+es：<b>potatoes</b>'],
+  ['pron_plural','photo','複数形','photos','写真→複数',['photoes','photo','photies'],'注意！photoは+sだけ：<b>photos</b>'],
+  ['pron_plural','piano','複数形','pianos','ピアノ→複数',['pianoes','piano','pianies'],'注意！pianoは+sだけ：<b>pianos</b>']
+].map(([cat,base,target,ans,jp,wrongs,exp,speak]) => ({cat,base,target,ans,jp,wrongs,exp,speak}));
+
+const VOCAB_BANK = [
+  ['one of the','最も〜な…の1つ（後ろは最上級＋複数名詞）','idiom2_3',0,['one of a','one for the','ones of the']],
+  ['as ~ as possible','できるだけ〜（as ~ as 主語 can に書換可）','idiom2_3',0,['as ~ as can','so ~ as possible','as ~ than possible']],
+  ['more and more','ますます〜・だんだん多くの','idiom2_3',0,['more or more','most and most','more than more']],
+  ['better than','〜よりも良い・上手だ','idiom2_3',0,['better then','gooder than','more good than']],
+  ['the best of all','すべての中で一番良い','idiom2_3',0,['best of all','the best in all','the most good of all']],
+  ['be known to','〜に知られている（受け身・前置詞はto）','idiom2_3',0,['be known by','be know to','be known for to']],
+  ['be made of','〜で作られている（材料が見てわかる）','idiom2_3',0,['be make of','be made by','be made in']],
+  ['be made from','〜で作られている（材料が変質して見えない）','idiom2_3',0,['be make from','be made by','be made to']],
+  ['be covered with','〜で覆われている（前置詞はwith）','idiom2_3',0,['be covered by','be cover with','be covered of']],
+  ['be famous for','〜で有名だ','idiom2_3',0,['be famous at','be famous to','be famus for']],
+  ['each other','お互いに','idiom2_3',0,['each others','one other','each another']],
+  ['all over the world','世界中で','idiom2_3',0,['all on the world','over all world','all in the world']],
+  ['around the world','世界中で・世界中をまわって','idiom2_3',0,['round the world','around world','around in world']],
+  ['any other','他のどの〜も（比較級＋than any other＋単数名詞）','idiom2_3',0,['any others','no other','some other']],
+  ['no other','他のどの〜も…ない（No other 単数名詞 is as ~ as）','idiom2_3',0,['not other','any other','none other']],
+  ['be interested in','〜に興味がある','idiom2_3',0,['be interesting in','be interested at','be interest in']],
+  ['be surprised at','〜に驚く（前置詞はat）','idiom2_3',0,['be surprising at','be surprised by','be surprised to']],
+  ['be proud of','〜を誇りに思う','idiom2_3',0,['be proud for','be proud in','be prowd of']],
+  ['be popular with','〜に人気がある','idiom2_3',0,['be popular to','be popular for','be populer with']],
+  ['be filled with','〜でいっぱいである','idiom2_3',0,['be full with','be filled by','be fill with']],
+  ['take care of','〜の世話をする','idiom2_3',0,['take care for','took care at','care of']],
+  ['look forward to','〜するのを楽しみに待つ（後ろは~ing）','idiom2_3',0,['look forward for','looks forward at','look forword to']],
+  ['Thank you for','〜してくれてありがとう','idiom2_3',1,['Thank you to','Thank for you','Thanks you for']],
+  ['a lot of','たくさんの〜','idiom2_3',0,['a lots of','lot of','a lot for']],
+  ['for example','たとえば','idiom2_3',0,['for exmple','of example','to example']],
+  ['at first','最初は','idiom2_3',0,['in first','on first','at fast']],
+  ['in fact','実は・実際に','idiom2_3',0,['on fact','at fact','in fuct']],
+  ['of course','もちろん','idiom2_3',0,['of cource','on course','of cause']],
+  ['long ago','大昔に（受け身の文と相性◎）','idiom2_3',0,['long before','far ago','ago long']],
+  ['hundreds of','何百もの〜（後ろは複数名詞）','idiom2_3',0,['hundred of','hundreds for','hundreds']],
+  ['thousands of','何千もの〜（後ろは複数名詞）','idiom2_3',0,['thousand of','thousands for','thousands']],
+  ['from all over the world','世界中から','idiom2_3',0,['from all on the world','all over from world','from over all world']],
+  ['call','呼ぶ・電話する（call A B：AをBと呼ぶ）','verb_pp2_3',0,['cal','calll','kall']],
+  ['name','名づける（name A B：AをBと名づける）','verb_pp2_3',0,['naim','nam','neme']],
+  ['make','作る・〜の状態にする（make A + 形容詞）','verb_pp2_3',0,['maik','mak','meke']],
+  ['speak','話す（過去分詞 spoken）','verb_pp2_3',0,['speek','spek','spake']],
+  ['write','書く（過去分詞 written）','verb_pp2_3',0,['rite','wrate','writte']],
+  ['use','使う（過去分詞 used）','verb_pp2_3',0,['yuse','uze','us']],
+  ['build','建てる（過去分詞 built）','verb_pp2_3',0,['bild','biuld','buil']],
+  ['invent','発明する（受け身頻出）','verb_pp2_3',0,['inbent','envent','invant']],
+  ['discover','発見する（受け身頻出）','verb_pp2_3',0,['discovar','discorver','descover']],
+  ['paint','描く・ペンキを塗る','verb_pp2_3',0,['peint','pant','pain']],
+  ['grow','育てる・栽培する・成長する（過去分詞 grown）','verb_pp2_3',0,['grou','graw','glow']],
+  ['produce','生産する・生み出す','verb_pp2_3',0,['produse','produs','ploduce']],
+  ['bake','（パン・ケーキを）焼く','verb_pp2_3',0,['baik','bak','beik']],
+  ['clean','掃除する・きれいにする','verb_pp2_3',0,['cleen','clen','crean']],
+  ['wash','洗う','verb_pp2_3',0,['wosh','wush','washe']],
+  ['open','開ける・開く','verb_pp2_3',0,['opan','opne','oppen']],
+  ['close','閉める・閉じる','verb_pp2_3',0,['cloze','closs','klose']],
+  ['break','壊す・折る（過去分詞 broken）','verb_pp2_3',0,['brake','braek','brek']],
+  ['choose','選ぶ（過去分詞 chosen）','verb_pp2_3',0,['chose','choos','chuose']],
+  ['collect','集める','verb_pp2_3',0,['colect','collekt','correct']],
+  ['invite','招待する','verb_pp2_3',0,['inbite','envite','invit']],
+  ['celebrate','祝う（is celebrated で頻出）','verb_pp2_3',0,['selebrate','celeblate','celabrate']],
+  ['teach','教える（過去分詞 taught）','verb_pp2_3',0,['teech','teah','taech']],
+  ['give','与える（過去分詞 given）','verb_pp2_3',0,['gibe','giv','geve']],
+  ['show','見せる（過去分詞 shown）','verb_pp2_3',0,['shouw','shou','syow']],
+  ['send','送る（過去分詞 sent）','verb_pp2_3',0,['cend','sende','sened']],
+  ['sell','売る（過去分詞 sold）','verb_pp2_3',0,['sel','cell','selle']],
+  ['find','見つける（過去分詞 found）','verb_pp2_3',0,['fined','fnd','finde']],
+  ['keep','保つ・飼い続ける（過去分詞 kept）','verb_pp2_3',0,['keap','kep','keepe']],
+  ['know','知っている（過去分詞 known）','verb_pp2_3',0,['now','kno','knowe']],
+  ['cover','覆う（be covered with）','verb_pp2_3',0,['cobar','cuver','kover']],
+  ['surprise','驚かせる（be surprised at）','verb_pp2_3',0,['suprise','surprize','sirprise']],
+  ['famous','有名な（more / most 型）','adj_comp2_3',0,['famus','femous','faimous']],
+  ['popular','人気のある（more / most 型）','adj_comp2_3',0,['populer','populor','poplar']],
+  ['interesting','おもしろい・興味深い（more / most 型）','adj_comp2_3',0,['intresting','intersting','interestting']],
+  ['exciting','わくわくさせる（more / most 型）','adj_comp2_3',0,['exiting','exciteing','eksciting']],
+  ['important','重要な（more / most 型）','adj_comp2_3',0,['inportant','importent','improtant']],
+  ['difficult','難しい（more / most 型）','adj_comp2_3',0,['dificult','diffcult','difficul']],
+  ['beautiful','美しい（more / most 型）','adj_comp2_3',0,['beautifull','beutiful','bautiful']],
+  ['delicious','おいしい（more / most 型）','adj_comp2_3',0,['delicius','delisious','dilicious']],
+  ['useful','役に立つ（more / most 型）','adj_comp2_3',0,['usefull','usful','yuseful']],
+  ['wonderful','すばらしい（more / most 型）','adj_comp2_3',0,['wanderful','wonderfull','wondarful']],
+  ['careful','注意深い（more / most 型）','adj_comp2_3',0,['carefull','carful','kareful']],
+  ['dangerous','危険な（more / most 型）','adj_comp2_3',0,['dangerus','danzerous','dengerous']],
+  ['safe','安全な（-r / -st 型）','adj_comp2_3',0,['saif','sfe','saef']],
+  ['strong','強い（-er / -est 型）','adj_comp2_3',0,['storong','strng','stlong']],
+  ['heavy','重い（-ier / -iest 型）','adj_comp2_3',0,['heaby','hevy','heavie']],
+  ['light','軽い・明るい（-er / -est 型）','adj_comp2_3',0,['liht','ligt','raight']],
+  ['high','高い（-er / -est 型）','adj_comp2_3',0,['hihg','hig','highe']],
+  ['low','低い（-er / -est 型）','adj_comp2_3',0,['lou','lo','law']],
+  ['deep','深い（-er / -est 型）','adj_comp2_3',0,['deap','dep','deepe']],
+  ['wide','広い・幅広い（-r / -st 型）','adj_comp2_3',0,['waid','wid','wyde']],
+  ['large','大きい・広い（-r / -st 型）','adj_comp2_3',0,['larj','larde','lerge']],
+  ['small','小さい（-er / -est 型）','adj_comp2_3',0,['smal','smoll','smalle']],
+  ['fast','速い・速く（-er / -est 型）','adj_comp2_3',0,['fust','fas','fastt']],
+  ['early','早い・早く（-ier / -iest 型）','adj_comp2_3',0,['eary','earry','arly']],
+  ['late','遅い・遅く（-r / -st 型）','adj_comp2_3',0,['lait','lat','leat']],
+  ['easy','簡単な（-ier / -iest 型）','adj_comp2_3',0,['eazy','esy','easie']],
+  ['hard','硬い・一生懸命に（-er / -est 型）','adj_comp2_3',0,['hurd','herd','hald']],
+  ['busy','忙しい（-ier / -iest 型）','adj_comp2_3',0,['bisy','busie','buzy']],
+  ['happy','幸せな・うれしい（-ier / -iest 型）','adj_comp2_3',0,['hapy','happie','heppy']],
+  ['angry','怒った（make A angry）','adj_comp2_3',0,['angly','engry','angrie']],
+  ['sad','悲しい（make A sad / -ddest）','adj_comp2_3',0,['sed','sadd','saad']],
+  ['tired','疲れた（make A tired）','adj_comp2_3',0,['tyred','tiried','tierd']],
+  ['warm','暖かい（-er / -est 型）','adj_comp2_3',0,['werm','worm','walm']],
+  ['cool','涼しい・かっこいい（-er / -est 型）','adj_comp2_3',0,['col','cuol','kool']],
+  ['ill','病気の（不規則：worse / worst）','adj_comp2_3',0,['il','ell','illl']],
+  ['worse','より悪い（bad / ill の比較級）','adj_comp2_3',0,['badder','worce','werse']],
+  ['worst','最も悪い（bad / ill の最上級）','adj_comp2_3',0,['baddest','warst','worste']],
+  ['better','より良い（good / well の比較級）','adj_comp2_3',0,['gooder','beter','bettar']],
+  ['best','最も良い（good / well の最上級）','adj_comp2_3',0,['goodest','bast','besst']],
+  ['least','最も少ない（little の最上級）','adj_comp2_3',0,['littlest','leest','liast']],
+  ['language','言語・ことば（English is a global language）','noun2_3',0,['langage','languge','languege']],
+  ['history','歴史','noun2_3',0,['histry','histoly','hestory']],
+  ['culture','文化','noun2_3',0,['calture','cultuer','kulture']],
+  ['tradition','伝統','noun2_3',0,['tradision','traditon','tradtion']],
+  ['festival','祭り・フェスティバル','noun2_3',0,['festibal','festivel','fastival']],
+  ['museum','博物館・美術館','noun2_3',0,['museam','muzeum','musium']],
+  ['library','図書館','noun2_3',0,['libraly','librery','liblary']],
+  ['temple','お寺','noun2_3',0,['tempel','tenple','tample']],
+  ['shrine','神社','noun2_3',0,['srine','shryne','shline']],
+  ['castle','城（tは発音しない）','noun2_3',0,['casle','castel','kassle']],
+  ['tower','塔・タワー','noun2_3',0,['tawer','touer','towar']],
+  ['bridge','橋','noun2_3',0,['brige','blidge','bridg']],
+  ['mountain','山','noun2_3',0,['mountin','mauntain','mountan']],
+  ['island','島（sは発音しない）','noun2_3',0,['iland','islnd','aisland']],
+  ['river','川','noun2_3',0,['riber','rivar','liver']],
+  ['lake','湖','noun2_3',0,['laik','lak','leik']],
+  ['ocean','大洋・海','noun2_3',0,['oshean','osean','oceon']],
+  ['forest','森林・森','noun2_3',0,['forrest','folest','foreste']],
+  ['world','世界','noun2_3',0,['warld','word','wolrd']],
+  ['country','国・いなか','noun2_3',0,['cuntry','countly','countrie']],
+  ['city','都市・市','noun2_3',0,['sity','citi','citye']],
+  ['town','町','noun2_3',0,['toun','taun','towen']],
+  ['population','人口','noun2_3',0,['populasion','popuration','populaton']],
+  ['machine','機械','noun2_3',0,['mashine','machin','machene']],
+  ['computer','コンピュータ','noun2_3',0,['conputer','computor','computar']],
+  ['camera','カメラ','noun2_3',0,['camela','camra','kemera']],
+  ['dictionary','辞書','noun2_3',0,['dictionery','dicsionary','dictionry']],
+  ['newspaper','新聞','noun2_3',0,['newspapar','nuspaper','newpaper']],
+  ['novel','小説','noun2_3',0,['nobel','novle','nabel']],
+  ['picture','絵・写真','noun2_3',0,['pictuer','pichure','pikture']],
+  ['wood','木・木材（be made of wood）','noun2_3',0,['woud','wod','woode']],
+  ['glass','ガラス・コップ（be made of glass）','noun2_3',0,['glas','grass','gluss']],
+  ['paper','紙（be made from wood / of paper）','noun2_3',0,['papar','peper','paipar']],
+  ['cotton','綿（be made of cotton）','noun2_3',0,['coton','kotten','cotten']],
+  ['butter','バター（be made from milk）','noun2_3',0,['buter','batter','buttar']],
+  ['cheese','チーズ（be made from milk）','noun2_3',0,['chees','cheeze','chiese']],
+  ['snow','雪（be covered with snow）','noun2_3',0,['snou','snaw','smow']],
+  ['rain','雨','noun2_3',0,['rein','rane','raen']],
+  ['than','〜よりも（then と間違えない！）','comp_gram2_3',0,['then','thn','thun']],
+  ['as','〜と同じくらい（as 原級 as）','comp_gram2_3',0,['az','ass','es']],
+  ['possible','可能な（as ~ as possible）','comp_gram2_3',0,['posible','possibel','possibul']],
+  ['other','他の（any other ＋ 単数名詞）','comp_gram2_3',0,['ather','othar','othre']],
+  ['another','もう1つの・別の','comp_gram2_3',0,['anather','anothar','annother']],
+  ['all','すべて（of all で最上級と使う）','comp_gram2_3',0,['al','alll','oll']],
+  ['both','両方（both A and B）','comp_gram2_3',0,['borth','bothe','bouth']],
+  ['neither','どちらも〜ない','comp_gram2_3',0,['niether','nether','neithar']],
+  ['more','より多くの・もっと（比較級）','comp_gram2_3',0,['manyer','mor','moer']],
+  ['most','最も多くの・いちばん（最上級）','comp_gram2_3',0,['manyest','moast','moste']],
+  ['less','より少ない（littleの比較級）','comp_gram2_3',0,['littler','les','lass']],
+  ['by','〜によって（受け身の行為者）','comp_gram2_3',0,['buy','bye','bi']],
+  ['with','〜で（be covered with ~）','comp_gram2_3',0,['wth','wich','wit']],
+  ['from','〜から（be made from ~）','comp_gram2_3',0,['form','fram','flom']],
+  ['of','〜から・〜の中で（be made of / of all）','comp_gram2_3',0,['off','ob','ov']],
+  ['in','〜の中で（in Japan / in my class）','comp_gram2_3',0,['inn','en','im']],
+  ['to','〜に（be known to ~）','comp_gram2_3',0,['too','two','tu']],
+  ['for','〜で・〜のために（be famous for ~）','comp_gram2_3',0,['four','forr','far']],
+  ['at','〜に（be surprised at ~）','comp_gram2_3',0,['att','et','ot']],
+  ['who','だれが（Who is the tallest?）','comp_gram2_3',0,['whoo','hoo','wh']],
+  ['which','どちら・どれ（Which is older, A or B?）','comp_gram2_3',0,['wich','whitch','whych']],
+  ['what','何が（What is the highest mountain?）','comp_gram2_3',0,['wat','whut','waht']],
+  ['whose','だれの','comp_gram2_3',0,['whos',"who's",'whoes']],
+  ['when','いつ・〜するとき','comp_gram2_3',0,['wen','whan','whene']],
+  ['if','もし〜ならば','comp_gram2_3',0,['ef','iff','ifh']],
+  ['because','なぜなら〜だから','comp_gram2_3',0,['becouse','becuse','becaus']],
+  ['that','〜ということ（接続詞）','comp_gram2_3',0,['thet','tht','thatt']],
+  ['already','すでに・もう','comp_gram2_3',0,['allready','alredy','alraedy']],
+  ['still','まだ・今でも','comp_gram2_3',0,['stil','stell','styll']],
+  ['ago','〜前に（was built 100 years ago）','comp_gram2_3',0,['agoo','ego','agou']],
+  ['nickname','あだ名・ニックネーム（call A ~）','time_misc2_3',0,['nikname','nicknaim','nicknam']],
+  ['hero','英雄・ヒーロー','time_misc2_3',0,['hiro','herro','helo']],
+  ['winner','勝者・優勝者','time_misc2_3',0,['winer','winnar','weener']],
+  ['prize','賞・賞品','time_misc2_3',0,['prise','praize','priz']],
+  ['medal','メダル','time_misc2_3',0,['medle','meddl','madal']],
+  ['champion','チャンピオン・優勝者','time_misc2_3',0,['chanpion','champian','champin']],
+  ['team','チーム','time_misc2_3',0,['teem','tiem','teame']],
+  ['member','一員・メンバー','time_misc2_3',0,['menber','membar','mamber']],
+  ['player','選手・演奏者','time_misc2_3',0,['playar','plaier','preyer']],
+  ['scientist','科学者','time_misc2_3',0,['sientist','scentist','sciantist']],
+  ['writer','作家（was written by a famous writer）','time_misc2_3',0,['writter','riter','writar']],
+  ['artist','芸術家・画家','time_misc2_3',0,['artest','ertist','artyst']],
+  ['singer','歌手','time_misc2_3',0,['singar','senger','shinger']],
+  ['actor','俳優','time_misc2_3',0,['acter','aktor','actar']],
+  ['visitor','訪問者・観光客','time_misc2_3',0,['visiter','bisitor','visitar']],
+  ['tourist','観光客','time_misc2_3',0,['turist','tourlist','toulist']],
+  ['guest','客・ゲスト','time_misc2_3',0,['gest','geust','guast']],
+  ['passenger','乗客','time_misc2_3',0,['passanger','pasenger','passengar']],
+  ['neighbor','近所の人','time_misc2_3',0,['neibor','naighbor','neighbar']],
+  ['someone','だれか','time_misc2_3',0,['someon','somone','sumone']],
+  ['everyone','みんな・だれもが','time_misc2_3',0,['evryone','everyon','eberyone']],
+  ['nobody','だれも〜ない','time_misc2_3',0,['nobady','noboddy','nowbody']],
+  ['nothing','何も〜ない','time_misc2_3',0,['nathing','nothng','noething']],
+  ['everything','すべてのこと・もの','time_misc2_3',0,['evrything','everyhing','everithing']],
+  ['everywhere','どこでも・いたるところに','time_misc2_3',0,['evrywhere','everywher','everywere']],
+  ['anywhere','どこでも・（疑問/否定で）どこかに','time_misc2_3',0,['anywher','anywere','enywhere']],
+  ['someday','いつか（将来）','time_misc2_3',0,['sumday','somedey','somday']],
+  ['forever','永遠に','time_misc2_3',0,['foreber','forver','foever']]
+].map(([en,jp,cat,cap,typos]) => ({en,jp,cat,cap:!!cap,typos}));
+
+const STATIC_QUESTIONS = [
+  { id:'t23_u1_1', unit:'u1', diff:2, type:'choice', jp:'「この映画はその映画よりもっとおもしろいです。」', q:'This movie is (   ) than that one.', opts:['interesting','interestinger','more interesting','most interesting'], ans:2, exp:'interesting のような長い単語の比較級は前に more をつけて <b>more interesting</b> にします！', speak:'This movie is more interesting than that one.' },
+  { id:'t23_u1_2', unit:'u1', diff:2, type:'choice', jp:'「犬と猫では、あなたはどちらが好きですか。」', q:'Which do you like (   ), dogs or cats?', opts:['good','well','better','best'], ans:2, exp:'2つのものを比べるときの「より好き」は good / well の比較級 <b>better</b> を使います！（best は3つ以上のとき）', speak:'Which do you like better, dogs or cats?' },
+  { id:'t23_u1_3', unit:'u1', diff:2, type:'input', jp:'【スペル注意】「大阪は京都よりも大きいです。」(than も含めて2語で)', q:'Osaka is (         ) Kyoto.（2語で）', placeholder:'比較級 ＋ than（2語）', ansList:['larger than','bigger than'], caseSensitive:false, exp:'「〜よりも大きい」は <b>larger than</b>（または <b>bigger than</b>）。<b>than</b> を then にしないよう注意！', speak:'Osaka is larger than Kyoto.' },
+  { id:'t23_u1_4', unit:'u1', diff:2, type:'sort', jp:'「ケンとトムでは、どちらが速く走りますか。」', words:['faster,','runs','Who','or Tom?','Ken'], ans:'Who runs faster, Ken or Tom?', exp:'人の場合は <b>Who ＋ 動詞 ＋ 比較級, A or B?</b> の語順になります！', speak:'Who runs faster, Ken or Tom?' },
+  { id:'t23_u1_5', unit:'u1', diff:3, type:'error', jp:'「東京は札幌よりもずっと暑いです。」間違いを見つけよう。', segs:['Tokyo','is','more','hotter','than Sapporo.'], errIdx:2, fixOpts:['much','most','many'], fixAns:0, exp:'hotter に <b>more</b> を重ねることはできません！比較級を強める「ずっと〜」は <b>much</b> を使います。', speak:'Tokyo is much hotter than Sapporo.' },
+  { id:'t23_u2_1', unit:'u2', diff:2, type:'choice', jp:'「ケンは3人の少年の中でいちばん背が高いです。」', q:'Ken is the tallest (   ) the three boys.', opts:['in','of','than','at'], ans:1, exp:'<b>the three boys（数字・複数名詞）</b>の前には <b>of</b> を使います！（in は場所や単数集団）', speak:'Ken is the tallest of the three boys.' },
+  { id:'t23_u2_2', unit:'u2', diff:2, type:'choice', jp:'「富士山は日本でいちばん高い山です。」', q:'Mt. Fuji is (   ) mountain in Japan.', opts:['highest','the highest','most high','the most high'], ans:1, exp:'最上級の前の <b>the</b> を絶対に忘れないこと！high は短い語なので <b>the highest</b> です。', speak:'Mt. Fuji is the highest mountain in Japan.' },
+  { id:'t23_u2_3', unit:'u2', diff:3, type:'input', jp:'「ユミはクラスの中でいちばん人気の歌手です。」(3語で)', q:'Yumi is (               ) singer in her class.', placeholder:'the ＋ 最上級（3語）', ansList:['the most popular'], caseSensitive:false, exp:'popular は長い形容詞なので最上級は <b>the most popular</b> にします！', speak:'Yumi is the most popular singer in her class.' },
+  { id:'t23_u2_4', unit:'u2', diff:2, type:'sort', jp:'「すべての季節の中で、あなたはどの季節が一番好きですか。」', words:['like','do you','Which season','the best','of all?'], ans:'Which season do you like the best of all?', exp:'「どの季節が一番好きですか」は <b>Which season do you like the best of all?</b> になります。', speak:'Which season do you like the best of all?' },
+  { id:'t23_u2_5', unit:'u2', diff:3, type:'error', jp:'「これは世界で一番有名な橋です。」間違いを見つけよう。', segs:['This','is','the most famous','bridge','of the world.'], errIdx:4, fixOpts:['in the world.','than the world.','at the world.'], fixAns:0, exp:'「世界で（範囲・場所）」は of ではなく <b>in the world</b> を使います！', speak:'This is the most famous bridge in the world.' },
+  { id:'t23_u3_1', unit:'u3', diff:2, type:'choice', jp:'「このバッグはあのバッグと同じくらいの大きさです。」', q:'This bag is as (   ) as that one.', opts:['big','bigger','biggest','more big'], ans:0, exp:'<b>as ＋ 原級 ＋ as</b>！as と as の間には比較級や最上級ではなく必ず<b>原級（big）</b>を入れます。', speak:'This bag is as big as that one.' },
+  { id:'t23_u3_2', unit:'u3', diff:3, type:'choice', jp:'「昨日ケンはできるだけ速く走りました。」', q:'Ken ran as fast as (   ) yesterday.', opts:['he can','he could','possible can','he was'], ans:1, exp:'as ~ as possible ＝ as ~ as 主語 can [could]。過去の文（ran / yesterday）なので <b>he could</b> にします！', speak:'Ken ran as fast as he could yesterday.' },
+  { id:'t23_u3_3', unit:'u3', diff:3, type:'input', jp:'【頻出書き換え】同じ意味になるように：Ken is older than Yumi.', q:'Yumi is not (            ) Ken.（3語で）', qSpeak:'Ken is older than Yumi.', placeholder:'as 〜 as（3語）', ansList:['as old as','so old as'], caseSensitive:false, exp:'「ユミはケンほど年上ではない」＝ <b>not as [so] old as</b> を使います！', speak:'Yumi is not as old as Ken.' },
+  { id:'t23_u3_4', unit:'u3', diff:2, type:'sort', jp:'「どうかできるだけ早くここへ来てください。」', words:['possible.','here','as','Please','soon','come','as'], ans:'Please come here as soon as possible.', exp:'「できるだけ早く」＝ <b>as soon as possible</b> です！', speak:'Please come here as soon as possible.' },
+  { id:'t23_u3_5', unit:'u3', diff:3, type:'error', jp:'「数学は英語ほど難しくありません。」間違いを見つけよう。', segs:['Math','is not','as','more difficult','as','English.'], errIdx:3, fixOpts:['difficult','most difficult','difficulter'], fixAns:0, exp:'not as 〜 as の間も必ず<b>原級（difficult）</b>を入れます！', speak:'Math is not as difficult as English.' },
+  { id:'t23_u4_1', unit:'u4', diff:3, type:'choice', jp:'「信濃川は日本の他のどの川よりも長いです。」', q:'The Shinano River is longer than any other (   ) in Japan.', opts:['river','rivers','the river','a river'], ans:0, exp:'<b>比較級 ＋ than any other ＋ 単数名詞</b>！any other の後ろは必ず<b>単数形（river）</b>にします。', speak:'The Shinano River is longer than any other river in Japan.' },
+  { id:'t23_u4_2', unit:'u4', diff:3, type:'choice', jp:'「日本の他のどの山も富士山ほど高くありません。」', q:'(   ) mountain in Japan is as high as Mt. Fuji.', opts:['Any other','No other','All other','Some other'], ans:1, exp:'最上級の言い換え「他のどの〜も…ない」は <b>No other ＋ 単数名詞 ＋ is as 原級 as ...</b> を使います！', speak:'No other mountain in Japan is as high as Mt. Fuji.' },
+  { id:'t23_u4_3', unit:'u4', diff:3, type:'choice', jp:'「京都は日本で最も美しい都市の1つです。」', q:'Kyoto is one of the most beautiful (   ) in Japan.', opts:['city','cities','citys','a city'], ans:1, exp:'<b>one of the ＋ 最上級 ＋ 複数名詞</b>！city の複数形 <b>cities</b> にするのを忘れないで！', speak:'Kyoto is one of the most beautiful cities in Japan.' },
+  { id:'t23_u4_4', unit:'u4', diff:3, type:'input', jp:'【3パターン書き換え】同じ意味に：Tokyo is the largest city in Japan.', q:'Tokyo is (            ) any other city in Japan.（2語で）', qSpeak:'Tokyo is the largest city in Japan.', placeholder:'比較級 ＋ than（2語）', ansList:['larger than'], caseSensitive:false, exp:'最上級 ＝ <b>比較級 ＋ than</b> any other ＋ 単数名詞！よって <b>larger than</b> です。', speak:'Tokyo is larger than any other city in Japan.' },
+  { id:'t23_u4_5', unit:'u4', diff:2, type:'sort', jp:'「英語を勉強することはますます大切になっています。」', words:['is becoming','more','Studying English','and','important.','more'], ans:'Studying English is becoming more and more important.', exp:'「ますます〜」＝ <b>more and more ＋ 形容詞</b> を使います！', speak:'Studying English is becoming more and more important.' },
+  { id:'t23_u5_1', unit:'u5', diff:2, type:'choice', jp:'「英語は世界中で話されています。」', q:'English (   ) all over the world.', opts:['speaks','is spoken','is spoke','spoke'], ans:1, exp:'「話される」＝受け身（<b>be動詞 ＋ 過去分詞</b>）。speak の過去分詞は <b>spoken</b> です！', speak:'English is spoken all over the world.' },
+  { id:'t23_u5_2', unit:'u5', diff:3, type:'choice', jp:'「このお寺は約1000年前に建てられました。」', q:'This temple (   ) about 1,000 years ago.', opts:['is built','was built','built','was builded'], ans:1, exp:'1,000 years ago（過去）なので <b>was</b>、build の過去分詞は <b>built</b> です！', speak:'This temple was built about 1,000 years ago.' },
+  { id:'t23_u5_3', unit:'u5', diff:2, type:'input', jp:'「これらの写真は昨日ケンによって撮られました。」(take を正しい形に)', q:'These pictures were (         ) by Ken yesterday.', placeholder:'take の過去分詞', ansList:['taken'], caseSensitive:false, exp:'take の変化は <b>take - took - taken</b>！過去分詞は <b>taken</b> です。', speak:'These pictures were taken by Ken yesterday.' },
+  { id:'t23_u5_4', unit:'u5', diff:2, type:'sort', jp:'「この自転車は毎日使われていますか。」', words:['used','Is','every day?','this bike'], ans:'Is this bike used every day?', exp:'受け身の疑問文は <b>Be動詞 ＋ 主語 ＋ 過去分詞 ...?</b> の語順になります！', speak:'Is this bike used every day?' },
+  { id:'t23_u5_5', unit:'u5', diff:3, type:'error', jp:'「この小説は有名な作家によって書かれました。」間違いを見つけよう。', segs:['This novel','was','wrote','by','a famous writer.'], errIdx:2, fixOpts:['written','write','writed'], fixAns:0, exp:'受け身（was ＋ 過去分詞）なので、write の過去分詞 <b>written</b> にします！', speak:'This novel was written by a famous writer.' },
+  { id:'t23_u6_1', unit:'u6', diff:3, type:'choice', jp:'「富士山は冬には雪で覆われます。」', q:'Mt. Fuji is covered (   ) snow in winter.', opts:['by','with','of','to'], ans:1, exp:'「〜で覆われている」は <b>be covered with 〜</b>！by ではなく <b>with</b> を使います。', speak:'Mt. Fuji is covered with snow in winter.' },
+  { id:'t23_u6_2', unit:'u6', diff:3, type:'choice', jp:'「この歌手は世界中の人々に知られています。」', q:'This singer is known (   ) people all over the world.', opts:['by','to','with','from'], ans:1, exp:'「〜に知られている」は <b>be known to 〜</b>！by ではなく <b>to</b> を使う超頻出表現です。', speak:'This singer is known to people all over the world.' },
+  { id:'t23_u6_3', unit:'u6', diff:3, type:'choice', jp:'「チーズは牛乳から作られます。」（材料が見えない変化）', q:'Cheese is made (   ) milk.', opts:['of','from','with','to'], ans:1, exp:'牛乳→チーズのように性質が変わって材料が見えないときは <b>be made from 〜</b>！（木製の机など材料が見えるときは of）', speak:'Cheese is made from milk.' },
+  { id:'t23_u6_4', unit:'u6', diff:3, type:'input', jp:'【書き換え】受け身の文にしよう：Ken cleaned this room.', q:'This room (               ) Ken.（3語で）', qSpeak:'Ken cleaned this room.', placeholder:'be動詞 ＋ 過去分詞 ＋ by（3語）', ansList:['was cleaned by'], caseSensitive:false, exp:'もとの文が過去形（cleaned）なので <b>was cleaned by</b> にします！', speak:'This room was cleaned by Ken.' },
+  { id:'t23_u6_5', unit:'u6', diff:3, type:'error', jp:'「この机は木で作られています。」間違いを見つけよう。', segs:['This desk','is','made','from','wood.'], errIdx:3, fixOpts:['of','by','to'], fixAns:0, exp:'木製の机は見た目で材料（木）がわかるので <b>be made of wood</b> を使います！', speak:'This desk is made of wood.' },
+  { id:'t23_u7_1', unit:'u7', diff:2, type:'choice', jp:'「私たちはその犬をポチと呼んでいます。」', q:'We (   ) the dog Pochi.', opts:['call','say','talk','speak'], ans:0, exp:'「AをBと呼ぶ」は <b>call A B</b> の形をとります！', speak:'We call the dog Pochi.' },
+  { id:'t23_u7_2', unit:'u7', diff:3, type:'choice', jp:'「この音楽はいつも私たちを幸せにしてくれます。」', q:'This music always makes (   ) happy.', opts:['we','our','us','ours'], ans:2, exp:'動詞（makes）の後ろの A には必ず<b>目的格（us）</b>を置きます！', speak:'This music always makes us happy.' },
+  { id:'t23_u7_3', unit:'u7', diff:2, type:'sort', jp:'「彼らは自分たちの赤ちゃんをハナと名づけました。」', words:['named','Hana.','their baby','They'], ans:'They named their baby Hana.', exp:'「AをBと名づける」＝ <b>name A B</b> の語順です！', speak:'They named their baby Hana.' },
+  { id:'t23_u7_4', unit:'u7', diff:2, type:'input', jp:'「その知らせはケンをとても悲しくさせました。」(1語で)', q:'The news (         ) Ken very sad.', placeholder:'make の過去形（1語）', ansList:['made'], caseSensitive:false, exp:'「AをBの状態にする」の過去形なので <b>made</b> を入れます！', speak:'The news made Ken very sad.' },
+  { id:'t23_u7_5', unit:'u7', diff:3, type:'error', jp:'「このスポーツはみんなをわくわくさせます。」間違いを見つけよう。', segs:['This sport','makes','everyone','excitedly.'], errIdx:3, fixOpts:['excited.','excitingly.','excite.'], fixAns:0, exp:'make A B の B には副詞（-ly）ではなく<b>形容詞（excited）</b>を置きます！', speak:'This sport makes everyone excited.' },
+  { id:'t23_u8_1', unit:'u8', diff:2, type:'choice', jp:'「私たちはお互いに助け合うべきです。」', q:'We should help (   ).', opts:['each other','each others','one other','every other'], ans:0, exp:'「お互いに」は <b>each other</b> です！（s はつけません）', speak:'We should help each other.' },
+  { id:'t23_u8_2', unit:'u8', diff:2, type:'choice', jp:'「京都は古いお寺で有名です。」', q:'Kyoto is famous (   ) its old temples.', opts:['to','for','with','of'], ans:1, exp:'「〜で有名だ」は <b>be famous for 〜</b> です！', speak:'Kyoto is famous for its old temples.' },
+  { id:'t23_u8_3', unit:'u8', diff:3, type:'choice', jp:'「私はすべてのスポーツの中でサッカーが一番好きです。」', q:'I like soccer (   ) all sports.', opts:['better than','the best of','the best in','most good of'], ans:1, exp:'3つ以上の中で一番好き＝ <b>the best of 〜</b> を使います！', speak:'I like soccer the best of all sports.' },
+  { id:'t23_u8_4', unit:'u8', diff:3, type:'sort', jp:'「この歌はあちらの歌よりもずっと多くの人々に愛されています。」', words:['is loved by','than','This song','more people','that one.'], ans:'This song is loved by more people than that one.', exp:'受け身（is loved by）と 比較（more people than）を組み合わせた文です！', speak:'This song is loved by more people than that one.' },
+  { id:'t23_u8_5', unit:'u8', diff:3, type:'error', jp:'「私の犬は彼の犬より上手に泳げます。」間違いを見つけよう。', segs:['My dog','can swim','gooder','than','his dog.'], errIdx:2, fixOpts:['better','best','more well'], fixAns:0, exp:'well / good の比較級は gooder ではなく不規則変化の <b>better</b> です！', speak:'My dog can swim better than his dog.' }
+];
+
+const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+const pickN = (arr, n) => [...arr].sort(() => Math.random() - 0.5).slice(0, n);
+
+const BANK = {
+  compPairs: [
+    { a:'Ken', b:'Tom', adj:'tall', comp:'taller', sup:'tallest', jp:'背が高い' },
+    { a:'Yumi', b:'Emi', adj:'young', comp:'younger', sup:'youngest', jp:'若い' },
+    { a:'This river', b:'that river', adj:'long', comp:'longer', sup:'longest', jp:'長い' },
+    { a:'Osaka', b:'Kyoto', adj:'large', comp:'larger', sup:'largest', jp:'大きい' },
+    { a:'This bag', b:'that bag', adj:'heavy', comp:'heavier', sup:'heaviest', jp:'重い' },
+    { a:'Today', b:'yesterday', adj:'hot', comp:'hotter', sup:'hottest', jp:'暑い' }
+  ],
+  longAdjs: [
+    { base:'famous', jp:'有名な' },
+    { base:'popular', jp:'人気のある' },
+    { base:'interesting', jp:'おもしろい' },
+    { base:'difficult', jp:'難しい' },
+    { base:'beautiful', jp:'美しい' },
+    { base:'important', jp:'大切な' }
+  ],
+  passiveItems: [
+    { subj:'English', bePres:'is', bePast:'was', pp:'spoken', base:'speak', jpSubj:'英語は', jpAction:'話されています', place:'all over the world', jpPlace:'世界中で' },
+    { subj:'This song', bePres:'is', bePast:'was', pp:'loved', base:'love', jpSubj:'この歌は', jpAction:'愛されています', place:'by many young people', jpPlace:'多くの若者に' },
+    { subj:'These cars', bePres:'are', bePast:'were', pp:'made', base:'make', jpSubj:'これらの車は', jpAction:'作られています', place:'in Japan', jpPlace:'日本で' },
+    { subj:'This temple', bePres:'is', bePast:'was', pp:'built', base:'build', jpSubj:'このお寺は', jpAction:'建てられました', place:'500 years ago', jpPlace:'500年前に', pastOnly:true },
+    { subj:'Those letters', bePres:'are', bePast:'were', pp:'written', base:'write', jpSubj:'それらの手紙は', jpAction:'書かれました', place:'by Yumi yesterday', jpPlace:'昨日ユミによって', pastOnly:true },
+    { subj:'These computers', bePres:'are', bePast:'were', pp:'used', base:'use', jpSubj:'これらのコンピュータは', jpAction:'使われています', place:'in this school', jpPlace:'この学校で' }
+  ],
+  svocAdj: [
+    { en:'happy', wrong:'happily', jp:'幸せに' },
+    { en:'sad', wrong:'sadly', jp:'悲しく' },
+    { en:'angry', wrong:'angrily', jp:'怒った状態に' },
+    { en:'famous', wrong:'famously', jp:'有名に' },
+    { en:'excited', wrong:'excitedly', jp:'わくわくした状態に' }
+  ]
+};
+
+function generateFormQuestion(category = 'all', usedSet = new Set()) {
+  const pool = category === 'all' ? FORM_BANK : FORM_BANK.filter(f => f.cat === category);
+  let item = pick(pool);
+  for (let i = 0; i < 15; i++) { const c = pick(pool); if (!usedSet.has(c.base + '|' + c.target + '|' + c.ans)) { item = c; break; } }
+  usedSet.add(item.base + '|' + item.target + '|' + item.ans);
+
+  const catLabels = { comp_form:'語形変化：比較級・最上級', pp_abc:'語形変化：過去分詞 (A-B-C/A-B-A)', pp_abb_aaa:'語形変化：過去分詞 (A-B-B/規則等)', pron_plural:'語形変化：代名詞・複数形' };
+  const unitLabel = catLabels[item.cat] || '語形変化パーフェクト';
+  const mode = Math.random() < 0.55 ? 'input' : 'choice';
+  const uid = 'f_' + item.base + '_' + mode + '_' + Math.random().toString(36).slice(2, 5);
+  const isCap = /^[A-Z]/.test(item.ans);
+  const unchangedNote = (item.cat !== 'comp_form') ? '（※変化しない語もあります）' : '';
+  const speakPhrase = item.speak || `${item.base}. ${item.ans}.`;
+
+  if (mode === 'choice') {
+    return shuffleChoices({ id: uid, unit: 'forms', unitLabel, diff: 2, isGen: true, type: 'choice', jp: `<b>${item.base}</b> の <b>${item.target}</b> として正しいものは？（${item.jp}）`, q: `${item.base} → (   ) ［${item.target}］`, qSpeak: item.base, hintChar: item.ans[0], hintLen: item.ans.length, opts: [item.ans, ...item.wrongs.slice(0, 3)], ans: 0, exp: item.exp, speak: speakPhrase });
+  }
+  return { id: uid, unit: 'forms', unitLabel, diff: 2, isGen: true, type: 'input', jp: `<b>${item.base}</b> を <b>${item.target}</b> に変えて入力しよう！${unchangedNote}`, q: `${item.base}（${item.jp}）→ (          )`, qSpeak: item.base, hintChar: item.ans[0], hintLen: item.ans.length, placeholder: `${item.target}を入力`, ansList: [item.ans], caseSensitive: isCap, exp: item.exp, speak: speakPhrase };
+}
+
+function generateVocabQuestion(category = 'all', usedSet = new Set()) {
+  const pool = category === 'all' ? VOCAB_BANK : VOCAB_BANK.filter(w => w.cat === category);
+  let item = pick(pool);
+  for (let i = 0; i < 12; i++) { const c = pick(pool); if (!usedSet.has(c.en)) { item = c; break; } }
+  usedSet.add(item.en);
+
+  const mode = pick(['jp2en_choice', 'en2jp_choice', 'spell_choice', 'spell_input']);
+  const uid = 'v_' + item.en.replace(/\s+/g, '_') + '_' + mode + '_' + Math.random().toString(36).slice(2, 5);
+  const catNames = { idiom2_3:'3学期 重要熟語・連語', verb_pp2_3:'受け身・第5文型 重要動詞', adj_comp2_3:'比較・補語の形容詞・副詞', noun2_3:'文化・自然・材料の名詞', comp_gram2_3:'比較・受け身 文法語・前置詞', time_misc2_3:'第5文型・長文頻出名詞/表現' };
+  const catLabel = catNames[item.cat] || '3学期重要単語';
+
+  if (mode === 'jp2en_choice') {
+    const sameCat = pool.filter(x => x.en !== item.en);
+    const distractors = pickN(sameCat.length >= 3 ? sameCat : VOCAB_BANK.filter(x => x.en !== item.en), 3).map(x => x.en);
+    return shuffleChoices({ id: uid, unit: 'vocab', unitLabel: `単語：${catLabel}`, diff: 1, isGen: true, type: 'choice', jp: `次の日本語に合う英語を選ぼう`, q: `「${item.jp}」 ＝ (   )`, opts: [item.en, ...distractors], ans: 0, exp: `「${item.jp}」は <b>${item.en}</b> です。スペルと前置詞を正確に覚えよう！`, speak: item.en });
+  }
+  if (mode === 'en2jp_choice') {
+    const sameCat = pool.filter(x => x.en !== item.en);
+    const distractors = pickN(sameCat.length >= 3 ? sameCat : VOCAB_BANK.filter(x => x.en !== item.en), 3).map(x => x.jp);
+    return shuffleChoices({ id: uid, unit: 'vocab', unitLabel: `単語：${catLabel}`, diff: 1, isGen: true, type: 'choice', jp: `この英語の意味はどれ？（🔊ボタンで発音も聞けるよ）`, q: `${item.en}`, opts: [item.jp, ...distractors], ans: 0, exp: `<b>${item.en}</b> ＝「${item.jp}」です。`, speak: item.en });
+  }
+  if (mode === 'spell_choice') {
+    return shuffleChoices({ id: uid, unit: 'vocab', unitLabel: `単語：${catLabel}`, diff: 2, isGen: true, type: 'choice', jp: `テスト頻出！正しいつづり・形はどれ？`, q: `「${item.jp}」の正しい英語は？`, opts: [item.en, ...item.typos.slice(0, 3)], ans: 0, exp: `正しい英語は <b>${item.en}</b> です！テストでは前置詞や1文字のミスで減点されるので要注意。`, speak: item.en });
+  }
+  const isPhrase = item.en.includes(' ');
+  const masked = item.en.split(' ').map(w => w === '~' ? '~' : w[0] + w.slice(1).replace(/[a-zA-Z]/g, ' _')).join('  /  ');
+  const lenHint = isPhrase ? `${item.en.split(' ').length}語` : `${item.en.length}文字`;
+  return { id: uid, unit: 'vocab', unitLabel: `単語：${catLabel}`, diff: 2, isGen: true, type: 'input', jp: `テストで書けるかな？英語を入力しよう`, q: `「${item.jp}」 ＝ ${masked} (${lenHint})`, placeholder: isPhrase ? `${lenHint}の熟語を入力（スペース区切り）` : `${item.en[0]} から始まる ${lenHint}`, ansList: [item.en], caseSensitive: item.cap, exp: `正解は <b>${item.en}</b> です！書けなかった語はノートに3回書いてみよう。`, speak: item.en.replace(/~/g, 'something') };
+}
+
+function generateQuestionForUnit(unitId, preferredType = null) {
+  const uid = 'g_' + unitId + '_' + Math.random().toString(36).slice(2, 7);
+
+  if (unitId === 'u1') {
+    const mode = preferredType || pick(['comp_than', 'comp_long', 'comp_which', 'comp_input', 'comp_sort', 'comp_error']);
+    const pair = pick(BANK.compPairs);
+    if (mode === 'comp_than') {
+      if (Math.random() < 0.5) {
+        return { id: uid, unit:'u1', diff:2, isGen:true, type:'choice', jp:`${pair.a} は ${pair.b} よりも${pair.jp}です。`, q:`${pair.a} is ${pair.comp} (   ) ${pair.b}.`, opts:['than','then','as','that'], ans:0, exp:`比較級の「〜よりも」は <b>than</b>！（then「そのとき」と間違えるひっかけに注意）`, speak:`${pair.a} is ${pair.comp} than ${pair.b}.` };
+      }
+      return { id: uid, unit:'u1', diff:2, isGen:true, type:'choice', jp:`${pair.a} は ${pair.b} よりも${pair.jp}です。`, q:`${pair.a} is (   ) than ${pair.b}.`, opts:[pair.comp, `more ${pair.adj}`, pair.sup, pair.adj], ans:0, exp:`${pair.adj} は短い語なので比較級は <b>${pair.comp}</b> にします！（more はつけません）`, speak:`${pair.a} is ${pair.comp} than ${pair.b}.` };
+    }
+    if (mode === 'comp_long') {
+      const la = pick(BANK.longAdjs);
+      const item = pick([
+        { q:`Soccer is (   ) than tennis in our school.`, jp:`私たちの学校ではサッカーはテニスよりも${la.jp}です。`, speak:`Soccer is more ${la.base} than tennis in our school.` },
+        { q:`Math is (   ) than history for me.`, jp:`私にとって数学は歴史よりも${la.jp}です。`, speak:`Math is more ${la.base} than history for me.` }
+      ]);
+      return { id: uid, unit:'u1', diff:2, isGen:true, type:'choice', jp:item.jp, q:item.q, opts:[`more ${la.base}`, `${la.base}er`, `most ${la.base}`, la.base], ans:0, exp:`${la.base} は長い形容詞なので、比較級は前に more をつけて <b>more ${la.base}</b> にします！`, speak:item.speak };
+    }
+    if (mode === 'comp_which') {
+      const item = pick([
+        { jp:'春と秋では、どちらが暖かいですか。', q:'Which is (   ), spring or fall?', ans:'warmer', wrongs:['warmest','more warm','the warmest'], speak:'Which is warmer, spring or fall?' },
+        { jp:'テニスと野球では、どちらがより人気がありますか。', q:'Which is (   ), tennis or baseball?', ans:'more popular', wrongs:['most popular','popularer','the most popular'], speak:'Which is more popular, tennis or baseball?' },
+        { jp:'コーヒーと紅茶では、あなたはどちらが好きですか。', q:'Which do you like (   ), coffee or tea?', ans:'better', wrongs:['best','good','well'], speak:'Which do you like better, coffee or tea?' },
+        { jp:'ケンとユミでは、どちらが上手にピアノを弾きますか。', q:'Who plays the piano (   ), Ken or Yumi?', ans:'better', wrongs:['best','well','gooder'], speak:'Who plays the piano better, Ken or Yumi?' }
+      ]);
+      return { id: uid, unit:'u1', diff:3, isGen:true, type:'choice', jp:item.jp, q:item.q, opts:[item.ans, ...item.wrongs], ans:0, exp:`2つ（A or B）から選ぶときは必ず<b>比較級（${item.ans}）</b>を使います！（最上級にしない）`, speak:item.speak };
+    }
+    if (mode === 'comp_input') {
+      const item = pick([
+        { jp:`「${pair.a} は ${pair.b} よりも${pair.jp}です。」(${pair.adj} を正しい形に)`, q:`${pair.a} is (         ) than ${pair.b}.`, ans:pair.comp, speak:`${pair.a} is ${pair.comp} than ${pair.b}.`, exp:`${pair.adj} の比較級は <b>${pair.comp}</b> です！` },
+        { jp:'「ケンはトムより上手に英語を話します。」(well を正しい形に)', q:'Ken speaks English (         ) than Tom.', ans:'better', speak:'Ken speaks English better than Tom.', exp:'well の比較級は不規則変化で <b>better</b> です！' }
+      ]);
+      return { id: uid, unit:'u1', diff:2, isGen:true, type:'input', jp:item.jp, q:item.q, placeholder:'比較級を入力（1語）', ansList:[item.ans], caseSensitive:false, exp:item.exp, speak:item.speak };
+    }
+    if (mode === 'comp_sort') {
+      const item = pick([
+        { sent:'Which is older, Kyoto or Nara?', jp:'京都と奈良では、どちらが古いですか。' },
+        { sent:'This book is more interesting than that one.', jp:'この本はあの本よりもおもしろいです。' },
+        { sent:'Ken gets up earlier than his sister.', jp:'ケンは彼の妹より早く起きます。' }
+      ]);
+      return { id: uid, unit:'u1', diff:2, isGen:true, type:'sort', jp:item.jp, words:item.sent.split(' '), ans:item.sent, exp:'「Which is 比較級, A or B?」や「比較級 ＋ than」の語順を意識しよう！', speak:item.sent };
+    }
+    const err = pick([
+      { jp:'「この道はあの道よりもずっと広いです。」間違いを見つけよう。', segs:['This road','is','more','wider','than that one.'], errIdx:2, fixOpts:['much','most','many'], exp:'wider に more を重ねることはできません！比較級を強めるときは <b>much</b> を使います。', speak:'This road is much wider than that one.' },
+      { jp:'「私のカバンはあなたのカバンより重いです。」間違いを見つけよう。', segs:['My bag','is','heavier','then','yours.'], errIdx:3, fixOpts:['than','as','that'], exp:'比較級の「〜よりも」は then ではなく <b>than</b> です！', speak:'My bag is heavier than yours.' },
+      { jp:'「犬と猫ではどちらが好きですか。」間違いを見つけよう。', segs:['Which','do you like','best,','dogs','or cats?'], errIdx:2, fixOpts:['better,','good,','well,'], exp:'2つのものを比べるときの「より好き」は best ではなく <b>better</b> です！', speak:'Which do you like better, dogs or cats?' }
+    ]);
+    return { id: uid, unit:'u1', diff:3, isGen:true, type:'error', jp:err.jp, segs:err.segs, errIdx:err.errIdx, fixOpts:err.fixOpts, fixAns:0, exp:err.exp, speak:err.speak };
+  }
+
+  if (unitId === 'u2') {
+    const mode = preferredType || pick(['sup_in_of', 'sup_the', 'sup_wh', 'sup_input', 'sup_sort', 'sup_error']);
+    if (mode === 'sup_in_of') {
+      const item = pick([
+        { jp:'この湖は日本でいちばん深いです。', q:'This lake is the deepest (   ) Japan.', ans:'in', wrongs:['of','than','at'], exp:'場所・国（Japan）の中＝単数の範囲なので <b>in</b> を使います！', speak:'This lake is the deepest in Japan.' },
+        { jp:'ユミは5人の中でいちばん背が高いです。', q:'Yumi is the tallest (   ) the five.', ans:'of', wrongs:['in','than','for'], exp:'数・複数（the five）の中なので <b>of</b> を使います！', speak:'Yumi is the tallest of the five.' },
+        { jp:'ケンはクラスの中でいちばん足が速いです。', q:'Ken is the fastest runner (   ) his class.', ans:'in', wrongs:['of','than','on'], exp:'単数の集団（his class）の中なので <b>in</b> を使います！', speak:'Ken is the fastest runner in his class.' },
+        { jp:'私はすべての教科の中で英語がいちばん好きです。', q:'I like English the best (   ) all subjects.', ans:'of', wrongs:['in','than','at'], exp:'all subjects（複数のもの）の中なので <b>of</b> を使います！', speak:'I like English the best of all subjects.' }
+      ]);
+      return { id: uid, unit:'u2', diff:3, isGen:true, type:'choice', jp:item.jp, q:item.q, opts:[item.ans, ...item.wrongs], ans:0, exp:item.exp, speak:item.speak };
+    }
+    if (mode === 'sup_the') {
+      const la = pick(BANK.longAdjs);
+      if (Math.random() < 0.5) {
+        return { id: uid, unit:'u2', diff:2, isGen:true, type:'choice', jp:`これは世界中でいちばん${la.jp}場所です。`, q:`This is (   ) place in the world.`, opts:[`the most ${la.base}`, `most ${la.base}`, `the ${la.base}est`, `more ${la.base}`], ans:0, exp:`長い形容詞の最上級は <b>the most ＋ 原級（the most ${la.base}）</b>！the を忘れないで！`, speak:`This is the most ${la.base} place in the world.` };
+      }
+      const pair = pick(BANK.compPairs);
+      return { id: uid, unit:'u2', diff:2, isGen:true, type:'choice', jp:`${pair.a} は3人/3つの中でいちばん${pair.jp}です。`, q:`${pair.a} is (   ) of the three.`, opts:[`the ${pair.sup}`, pair.sup, `the ${pair.comp}`, `the most ${pair.adj}`], ans:0, exp:`最上級の前には必ず <b>the</b> をつけます！（<b>the ${pair.sup}</b>）`, speak:`${pair.a} is the ${pair.sup} of the three.` };
+    }
+    if (mode === 'sup_wh') {
+      const item = pick([
+        { jp:'あなたのクラスでだれがいちばん背が高いですか。', q:'(   ) is the tallest in your class?', ans:'Who', wrongs:['Which','What','Where'], speak:'Who is the tallest in your class?' },
+        { jp:'日本でいちばん長い川は何ですか。', q:'(   ) is the longest river in Japan?', ans:'What', wrongs:['Who','How','When'], speak:'What is the longest river in Japan?' },
+        { jp:'春、夏、秋、冬の中で、どれがいちばん暑いですか。', q:'(   ) is the hottest, spring, summer, fall, or winter?', ans:'Which', wrongs:['Who','Where','Why'], speak:'Which is the hottest, spring, summer, fall, or winter?' }
+      ]);
+      return { id: uid, unit:'u2', diff:2, isGen:true, type:'choice', jp:item.jp, q:item.q, opts:[item.ans, ...item.wrongs], ans:0, exp:`人なら Who、選択肢（A, B, C, or D）があるときは <b>Which</b>、広く「何」と聞くときは <b>What</b> を使います！`, speak:item.speak };
+    }
+    if (mode === 'sup_input') {
+      const item = pick([
+        { jp:'「8月は1年でいちばん暑い月です。」(2語で)', q:'August is (         ) month of the year.', ans:'the hottest', exp:'hot の最上級は t を重ねて <b>the hottest</b>（the忘れ注意）！', speak:'August is the hottest month of the year.' },
+        { jp:'「健康はすべての中でいちばん大切です。」(3語で)', q:'Health is (               ) thing of all.', ans:'the most important', exp:'important は長い語なので <b>the most important</b> にします！', speak:'Health is the most important thing of all.' }
+      ]);
+      return { id: uid, unit:'u2', diff:3, isGen:true, type:'input', jp:item.jp, q:item.q, placeholder:'the ＋ 最上級', ansList:[item.ans], caseSensitive:false, exp:item.exp, speak:item.speak };
+    }
+    if (mode === 'sup_sort') {
+      const item = pick([
+        { sent:'Who is the youngest of the four brothers?', jp:'4人兄弟の中でだれがいちばん若いですか。' },
+        { sent:'This mountain is the highest in our country.', jp:'この山は私たちの国でいちばん高いです。' },
+        { sent:'Baseball is the most popular sport in Japan.', jp:'野球は日本で最も人気のあるスポーツです。' }
+      ]);
+      return { id: uid, unit:'u2', diff:2, isGen:true, type:'sort', jp:item.jp, words:item.sent.split(' '), ans:item.sent, exp:'「the ＋ 最上級 ＋ in [of] ...」の語順を意識して組み立てよう！', speak:item.sent };
+    }
+    const err = pick([
+      { jp:'「ケンは家族の中でいちばん背が高いです。」間違いを見つけよう。', segs:['Ken','is','tallest','in','his family.'], errIdx:2, fixOpts:['the tallest','taller','most tall'], exp:'最上級の前には必ず <b>the</b> をつけます！（<b>the tallest</b>）', speak:'Ken is the tallest in his family.' },
+      { jp:'「これはすべての中でいちばん簡単な問題です。」間違いを見つけよう。', segs:['This','is','the easiest','question','in all.'], errIdx:4, fixOpts:['of all.','than all.','for all.'], exp:'all（すべて）と使うときは in ではなく <b>of all</b> にします！', speak:'This is the easiest question of all.' }
+    ]);
+    return { id: uid, unit:'u2', diff:3, isGen:true, type:'error', jp:err.jp, segs:err.segs, errIdx:err.errIdx, fixOpts:err.fixOpts, fixAns:0, exp:err.exp, speak:err.speak };
+  }
+
+  if (unitId === 'u3') {
+    const mode = preferredType || pick(['as_basic', 'as_neg', 'as_possible', 'as_input', 'as_sort', 'as_error']);
+    const pair = pick(BANK.compPairs);
+    if (mode === 'as_basic') {
+      return { id: uid, unit:'u3', diff:2, isGen:true, type:'choice', jp:`${pair.a} は ${pair.b} と同じくらい${pair.jp}です。`, q:`${pair.a} is as (   ) as ${pair.b}.`, opts:[pair.adj, pair.comp, pair.sup, `more ${pair.adj}`], ans:0, exp:`<b>as ＋ 原級 ＋ as</b>！間には必ず元の形（<b>${pair.adj}</b>）を入れます。`, speak:`${pair.a} is as ${pair.adj} as ${pair.b}.` };
+    }
+    if (mode === 'as_neg') {
+      return { id: uid, unit:'u3', diff:3, isGen:true, type:'choice', jp:`${pair.b} は ${pair.a} ほど${pair.jp}ではありません。`, q:`${pair.b} is (   ) ${pair.a}.`, opts:[`not as ${pair.adj} as`, `not as ${pair.comp} as`, `as ${pair.adj} not as`, `not ${pair.comp} than`], ans:0, exp:`「〜ほど…ない」は <b>not as [so] ＋ 原級 ＋ as</b> を使います！`, speak:`${pair.b} is not as ${pair.adj} as ${pair.a}.` };
+    }
+    if (mode === 'as_possible') {
+      const item = pick([
+        { orig:'Please run as fast as you can.', jp:'「できるだけ速く走ってください。」', q:'Please run as fast as (   ).', ans:'possible', wrongs:['can','could','you possible'], speak:'Please run as fast as possible.', exp:'as ~ as 主語 can ＝ <b>as ~ as possible</b>「できるだけ〜」！' },
+        { orig:'Ken got up as early as possible.', jp:'「ケンはできるだけ早く起きました。」(過去の文に注意！)', q:'Ken got up as early as (   ).', ans:'he could', wrongs:['he can','possible can','him could'], speak:'Ken got up as early as he could.', exp:'got up（過去形）なので、can を過去の <b>he could</b> にするのがテストのひっかけポイント！' }
+      ]);
+      return { id: uid, unit:'u3', diff:3, isGen:true, type:'choice', jp:`同じ意味にしよう：${item.orig}<br>${item.jp}`, q:item.q, opts:[item.ans, ...item.wrongs], ans:0, exp:item.exp, speak:item.speak };
+    }
+    if (mode === 'as_input') {
+      if (Math.random() < 0.5) {
+        const orig = `${pair.a} is ${pair.comp} than ${pair.b}.`;
+        return { id: uid, unit:'u3', diff:3, isGen:true, type:'input', jp:`【書き換え】同じ意味にしよう：${orig}`, q:`${pair.b} is not (            ) ${pair.a}.（3語で）`, qSpeak:orig, placeholder:'as 〜 as（3語）', ansList:[`as ${pair.adj} as`, `so ${pair.adj} as`], caseSensitive:false, exp:`「〜ほど…ない」＝ <b>not as ${pair.adj} as</b> に書き換えられます！`, speak:`${pair.b} is not as ${pair.adj} as ${pair.a}.` };
+      }
+      const orig = 'We should help as many people as possible.';
+      return { id: uid, unit:'u3', diff:3, isGen:true, type:'input', jp:`【書き換え】同じ意味にしよう：${orig}`, q:'We should help as many people as (         ).（2語で）', qSpeak:orig, placeholder:'主語 ＋ can（2語）', ansList:['we can'], caseSensitive:false, exp:'主語が We で現在（should）なので <b>we can</b> に書き換えます！', speak:'We should help as many people as we can.' };
+    }
+    if (mode === 'as_sort') {
+      const item = pick([
+        { sent:'Ken can swim as fast as Tom.', jp:'ケンはトムと同じくらい速く泳ぐことができます。' },
+        { sent:'This river is not as long as that one.', jp:'この川はあの川ほど長くありません。' },
+        { sent:'Please write to me as soon as possible.', jp:'どうかできるだけ早く私に手紙を書いてください。' }
+      ]);
+      return { id: uid, unit:'u3', diff:2, isGen:true, type:'sort', jp:item.jp, words:item.sent.split(' '), ans:item.sent, exp:'「as ＋ 原級 ＋ as」のまとまりを作ろう！', speak:item.sent };
+    }
+    const err = pick([
+      { jp:'「ユミは彼女の兄と同じくらいの背の高さです。」間違いを見つけよう。', segs:['Yumi','is','as','taller','as','her brother.'], errIdx:3, fixOpts:['tall','tallest','more tall'], exp:'as と as の間は必ず<b>原級（tall）</b>にします！', speak:'Yumi is as tall as her brother.' },
+      { jp:'「英語は数学ほど難しくありません。」間違いを見つけよう。', segs:['English','is not','so','difficult','than','math.'], errIdx:4, fixOpts:['as','to','for'], exp:'not so 〜 の後ろは than ではなく <b>as</b> を使います！', speak:'English is not so difficult as math.' }
+    ]);
+    return { id: uid, unit:'u3', diff:3, isGen:true, type:'error', jp:err.jp, segs:err.segs, errIdx:err.errIdx, fixOpts:err.fixOpts, fixAns:0, exp:err.exp, speak:err.speak };
+  }
+
+  if (unitId === 'u4') {
+    const mode = preferredType || pick(['app_any_other', 'app_no_other', 'app_one_of', 'app_more_and', 'app_rewrite', 'app_sort', 'app_error']);
+    if (mode === 'app_any_other') {
+      const item = pick([
+        { jp:'東京は日本の他のどの都市よりも大きいです。', q:'Tokyo is larger than any other (   ) in Japan.', ans:'city', wrongs:['cities','citys','the city'], speak:'Tokyo is larger than any other city in Japan.' },
+        { jp:'ケンはクラスの中で他のどの少年よりも速く走れます。', q:'Ken can run faster than any other (   ) in his class.', ans:'boy', wrongs:['boys','the boy','a boy'], speak:'Ken can run faster than any other boy in his class.' }
+      ]);
+      return { id: uid, unit:'u4', diff:3, isGen:true, type:'choice', jp:item.jp, q:item.q, opts:[item.ans, ...item.wrongs], ans:0, exp:`<b>比較級 ＋ than any other ＋ 単数名詞</b>！any other の後ろは必ず<b>単数形（${item.ans}）</b>にします。`, speak:item.speak };
+    }
+    if (mode === 'app_no_other') {
+      const item = pick([
+        { jp:'日本の他のどの川も信濃川ほど長くありません。', q:'(   ) river in Japan is as long as the Shinano River.', ans:'No other', wrongs:['Any other','All other','Some other'], speak:'No other river in Japan is as long as the Shinano River.' },
+        { jp:'クラスの中の他のどの生徒もケンほど背が高くありません。', q:'No other student in our class (   ) as tall as Ken.', ans:'is', wrongs:['are','were','do'], speak:'No other student in our class is as tall as Ken.' }
+      ]);
+      return { id: uid, unit:'u4', diff:3, isGen:true, type:'choice', jp:item.jp, q:item.q, opts:[item.ans, ...item.wrongs], ans:0, exp:'<b>No other ＋ 単数名詞 ＋ is as 原級 as ...</b>！No other で始まり、単数扱いなので <b>is</b> を使います。', speak:item.speak };
+    }
+    if (mode === 'app_one_of') {
+      const item = pick([
+        { jp:'これは世界で最も古い建物の1つです。', q:'This is one of the oldest (   ) in the world.', ans:'buildings', wrongs:['building','a building','the building'], speak:'This is one of the oldest buildings in the world.' },
+        { jp:'サッカーは日本で最も人気のあるスポーツの1つです。', q:'Soccer is (   ) popular sports in Japan.', ans:'one of the most', wrongs:['one of most','one of the more','one of a most'], speak:'Soccer is one of the most popular sports in Japan.' }
+      ]);
+      return { id: uid, unit:'u4', diff:3, isGen:true, type:'choice', jp:item.jp, q:item.q, opts:[item.ans, ...item.wrongs], ans:0, exp:'<b>one of the ＋ 最上級 ＋ 複数名詞</b>！the も最後の s も落とさないこと！', speak:item.speak };
+    }
+    if (mode === 'app_more_and') {
+      const item = pick([
+        { jp:'冬が近づき、だんだん寒くなっています。', q:'It is getting (   ).', ans:'colder and colder', wrongs:['colder or colder','coldest and coldest','more and more cold'], speak:'It is getting colder and colder.' },
+        { jp:'この町はますます有名になっています。', q:'This town is becoming (   ) famous.', ans:'more and more', wrongs:['most and most','more than more','more and most'], speak:'This town is becoming more and more famous.' }
+      ]);
+      return { id: uid, unit:'u4', diff:2, isGen:true, type:'choice', jp:item.jp, q:item.q, opts:[item.ans, ...item.wrongs], ans:0, exp:'「だんだん〜」「ますます〜」は <b>比較級 and 比較級</b>（長い語は <b>more and more ＋ 原級</b>）です！', speak:item.speak };
+    }
+    if (mode === 'app_rewrite') {
+      const item = pick([
+        { orig:'Mt. Fuji is the highest mountain in Japan.', q:'(            ) mountain in Japan is as high as Mt. Fuji.（2語で）', ans:'No other', exp:'最上級 ＝ <b>No other</b> ＋ 単数名詞 ＋ is as 原級 as ...！', speak:'No other mountain in Japan is as high as Mt. Fuji.' },
+        { orig:'Ken is the tallest boy in his class.', q:'Ken is (            ) any other boy in his class.（2語で）', ans:'taller than', exp:'最上級 ＝ <b>比較級 ＋ than</b> any other ＋ 単数名詞！よって <b>taller than</b> です。', speak:'Ken is taller than any other boy in his class.' }
+      ]);
+      return { id: uid, unit:'u4', diff:3, isGen:true, type:'input', jp:`【3パターン書き換え】同じ意味にしよう：${item.orig}`, q:item.q, qSpeak:item.orig, placeholder:'2語で入力', ansList:[item.ans], caseSensitive:false, exp:item.exp, speak:item.speak };
+    }
+    if (mode === 'app_sort') {
+      const item = pick([
+        { sent:'Nara is one of the most famous cities in Japan.', jp:'奈良は日本で最も有名な都市の1つです。' },
+        { sent:'No other student in my class is as fast as Ken.', jp:'私のクラスの他のどの生徒もケンほど速くありません。' },
+        { sent:'She is getting taller and taller every year.', jp:'彼女は毎年だんだん背が高くなっています。' }
+      ]);
+      return { id: uid, unit:'u4', diff:3, isGen:true, type:'sort', jp:item.jp, words:item.sent.split(' '), ans:item.sent, exp:'「one of the 最上級 複数名詞」や「No other 単数名詞 is as ~ as」の型を意識しよう！', speak:item.sent };
+    }
+    const err = pick([
+      { jp:'「富士山は日本の他のどの山よりも高いです。」間違いを見つけよう。', segs:['Mt. Fuji','is','higher','than','any other','mountains','in Japan.'], errIdx:5, fixOpts:['mountain','a mountain','the mountain'], exp:'any other の後ろは必ず<b>単数名詞（mountain）</b>にします！', speak:'Mt. Fuji is higher than any other mountain in Japan.' },
+      { jp:'「京都は日本で最も人気のある都市の1つです。」間違いを見つけよう。', segs:['Kyoto','is','one of','the most popular','city','in Japan.'], errIdx:4, fixOpts:['cities','citys','a city'], exp:'one of the 最上級 の後ろは必ず<b>複数名詞（cities）</b>にします！', speak:'Kyoto is one of the most popular cities in Japan.' }
+    ]);
+    return { id: uid, unit:'u4', diff:3, isGen:true, type:'error', jp:err.jp, segs:err.segs, errIdx:err.errIdx, fixOpts:err.fixOpts, fixAns:0, exp:err.exp, speak:err.speak };
+  }
+
+  if (unitId === 'u5') {
+    const mode = preferredType || pick(['pas1_form', 'pas1_qa', 'pas1_input', 'pas1_sort', 'pas1_error']);
+    const pItem = pick(BANK.passiveItems);
+    if (mode === 'pas1_form') {
+      const isPast = pItem.pastOnly || Math.random() < 0.45;
+      const be = isPast ? pItem.bePast : pItem.bePres;
+      const ans = `${be} ${pItem.pp}`;
+      const wrongBe = isPast ? (pItem.bePast === 'was' ? 'were' : 'was') : (pItem.bePres === 'is' ? 'are' : 'is');
+      return { id: uid, unit:'u5', diff:2, isGen:true, type:'choice', jp:`${pItem.jpSubj}${pItem.jpPlace}で${pItem.jpAction}。`, q:`${pItem.subj} (   ) ${pItem.place}.`, opts:[ans, `${wrongBe} ${pItem.pp}`, `${be} ${pItem.base}`, pItem.pp], ans:0, exp:`受け身は <b>be動詞（${be}）＋ 過去分詞（${pItem.pp}）</b>！主語が単数か複数か、現在か過去かも確認しよう。`, speak:`${pItem.subj} ${ans} ${pItem.place}.` };
+    }
+    if (mode === 'pas1_qa') {
+      const item = pick([
+        { jp:'「カナダではフランス語が話されていますか。」「はい、話されています。」', q:'Is French spoken in Canada? — Yes, (   ).', ans:'it is', wrongs:['French is','it does','it speaks'], speak:'Is French spoken in Canada? Yes, it is.' },
+        { jp:'「この城はいつ建てられましたか。」', q:'When (   ) this castle built?', ans:'was', wrongs:['did','were','is'], speak:'When was this castle built?' },
+        { jp:'「これらの部屋は日曜日には使われません。」', q:'These rooms (   ) on Sundays.', ans:'are not used', wrongs:['do not used','is not used','are not use'], speak:'These rooms are not used on Sundays.' }
+      ]);
+      return { id: uid, unit:'u5', diff:3, isGen:true, type:'choice', jp:item.jp, q:item.q, opts:[item.ans, ...item.wrongs], ans:0, exp:'受け身の疑問文・否定文は <b>be動詞（is / are / was / were）</b>のルールと同じです！', speak:item.speak };
+    }
+    if (mode === 'pas1_input') {
+      const item = pick([
+        { jp:'「この本は世界中の子どもたちに読まれています。」(read を正しい形に)', q:'This book is (         ) by children all over the world.', ans:'read', speak:'This book is read by children all over the world.', exp:'read の過去分詞はつづり同じで <b>read</b>（発音は「レッド」）！' },
+        { jp:'「あの窓は昨日ケンによって割られました。」(break を正しい形に)', q:'That window was (         ) by Ken yesterday.', ans:'broken', speak:'That window was broken by Ken yesterday.', exp:'break の過去分詞は <b>broken</b> です！' },
+        { jp:'「英語は多くの国で話されています。」(speak を正しい形に)', q:'English is (         ) in many countries.', ans:'spoken', speak:'English is spoken in many countries.', exp:'speak の過去分詞は <b>spoken</b> です！' }
+      ]);
+      return { id: uid, unit:'u5', diff:2, isGen:true, type:'input', jp:item.jp, q:item.q, placeholder:'過去分詞を入力（1語）', ansList:[item.ans], caseSensitive:false, exp:item.exp, speak:item.speak };
+    }
+    if (mode === 'pas1_sort') {
+      const item = pick([
+        { sent:'Was this picture painted by your sister?', jp:'この絵はあなたの妹によって描かれましたか。' },
+        { sent:'These apples are grown in Aomori.', jp:'これらのリンゴは青森で栽培されています。' },
+        { sent:'This room is not cleaned every day.', jp:'この部屋は毎日掃除されているわけではありません。' }
+      ]);
+      return { id: uid, unit:'u5', diff:2, isGen:true, type:'sort', jp:item.jp, words:item.sent.split(' '), ans:item.sent, exp:'「主語 ＋ be動詞 (+ not) ＋ 過去分詞」または「Be動詞 ＋ 主語 ＋ 過去分詞?」の語順にしよう！', speak:item.sent };
+    }
+    const err = pick([
+      { jp:'「この歌はたくさんの人々に歌われています。」間違いを見つけよう。', segs:['This song','is','sang','by','many people.'], errIdx:2, fixOpts:['sung','sing','singing'], exp:'受け身（be動詞＋過去分詞）なので、sing の過去分詞 <b>sung</b> にします！', speak:'This song is sung by many people.' },
+      { jp:'「これらの手紙は昨日書かれました。」間違いを見つけよう。', segs:['These letters','was','written','yesterday.'], errIdx:1, fixOpts:['were','is','are'], exp:'主語が <b>These letters（複数）</b>で yesterday（過去）なので <b>were</b> にします！', speak:'These letters were written yesterday.' }
+    ]);
+    return { id: uid, unit:'u5', diff:3, isGen:true, type:'error', jp:err.jp, segs:err.segs, errIdx:err.errIdx, fixOpts:err.fixOpts, fixAns:0, exp:err.exp, speak:err.speak };
+  }
+
+  if (unitId === 'u6') {
+    const mode = preferredType || pick(['pas2_prep', 'pas2_made', 'pas2_rewrite', 'pas2_sort', 'pas2_error']);
+    if (mode === 'pas2_prep') {
+      const item = pick([
+        { jp:'その山の頂上は雪で覆われています。', q:'The top of the mountain is covered (   ) snow.', ans:'with', wrongs:['by','of','from'], speak:'The top of the mountain is covered with snow.', exp:'「〜で覆われている」は <b>be covered with 〜</b> です！' },
+        { jp:'彼は私たちの町のみんなに知られています。', q:'He is known (   ) everyone in our town.', ans:'to', wrongs:['by','with','at'], speak:'He is known to everyone in our town.', exp:'「〜に知られている」は <b>be known to 〜</b> です！' },
+        { jp:'私たちはそのニュースに驚きました。', q:'We were surprised (   ) the news.', ans:'at', wrongs:['by','with','to'], speak:'We were surprised at the news.', exp:'「〜に驚く」は <b>be surprised at 〜</b> です！' },
+        { jp:'ケンは日本の歴史に興味があります。', q:'Ken is interested (   ) Japanese history.', ans:'in', wrongs:['by','at','on'], speak:'Ken is interested in Japanese history.', exp:'「〜に興味がある」は <b>be interested in 〜</b> です！' }
+      ]);
+      return { id: uid, unit:'u6', diff:3, isGen:true, type:'choice', jp:item.jp, q:item.q, opts:[item.ans, ...item.wrongs], ans:0, exp:item.exp, speak:item.speak };
+    }
+    if (mode === 'pas2_made') {
+      const item = pick([
+        { jp:'この紙飛行機は紙で作られています。（材料が見える）', q:'This paper plane is made (   ) paper.', ans:'of', wrongs:['from','by','with'], speak:'This paper plane is made of paper.', exp:'材料がそのまま見てわかるときは <b>be made of 〜</b> を使います！' },
+        { jp:'バターは牛乳から作られます。（材料が見えない変化）', q:'Butter is made (   ) milk.', ans:'from', wrongs:['of','by','to'], speak:'Butter is made from milk.', exp:'牛乳→バターのように形や性質が変わって材料が見えないときは <b>be made from 〜</b> を使います！' },
+        { jp:'このワインはぶどうから作られています。（材料が見えない変化）', q:'This wine is made (   ) grapes.', ans:'from', wrongs:['of','by','with'], speak:'This wine is made from grapes.', exp:'ぶどう→ワインは材料が変質して見えないので <b>be made from 〜</b> を使います！' },
+        { jp:'あの橋は石で作られています。（材料が見える）', q:'That bridge is made (   ) stone.', ans:'of', wrongs:['from','by','at'], speak:'That bridge is made of stone.', exp:'石でできている橋は見た目で材料がわかるので <b>be made of 〜</b> を使います！' }
+      ]);
+      return { id: uid, unit:'u6', diff:3, isGen:true, type:'choice', jp:item.jp, q:item.q, opts:[item.ans, ...item.wrongs], ans:0, exp:item.exp, speak:item.speak };
+    }
+    if (mode === 'pas2_rewrite') {
+      const p = pick([{ sub:'I', obj:'me' }, { sub:'He', obj:'him' }, { sub:'She', obj:'her' }, { sub:'We', obj:'us' }]);
+      const item = pick([
+        { orig:`${p.sub} took this picture.`, q:`This picture (               ) ${p.obj}.（3語で）`, ans:'was taken by', speak:`This picture was taken by ${p.obj}.`, exp:'過去形 took の受け身なので <b>was taken by</b>！' },
+        { orig:`${p.sub} wrote those letters.`, q:`Those letters (               ) ${p.obj}.（3語で）`, ans:'were written by', speak:`Those letters were written by ${p.obj}.`, exp:'主語が Those letters（複数）で過去形なので <b>were written by</b>！' },
+        { orig:'Many people use this website.', q:'This website (               ) many people.（3語で）', ans:'is used by', speak:'This website is used by many people.', exp:'現在形の受け身なので <b>is used by</b>！' }
+      ]);
+      return { id: uid, unit:'u6', diff:3, isGen:true, type:'input', jp:`【書き換え】受け身の文にしよう：${item.orig}`, q:item.q, qSpeak:item.orig, placeholder:'be動詞 ＋ 過去分詞 ＋ by（3語）', ansList:[item.ans], caseSensitive:false, exp:item.exp, speak:item.speak };
+    }
+    if (mode === 'pas2_sort') {
+      const item = pick([
+        { sent:'The park is covered with beautiful flowers.', jp:'その公園は美しい花で覆われています。' },
+        { sent:'This song is known to young people.', jp:'この歌は若い人たちに知られています。' },
+        { sent:'That cake was made by my mother.', jp:'あのケーキは私の母によって作られました。' }
+      ]);
+      return { id: uid, unit:'u6', diff:2, isGen:true, type:'sort', jp:item.jp, words:item.sent.split(' '), ans:item.sent, exp:'be covered with / be known to の前置詞に注意して並べよう！', speak:item.sent };
+    }
+    const err = pick([
+      { jp:'「その絵は彼女によって描かれました。」間違いを見つけよう。', segs:['The picture','was','painted','by','she.'], errIdx:4, fixOpts:['her.','hers.','herself.'], exp:'前置詞 <b>by</b> の後ろは必ず目的格（<b>her</b>）にします！', speak:'The picture was painted by her.' },
+      { jp:'「この山はいつも雪で覆われています。」間違いを見つけよう。', segs:['This mountain','is always','covered','by','snow.'], errIdx:3, fixOpts:['with','of','to'], exp:'「〜で覆われている」は by ではなく <b>be covered with</b> を使います！', speak:'This mountain is always covered with snow.' }
+    ]);
+    return { id: uid, unit:'u6', diff:3, isGen:true, type:'error', jp:err.jp, segs:err.segs, errIdx:err.errIdx, fixOpts:err.fixOpts, fixAns:0, exp:err.exp, speak:err.speak };
+  }
+
+  if (unitId === 'u7') {
+    const mode = preferredType || pick(['svoc_choice', 'svoc_pron', 'svoc_make', 'svoc_input', 'svoc_sort', 'svoc_error']);
+    if (mode === 'svoc_choice') {
+      const item = pick([
+        { jp:'私たちはこの犬をシロと呼んでいます。', q:'We (   ) this dog Shiro.', ans:'call', wrongs:['speak','say','talk'], speak:'We call this dog Shiro.', exp:'「AをBと呼ぶ」は <b>call A B</b> を使います！' },
+        { jp:'ケンは自分の猫をミミと名づけました。', q:'Ken (   ) his cat Mimi.', ans:'named', wrongs:['said','told','spoke'], speak:'Ken named his cat Mimi.', exp:'「AをBと名づける」は <b>name A B</b> を使います！' },
+        { jp:'この花は日本では「サクラ」と呼ばれています。（受け身）', q:'This flower (   ) "Sakura" in Japan.', ans:'is called', wrongs:['calls','is calling','called'], speak:'This flower is called "Sakura" in Japan.', exp:'「〜と呼ばれる」は受け身にして <b>is called B</b> を使います！' }
+      ]);
+      return { id: uid, unit:'u7', diff:2, isGen:true, type:'choice', jp:item.jp, q:item.q, opts:[item.ans, ...item.wrongs], ans:0, exp:item.exp, speak:item.speak };
+    }
+    if (mode === 'svoc_pron') {
+      const p = pick([{ sub:'he', obj:'him', poss:'his', jp:'彼を' }, { sub:'she', obj:'her', poss:'hers', jp:'彼女を' }, { sub:'they', obj:'them', poss:'their', jp:'彼らを' }, { sub:'we', obj:'us', poss:'our', jp:'私たちを' }]);
+      return { id: uid, unit:'u7', diff:3, isGen:true, type:'choice', jp:`「この良い知らせは${p.jp}とても幸せにしました。」`, q:`This good news made (   ) very happy.`, opts:[p.obj, p.sub, p.poss, `${p.obj}self`], ans:0, exp:`make ＋ A ＋ B の A には必ず<b>目的格（${p.obj}）</b>を入れます！`, speak:`This good news made ${p.obj} very happy.` };
+    }
+    if (mode === 'svoc_make') {
+      const adj = pick(BANK.svocAdj);
+      return { id: uid, unit:'u7', diff:3, isGen:true, type:'choice', jp:`「その映画は私たちを${adj.jp}させました。」`, q:`The movie made us (   ).`, opts:[adj.en, adj.wrong, `to ${adj.en}`, `being ${adj.en}`], ans:0, exp:`make A B の B（補語）には副詞（-ly）ではなく<b>形容詞（${adj.en}）</b>を置きます！`, speak:`The movie made us ${adj.en}.` };
+    }
+    if (mode === 'svoc_input') {
+      const item = pick([
+        { jp:'「友達は私のことをケンと呼びます。」(2語で)', q:'My friends (         ) Ken.', ans:'call me', speak:'My friends call me Ken.', exp:'「私をケンと呼ぶ」＝ <b>call me</b> Ken（目的格 me に注意）！' },
+        { jp:'「あなたの笑顔はいつも私を幸せにしてくれます。」(2語で)', q:'Your smile always (         ) happy.', ans:'makes me', speak:'Your smile always makes me happy.', exp:'主語が Your smile（単数）で always なので <b>makes me</b> にします！' }
+      ]);
+      return { id: uid, unit:'u7', diff:3, isGen:true, type:'input', jp:item.jp, q:item.q, placeholder:'動詞 ＋ 目的格（2語）', ansList:[item.ans], caseSensitive:false, exp:item.exp, speak:item.speak };
+    }
+    if (mode === 'svoc_sort') {
+      const item = pick([
+        { sent:'Everyone in the class calls him Ken.', jp:'クラスの誰もが彼をケンと呼んでいます。' },
+        { sent:'They named the new park Green Park.', jp:'彼らはその新しい公園をグリーンパークと名づけました。' },
+        { sent:'Playing soccer always makes us happy.', jp:'サッカーをすることはいつも私たちを幸せにします。' }
+      ]);
+      return { id: uid, unit:'u7', diff:2, isGen:true, type:'sort', jp:item.jp, words:item.sent.split(' '), ans:item.sent, exp:'「動詞（call/name/make）＋ A ＋ B」の語順に組み立てよう！', speak:item.sent };
+    }
+    const err = pick([
+      { jp:'「その長いスピーチは私たちを眠くさせました。」間違いを見つけよう。', segs:['The long speech','made','we','sleepy.'], errIdx:2, fixOpts:['us','our','ours'], exp:'made の後ろ（目的語 A）には必ず目的格（<b>us</b>）を入れます！', speak:'The long speech made us sleepy.' },
+      { jp:'「私は彼を「先生」と呼びます。」間違いを見つけよう。', segs:['I','call','to','him','"Sensei".'], errIdx:2, fixOpts:['(to を消す)','for','at'], exp:'call A B の間に前置詞 <b>to は不要</b>です！', speak:'I call him "Sensei".' }
+    ]);
+    return { id: uid, unit:'u7', diff:3, isGen:true, type:'error', jp:err.jp, segs:err.segs, errIdx:err.errIdx, fixOpts:err.fixOpts, fixAns:0, exp:err.exp, speak:err.speak };
+  }
+
+  const mode = preferredType || pick(['mix_idiom', 'mix_fusion', 'mix_input', 'mix_sort', 'mix_error']);
+  if (mode === 'mix_idiom') {
+    const item = pick([
+      { jp:'「富士山は美しい姿で世界中で有名です。」', q:'Mt. Fuji is famous (   ) its beauty all over the world.', ans:'for', wrongs:['to','with','of'], speak:'Mt. Fuji is famous for its beauty all over the world.', exp:'「〜で有名だ」は <b>be famous for 〜</b> です！' },
+      { jp:'「この歌はあちらの歌よりも良いです。」', q:'This song is (   ) that one.', ans:'better than', wrongs:['gooder than','better then','best than'], speak:'This song is better than that one.', exp:'「〜より良い」は <b>better than 〜</b>（than のスペルに注意）！' },
+      { jp:'「この本はすべての本の中でいちばん良いです。」', q:'This book is (   ) all.', ans:'the best of', wrongs:['best of','the best in','better of'], speak:'This book is the best of all.', exp:'「すべての中で一番良い」は <b>the best of all</b> です！' },
+      { jp:'「私たちはお互いをよく知っています。」', q:'We know (   ) very well.', ans:'each other', wrongs:['each others','one other','any other'], speak:'We know each other very well.', exp:'「お互いに」は <b>each other</b> です！' }
+    ]);
+    return { id: uid, unit:'u8', diff:2, isGen:true, type:'choice', jp:item.jp, q:item.q, opts:[item.ans, ...item.wrongs], ans:0, exp:item.exp, speak:item.speak };
+  }
+  if (mode === 'mix_fusion') {
+    const item = pick([
+      { jp:'「この本はあちらの本より多くの人に読まれています。」', q:'This book is (   ) by more people than that one.', ans:'read', wrongs:['reading','reads','readed'], speak:'This book is read by more people than that one.', exp:'受け身（is ＋ 過去分詞）＋ 比較（more people than）の融合文！read の過去分詞は <b>read</b> です。' },
+      { jp:'「それは世界で最もよく使われている言語の1つです。」', q:'It is one of the most widely used (   ) in the world.', ans:'languages', wrongs:['language','a language','the language'], speak:'It is one of the most widely used languages in the world.', exp:'<b>one of the 最上級 ＋ 複数名詞</b>なので <b>languages</b> にします！' },
+      { jp:'「これは日本で最も有名な城の1つと呼ばれています。」', q:'This is (   ) one of the most famous castles in Japan.', ans:'called', wrongs:['calling','call','calls'], speak:'This is called one of the most famous castles in Japan.', exp:'「〜と呼ばれている」は受け身 <b>is called 〜</b> にします！' }
+    ]);
+    return { id: uid, unit:'u8', diff:3, isGen:true, type:'choice', jp:item.jp, q:item.q, opts:[item.ans, ...item.wrongs], ans:0, exp:item.exp, speak:item.speak };
+  }
+  if (mode === 'mix_input') {
+    const item = pick([
+      { jp:'「テニスと野球では、どちらが好きですか。」(1語で)', q:'Which do you like (         ), tennis or baseball?', ans:'better', exp:'2つの選択なので最上級 best ではなく比較級 <b>better</b> を使います！', speak:'Which do you like better, tennis or baseball?' },
+      { jp:'「できるだけ丁寧にあなたの名前を書いてください。」(2語で)', q:'Please write your name as carefully (            ).', ans:'as possible', exp:'「できるだけ〜」は <b>as 〜 as possible</b>！よって <b>as possible</b> が入ります。', speak:'Please write your name as carefully as possible.' }
+    ]);
+    return { id: uid, unit:'u8', diff:3, isGen:true, type:'input', jp:item.jp, q:item.q, placeholder:item.ans.includes(' ') ? '2語で入力' : '1語で入力', ansList:[item.ans], caseSensitive:false, exp:item.exp, speak:item.speak };
+  }
+  if (mode === 'mix_sort') {
+    const item = pick([
+      { sent:'Which do you like better, math or science?', jp:'数学と理科では、あなたはどちらが好きですか。' },
+      { sent:'Is this mountain known to people all over Japan?', jp:'この山は日本中の人々に知られていますか。' },
+      { sent:'We became better and better friends.', jp:'私たちはますます良い友達になりました。' }
+    ]);
+    return { id: uid, unit:'u8', diff:3, isGen:true, type:'sort', jp:item.jp, words:item.sent.split(' '), ans:item.sent, exp:'比較・受け身・熟語のまとまりを見つけて組み立てよう！', speak:item.sent };
+  }
+  const err = pick([
+    { jp:'「この町はおいしいリンゴで有名です。」間違いを見つけよう。', segs:['This town','is','famous','to','delicious apples.'], errIdx:3, fixOpts:['for','with','by'], exp:'「〜で有名だ」は known to ではなく <b>be famous for 〜</b> です！', speak:'This town is famous for delicious apples.' },
+    { jp:'「この机は良い木で作られています。」間違いを見つけよう。', segs:['This desk','is','made','from','good wood.'], errIdx:3, fixOpts:['of','by','with'], exp:'机の材料の木は見た目でわかるので <b>be made of 〜</b> にします！', speak:'This desk is made of good wood.' }
+  ]);
+  return { id: uid, unit:'u8', diff:3, isGen:true, type:'error', jp:err.jp, segs:err.segs, errIdx:err.errIdx, fixOpts:err.fixOpts, fixAns:0, exp:err.exp, speak:err.speak };
+}
+
+function shuffleChoices(q) {
+  const copy = { ...q };
+  if (copy.type === 'choice') {
+    const tagged = copy.opts.map((text, i) => ({ text, isCorrect: i === copy.ans }));
+    tagged.sort(() => Math.random() - 0.5);
+    copy.opts = tagged.map(t => t.text);
+    copy.ans = tagged.findIndex(t => t.isCorrect);
+  } else if (copy.type === 'error' && Array.isArray(copy.fixOpts)) {
+    const tagged = copy.fixOpts.map((text, i) => ({ text, isCorrect: i === copy.fixAns }));
+    tagged.sort(() => Math.random() - 0.5);
+    copy.fixOpts = tagged.map(t => t.text);
+    copy.fixAns = tagged.findIndex(t => t.isCorrect);
+  }
+  return copy;
+}
+
+function drawUniqueQuestion(unitId, usedPrompts, preferGenProb = 0.78) {
+  for (let tries = 0; tries < 20; tries++) {
+    let q;
+    const staticPool = STATIC_QUESTIONS.filter(x => x.unit === unitId && !usedPrompts.has(x.jp + (x.q || x.ans || '')));
+    if (staticPool.length > 0 && Math.random() > preferGenProb) q = pick(staticPool);
+    else q = generateQuestionForUnit(unitId);
+    const key = (q.jp || '') + (q.q || q.ans || '');
+    if (!usedPrompts.has(key)) { usedPrompts.add(key); return shuffleChoices(q); }
+  }
+  return shuffleChoices(generateQuestionForUnit(unitId));
+}
+
+const STORAGE_KEY = 'grammar_quest_jhs2_term3_v1';
+let state = { xp: 0, combo: 0, soundOn: true, speed: 0.95, preferredVoiceName: '', diagDone: false, tutorialDone: false, unitStats: {}, missedQuestions: [] };
+
+function initUnitStats() { UNITS.forEach(u => { if (!state.unitStats[u.id]) state.unitStats[u.id] = { mastery: 0, attempts: 0, correct: 0, streak: 0, status: 'new' }; }); }
+function loadState() { try { const raw = localStorage.getItem(STORAGE_KEY); if (raw) state = { ...state, ...JSON.parse(raw) }; } catch (e) {} initUnitStats(); }
+function saveState() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {} }
+
+let audioCtx = null;
+function getAudioCtx() {
+  if (!audioCtx) { const AC = window.AudioContext || window.webkitAudioContext; if (AC) audioCtx = new AC(); }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+function playTone(freq, dur, type='sine', delay=0, vol=0.12) {
+  if (!state.soundOn) return;
+  const ctx = getAudioCtx(); if (!ctx) return;
+  const osc = ctx.createOscillator(), gain = ctx.createGain();
+  osc.type = type; osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+  gain.gain.setValueAtTime(vol, ctx.currentTime + delay);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + dur);
+  osc.connect(gain); gain.connect(ctx.destination);
+  osc.start(ctx.currentTime + delay); osc.stop(ctx.currentTime + delay + dur);
+}
+function sfxCorrect() { playTone(523.25, 0.12, 'triangle', 0); playTone(659.25, 0.12, 'triangle', 0.08); playTone(783.99, 0.22, 'triangle', 0.16); }
+function sfxWrong() { playTone(220, 0.18, 'sawtooth', 0, 0.08); playTone(180, 0.25, 'sawtooth', 0.14, 0.08); }
+function sfxSkip() { [523, 659, 784, 1046].forEach((f, i) => playTone(f, 0.16, 'sine', i * 0.07, 0.13)); }
+
+function scoreVoice(v) {
+  const lang = (v.lang || '').toLowerCase(); if (!lang.startsWith('en')) return -1000;
+  let score = lang === 'en-us' || lang === 'en_us' ? 25 : 15;
+  const n = (v.name || '').toLowerCase();
+  if (n.includes('natural') || n.includes('neural') || n.includes('online')) score += 120;
+  if (n.includes('google us english')) score += 110; else if (n.includes('google')) score += 95;
+  if (n.includes('enhanced') || n.includes('premium') || n.includes('siri')) score += 85;
+  if (n.includes('aria') || n.includes('jenny') || n.includes('ava') || n.includes('samantha') || n.includes('daniel') || n.includes('allison')) score += 45;
+  if (n.includes('espeak') || n.includes('compact')) score -= 40;
+  if (n.includes('david') || n.includes('zira') || n.includes('mark')) score -= 10;
+  return score;
+}
+function getSortedEnglishVoices() {
+  if (!('speechSynthesis' in window)) return [];
+  return window.speechSynthesis.getVoices().filter(v => (v.lang || '').toLowerCase().startsWith('en')).sort((a, b) => scoreVoice(b) - scoreVoice(a));
+}
+function pickBestVoice() {
+  const list = getSortedEnglishVoices(); if (list.length === 0) return null;
+  if (state.preferredVoiceName) { const f = list.find(v => v.name === state.preferredVoiceName); if (f) return f; }
+  return list[0];
+}
+if ('speechSynthesis' in window) { window.speechSynthesis.getVoices(); window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); }; }
+function fixReadPronunciation(str) {
+  const adv = '(?:never|already|just|ever|always|often|usually|sometimes|still|not|widely|well|really)\\s+';
+  let s = str;
+  s = s.replace(new RegExp(`(\\b(?:have|has|had|haven't|hasn't|hadn't)|'ve|'s|'d)\\s+(${adv})?read\\b`, 'gi'), (_, v, a) => `${v} ${a || ''}red`);
+  s = s.replace(new RegExp(`\\b(Have|Has|Had)\\s+(?!to\\b)([A-Za-z]+)\\s+(${adv})?read\\b`, 'g'), (_, v, subj, a) => `${v} ${subj} ${a || ''}red`);
+  s = s.replace(new RegExp(`(\\b(?:am|is|are|was|were|be|been|being)|'m|'s|'re)\\s+(${adv})?read\\b`, 'gi'), (_, be, a) => `${be} ${a || ''}red`);
+  s = s.replace(/\bread\s+by\b/gi, 'red by');
+  s = s.replace(new RegExp(`(^|[.!?]\\s+)(He|She|It)\\s+(${adv})?read\\b`, 'g'), (_, p, subj, a) => `${p}${subj} ${a || ''}red`);
+  if (/\b(yesterday|ago|last\s+(?:night|week|month|year|summer|winter|sunday|monday|tuesday|wednesday|thursday|friday|saturday))\b/i.test(s) &&
+      !/\b(do|does|did|don't|doesn't|didn't|can|can't|could|couldn't|will|won't|would|should|may|might|must|to)\s+(?:[A-Za-z]+\s+)?read\b/i.test(s)) {
+    s = s.replace(/\bread\b/gi, 'red');
+  }
+  return s;
+}
+function speakText(text) {
+  if (!state.soundOn || !('speechSynthesis' in window) || !text) return;
+  window.speechSynthesis.cancel();
+  const clean = fixReadPronunciation(text.replace(/<u>|<\/u>/g, '').replace(/\(\s*\)/g, ' ... ').replace(/\s*—\s*/g, '. ... ').replace(/\s+/g, ' ').trim());
+  const utt = new SpeechSynthesisUtterance(clean), voice = pickBestVoice();
+  if (voice) { utt.voice = voice; utt.lang = voice.lang; } else utt.lang = 'en-US';
+  utt.rate = state.speed; utt.pitch = 1.0; window.speechSynthesis.speak(utt);
+}
+function toggleSound() { state.soundOn = !state.soundOn; document.getElementById('btn-sound').textContent = state.soundOn ? '🔊 ON' : '🔇 OFF'; saveState(); }
+function openVoiceSettings() {
+  const voices = getSortedEnglishVoices(), current = pickBestVoice();
+  const optsHtml = voices.length > 0 ? voices.map(v => `<option value="${v.name}" ${current && v.name === current.name ? 'selected' : ''}>${v.name} (${v.lang})${scoreVoice(v) >= 80 ? ' ★高音質' : ''}</option>`).join('') : '<option value="">英語音声が見つかりません（OS標準を使用）</option>';
+  document.getElementById('modal-title').textContent = '🎙 英語音声の設定・聞き比べ';
+  document.getElementById('modal-close-btn').textContent = '✕ 閉じる';
+  document.getElementById('modal-body').innerHTML = `<p style="font-size:0.86rem; color:var(--text-muted); margin-top:0; line-height:1.5;">※ブラウザ・端末の音声機能を利用しています。<b>「Natural」「Google」「Enhanced」</b>が付いた音声を選ぶと自然な発音になります。</p><div style="margin-bottom:12px;"><label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:6px;">使用する英語の声：</label><select id="voice-select" class="select-input" onchange="changeVoice(this.value)">${optsHtml}</select></div><div style="margin-bottom:14px;"><label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:6px;">話すスピード：<span id="speed-label">${state.speed.toFixed(2)}x</span></label><input type="range" min="0.7" max="1.15" step="0.05" value="${state.speed}" style="width:100%;" oninput="changeSpeed(this.value)"></div><button class="btn btn-primary" style="width:100%;" onclick="speakText('Mt. Fuji is the highest mountain in Japan. English is spoken all over the world.')">🔊 この声でテスト再生する</button>`;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+function changeVoice(name) { state.preferredVoiceName = name; saveState(); }
+function changeSpeed(val) { state.speed = parseFloat(val); document.getElementById('speed-label').textContent = state.speed.toFixed(2) + 'x'; saveState(); }
+
+const TUTORIAL_STEPS = [
+  { title:'① まずは「実力アナライズ診断」から！', body:`<p style="margin-top:0;">中2の3学期は、配点の半分を占める「比較の3パターン＆書き換え」と、学年末テストで必出の「受け身（受動態）・第5文型（call / name / make）」が勢ぞろい！まずは<strong>「🔍 実力アナライズ診断（16問）」</strong>を受けよう。</p><ul class="tut-list"><li>3学期全8単元からランダムに問題が出ます。</li><li>自分の「分かっている単元」と「学年末テストで危ない単元」がレーダーチャートで一目でわかります。</li></ul>` },
+  { title:'② 毎回ちがう問題が出る！弱点ドリル', body:`<p style="margin-top:0;">診断が終わったら<strong>「🎯 おまかせ弱点ドリル」</strong>に進もう！</p><ul class="tut-list"><li>苦手な単元から優先的に出題され、同じ単元でも単語・時制・出題形式が毎回シャッフルされるから丸暗記できません！</li><li><strong>3問連続で正解</strong>すると「完全理解」と判定し、残りを<strong>自動でスキップ</strong>して次に進みます！</li><li>同じ単元で2回つまずくと、10秒レスキュー解説が自動で開きます。</li></ul>` },
+  { title:'③ 必須単語200語＋比較変化＆過去分詞180問道場', body:`<p style="margin-top:0;">3学期のテストで差がつく「不規則変化」と「重要熟語」も完全カバー！</p><ul class="tut-list"><li><strong>🔄 比較変化＆過去分詞 パーフェクト復習</strong>：good/well/bad/many の比較変化と、受け身で必須の過去分詞（spoken/written/built等）、代名詞目的格＆複数形まで全180変化を徹底確認！</li><li><strong>🔤 3学期 必須単語・熟語クイズ</strong>：one of the 最上級・as ~ as possible・be known to・be made of/from など200語を4パターンで特訓！</li><li><strong>🏆 3学期 学年末テスト模擬</strong>：全範囲から15問の総合テストで腕試しができます。</li></ul>` },
+  { title:'④ 画面の各ボタン・ゲージの見方', body:`<ul class="tut-list" style="margin-top:0;"><li><strong>✨ XP / 🔥 コンボ</strong>：正解や連続正解でたまるスコアです。</li><li><strong>🎙 音声設定</strong>：ネイティブ発音の声の種類やスピードを変えられます。</li><li><strong>📖 まとめ帳</strong>：比較3パターン書き換えや、by以外の受け身前置詞、call/name/makeの語順などをいつでも確認できます。</li><li><strong>🗺 単元別マスター状況</strong>：下の単元カードをタップすると、特定の単元だけ10問集中特訓できます。</li></ul>` }
+];
+
+function openTutorial(step = 0) {
+  const s = TUTORIAL_STEPS[step], dots = TUTORIAL_STEPS.map((_, i) => `<span class="tut-dot ${i === step ? 'active' : ''}"></span>`).join(''), isLast = step === TUTORIAL_STEPS.length - 1;
+  document.getElementById('modal-title').textContent = '🎓 学習の進め方ガイド';
+  document.getElementById('modal-close-btn').textContent = 'スキップ ✕';
+  document.getElementById('modal-body').innerHTML = `<div class="tut-box"><h4 style="margin:0 0 8px; color:var(--primary); font-size:1.05rem;">${s.title}</h4>${s.body}</div><div class="tut-step-dots">${dots}</div><div style="display:flex; gap:8px; justify-content:space-between; flex-wrap:wrap;">${step > 0 ? `<button class="btn btn-secondary btn-sm" onclick="openTutorial(${step - 1})">⬅ 戻る</button>` : `<button class="btn btn-secondary btn-sm" onclick="finishTutorial(false)">スキップする</button>`}${isLast ? `<div style="display:flex; gap:8px; flex:1; justify-content:flex-end;"><button class="btn btn-secondary btn-sm" onclick="finishTutorial(false)">ホームを見る</button><button class="btn btn-primary btn-sm" onclick="finishTutorial(true)">🔍 診断を始める</button></div>` : `<button class="btn btn-primary btn-sm" onclick="openTutorial(${step + 1})">次へ (${step + 1}/${TUTORIAL_STEPS.length}) ➡</button>`}</div>`;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+function finishTutorial(startDiag) { state.tutorialDone = true; saveState(); closeModal(); if (startDiag) startDiagnostic(); }
+
+let session = { mode: 'diag', targetUnit: null, vocabCat: 'all', queue: [], idx: 0, correctCount: 0, earnedXp: 0, answered: false, currentQ: null, unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {}, sortPicked: [], usedPrompts: new Set() };
+let lastPlayedConfig = { mode: 'adaptive', param: null };
+
+function showScreen(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+function updateHud() {
+  document.getElementById('hud-xp').textContent = state.xp;
+  document.getElementById('hud-combo').textContent = state.combo;
+  document.getElementById('btn-sound').textContent = state.soundOn ? '🔊 ON' : '🔇 OFF';
+  document.getElementById('btn-continue-adaptive').style.display = state.diagDone ? 'inline-flex' : 'none';
+}
+function renderUnitMap() {
+  const map = document.getElementById('unit-map'); map.innerHTML = '';
+  UNITS.forEach((u, idx) => {
+    const st = state.unitStats[u.id], tagMap = { master:['mastered','tag-master','#22c55e'], weak:['要特訓','tag-weak','#ef4444'], mid:['あと少し','tag-mid','#f59e0b'], new:['未診断','tag-new','#64748b'] };
+    const [label, cls, color] = tagMap[st.status] || tagMap.new;
+    const el = document.createElement('div'); el.className = 'unit-item'; el.onclick = () => startUnitDrill(u.id);
+    el.innerHTML = `<div class="unit-top"><span>Unit ${idx + 1}</span><span class="tag ${cls}">${label} (${st.mastery}%)</span></div><div class="unit-title">${u.name}</div><div class="bar-bg"><div class="bar-fill" style="width:${st.mastery}%; background:${color};"></div></div>`;
+    map.appendChild(el);
+  });
+}
+function goHome() { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); updateHud(); renderUnitMap(); showScreen('screen-home'); }
+
+function startDiagnostic() {
+  getAudioCtx(); lastPlayedConfig = { mode: 'diag', param: null };
+  const used = new Set(), qList = [];
+  UNITS.forEach(u => { qList.push(drawUniqueQuestion(u.id, used, 0.7)); qList.push(drawUniqueQuestion(u.id, used, 0.85)); });
+  qList.sort(() => Math.random() - 0.5);
+  session = { mode: 'diag', targetUnit: null, vocabCat: 'all', queue: qList, idx: 0, correctCount: 0, earnedXp: 0, answered: false, currentQ: null, unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {}, sortPicked: [], usedPrompts: used };
+  setHintText('3学期（比較・受け身・第5文型）全範囲16問の実力アナライズ診断中！分からない問題も正直に選んでOKだよ。');
+  showScreen('screen-quiz'); renderQuestion();
+}
+
+function startAdaptiveDrill() {
+  getAudioCtx(); lastPlayedConfig = { mode: 'adaptive', param: null };
+  const used = new Set(), sortedUnits = [...UNITS].sort((a, b) => state.unitStats[a.id].mastery - state.unitStats[b.id].mastery);
+  let targetUnits = sortedUnits.filter(u => state.unitStats[u.id].mastery < 90);
+  if (targetUnits.length === 0) targetUnits = sortedUnits;
+  const qList = [];
+  state.missedQuestions.filter(m => m.unit !== 'vocab' && m.unit !== 'forms').slice(0, 1).forEach(mq => { used.add((mq.jp || '') + (mq.q || mq.ans || '')); qList.push(shuffleChoices(mq)); });
+  targetUnits.slice(0, 3).forEach(u => { for (let i = 0; i < 4; i++) qList.push(drawUniqueQuestion(u.id, used, 0.85)); });
+  session = { mode: 'adaptive', targetUnit: null, vocabCat: 'all', queue: qList.slice(0, 12), idx: 0, correctCount: 0, earnedXp: 0, answered: false, currentQ: null, unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {}, sortPicked: [], usedPrompts: used };
+  setHintText(`「<b>${targetUnits[0].name}</b>」から優先出題中！3問連続正解すると自動で次の単元へスキップするよ。`);
+  showScreen('screen-quiz'); renderQuestion();
+}
+
+function startUnitDrill(unitId) {
+  getAudioCtx(); lastPlayedConfig = { mode: 'unit', param: unitId };
+  const used = new Set(), u = UNITS.find(x => x.id === unitId), qList = [];
+  for (let i = 0; i < 10; i++) qList.push(drawUniqueQuestion(unitId, used, 0.82));
+  session = { mode: 'unit', targetUnit: unitId, vocabCat: 'all', queue: qList, idx: 0, correctCount: 0, earnedXp: 0, answered: false, currentQ: null, unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {}, sortPicked: [], usedPrompts: used };
+  setHintText(`「<b>${u.name}</b>」の個別特訓中！迷ったら下の「💡 ヒントを見る」を押してね。`);
+  showScreen('screen-quiz'); renderQuestion();
+}
+
+function startSurvivalTest() {
+  getAudioCtx(); lastPlayedConfig = { mode: 'survival', param: null };
+  const used = new Set(), qList = [];
+  for (let i = 0; i < 15; i++) qList.push(drawUniqueQuestion(UNITS[i % UNITS.length].id, used, 0.8));
+  qList.sort(() => Math.random() - 0.5);
+  session = { mode: 'survival', targetUnit: null, vocabCat: 'all', queue: qList, idx: 0, correctCount: 0, earnedXp: 0, answered: false, currentQ: null, unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {}, sortPicked: [], usedPrompts: used };
+  setHintText('3学期・学年末の全範囲からランダム15問出題中！in/ofの区別や過去分詞・前置詞のひっかけに気をつけよう。');
+  showScreen('screen-quiz'); renderQuestion();
+}
+
+function openFormSelector() {
+  document.getElementById('modal-title').textContent = '🔄 比較変化 ＆ 過去分詞 パーフェクト復習';
+  document.getElementById('modal-close-btn').textContent = '✕ 閉じる';
+  document.getElementById('modal-body').innerHTML = `<p style="font-size:0.88rem; color:var(--text-muted); margin-top:0; line-height:1.5;">3学期テスト必出の全180項目（不規則＆つづり注意の比較級/最上級・受け身で必須の過去分詞・代名詞目的格/複数形）を、記述入力＆ひっかけ4択で徹底確認！毎回ランダムで15問出題します。</p><div style="display:flex; flex-direction:column; gap:8px;"><button class="btn btn-primary" onclick="closeModal(); startFormQuiz('all')">🌟 全カテゴリMIX（180変化・ランダム15問）</button><button class="btn btn-secondary" onclick="closeModal(); startFormQuiz('comp_form')">📊 比較級 ＆ 最上級（不規則・スペル注意 60問・15問）</button><button class="btn btn-secondary" onclick="closeModal(); startFormQuiz('pp_abc')">⚡ 過去分詞 A-B-C / A-B-A型（spoken/written等 40問・15問）</button><button class="btn btn-secondary" onclick="closeModal(); startFormQuiz('pp_abb_aaa')">🔨 過去分詞 A-B-B / A-A-A / 規則注意（45問・15問）</button><button class="btn btn-secondary" onclick="closeModal(); startFormQuiz('pron_plural')">📦 代名詞の目的格（by/make対策）＆ 複数形（35問・15問）</button><button class="btn btn-secondary" style="border-color:var(--primary); color:#7dd3fc; margin-top:4px;" onclick="openFormTable()">📋 全180語 語形変化一覧チート表を見る</button></div>`;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+
+function openFormTable() {
+  const secs = [['comp_form','📊 比較級・最上級（不規則＆スペル注意 60項目）'],['pp_abc','⚡ 過去分詞 A-B-C / A-B-A型（40項目）'],['pp_abb_aaa','🔨 過去分詞 A-B-B / A-A-A / 規則変化（45項目）'],['pron_plural','📦 代名詞の格変化（受け身・第5文型対策）＆ 複数形（35項目）']];
+  document.getElementById('modal-title').textContent = '📋 学年末必出 全180語 語形変化一覧表';
+  document.getElementById('modal-close-btn').textContent = '✕ 閉じる';
+  document.getElementById('modal-body').innerHTML = `<div style="margin-bottom:12px;"><button class="btn btn-secondary btn-sm" onclick="openFormSelector()">⬅ クイズ選択に戻る</button></div>${secs.map(([cat, title]) => `<div class="cheat-sec"><h4>${title}</h4><div class="form-table">${FORM_BANK.filter(f => f.cat === cat).map(f => `<div class="form-pill">${f.base} → <b>${f.ans}</b><br><span style="color:var(--text-muted);font-size:.7rem;">${f.target}</span></div>`).join('')}</div></div>`).join('')}`;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+
+function startFormQuiz(category = 'all') {
+  getAudioCtx(); lastPlayedConfig = { mode: 'forms', param: category };
+  const used = new Set(), qList = [];
+  for (let i = 0; i < 15; i++) qList.push(generateFormQuestion(category, used));
+  session = { mode: 'forms', targetUnit: null, vocabCat: category, queue: qList, idx: 0, correctCount: 0, earnedXp: 0, answered: false, currentQ: null, unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {}, sortPicked: [], usedPrompts: used };
+  setHintText('3学期に狙われる語形変化を徹底確認！比較の不規則（good/well/bad/many）、過去分詞（written/spoken/built等）、複数形に注意しよう。');
+  showScreen('screen-quiz'); renderQuestion();
+}
+
+function openVocabSelector() {
+  document.getElementById('modal-title').textContent = '🔤 3学期 必須単語・熟語クイズ（全200語）';
+  document.getElementById('modal-close-btn').textContent = '✕ 閉じる';
+  document.getElementById('modal-body').innerHTML = `<p style="font-size:0.88rem; color:var(--text-muted); margin-top:0; line-height:1.5;">中2・3学期（学年末テスト）に出る重要単語・熟語200語から、毎回ランダムで12問出題します（意味4択・スペル正誤・スペル入力）。</p><div style="display:flex; flex-direction:column; gap:8px;"><button class="btn btn-primary" onclick="closeModal(); startVocabQuiz('all')">🌟 全カテゴリからランダム出題（200語・12問）</button><button class="btn btn-secondary" onclick="closeModal(); startVocabQuiz('idiom2_3')">🔗 テスト必出！重要熟語・連語（32語）</button><button class="btn btn-secondary" onclick="closeModal(); startVocabQuiz('verb_pp2_3')">🏃 受け身・第5文型 重要動詞（32語）</button><button class="btn btn-secondary" onclick="closeModal(); startVocabQuiz('adj_comp2_3')">✨ 比較・補語の形容詞・副詞（40語）</button><button class="btn btn-secondary" onclick="closeModal(); startVocabQuiz('noun2_3')">🏛 文化・自然・材料の名詞（38語）</button><button class="btn btn-secondary" onclick="closeModal(); startVocabQuiz('comp_gram2_3')">⚡ 比較・受け身 文法語・前置詞（30語）</button><button class="btn btn-secondary" onclick="closeModal(); startVocabQuiz('time_misc2_3')">🎭 第5文型・長文頻出名詞/表現（28語）</button></div>`;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+
+function startVocabQuiz(category = 'all') {
+  getAudioCtx(); lastPlayedConfig = { mode: 'vocab', param: category };
+  const used = new Set(), qList = [];
+  for (let i = 0; i < 12; i++) qList.push(generateVocabQuestion(category, used));
+  session = { mode: 'vocab', targetUnit: null, vocabCat: category, queue: qList, idx: 0, correctCount: 0, earnedXp: 0, answered: false, currentQ: null, unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {}, sortPicked: [], usedPrompts: used };
+  setHintText('3学期の必須単語・熟語クイズ！前置詞（to / with / of / from / for）や than と then の違いに注目して覚えよう。');
+  showScreen('screen-quiz'); renderQuestion();
+}
+
+function retryLastMode() {
+  if (lastPlayedConfig.mode === 'vocab') startVocabQuiz(lastPlayedConfig.param || 'all');
+  else if (lastPlayedConfig.mode === 'forms') startFormQuiz(lastPlayedConfig.param || 'all');
+  else if (lastPlayedConfig.mode === 'unit') startUnitDrill(lastPlayedConfig.param);
+  else if (lastPlayedConfig.mode === 'survival') startSurvivalTest();
+  else startAdaptiveDrill();
+}
+
+function setHintText(html) { document.getElementById('hint-msg').innerHTML = 'ヒント：' + html; }
+
+function renderQuestion() {
+  const q = session.queue[session.idx];
+  session.currentQ = q; session.answered = false; session.sortPicked = [];
+  const u = UNITS.find(x => x.id === q.unit);
+  const modeNames = { diag:'🔍 実力アナライズ', adaptive:'🎯 弱点アダプティブ', unit:'📘 単元特訓', survival:'🏆 学年末テスト模擬', vocab:'🔤 単語・熟語クイズ', forms:'🔄 語形変化道場' };
+  document.getElementById('q-mode-label').textContent = modeNames[session.mode];
+  document.getElementById('q-unit-label').textContent = q.unitLabel || (u ? u.name : '3学期復習');
+  document.getElementById('q-source-badge').textContent = q.isGen ? '⚡ランダム生成' : '⭐テスト厳選';
+  document.getElementById('q-num').textContent = session.idx + 1;
+  document.getElementById('q-total').textContent = session.queue.length;
+  document.getElementById('q-progress').style.width = `${(session.idx / session.queue.length) * 100}%`;
+
+  document.getElementById('q-jp').innerHTML = q.jp;
+  const enBox = document.getElementById('q-en');
+  if (q.type === 'sort') enBox.textContent = '下の単語カードをタップして正しい語順に並べよう';
+  else if (q.type === 'error') enBox.textContent = '下の文の中で「文法的に間違っている箇所」をタップしよう';
+  else enBox.innerHTML = q.q;
+
+  const fb = document.getElementById('feedback'); fb.classList.remove('show', 'ok', 'ng');
+  document.getElementById('btn-hint').style.display = 'inline-flex';
+  const area = document.getElementById('q-interact'); area.innerHTML = '';
+
+  if (q.type === 'choice') {
+    const grid = document.createElement('div'); grid.className = 'opts-grid';
+    q.opts.forEach((opt, i) => {
+      const btn = document.createElement('button'); btn.className = 'opt-btn';
+      btn.innerHTML = `<span class="opt-num">${i + 1}</span><span>${opt}</span>`;
+      btn.onclick = () => checkChoice(i, btn); grid.appendChild(btn);
+    });
+    area.appendChild(grid);
+  } else if (q.type === 'sort') {
+    const shuffled = q.words.map((w, i) => ({ w, id: i })).sort(() => Math.random() - 0.5);
+    area.innerHTML = `<div class="sort-zone" id="sort-zone"><span style="color:#64748b; font-size:0.88rem;">ここに単語が並びます...</span></div><div class="word-bank" id="word-bank"></div><div style="display:flex; gap:8px;"><button class="btn btn-secondary btn-sm" onclick="clearSort()">↺ やり直す</button><button class="btn btn-primary" style="flex:1;" onclick="checkSort()">決定する ✓</button></div>`;
+    const bank = document.getElementById('word-bank');
+    shuffled.forEach(item => {
+      const chip = document.createElement('button'); chip.className = 'word-chip'; chip.textContent = item.w; chip.dataset.id = item.id;
+      chip.onclick = () => pickSortWord(item.id, item.w, chip); bank.appendChild(chip);
+    });
+  } else if (q.type === 'input') {
+    area.innerHTML = `<div class="input-wrap"><input type="text" id="ans-input" class="text-input" placeholder="${q.placeholder || 'ここに入力...'}" autocomplete="off" autocapitalize="off" spellcheck="false"><div class="helper-keys"><span style="font-size:0.8rem; color:var(--text-muted);">記号入力補助:</span><button type="button" class="key-chip" onclick="insertChar('\'')">'</button><button type="button" class="key-chip" onclick="insertChar('~')">~</button><button type="button" class="key-chip" onclick="insertChar('?')">?</button><button type="button" class="key-chip" onclick="insertChar('.')">.</button></div><button class="btn btn-primary" onclick="checkInput()">解答する ✓</button></div>`;
+    const inp = document.getElementById('ans-input'); inp.focus();
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter' && !session.answered) checkInput(); });
+  } else if (q.type === 'error') {
+    area.innerHTML = `<div class="seg-row" id="seg-row"></div><div id="fix-area" style="display:none; margin-top:10px;"><div style="font-size:0.9rem; color:var(--warning); font-weight:700; margin-bottom:8px;">👇 正しく直すとどうなる？</div><div class="opts-grid" id="fix-opts"></div></div>`;
+    const row = document.getElementById('seg-row');
+    q.segs.forEach((seg, i) => {
+      const btn = document.createElement('button'); btn.className = 'seg-btn'; btn.textContent = seg;
+      btn.onclick = () => pickErrorSeg(i, btn); row.appendChild(btn);
+    });
+  }
+}
+
+function speakCurrent() {
+  const q = session.currentQ; if (!q) return;
+  if (q.unit === 'vocab') speakText(q.speak);
+  else if (q.type === 'sort' || q.type === 'error') speakText(q.speak);
+  else if (q.qSpeak) speakText(q.qSpeak);
+  else speakText(q.q);
+}
+function speakAnswer() { if (session.currentQ) speakText(session.currentQ.speak); }
+
+function showHint() {
+  const q = session.currentQ;
+  if (q.unit === 'vocab') { setHintText(`最初の文字は「<b>${q.speak[0]}</b>」（長さ: ${q.speak.includes(' ') ? q.speak.split(' ').length + '語' : q.speak.length + '文字'}）だよ！🔊 発音ボタンもヒントになるよ。`); return; }
+  if (q.unit === 'forms') { setHintText(`最初の文字は「<b>${q.hintChar}</b>」（文字数: ${q.hintLen}文字）だよ！規則か不規則か思い出してみよう。`); return; }
+  const u = UNITS.find(x => x.id === q.unit);
+  let hintText = u ? u.tip : '';
+  if (q.type === 'input') hintText = `最初の文字は「<b>${q.ansList[0][0]}</b>」（文字数: ${q.ansList[0].length}文字）だよ！`;
+  else if (q.type === 'sort') hintText = `最初の単語は「<b>${q.ans.split(' ')[0]}</b>」から始まるよ！`;
+  else if (q.type === 'error' && u) hintText = `「<b>${u.short}</b>」のルールをチェック！`;
+  setHintText(hintText);
+}
+
+function checkChoice(idx, btn) {
+  if (session.answered) return;
+  const q = session.currentQ, buttons = document.querySelectorAll('#q-interact .opt-btn');
+  buttons.forEach(b => b.disabled = true);
+  const isOk = idx === q.ans;
+  btn.classList.add(isOk ? 'correct' : 'wrong');
+  if (!isOk) buttons[q.ans].classList.add('correct');
+  finishQuestion(isOk);
+}
+function pickSortWord(id, word, bankChip) { if (session.answered) return; bankChip.classList.add('used'); session.sortPicked.push({ id, word }); renderSortZone(); }
+function renderSortZone() {
+  const zone = document.getElementById('sort-zone');
+  if (session.sortPicked.length === 0) { zone.innerHTML = '<span style="color:#64748b; font-size:0.88rem;">ここに単語が並びます...</span>'; return; }
+  zone.innerHTML = '';
+  session.sortPicked.forEach((item, idx) => {
+    const chip = document.createElement('button'); chip.className = 'word-chip placed'; chip.textContent = item.word;
+    chip.onclick = () => { if (session.answered) return; session.sortPicked.splice(idx, 1); const b = document.querySelector(`#word-bank .word-chip[data-id="${item.id}"]`); if (b) b.classList.remove('used'); renderSortZone(); };
+    zone.appendChild(chip);
+  });
+}
+function clearSort() { if (session.answered) return; session.sortPicked = []; document.querySelectorAll('#word-bank .word-chip').forEach(c => c.classList.remove('used')); renderSortZone(); }
+function checkSort() {
+  if (session.answered || session.sortPicked.length === 0) return;
+  const q = session.currentQ, built = session.sortPicked.map(x => x.word).join(' ').replace(/\s+/g, ' ').trim(), isOk = built === q.ans;
+  finishQuestion(isOk, isOk ? null : `正しい語順：<b>${q.ans}</b>`);
+}
+function insertChar(ch) { const inp = document.getElementById('ans-input'); if (inp) { inp.value += ch; inp.focus(); } }
+function checkInput() {
+  if (session.answered) return;
+  const q = session.currentQ, inp = document.getElementById('ans-input'); if (!inp.value.trim()) return;
+  const userVal = inp.value.trim().replace(/[’‘]/g, "'").replace(/\s+/g, ' ');
+  let isOk = false, almostMsg = null;
+  for (const ans of q.ansList) {
+    if (q.caseSensitive) {
+      if (userVal === ans) { isOk = true; break; }
+      if (userVal.toLowerCase() === ans.toLowerCase()) almostMsg = `スペルは合っていますが、<b>大文字・小文字</b>に注意！（正解：<b>${ans}</b>）`;
+    } else if (userVal.toLowerCase() === ans.toLowerCase()) { isOk = true; break; }
+  }
+  inp.disabled = true;
+  finishQuestion(isOk, almostMsg || (isOk ? null : `正解例：<b>${q.ansList[0]}</b>`));
+}
+function pickErrorSeg(idx, btn) {
+  if (session.answered) return;
+  const q = session.currentQ, btns = document.querySelectorAll('#seg-row .seg-btn');
+  if (idx !== q.errIdx) { btns.forEach(b => b.disabled = true); btn.classList.add('wrong'); btns[q.errIdx].classList.add('correct'); finishQuestion(false, `間違いは「<b>${q.segs[q.errIdx]}</b>」の部分だよ！`); return; }
+  btns.forEach(b => b.disabled = true); btn.classList.add('selected');
+  document.getElementById('fix-area').style.display = 'block';
+  const fixOpts = document.getElementById('fix-opts'); fixOpts.innerHTML = '';
+  q.fixOpts.forEach((opt, i) => {
+    const ob = document.createElement('button'); ob.className = 'opt-btn'; ob.innerHTML = `<span class="opt-num">${i + 1}</span><span>${opt}</span>`;
+    ob.onclick = () => {
+      if (session.answered) return;
+      document.querySelectorAll('#fix-opts .opt-btn').forEach(x => x.disabled = true);
+      const isOk = i === q.fixAns; ob.classList.add(isOk ? 'correct' : 'wrong');
+      if (!isOk) document.querySelectorAll('#fix-opts .opt-btn')[q.fixAns].classList.add('correct');
+      btn.classList.remove('selected'); btn.classList.add(isOk ? 'correct' : 'wrong');
+      finishQuestion(isOk);
+    };
+    fixOpts.appendChild(ob);
+  });
+}
+
+function finishQuestion(isOk, extraMsg = null) {
+  session.answered = true;
+  const q = session.currentQ, isSpecial = q.unit === 'vocab' || q.unit === 'forms', st = !isSpecial ? state.unitStats[q.unit] : null;
+  if (st) st.attempts++;
+  if (session.mode === 'diag' && !isSpecial) {
+    if (!session.diagResults[q.unit]) session.diagResults[q.unit] = { total: 0, ok: 0 };
+    session.diagResults[q.unit].total++; if (isOk) session.diagResults[q.unit].ok++;
+  }
+  let gain = 0;
+  if (isOk) {
+    sfxCorrect(); session.correctCount++; state.combo++;
+    gain = 10 + Math.min(state.combo * 2, 20); state.xp += gain; session.earnedXp += gain;
+    if (st) { st.correct++; st.streak++; if (session.mode !== 'diag') st.mastery = Math.min(100, st.mastery + 25); }
+    state.missedQuestions = state.missedQuestions.filter(m => m.id !== q.id);
+    session.unitSessionStreak[q.unit] = (session.unitSessionStreak[q.unit] || 0) + 1; session.unitSessionMiss[q.unit] = 0;
+  } else {
+    sfxWrong(); state.combo = 0;
+    if (st) { st.streak = 0; if (session.mode !== 'diag') st.mastery = Math.max(0, st.mastery - 10); }
+    if (!isSpecial && !state.missedQuestions.some(m => m.id === q.id)) { state.missedQuestions.unshift(q); if (state.missedQuestions.length > 10) state.missedQuestions.pop(); }
+    session.unitSessionStreak[q.unit] = 0; session.unitSessionMiss[q.unit] = (session.unitSessionMiss[q.unit] || 0) + 1;
+  }
+  if (st && session.mode !== 'diag') st.status = st.mastery >= 80 ? 'master' : st.mastery >= 45 ? 'mid' : 'weak';
+  saveState(); updateHud();
+  setTimeout(() => speakText(q.speak), 220);
+
+  const fb = document.getElementById('feedback'); fb.className = 'feedback show ' + (isOk ? 'ok' : 'ng');
+  document.getElementById('fb-status').textContent = isOk ? `⭕ 正解！ (+${gain} XP)` : '❌ おしい！チェックしよう';
+  document.getElementById('fb-exp').innerHTML = (extraMsg ? extraMsg + '<br>' : '') + q.exp;
+  document.getElementById('btn-hint').style.display = 'none';
+
+  if (!isSpecial && session.mode === 'adaptive' && isOk && session.unitSessionStreak[q.unit] >= 3) {
+    if (session.queue.slice(session.idx + 1).some(nq => nq.unit === q.unit)) {
+      session.queue = [...session.queue.slice(0, session.idx + 1), ...session.queue.slice(session.idx + 1).filter(nq => nq.unit !== q.unit)];
+      st.mastery = Math.max(st.mastery, 90); st.status = 'master'; saveState(); sfxSkip();
+      const u = UNITS.find(x => x.id === q.unit);
+      showAlertModal('⚡ AUTO SKIP発動！', `<p style="font-size:1rem; line-height:1.6;">「<b>${u.name}</b>」を3問連続パーフェクト！<br><strong>『完全理解』</strong>と判定し、残りをスキップして次の単元へ進みます！</p>`);
+    }
+  } else if (!isSpecial && !isOk && session.mode !== 'diag') {
+    if (session.unitSessionMiss[q.unit] >= 2) {
+      session.unitSessionMiss[q.unit] = 0;
+      const u = UNITS.find(x => x.id === q.unit);
+      showAlertModal('💡 10秒レスキュー解説！', `<p style="color:var(--warning); font-weight:700; margin-top:0;">「${u.name}」のポイントを確認しよう！</p><div class="cheat-sec"><p>${u.tip}</p></div>`);
+    }
+    if (session.queue.length < 18) session.queue.splice(Math.min(session.idx + 3, session.queue.length), 0, drawUniqueQuestion(q.unit, session.usedPrompts, 0.95));
+  }
+  document.getElementById('btn-next').textContent = (session.idx + 1 >= session.queue.length) ? '結果を見る 🏁' : '次の問題へ ➡';
+}
+
+function nextQuestion() { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); session.idx++; if (session.idx >= session.queue.length) finishSession(); else renderQuestion(); }
+
+function finishSession() {
+  if (session.mode === 'diag') {
+    state.diagDone = true;
+    UNITS.forEach(u => {
+      const r = session.diagResults[u.id] || { total: 1, ok: 0 }, m = (r.ok / r.total) >= 1 ? 90 : (r.ok / r.total) >= 0.5 ? 50 : 15;
+      state.unitStats[u.id].mastery = m; state.unitStats[u.id].status = m >= 80 ? 'master' : m >= 45 ? 'mid' : 'weak';
+    });
+    saveState(); renderDiagnosticReport(); showScreen('screen-report');
+  } else {
+    const acc = Math.round((session.correctCount / session.queue.length) * 100);
+    document.getElementById('res-emoji').textContent = acc >= 80 ? '🏆' : acc >= 50 ? '👍' : '💪';
+    document.getElementById('res-title').textContent = acc >= 80 ? '素晴らしい！学年末テスト合格レベル！' : 'ナイスチャレンジ！着実に力がついてるよ';
+    document.getElementById('res-desc').textContent = `${session.queue.length}問中 ${session.correctCount}問正解しました！次はまた違う単語や例文パターンが出題されるよ。`;
+    document.getElementById('res-acc').textContent = acc + '%';
+    document.getElementById('res-xp').textContent = session.earnedXp;
+    document.getElementById('btn-retry-same').textContent = session.mode === 'vocab' ? '🔤 新しい単語問題でもう一度' : session.mode === 'forms' ? '🔄 新しい語形変化問題でもう一度' : '🔥 新しい問題で続けて攻略';
+    renderRandomPrCard('pr-slot-result'); showScreen('screen-result');
+  }
+}
+
+function renderDiagnosticReport() {
+  const weakUnits = UNITS.filter(u => state.unitStats[u.id].mastery < 60);
+  document.getElementById('report-summary').innerHTML = weakUnits.length > 0 ? `分析の結果、<b>${weakUnits.map(u=>u.short).join('・')}</b> にテストでの要注意ポイントが見つかりました！自動でここを優先するドリルを作成したよ。` : `すごい！中2・3学期の重要単元の基礎がしっかりできています！さらに別パターンの応用問題で100点を目指そう！`;
+  renderRandomPrCard('pr-slot-diag');
+  const list = document.getElementById('report-list'); list.innerHTML = '';
+  UNITS.forEach((u, i) => {
+    const st = state.unitStats[u.id], badge = st.mastery >= 80 ? '<span class="tag tag-master">OK / スキップ候補</span>' : st.mastery >= 45 ? '<span class="tag tag-mid">あと少し</span>' : '<span class="tag tag-weak">要注意・重点特訓</span>';
+    const row = document.createElement('div'); row.style.cssText = 'display:flex; justify-content:space-between; align-items:center; background:var(--bg); padding:8px 12px; border-radius:10px; border:1px solid var(--border); font-size:0.86rem;';
+    row.innerHTML = `<span><b>U${i+1}.</b> ${u.short}</span>${badge}`; list.appendChild(row);
+  });
+  const svg = document.getElementById('radar-svg'), cx = 140, cy = 140, maxR = 92, n = UNITS.length; let html = '';
+  [0.33, 0.66, 1].forEach(rScale => {
+    const pts = UNITS.map((_, i) => { const a = (Math.PI * 2 * i) / n - Math.PI / 2; return `${cx + Math.cos(a)*maxR*rScale},${cy + Math.sin(a)*maxR*rScale}`; }).join(' ');
+    html += `<polygon points="${pts}" fill="none" stroke="#334155" stroke-width="1"/>`;
+  });
+  UNITS.forEach((u, i) => {
+    const a = (Math.PI * 2 * i) / n - Math.PI / 2;
+    html += `<line x1="${cx}" y1="${cy}" x2="${cx + Math.cos(a)*maxR}" y2="${cy + Math.sin(a)*maxR}" stroke="#334155" stroke-width="1"/>`;
+    html += `<text x="${cx + Math.cos(a)*(maxR+24)}" y="${cy + Math.sin(a)*(maxR+20)}" fill="#cbd5e1" font-size="10" font-weight="700" text-anchor="middle" dominant-baseline="middle">${u.short}</text>`;
+  });
+  const dataPts = UNITS.map((u, i) => { const val = Math.max(15, state.unitStats[u.id].mastery)/100, a = (Math.PI*2*i)/n - Math.PI/2; return `${cx+Math.cos(a)*maxR*val},${cy+Math.sin(a)*maxR*val}`; }).join(' ');
+  html += `<polygon points="${dataPts}" fill="rgba(56,189,248,0.28)" stroke="#38bdf8" stroke-width="2.5"/>`;
+  svg.innerHTML = html;
+}
+
+function openCheatSheet() {
+  document.getElementById('modal-title').textContent = '📖 中2・3学期 学年末必勝まとめノート';
+  document.getElementById('modal-close-btn').textContent = '✕ 閉じる';
+  document.getElementById('modal-body').innerHTML = UNITS.map((u, i) => `<div class="cheat-sec"><h4>Unit ${i+1}: ${u.name}</h4><p>${u.tip}</p></div>`).join('') + `<button class="btn btn-secondary" style="width:100%;" onclick="openFormTable()">📋 全180語 語形変化一覧表を開く</button>`;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+function showAlertModal(title, html) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-close-btn').textContent = '✕ 閉じる';
+  document.getElementById('modal-body').innerHTML = html + `<button class="btn btn-primary" style="width:100%; margin-top:12px;" onclick="closeModal()">OK！続ける</button>`;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+function closeModal() {
+  if (!state.tutorialDone && document.getElementById('modal-title').textContent.includes('学習の進め方')) { state.tutorialDone = true; saveState(); }
+  document.getElementById('modal-backdrop').classList.remove('open');
+}
+function resetProgress() {
+  if (!confirm('中2・3学期の学習データ（XP・単元マスター度・診断結果）をリセットしますか？')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  state = { xp: 0, combo: 0, soundOn: state.soundOn, speed: state.speed, preferredVoiceName: state.preferredVoiceName, diagDone: false, tutorialDone: true, unitStats: {}, missedQuestions: [] };
+  initUnitStats(); saveState(); goHome();
+}
+
+loadState();
+goHome();
+if (!state.tutorialDone) openTutorial(0);
+</script>
+</body>
+</html>
