@@ -340,11 +340,16 @@ function renderLessons() {
       let footLeft = 'クエストを始める';
       let barWidth = 0;
       if (p && (p.xp > 0 || p.diagDone)) {
-        barWidth = p.avgMastery;
+        if (p.avgMastery > 0) {
+          barWidth = Math.max(8, p.avgMastery);
+          footLeft = `習得度 ${p.avgMastery}%（つづきを攻略）`;
+        } else {
+          barWidth = Math.min(35, Math.max(8, Math.round(p.xp / 5)));
+          footLeft = 'チャレンジ中（診断完了で習得率表示）';
+        }
         statusHtml = p.avgMastery >= 80
           ? `<span class="status-tag st-done">習得 ${p.avgMastery}%</span>`
           : `<span class="status-tag st-play">✨ ${p.xp} XP</span>`;
-        footLeft = p.diagDone ? `つづきを攻略（平均${p.avgMastery}%）` : 'つづきを攻略';
       }
       return `
         <a href="${l.url}" class="lesson-card">
