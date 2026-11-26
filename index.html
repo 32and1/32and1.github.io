@@ -244,4 +244,158 @@ const GAMES = [
     icon: '🪙',
     badge: 'REFRESH｜勉強の合間の息抜きに',
     title: 'コインゲットゲーム（Coin Rush）',
-    desc: '英語はお休み！クイズで頭を使ったあとの
+    desc: '英語はお休み！クイズで頭を使ったあとのリフレッシュに遊べる爽快ミニゲーム。',
+    url: 'coin-rush/'
+  }
+];
+
+const PR_MINI_ITEMS = [
+  { tag:'🎓 高校入試・3年間の総復習に', title:'高校入試 中学3年間の総復習 英語 新装改訂版', url:'https://www.amazon.co.jp/dp/4010222816?tag=goodjobsale-22' },
+  { tag:'✏️ 基礎からのやり直しに定番', title:'中3英語をひとつひとつわかりやすく。改訂版', url:'https://www.amazon.co.jp/dp/4053052491?tag=goodjobsale-22' },
+  { tag:'📖 納得しながら理解できる', title:'改訂第２版 中３英語が面白いほどわかる本', url:'https://www.amazon.co.jp/dp/B0FPTY9B1L?tag=goodjobsale-22' }
+];
+
+let currentFilter = 'all';
+
+function readLessonProgress(storageKey) {
+  if (!storageKey) return null;
+  try {
+    const raw = localStorage.getItem(storageKey);
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    const units = data.unitStats ? Object.values(data.unitStats) : [];
+    const avgMastery = units.length > 0 ? Math.round(units.reduce((s, u) => s + (u.mastery || 0), 0) / units.length) : 0;
+    return { xp: data.xp || 0, diagDone: !!data.diagDone, avgMastery };
+  } catch (e) {
+    return null;
+  }
+}
+
+function renderAll() {
+  const realLessons = LESSONS.filter(l => !l.comingSoon);
+  let totalXp = 0;
+  let startedCount = 0;
+
+  realLessons.forEach(l => {
+    const p = readLessonProgress(l.storageKey);
+    if (p) {
+      totalXp += p.xp;
+      if (p.xp > 0 || p.diagDone) startedCount++;
+    }
+  });
+
+  document.getElementById('total-xp').textContent = totalXp.toLocaleString();
+  document.getElementById('started-count').textContent = startedCount;
+  document.getElementById('lesson-count').textContent = realLessons.length;
+  document.getElementById('total-lessons-label').textContent = realLessons.length;
+
+  renderLessons();
+  renderGames();
+  renderMiniPr();
+}
+
+function filterGrade(grade, btn) {
+  currentFilter = grade;
+  document.querySelectorAll('#grade-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderLessons();
+}
+
+function renderLessons() {
+  const container = document.getElementById('lessons-container');
+  container.innerHTML = '';
+
+  const gradesToShow = currentFilter === 'all' ? ['j1', 'j2', 'j3'] : [currentFilter];
+
+  gradesToShow.forEach(g => {
+    const list = LESSONS.filter(l => l.grade === g);
+    if (list.length === 0) return;
+
+    const meta = GRADE_META[g];
+    const group = document.createElement('div');
+    group.className = 'grade-group';
+
+    const cardsHtml = list.map(l => {
+      if (l.comingSoon) {
+        return `
+          <div class="lesson-card coming">
+            <div class="lc-top"><span class="term-tag">${l.term}</span><span class="status-tag st-new">準備中</span></div>
+            <div class="lc-title">${l.title}</div>
+            <p class="lc-desc">${l.desc}</p>
+            <div class="lc-tags">${l.tags.map(t => `<span class="mini-chip">${t}</span>`).join('')}</div>
+            <div class="lc-foot" style="color:var(--text-muted);"><span>近日公開予定</span><span>🔜</span></div>
+          </div>`;
+      }
+      const p = readLessonProgress(l.storageKey);
+      let statusHtml = '<span class="status-tag st-new">未挑戦</span>';
+      let footLeft = 'クエストを始める';
+      let barWidth = 0;
+      if (p && (p.xp > 0 || p.diagDone)) {
+        if (p.avgMastery > 0) {
+          barWidth = Math.max(8, p.avgMastery);
+          footLeft = `習得度 ${p.avgMastery}%（つづきを攻略）`;
+        } else {
+          barWidth = Math.min(35, Math.max(8, Math.round(p.xp / 5)));
+          footLeft = 'チャレンジ中（診断完了で習得率表示）';
+        }
+        statusHtml = p.avgMastery >= 80
+          ? `<span class="status-tag st-done">習得 ${p.avgMastery}%</span>`
+          : `<span class="status-tag st-play">✨ ${p.xp} XP</span>`;
+      }
+      return `
+        <a href="${l.url}" class="lesson-card">
+          <div class="lc-top"><span class="term-tag">${l.term}</span>${statusHtml}</div>
+          <div class="lc-title">${l.title}</div>
+          <p class="lc-desc">${l.desc}</p>
+          <div class="lc-tags">${l.tags.map(t => `<span class="mini-chip">${t}</span>`).join('')}</div>
+          <div class="bar-bg"><div class="bar-fill" style="width:${barWidth}%;"></div></div>
+          <div class="lc-foot"><span>${footLeft}</span><span>挑戦する ➡</span></div>
+        </a>`;
+    }).join('');
+
+    group.innerHTML = `
+      <h3 class="grade-label">
+        <span>${meta.label}</span>
+        <span class="grade-badge ${meta.cls}">${meta.badge}</span>
+      </h3>
+      <div class="lesson-grid">${cardsHtml}</div>`;
+    container.appendChild(group);
+  });
+}
+
+function renderGames() {
+  const container = document.getElementById('games-container');
+  container.innerHTML = GAMES.map(g => `
+    <a href="${g.url}" class="game-card ${g.type === 'fun' ? 'fun' : ''}">
+      <div class="game-icon">${g.icon}</div>
+      <div class="game-info">
+        <span class="game-badge">${g.badge}</span>
+        <h3 class="game-title">${g.title}</h3>
+        <p class="game-desc">${g.desc}</p>
+      </div>
+      <span style="font-weight:800; color:#e2e8f0;">▶</span>
+    </a>
+  `).join('');
+}
+
+function renderMiniPr() {
+  const grid = document.getElementById('pr-mini-grid');
+  grid.innerHTML = PR_MINI_ITEMS.map(item => `
+    <a href="${item.url}" target="_blank" rel="nofollow sponsored noopener noreferrer" class="pr-mini-item">
+      <div>
+        <span class="pr-mini-tag">${item.tag}</span>
+        <p class="pr-mini-name">${item.title}</p>
+      </div>
+      <span class="pr-mini-cta">Amazonで見る ↗</span>
+    </a>
+  `).join('');
+}
+
+function openGuide() { document.getElementById('modal-backdrop').classList.add('open'); }
+function closeModal() { document.getElementById('modal-backdrop').classList.remove('open'); }
+
+renderAll();
+window.addEventListener('pageshow', () => { renderAll(); });
+</script>
+</body>
+</html>
