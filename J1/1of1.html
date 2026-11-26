@@ -1,0 +1,1921 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>GRAMMAR QUEST｜中1英語 1学期マスター</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --bg-card: #1e293b;
+    --bg-card2: #283548;
+    --text: #f8fafc;
+    --text-muted: #94a3b8;
+    --primary: #38bdf8;
+    --primary-dark: #0284c7;
+    --accent: #a855f7;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --border: #334155;
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0;
+    font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', system-ui, sans-serif;
+    background: radial-gradient(circle at top right, #1e1b4b, var(--bg) 60%);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .container { width: 100%; max-width: 860px; padding: 16px; flex: 1; display: flex; flex-direction: column; }
+
+  /* Header & Large Logo */
+  header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 16px; background: rgba(30, 41, 59, 0.9); backdrop-filter: blur(10px);
+    border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 14px; gap: 12px; flex-wrap: wrap;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.08rem; letter-spacing: 0.4px; cursor: pointer; }
+  .site-logo {
+    height: 60px; width: auto; max-width: 240px; object-fit: contain;
+    border-radius: 10px; background: rgba(255,255,255,0.08); padding: 4px 8px;
+  }
+  .logo-text-wrap { display: flex; flex-direction: column; gap: 3px; }
+  .logo span.badge {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    padding: 2px 8px; border-radius: 7px; font-size: 0.7rem; color: #fff; width: fit-content;
+  }
+  .hud { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  @media (max-width: 640px) {
+    header { justify-content: center; }
+    .logo { width: 100%; justify-content: center; }
+    .hud { width: 100%; justify-content: center; }
+  }
+  .pill {
+    background: var(--bg); border: 1px solid var(--border); padding: 5px 10px;
+    border-radius: 999px; font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; gap: 4px;
+  }
+  .pill.xp { color: #fde047; }
+  .pill.combo { color: #fb923c; }
+  .icon-btn {
+    background: var(--bg-card2); border: 1px solid var(--border); color: var(--text);
+    border-radius: 10px; padding: 6px 9px; cursor: pointer; font-size: 0.8rem; font-weight: 600;
+    transition: transform 0.1s, background 0.2s;
+  }
+  .icon-btn:hover { background: #334155; }
+  .icon-btn:active { transform: scale(0.95); }
+
+  /* Screens */
+  .screen { display: none; animation: fadeIn 0.25s ease; }
+  .screen.active { display: flex; flex-direction: column; gap: 14px; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Cards & Buttons */
+  .card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  }
+  .hero {
+    text-align: center; padding: 24px 20px;
+    background: linear-gradient(145deg, rgba(56,189,248,0.12), rgba(168,85,247,0.12));
+    border: 1px solid rgba(56,189,248,0.3);
+  }
+  .hero h1 { margin: 0 0 8px; font-size: 1.65rem; background: linear-gradient(90deg, #38bdf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { margin: 0 auto 14px; color: var(--text-muted); max-width: 600px; line-height: 1.6; font-size: 0.93rem; }
+  .stat-chips { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+  .stat-chip { background: rgba(15,23,42,0.7); border: 1px solid rgba(56,189,248,0.3); padding: 4px 10px; border-radius: 999px; font-size: 0.78rem; color: #bae6fd; font-weight: 700; }
+
+  .btn {
+    border: none; border-radius: 12px; padding: 13px 20px; font-size: 0.96rem; font-weight: 700;
+    cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; justify-content: center;
+    gap: 8px; color: #fff; text-decoration: none;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary { background: linear-gradient(135deg, var(--primary-dark), var(--accent)); box-shadow: 0 4px 15px rgba(56,189,248,0.3); }
+  .btn-primary:hover { filter: brightness(1.1); }
+  .btn-secondary { background: var(--bg-card2); border: 1px solid var(--border); color: var(--text); }
+  .btn-secondary:hover { background: #334155; }
+  .btn-pr { background: linear-gradient(135deg, #059669, #10b981); box-shadow: 0 4px 14px rgba(16,185,129,0.28); }
+  .btn-pr:hover { filter: brightness(1.08); }
+  .btn-sm { padding: 8px 12px; font-size: 0.84rem; border-radius: 9px; }
+
+  .section-note { font-size: 0.84rem; color: var(--text-muted); margin: 4px 0 12px; line-height: 1.5; }
+  .mode-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+  .mode-card {
+    background: var(--bg-card2); border: 1px solid var(--border); border-radius: 14px;
+    padding: 15px; cursor: pointer; transition: transform 0.15s, border-color 0.2s; text-align: left;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .mode-card:hover { transform: translateY(-2px); border-color: var(--primary); }
+  .step-tag {
+    display: inline-block; width: fit-content; font-size: 0.7rem; font-weight: 800;
+    padding: 2px 7px; border-radius: 6px; background: rgba(56,189,248,0.16); color: #7dd3fc;
+  }
+  .mode-card h3 { margin: 2px 0; font-size: 1rem; display: flex; align-items: center; gap: 6px; }
+  .mode-card p { margin: 0; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* Affiliate Card */
+  .pr-card {
+    background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(56,189,248,0.1));
+    border: 1px solid rgba(16,185,129,0.4); border-radius: 16px; padding: 18px;
+    text-align: left; display: flex; flex-direction: column; gap: 10px;
+  }
+  .pr-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .pr-badge {
+    background: rgba(148,163,184,0.2); color: #cbd5e1; font-size: 0.7rem; font-weight: 700;
+    padding: 2px 7px; border-radius: 5px; border: 1px solid rgba(148,163,184,0.3);
+  }
+  .pr-tag { font-size: 0.78rem; font-weight: 800; color: #34d399; }
+  .pr-body { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+  .pr-title { margin: 0 0 4px; font-size: 1.04rem; font-weight: 800; color: #f8fafc; line-height: 1.4; }
+  .pr-desc { margin: 0; font-size: 0.85rem; color: #cbd5e1; line-height: 1.55; }
+
+  /* Unit Map */
+  .unit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+  .unit-item {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 12px;
+    padding: 12px; cursor: pointer; transition: border-color 0.2s, transform 0.1s; display: flex; flex-direction: column; gap: 6px;
+  }
+  .unit-item:hover { border-color: var(--primary); transform: translateY(-2px); }
+  .unit-top { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted); }
+  .unit-title { font-weight: 700; font-size: 0.94rem; }
+  .bar-bg { height: 7px; background: #1e293b; border-radius: 99px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 99px; transition: width 0.4s ease; }
+  .tag { font-size: 0.72rem; padding: 2px 7px; border-radius: 6px; font-weight: 700; }
+  .tag-master { background: rgba(34,197,94,0.2); color: #4ade80; }
+  .tag-weak { background: rgba(239,68,68,0.2); color: #f87171; }
+  .tag-mid { background: rgba(245,158,11,0.2); color: #fbbf24; }
+  .tag-new { background: rgba(148,163,184,0.2); color: #cbd5e1; }
+
+  /* Hint Bar */
+  .hint-bar {
+    display: flex; align-items: center; gap: 10px;
+    background: linear-gradient(90deg, rgba(56,189,248,0.1), rgba(168,85,247,0.08));
+    border: 1px solid rgba(56,189,248,0.32); border-radius: 14px; padding: 10px 14px;
+  }
+  .hint-icon {
+    width: 34px; height: 34px; border-radius: 10px;
+    background: rgba(56,189,248,0.18); border: 1px solid rgba(56,189,248,0.4);
+    display: flex; align-items: center; justify-content: center; font-size: 1.15rem; flex-shrink: 0;
+  }
+  .hint-msg { font-size: 0.88rem; line-height: 1.45; }
+  .hint-msg strong { color: var(--primary); }
+
+  /* Question Area */
+  .q-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 0.82rem; color: var(--text-muted); gap: 8px; flex-wrap: wrap; }
+  .q-type-badge { background: rgba(168,85,247,0.2); color: #d8b4fe; padding: 3px 9px; border-radius: 7px; font-weight: 700; }
+  .q-gen-badge { background: rgba(56,189,248,0.16); color: #7dd3fc; padding: 2px 7px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; margin-left: 6px; }
+  .progress-wrap { height: 8px; background: var(--bg); border-radius: 99px; overflow: hidden; margin-bottom: 14px; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: width 0.3s ease; }
+
+  .q-jp { font-size: 1.02rem; color: #cbd5e1; margin-bottom: 8px; font-weight: 600; }
+  .q-en-box {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px;
+    font-size: 1.2rem; font-weight: 700; line-height: 1.5;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 16px;
+  }
+  .speak-btn {
+    background: rgba(56,189,248,0.15); border: 1px solid rgba(56,189,248,0.4); color: var(--primary);
+    border-radius: 10px; padding: 8px 11px; cursor: pointer; font-size: 0.95rem; flex-shrink: 0;
+  }
+  .speak-btn:hover { background: rgba(56,189,248,0.28); }
+
+  /* Options & Inputs */
+  .opts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+  .opt-btn {
+    background: var(--bg-card2); border: 2px solid var(--border); color: var(--text);
+    border-radius: 12px; padding: 14px 16px; font-size: 1.02rem; font-weight: 700;
+    cursor: pointer; text-align: left; transition: all 0.15s; display: flex; align-items: center; gap: 10px;
+  }
+  .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: #334155; }
+  .opt-btn.correct { border-color: var(--success); background: rgba(34,197,94,0.2); color: #86efac; }
+  .opt-btn.wrong { border-color: var(--danger); background: rgba(239,68,68,0.2); color: #fca5a5; }
+  .opt-num {
+    width: 26px; height: 26px; border-radius: 7px; background: var(--bg);
+    display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--text-muted); flex-shrink: 0;
+  }
+
+  .sort-zone {
+    min-height: 60px; background: var(--bg); border: 2px dashed var(--border);
+    border-radius: 12px; padding: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px;
+  }
+  .word-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .word-chip {
+    background: var(--bg-card2); border: 1px solid #475569; color: var(--text);
+    padding: 9px 14px; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; user-select: none;
+  }
+  .word-chip:hover { background: #3b4c66; }
+  .word-chip.used { opacity: 0.28; pointer-events: none; }
+  .word-chip.placed { background: rgba(56,189,248,0.2); border-color: var(--primary); }
+
+  .input-wrap { display: flex; flex-direction: column; gap: 10px; }
+  .text-input, .select-input {
+    width: 100%; background: var(--bg); border: 2px solid var(--border); color: var(--text);
+    border-radius: 12px; padding: 12px 14px; font-size: 1.05rem; font-weight: 700; outline: none;
+  }
+  .text-input:focus, .select-input:focus { border-color: var(--primary); }
+  .helper-keys { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .key-chip { background: var(--bg-card2); border: 1px solid var(--border); color: var(--text-muted); padding: 5px 10px; border-radius: 8px; font-size: 0.85rem; cursor: pointer; }
+
+  .seg-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .seg-btn {
+    background: var(--bg); border: 2px solid var(--border); color: var(--text);
+    padding: 10px 14px; border-radius: 10px; font-size: 1.08rem; font-weight: 700; cursor: pointer;
+  }
+  .seg-btn.selected { border-color: var(--warning); background: rgba(245,158,11,0.2); }
+  .seg-btn.correct { border-color: var(--success); background: rgba(34,197,94,0.2); }
+  .seg-btn.wrong { border-color: var(--danger); background: rgba(239,68,68,0.2); }
+
+  .feedback { margin-top: 14px; padding: 14px 16px; border-radius: 12px; display: none; animation: fadeIn 0.2s ease; }
+  .feedback.show { display: block; }
+  .feedback.ok { background: rgba(34,197,94,0.14); border: 1px solid rgba(34,197,94,0.5); }
+  .feedback.ng { background: rgba(239,68,68,0.14); border: 1px solid rgba(239,68,68,0.5); }
+  .feedback-title { font-weight: 800; font-size: 1.05rem; margin-bottom: 6px; display: flex; align-items: center; justify-content: space-between; }
+  .feedback-exp { font-size: 0.9rem; line-height: 1.55; color: #e2e8f0; margin-bottom: 12px; }
+
+  /* Modals & Tutorial */
+  .modal-backdrop {
+    position: fixed; inset: 0; background: rgba(15,23,42,0.84);
+    display: none; align-items: center; justify-content: center; padding: 16px; z-index: 100;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    background: var(--bg-card); border: 1px solid var(--primary); border-radius: 18px;
+    max-width: 540px; width: 100%; padding: 22px; max-height: 90vh; overflow-y: auto;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5); animation: popIn 0.22s ease;
+  }
+  @keyframes popIn { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+  .tut-step-dots { display: flex; gap: 6px; justify-content: center; margin: 14px 0; }
+  .tut-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border); transition: all 0.2s; }
+  .tut-dot.active { background: var(--primary); width: 22px; border-radius: 99px; }
+  .tut-box {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 14px;
+    padding: 16px; line-height: 1.6; font-size: 0.93rem; color: #e2e8f0;
+  }
+  .tut-list { margin: 8px 0 0; padding-left: 18px; }
+  .tut-list li { margin-bottom: 6px; }
+
+  .report-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: center; }
+  @media (max-width: 640px) { .report-grid { grid-template-columns: 1fr; } }
+  .radar-box { display: flex; justify-content: center; align-items: center; }
+
+  .cheat-sec { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
+  .cheat-sec h4 { margin: 0 0 6px; color: var(--primary); font-size: 0.98rem; }
+  .cheat-sec p { margin: 0; font-size: 0.87rem; line-height: 1.55; color: #cbd5e1; }
+  code { background: #334155; padding: 2px 6px; border-radius: 5px; font-family: monospace; color: #fde047; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="logo" onclick="goHome()">
+      <img src="https://32and1.com/logo.png" alt="Logo" class="site-logo" onerror="this.style.display='none'">
+      <div class="logo-text-wrap">
+        <span>GRAMMAR QUEST</span>
+        <span class="badge">中1・1学期</span>
+      </div>
+    </div>
+    <div class="hud">
+             <div class="pill xp" title="正解するとたまる経験値">✨ <span id="hud-xp">0</span> XP</div>
+             <div class="pill combo" title="連続正解数">🔥 <span id="hud-combo">0</span></div>
+             <a href="https://32and1.com/index.html" class="icon-btn" style="text-decoration:none;">🏠 一覧</a>
+             <button class="icon-btn" onclick="openTutorial(0)">❓ 使い方</button>
+             <button class="icon-btn" onclick="openVoiceSettings()">🎙 音声</button>
+             <button class="icon-btn" onclick="toggleSound()" id="btn-sound">🔊 ON</button>
+             <button class="icon-btn" onclick="openCheatSheet()">📖 まとめ</button>
+           </div>
+  </header>
+
+  <!-- HOME SCREEN -->
+  <section id="screen-home" class="screen active">
+    <div class="card hero">
+      <h1>中1英語 1学期マスタークエスト</h1>
+      <p>be動詞・一般動詞・can・疑問詞・命令文の文法と、1学期必須の英単語を完全カバー！<br>毎回自動で新しい問題とパターンがシャッフル出題されるので、丸暗記ではなく本当の実力が身につきます。</p>
+      <div class="stat-chips">
+        <span class="stat-chip">⚡ 文法生成 1,000通り以上</span>
+        <span class="stat-chip">🔤 必須単語 88語×4パターン</span>
+        <span class="stat-chip">🚀 連続正解で自動スキップ</span>
+      </div>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="startDiagnostic()">🔍 まずは実力アナライズ診断（16問）</button>
+        <button class="btn btn-secondary" id="btn-continue-adaptive" onclick="startAdaptiveDrill()" style="display:none;">🚀 弱点攻略ドリルを続ける</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin:0; font-size:1.05rem;">🎮 学習メニュー（目的に合わせて選ぼう）</h3>
+      <p class="section-note">初めての方はまず上の「実力アナライズ診断」がおすすめ！診断後は弱点ドリルで苦手な単元から自動で攻略できます。</p>
+      <div class="mode-grid">
+        <div class="mode-card" onclick="startAdaptiveDrill()">
+          <span class="step-tag">STEP 2・弱点集中</span>
+          <h3>🎯 おまかせ弱点ドリル</h3>
+          <p>診断データをもとに苦手な単元から出題。3連続正解で次の単元へ自動スキップ！</p>
+        </div>
+        <div class="mode-card" onclick="openVocabSelector()">
+          <span class="step-tag">単語対策・88語</span>
+          <h3>🔤 1学期 必須単語クイズ</h3>
+          <p>曜日・月・学校・基本動詞を4択・スペル入力・間違い探しでランダム特訓！</p>
+        </div>
+        <div class="mode-card" onclick="startSurvivalTest()">
+          <span class="step-tag">STEP 3・仕上げ</span>
+          <h3>🏆 期末テスト模擬チャレンジ</h3>
+          <p>1学期の全範囲からランダム15問を出題。毎回違う問題で本番前の実力試し！</p>
+        </div>
+        <div class="mode-card" onclick="openCheatSheet()">
+          <span class="step-tag">テスト直前確認</span>
+          <h3>📖 10秒まとめノート</h3>
+          <p>be動詞と一般動詞の見分け方や、否定・疑問の書き換えルールをすぐ確認。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <div>
+          <h3 style="margin:0; font-size:1.05rem;">🗺 単元別マスター状況</h3>
+          <p class="section-note" style="margin:2px 0 10px;">各単元の理解度ゲージです。カードを直接タップするとその単元だけ集中特訓（10問）ができます。</p>
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="resetProgress()">🗑 データリセット</button>
+      </div>
+      <div id="unit-map" class="unit-grid"></div>
+    </div>
+  </section>
+
+  <!-- QUIZ SCREEN -->
+  <section id="screen-quiz" class="screen">
+    <div class="hint-bar">
+      <div class="hint-icon">💡</div>
+      <div class="hint-msg" id="hint-msg">ヒント：迷ったら下の「ヒントを見る」を押してね。</div>
+    </div>
+
+    <div class="card">
+      <div class="q-meta">
+        <div>
+          <span class="q-type-badge" id="q-mode-label">実力アナライズ</span>
+          <span id="q-unit-label" style="margin-left:6px; font-weight:700;">Unit 1</span>
+          <span class="q-gen-badge" id="q-source-badge">⚡ランダム生成</span>
+        </div>
+        <div>問題 <span id="q-num">1</span> / <span id="q-total">16</span></div>
+      </div>
+      <div class="progress-wrap"><div class="progress-fill" id="q-progress" style="width:0%"></div></div>
+
+      <div class="q-jp" id="q-jp">日本語訳</div>
+      <div class="q-en-box">
+        <span id="q-en">Question text</span>
+        <button class="speak-btn" onclick="speakCurrent()" title="音声を聞く">🔊 発音</button>
+      </div>
+
+      <div id="q-interact"></div>
+
+      <div id="feedback" class="feedback">
+        <div class="feedback-title">
+          <span id="fb-status">⭕ 正解！</span>
+          <button class="btn btn-secondary btn-sm" onclick="speakAnswer()">🔊 正しい英文を聞く</button>
+        </div>
+        <div class="feedback-exp" id="fb-exp"></div>
+        <button class="btn btn-primary" style="width:100%;" id="btn-next" onclick="nextQuestion()">次の問題へ ➡</button>
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <button class="btn btn-secondary btn-sm" onclick="goHome()">🏠 ホームに戻る</button>
+      <button class="btn btn-secondary btn-sm" id="btn-hint" onclick="showHint()">💡 ヒントを見る</button>
+    </div>
+  </section>
+
+  <!-- DIAGNOSTIC REPORT SCREEN -->
+  <section id="screen-report" class="screen">
+    <div class="card">
+      <h2 style="margin:0 0 6px;">📊 実力アナライズ完了！</h2>
+      <p style="margin:0 0 16px; color:var(--text-muted); font-size:0.9rem;" id="report-summary"></p>
+
+      <div class="report-grid">
+        <div class="radar-box">
+          <svg id="radar-svg" width="280" height="280" viewBox="0 0 280 280"></svg>
+        </div>
+        <div id="report-list" style="display:flex; flex-direction:column; gap:8px;"></div>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:20px; flex-wrap:wrap;">
+        <button class="btn btn-primary" style="flex:1;" onclick="startAdaptiveDrill()">🚀 弱点克服ドリルをスタート！</button>
+        <button class="btn btn-secondary" onclick="startDiagnostic()">🔄 別問題で再診断</button>
+        <button class="btn btn-secondary" onclick="goHome()">🏠 マップ</button>
+      </div>
+    </div>
+
+    <div id="pr-slot-diag"></div>
+  </section>
+
+  <!-- END / RESULT SCREEN -->
+  <section id="screen-result" class="screen">
+    <div class="card" style="text-align:center; padding:30px 20px;">
+      <div style="font-size:3rem; margin-bottom:8px;" id="res-emoji">🎉</div>
+      <h2 style="margin:0 0 8px;" id="res-title">クエストクリア！</h2>
+      <p style="color:var(--text-muted); margin:0 0 18px;" id="res-desc"></p>
+      <div style="display:flex; justify-content:center; gap:16px; margin-bottom:22px; flex-wrap:wrap;">
+        <div class="pill xp" style="font-size:1rem; padding:8px 16px;">正答率 <span id="res-acc">0%</span></div>
+        <div class="pill combo" style="font-size:1rem; padding:8px 16px;">獲得XP +<span id="res-xp">0</span></div>
+      </div>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn btn-primary" id="btn-retry-same" onclick="retryLastMode()">🔥 新しい問題で続けて攻略</button>
+        <button class="btn btn-secondary" onclick="goHome()">🏠 ホームへ</button>
+      </div>
+    </div>
+
+    <div id="pr-slot-result"></div>
+  </section>
+  <footer style="margin-top:20px; padding:12px 10px 6px; border-top:1px solid var(--border); text-align:center; font-size:.76rem; color:var(--text-muted); line-height:1.6;">
+      © 32and1.com ｜ ※本サイトはプロモーション（PR・アフィリエイト広告）を含みます。<br>
+      Amazonのアソシエイトとして、32and1.comは適格販売により収入を得ています。
+    </footer>
+</div>
+
+<!-- MODAL -->
+<div id="modal-backdrop" class="modal-backdrop" onclick="if(event.target===this) closeModal()">
+  <div class="modal">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+      <h3 style="margin:0;" id="modal-title">タイトル</h3>
+      <button class="icon-btn" id="modal-close-btn" onclick="closeModal()">✕ 閉じる</button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+// ==========================================
+// ★ アフィリエイトリンク設定（3冊からランダム表示） ★
+// ==========================================
+const AFFILIATE_ITEMS = [
+  {
+    tag: '✏️ 超基礎からの解き直しにおすすめ',
+    title: '中1英語をひとつひとつわかりやすく。改訂版',
+    desc: 'やさしい解説＋書き込み式練習問題が見開きで効率よく学べる人気シリーズ。文法も単語もリスニングもこれ1冊！',
+    btnText: 'Amazonで見る ↗',
+    url: 'https://www.amazon.co.jp/dp/4053052440?tag=goodjobsale-22'
+  },
+  {
+    tag: '📘 教科書の要点整理におすすめ',
+    title: 'ニューコース参考書 中1英語 新装版',
+    desc: '教科書の要点がひと目でわかる豊富なビジュアル！普段の予習・復習からテスト対策まで頼れる定番参考書です。',
+    btnText: 'Amazonで見る ↗',
+    url: 'https://www.amazon.co.jp/dp/4053063221?tag=goodjobsale-22'
+  },
+  {
+    tag: '⚡ 文法の反復定着におすすめ',
+    title: '中１英文法 パターンドリル (シグマベスト)',
+    desc: 'be動詞や一般動詞などの基本ルールを、同じパターンの反復練習で体が覚えるまでしっかり定着させられます！',
+    btnText: 'Amazonで見る ↗',
+    url: 'https://www.amazon.co.jp/dp/4578221350?tag=goodjobsale-22'
+  },
+  {
+    tag: '🔤 1学期の英単語対策におすすめ',
+    title: '中学英単語をひとつひとつわかりやすく。 改訂版',
+    desc: 'テストでよく出る重要単語をイラストや音声と一緒に無理なく暗記！スペルミス対策の1冊目にもぴったりです。',
+    btnText: 'Amazonで見る ↗',
+    url: 'https://www.amazon.co.jp/dp/4053053439?tag=goodjobsale-22'
+  },
+  {
+    tag: '🏆 定期テストの得点アップにおすすめ',
+    title: '中学定期テスト 得点アップ問題集 中１英語 新装三訂版',
+    desc: '定期テストに出やすい問題形式を厳選！テスト直前の総仕上げと弱点チェックで高得点を狙えます。',
+    btnText: 'Amazonで見る ↗',
+    url: 'https://www.amazon.co.jp/dp/4010222166?tag=goodjobsale-22'
+  },
+  {
+    tag: '🌱 英語が苦手な人の最初の1冊に',
+    title: 'ぐーんっとやさしく 中1英語',
+    desc: 'つまずきやすいポイントをスモールステップで解説。「英語がちょっと苦手かも…」という人でも無理なく進められます。',
+    btnText: 'Amazonで見る ↗',
+    url: 'https://www.amazon.co.jp/dp/4578234185?tag=goodjobsale-22'
+  }
+];
+function renderRandomPrCard(containerId) {
+  const el = document.getElementById(containerId);
+  if (!el || AFFILIATE_ITEMS.length === 0) return;
+  const offer = AFFILIATE_ITEMS[Math.floor(Math.random() * AFFILIATE_ITEMS.length)];
+  el.innerHTML = `
+    <div class="pr-card">
+      <div class="pr-header"><span class="pr-tag">${offer.tag}</span><span class="pr-badge">PR</span></div>
+      <div class="pr-body">
+        <div style="flex:1; min-width:220px;">
+          <h4 class="pr-title">${offer.title}</h4>
+          <p class="pr-desc">${offer.desc}</p>
+        </div>
+        <a href="${offer.url}" target="_blank" rel="sponsored noopener noreferrer" class="btn btn-pr">${offer.btnText}</a>
+      </div>
+    </div>`;
+}
+// ==========================================
+// 1. UNITS & VOCABULARY BANK (88 ESSENTIAL WORDS)
+// ==========================================
+const UNITS = [
+  { id: 'u1', name: '基本ルール・単語・a/an', short: '基本/a・an',
+    tip: '①文の最初は必ず大文字！ <b>I</b>（私は）は文中いつでも大文字。<br>②母音（ア・イ・ウ・エ・オの発音）で始まる単数名詞の前は <code>an</code>（例: <code>an apple</code>, <code>an English book</code>）。<br>③複数形は <code>s</code>（s, x, ch, sh で終わると <code>es</code>、子音字+yは <code>ies</code>）。' },
+  { id: 'u2', name: 'be動詞の肯定文 (am/is/are)', short: 'be動詞肯定',
+    tip: '主語に合わせて使い分け！<br>・<code>I am (I\'m)</code><br>・<code>You / We / They / 複数</code> → <code>are</code>（例: Ken and Mai <b>are</b>）<br>・<code>He / She / It / This / That / 単数</code> → <code>is</code>' },
+  { id: 'u3', name: 'be動詞の否定・疑問・答え方', short: 'be否定疑問',
+    tip: '①否定文：be動詞の後ろに <code>not</code>（<code>isn\'t</code> / <code>aren\'t</code>）。※<code>amn\'t</code> は存在しない！<br>②疑問文：be動詞を先頭に出す。<br>③答え方：<code>Is this...?</code> → <code>Yes, <b>it</b> is.</code> / <code>Yes, I am.</code>（肯定の最後は短縮しない）' },
+  { id: 'u4', name: '一般動詞の肯定文と区別', short: '一般動詞',
+    tip: '動作や状態を表す動詞（play, like, have, study, live など）。<br>【テスト最大ひっかけ】<b>be動詞と一般動詞は同じ文に絶対並べない！</b><br>× I am play tennis. → ○ I play tennis.' },
+  { id: 'u5', name: '一般動詞の否定・疑問 (do/don\'t)', short: '一般否定疑問',
+    tip: '一般動詞の文には <code>do</code> チームを使う！<br>・否定文：<code>don\'t (do not)</code> ＋動詞の原形<br>・疑問文：<code>Do</code>＋主語＋動詞の原形〜? → <code>Yes, I do.</code> / <code>No, I don\'t.</code>' },
+  { id: 'u6', name: '助動詞 can の文', short: '助動詞can',
+    tip: '<code>can</code>（〜できる）の後ろは<b>必ず動詞の原形</b>！<br>・否定：<code>can\'t</code> または <code>cannot</code>（1語！）<br>・疑問：<code>Can</code>＋主語＋動詞の原形〜? → <code>Yes, I can.</code><br>※楽器の前には <code>the</code>（play the piano）をつける！' },
+  { id: 'u7', name: '疑問詞 (What/Who/How/Where)', short: '疑問詞',
+    tip: '疑問詞（What, Who, How, Where）は<b>文の先頭</b>に置き、後ろは<b>疑問文の語順</b>！<br>・Yes / No で答えない！<br>・<code>How many ＋ 複数名詞</code>（いくつ〜？）はテスト超頻出！' },
+  { id: 'u8', name: '命令文・Let\'s・複数/指示代名詞', short: '命令文/応用',
+    tip: '①命令文：主語なし・動詞の原形で始める！ be動詞なら <code>Be quiet!</code><br>②禁止：<code>Don\'t</code>＋動詞の原形（例: <code>Don\'t be late!</code>）<br>③<code>these</code>(これら) / <code>those</code>(あれら) の質問は <code>they</code> で受ける！' }
+];
+
+const VOCAB_BANK = [
+  // cat: 'cal' (27 words)
+  { en:'Monday', jp:'月曜日', cat:'cal', cap:true, typos:['Manday','Mondy','Munday'] },
+  { en:'Tuesday', jp:'火曜日', cat:'cal', cap:true, typos:['Teusday','Tusday','Tuesdey'] },
+  { en:'Wednesday', jp:'水曜日', cat:'cal', cap:true, typos:['Wensday','Wednsday','Wedenesday'] },
+  { en:'Thursday', jp:'木曜日', cat:'cal', cap:true, typos:['Thirsday','Thusday','Thursdey'] },
+  { en:'Friday', jp:'金曜日', cat:'cal', cap:true, typos:['Fridey','Flyday','Frday'] },
+  { en:'Saturday', jp:'土曜日', cat:'cal', cap:true, typos:['Saterday','Satuday','Saturdey'] },
+  { en:'Sunday', jp:'日曜日', cat:'cal', cap:true, typos:['Sanday','Sundey','Sundy'] },
+  { en:'January', jp:'1月', cat:'cal', cap:true, typos:['Janury','Januarry','Jenuary'] },
+  { en:'February', jp:'2月', cat:'cal', cap:true, typos:['Febuary','Febrary','Feburary'] },
+  { en:'March', jp:'3月', cat:'cal', cap:true, typos:['Marth','Murch','Marche'] },
+  { en:'April', jp:'4月', cat:'cal', cap:true, typos:['Aprill','Aplil','Apryl'] },
+  { en:'June', jp:'6月', cat:'cal', cap:true, typos:['Jun','Jeun','Jume'] },
+  { en:'July', jp:'7月', cat:'cal', cap:true, typos:['Jly','Julai','Jury'] },
+  { en:'August', jp:'8月', cat:'cal', cap:true, typos:['Augst','Ougust','Augast'] },
+  { en:'September', jp:'9月', cat:'cal', cap:true, typos:['Septembar','Setember','Septmber'] },
+  { en:'October', jp:'10月', cat:'cal', cap:true, typos:['Octobar','Octber','Oktober'] },
+  { en:'November', jp:'11月', cat:'cal', cap:true, typos:['Novembar','Nobember','Novmber'] },
+  { en:'December', jp:'12月', cat:'cal', cap:true, typos:['Decembar','Desember','Decmber'] },
+  { en:'eleven', jp:'11', cat:'cal', cap:false, typos:['elven','eleben','elevenn'] },
+  { en:'twelve', jp:'12', cat:'cal', cap:false, typos:['twelf','twlve','twelwe'] },
+  { en:'fifteen', jp:'15', cat:'cal', cap:false, typos:['fiveteen','fiften','fiftheen'] },
+  { en:'twenty', jp:'20', cat:'cal', cap:false, typos:['twnty','tweny','twentey'] },
+  { en:'hundred', jp:'100', cat:'cal', cap:false, typos:['handred','hundled','hunred'] },
+  { en:'spring', jp:'春', cat:'cal', cap:false, typos:['sprng','spling','sprig'] },
+  { en:'summer', jp:'夏', cat:'cal', cap:false, typos:['sumer','sammer','summur'] },
+  { en:'autumn', jp:'秋', cat:'cal', cap:false, typos:['autum','otumn','autamn'] },
+  { en:'winter', jp:'冬', cat:'cal', cap:false, typos:['wintar','wenter','winnter'] },
+
+  // cat: 'school' (20 words)
+  { en:'English', jp:'英語', cat:'school', cap:true, typos:['Inglish','Engrish','Englesh'] },
+  { en:'math', jp:'数学', cat:'school', cap:false, typos:['mas','mathe','maht'] },
+  { en:'science', jp:'理科', cat:'school', cap:false, typos:['sience','scince','sciense'] },
+  { en:'music', jp:'音楽', cat:'school', cap:false, typos:['musick','myusic','muzic'] },
+  { en:'Japanese', jp:'国語・日本語', cat:'school', cap:true, typos:['Japanise','Japanease','Japanes'] },
+  { en:'library', jp:'図書館', cat:'school', cap:false, typos:['liblary','libary','librari'] },
+  { en:'classroom', jp:'教室', cat:'school', cap:false, typos:['clasroom','classrom','clssroom'] },
+  { en:'teacher', jp:'先生', cat:'school', cap:false, typos:['techer','teachar','teacer'] },
+  { en:'student', jp:'生徒', cat:'school', cap:false, typos:['studant','studeint','sutudent'] },
+  { en:'friend', jp:'友達', cat:'school', cap:false, typos:['freind','frend','friand'] },
+  { en:'classmate', jp:'同級生', cat:'school', cap:false, typos:['clasmate','classmait','classmet'] },
+  { en:'dictionary', jp:'辞書', cat:'school', cap:false, typos:['dictionry','dictonary','dictionery'] },
+  { en:'notebook', jp:'ノート', cat:'school', cap:false, typos:['notbook','notebuk','notebok'] },
+  { en:'eraser', jp:'消しゴム', cat:'school', cap:false, typos:['elaser','erasar','iraser'] },
+  { en:'umbrella', jp:'傘', cat:'school', cap:false, typos:['unbrella','umbrela','ambrella'] },
+  { en:'computer', jp:'コンピューター', cat:'school', cap:false, typos:['conputer','computar','computor'] },
+  { en:'picture', jp:'写真・絵', cat:'school', cap:false, typos:['picure','pictur','pichure'] },
+  { en:'homework', jp:'宿題', cat:'school', cap:false, typos:['homwork','homewark','homewok'] },
+  { en:'school', jp:'学校', cat:'school', cap:false, typos:['scool','shool','schol'] },
+  { en:'member', jp:'一員・メンバー', cat:'school', cap:false, typos:['menber','membar','memer'] },
+
+  // cat: 'life' (17 words)
+  { en:'breakfast', jp:'朝食', cat:'life', cap:false, typos:['brekfast','breakfst','breafast'] },
+  { en:'lunch', jp:'昼食', cat:'life', cap:false, typos:['lanch','lunche','runsh'] },
+  { en:'dinner', jp:'夕食', cat:'life', cap:false, typos:['diner','dinnar','denner'] },
+  { en:'bread', jp:'パン', cat:'life', cap:false, typos:['bred','blread','breab'] },
+  { en:'orange', jp:'オレンジ', cat:'life', cap:false, typos:['orenge','olange','orang'] },
+  { en:'family', jp:'家族', cat:'life', cap:false, typos:['famiry','famly','familiy'] },
+  { en:'brother', jp:'兄・弟', cat:'life', cap:false, typos:['blother','brothar','brohter'] },
+  { en:'sister', jp:'姉・妹', cat:'life', cap:false, typos:['sistar','siter','shister'] },
+  { en:'father', jp:'父', cat:'life', cap:false, typos:['fathar','fater','fathre'] },
+  { en:'mother', jp:'母', cat:'life', cap:false, typos:['mothar','mather','mothre'] },
+  { en:'station', jp:'駅', cat:'life', cap:false, typos:['stasion','staton','staition'] },
+  { en:'hospital', jp:'病院', cat:'life', cap:false, typos:['hospitl','hosipital','hospitel'] },
+  { en:'mountain', jp:'山', cat:'life', cap:false, typos:['mountin','montain','mounten'] },
+  { en:'animal', jp:'動物', cat:'life', cap:false, typos:['animl','anmal','animel'] },
+  { en:'basketball', jp:'バスケットボール', cat:'life', cap:false, typos:['bascketball','basketbal','baskeball'] },
+  { en:'guitar', jp:'ギター', cat:'life', cap:false, typos:['gitar','guiter','giter'] },
+  { en:'piano', jp:'ピアノ', cat:'life', cap:false, typos:['peano','piono','pianno'] },
+
+  // cat: 'verb' (24 words)
+  { en:'study', jp:'勉強する', cat:'verb', cap:false, typos:['stady','studdy','studi'] },
+  { en:'speak', jp:'（言語を）話す', cat:'verb', cap:false, typos:['speek','spak','spek'] },
+  { en:'watch', jp:'（テレビなどを）見る', cat:'verb', cap:false, typos:['wach','watsh','wotch'] },
+  { en:'listen', jp:'（音楽などを）聞く', cat:'verb', cap:false, typos:['lisen','listn','listan'] },
+  { en:'write', jp:'書く', cat:'verb', cap:false, typos:['rite','writ','wrate'] },
+  { en:'read', jp:'読む', cat:'verb', cap:false, typos:['reid','raed','ried'] },
+  { en:'know', jp:'知っている', cat:'verb', cap:false, typos:['kno','knou','konw'] },
+  { en:'live', jp:'住む', cat:'verb', cap:false, typos:['libe','leav','liv'] },
+  { en:'swim', jp:'泳ぐ', cat:'verb', cap:false, typos:['suim','swin','swem'] },
+  { en:'cook', jp:'料理する', cat:'verb', cap:false, typos:['cok','kook','cooke'] },
+  { en:'open', jp:'開ける', cat:'verb', cap:false, typos:['opan','opne','oppen'] },
+  { en:'close', jp:'閉める', cat:'verb', cap:false, typos:['cloz','cloce','klose'] },
+  { en:'wash', jp:'洗う', cat:'verb', cap:false, typos:['wosh','wush','washe'] },
+  { en:'clean', jp:'掃除する・きれいな', cat:'verb', cap:false, typos:['cleen','clen','crean'] },
+  { en:'favorite', jp:'お気に入りの', cat:'verb', cap:false, typos:['favorit','favarite','faborite'] },
+  { en:'hungry', jp:'お腹がすいた', cat:'verb', cap:false, typos:['hangry','hungly','hungy'] },
+  { en:'quiet', jp:'静かな', cat:'verb', cap:false, typos:['quite','quait','kuiet'] },
+  { en:'busy', jp:'忙しい', cat:'verb', cap:false, typos:['bisy','busi','buzy'] },
+  { en:'often', jp:'よく・しばしば', cat:'verb', cap:false, typos:['offen','ofton','oftun'] },
+  { en:'together', jp:'いっしょに', cat:'verb', cap:false, typos:['togehter','togather','togther'] },
+  { en:'morning', jp:'朝', cat:'verb', cap:false, typos:['mornig','moring','moning'] },
+  { en:'afternoon', jp:'午後', cat:'verb', cap:false, typos:['afternon','aftenoon','aftrnoon'] },
+  { en:'usually', jp:'たいてい', cat:'verb', cap:false, typos:['usualy','usally','usuarry'] },
+  { en:'really', jp:'本当に', cat:'verb', cap:false, typos:['realy','relly','raelly'] }
+];
+
+// ==========================================
+// 2. STATIC CURATED GRAMMAR QUESTIONS
+// ==========================================
+const STATIC_QUESTIONS = [
+  { id:'s_u1_1', unit:'u1', diff:2, type:'error', jp:'「ケンと私は友達です」間違い箇所をタップして直そう。', segs:['Ken','and','i','are','friends.'], errIdx:2, fixOpts:['I（大文字にする）','me','my'], fixAns:0, exp:'「私」を表す I は、文の途中であっても必ず大文字で書きます！', speak:'Ken and I are friends.' },
+  { id:'s_u1_2', unit:'u1', diff:1, type:'choice', jp:'「おはよう。元気ですか。」に合う挨拶は？', q:'Good morning. (   )', opts:['Good night.','How are you?','See you.','Thank you.'], ans:1, exp:'朝の挨拶に続けて相手の調子を尋ねる定番表現は How are you? です。', speak:'Good morning. How are you?' },
+  { id:'s_u1_3', unit:'u1', diff:2, type:'choice', jp:'「どうぞよろしく。」は英語で？', q:'Nice to (   ) you.', opts:['look','watch','meet','see'], ans:2, exp:'初対面の挨拶は Nice to meet you. が鉄板です。', speak:'Nice to meet you.' },
+  { id:'s_u1_4', unit:'u1', diff:2, type:'choice', jp:'「こちらこそよろしく。」は英語で？', q:'Nice to meet you, (   ).', opts:['also','too','very','two'], ans:1, exp:'「〜もまた」を文末に添えるときは too（oが2つ！）を使います。', speak:'Nice to meet you, too.' },
+  { id:'s_u1_5', unit:'u1', diff:3, type:'error', jp:'「私は3冊の本を持っています」間違いを見つけよう。', segs:['I','have','three','book.'], errIdx:3, fixOpts:['books','a book','bookes'], fixAns:0, exp:'three（3冊）のように2つ以上の数を表すときは、名詞を複数形（books）にします。', speak:'I have three books.' },
+
+  { id:'s_u2_1', unit:'u2', diff:2, type:'error', jp:'「ユキと私はチームメイトです」間違いを見つけよう。', segs:['Yuki','and','I','am','teammates.'], errIdx:3, fixOpts:['are','is','do'], fixAns:0, exp:'最後に I があっても、主語全体が「Yuki and I（＝私たち）」と複数なので am ではなく are が正解！テスト超頻出の罠です。', speak:'Yuki and I are teammates.' },
+  { id:'s_u2_2', unit:'u2', diff:2, type:'input', jp:'「あれは富士山の写真です。」（That is の短縮形1語）', q:'(       ) a picture of Mt. Fuji.', placeholder:'That is の短縮形', ansList:["That's"], caseSensitive:true, exp:"That is の短縮形は That's です。（※This is には短縮形がありません！）", speak:"That's a picture of Mt. Fuji." },
+  { id:'s_u2_3', unit:'u2', diff:3, type:'error', jp:'「これは私のノートです」間違いを見つけよう。（短縮形に注意！）', segs:["This's",'my','new','notebook.'], errIdx:0, fixOpts:['This is','These are','This are'], fixAns:0, exp:"That is → That's はありますが、This is に This's という短縮形はありません！", speak:'This is my new notebook.' },
+  { id:'s_u2_4', unit:'u2', diff:2, type:'input', jp:'空欄に短縮形1語を入れよう。「私は大阪出身です。」', q:'(     ) from Osaka.', placeholder:'I am の短縮形', ansList:["I'm"], caseSensitive:true, exp:"I am の短縮形は I'm です。", speak:"I'm from Osaka." },
+
+  { id:'s_u3_1', unit:'u3', diff:1, type:'choice', jp:'「これはあなたのペンですか。」「はい、そうです。」', q:'Is this your pen? — Yes, (   ).', opts:['this is','it is','that is',"it's"], ans:1, exp:"Is this 〜? / Is that 〜? で聞かれたら it を使って Yes, it is. と答えます！また Yes, it's. と短縮しません。", speak:'Is this your pen? Yes, it is.' },
+  { id:'s_u3_2', unit:'u3', diff:1, type:'choice', jp:'「あなたは忙しいですか。」「はい、忙しいです。」', q:'Are you busy? — Yes, (   ).', opts:["I'm",'I am','you are','I do'], ans:1, exp:"Yes, I am. のように肯定の短い答えの最後では短縮形（Yes, I'm.）は使えません！", speak:'Are you busy? Yes, I am.' },
+  { id:'s_u3_3', unit:'u3', diff:2, type:'error', jp:'「私はお腹がすいていません」間違いを見つけよう。', segs:['I',"amn't",'hungry','now.'], errIdx:1, fixOpts:['am not',"don't",'not am'], fixAns:0, exp:"amn't という短縮形は存在しません！ I am not または I'm not と書きます。", speak:'I am not hungry now.' },
+  { id:'s_u3_4', unit:'u3', diff:2, type:'choice', jp:'「あの男の子はケンですか。」「いいえ、ちがいます。」', q:'Is that boy Ken? — No, (   ).', opts:["that isn't","it isn't","he isn't","she isn't"], ans:2, exp:'that boy（あの男の子＝人間・男性1人）なので it ではなく he で受けます！', speak:"Is that boy Ken? No, he isn't." },
+  { id:'s_u3_5', unit:'u3', diff:2, type:'choice', jp:'「あの女の子はあなたの妹ですか。」「はい、そうです。」', q:'Is that girl your sister? — Yes, (   ).', opts:['that is','it is','she is',"she's"], ans:2, exp:'that girl（女性1人）なので she で受け、肯定の最後は短縮しないので Yes, she is. です。', speak:'Is that girl your sister? Yes, she is.' },
+
+  { id:'s_u4_1', unit:'u4', diff:2, type:'choice', jp:'私はこの漫画がとても好きです。', q:'I like this comic book (   ).', opts:['very','many','very much','a lot of'], ans:2, exp:'動詞（like）を「とても〜」と強めるときは文末に very much を置きます。very だけでは使えません！', speak:'I like this comic book very much.' },
+  { id:'s_u4_2', unit:'u4', diff:2, type:'sort', jp:'私は放課後、よく音楽を聞きます。', words:['music','often','to','listen','I','after school.'], ans:'I often listen to music after school.', exp:'often（よく）は一般動詞の前に置きます。「〜を聞く」は listen to 〜。', speak:'I often listen to music after school.' },
+  { id:'s_u4_3', unit:'u4', diff:3, type:'choice', jp:'be動詞が入る文はどれ？（見分け問題）', q:'空欄に am / is / are のどれかが入る文を選ぼう。', opts:['I (  ) like dogs.','You (  ) speak Japanese.','They (  ) good swimmers.','We (  ) walk to school.'], ans:2, exp:'like, speak, walk は一般動詞なので be動詞は不要。good swimmers は名詞なので are が入ります！', speak:'They are good swimmers.' },
+  { id:'s_u4_4', unit:'u4', diff:2, type:'choice', jp:'「私は朝食にパンを食べます。」eat の代わりに使える動詞は？', q:'I (   ) bread for breakfast.', opts:['am','have','play','watch'], ans:1, exp:'「食べる・飲む」の意味で have もテストによく出ます（have breakfast 等）。', speak:'I have bread for breakfast.' },
+
+  { id:'s_u5_1', unit:'u5', diff:2, type:'choice', jp:'空欄に入る正しい組み合わせは？（be動詞と一般動詞のミックス）', q:'(   ) you busy? — No, I (   ) have homework today.', opts:["Do / don't","Are / am not","Are / don't","Do / am not"], ans:2, exp:'前半は busy（形容詞）なので Are you busy?、後半は have（一般動詞）があるので I don\'t have... です！', speak:"Are you busy? No, I don't have homework today." },
+  { id:'s_u5_2', unit:'u5', diff:2, type:'sort', jp:'疑問文にしよう：「あなたは毎日朝食を食べますか。」', words:['every day?','Do','breakfast','have','you'], ans:'Do you have breakfast every day?', exp:'breakfast などの食事名の前に a/the はつけません。', speak:'Do you have breakfast every day?' },
+  { id:'s_u5_3', unit:'u5', diff:3, type:'choice', jp:'答えとして正しいのは？「あなたは数学を勉強しますか。」', q:'Do you study math? — Yes, (   ).', opts:['I am','I do','you do','I study'], ans:1, exp:'Do you...? で聞かれたら Yes, I do. / No, I don\'t. で答えます。', speak:'Do you study math? Yes, I do.' },
+
+  { id:'s_u6_1', unit:'u6', diff:2, type:'choice', jp:'「このコンピューターを使ってもいいですか。」「いいですよ。」', q:'Can I use this computer? — (   ).', opts:['Yes, I can.','Sure.','No, I can\'t.','Yes, you are.'], ans:1, exp:'Can I 〜?（〜してもいいですか）に対する許可の返答は Sure. / Yes, you can. / Of course. を使います。', speak:'Can I use this computer? Sure.' },
+  { id:'s_u6_2', unit:'u6', diff:2, type:'input', jp:'次の文を否定文にしよう：He can speak Japanese.', q:'He (      ) speak Japanese.（短縮せず1語で書くなら？）', placeholder:'can の否定形1語', ansList:['cannot',"can't"], caseSensitive:false, exp:'can not を1語で書くときは cannot（nが2つ！）になります。', speak:'He cannot speak Japanese.' },
+  { id:'s_u6_3', unit:'u6', diff:3, type:'error', jp:'「ケンはピアノを上手に弾けます」間違いを見つけよう。', segs:['Ken','can','plays','the piano','well.'], errIdx:2, fixOpts:['play','playing','to play'], fixAns:0, exp:'can の後ろの動詞は、主語が Ken であっても必ず原形（play）になります！', speak:'Ken can play the piano well.' },
+
+  { id:'s_u7_1', unit:'u7', diff:2, type:'input', jp:'「今、何時ですか。」空欄に1語入れよう。', q:'What (     ) is it now?', placeholder:'時を表す単語', ansList:['time'], caseSensitive:false, exp:'「何時ですか」は What time is it? という決まり文句です。', speak:'What time is it now?' },
+  { id:'s_u7_2', unit:'u7', diff:2, type:'choice', jp:'「おいくつですか。」「12歳です。」', q:"How (   ) are you? — I'm twelve.", opts:['many','much','old','tall'], ans:2, exp:'年齢を尋ねるときは How old are you? を使います。', speak:"How old are you? I'm twelve." },
+  { id:'s_u7_3', unit:'u7', diff:3, type:'input', jp:'下線部を尋ねる疑問文を作ろう（あなたは日曜日に何をしますか？）：', q:'I play <u>soccer</u> on Sundays.', placeholder:'What ... ?', ansList:['What do you do on Sundays?','What do you play on Sundays?'], caseSensitive:true, exp:'What do you do on Sundays?（または What do you play on Sundays?）が正解！', speak:'What do you do on Sundays?' },
+  { id:'s_u7_4', unit:'u7', diff:2, type:'error', jp:'「かばんの中に何を持っていますか」間違いを見つけよう。', segs:['What','you','do','have','in your bag?'], errIdx:1, fixOpts:['do you にする','are you にする','you を消す'], fixAns:0, exp:'疑問詞（What）の後ろは疑問文の語順（do you have）にします！', speak:'What do you have in your bag?' },
+
+  { id:'s_u8_1', unit:'u8', diff:2, type:'choice', jp:'「放課後テニスをしようよ。」「うん、そうしよう！」', q:"Let's play tennis after school. — (   ).", opts:['Yes, I do.',"Yes, let's.",'Yes, we are.',"No, I don't."], ans:1, exp:"Let's 〜. の誘いに賛成するときは Yes, let's. や Sounds good. で返事します！", speak:"Let's play tennis after school. Yes, let's." },
+  { id:'s_u8_2', unit:'u8', diff:2, type:'input', jp:'「いっしょに昼食を食べましょう。」空欄に1語入れよう。', q:'(     ) have lunch together.', placeholder:'先頭大文字で', ansList:["Let's"], caseSensitive:true, exp:"「〜しましょう」は Let's ＋動詞の原形です。", speak:"Let's have lunch together." },
+  { id:'s_u8_3', unit:'u8', diff:3, type:'error', jp:'「遅れてはいけません」間違いを見つけよう。', segs:['Not','be','late','for school.'], errIdx:0, fixOpts:["Don't",'No',"Aren't"], fixAns:0, exp:"「〜するな」という禁止の命令文は、be動詞の文でも先頭に Don't を置きます！", speak:"Don't be late for school." }
+];
+
+// ==========================================
+// 3. PROCEDURAL GRAMMAR & VOCAB GENERATOR
+// ==========================================
+const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+const pickN = (arr, n) => [...arr].sort(() => Math.random() - 0.5).slice(0, n);
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+const low = s => s.startsWith('I ') || s === 'I' || /^[A-Z][a-z]+\./.test(s) || /^(Ken|Yumi|Mai|Ms\.|Mr\.|Tom|Osaka|Tokyo|Japan|Canada|Australia|English|French|Japanese|Mt\.)/.test(s) ? s : s.charAt(0).toLowerCase() + s.slice(1);
+
+const BANK = {
+  aAnNouns: [
+    { w:'apple', jp:'りんご', art:'an' }, { w:'orange', jp:'オレンジ', art:'an' },
+    { w:'egg', jp:'卵', art:'an' }, { w:'eraser', jp:'消しゴム', art:'an' },
+    { w:'umbrella', jp:'傘', art:'an' }, { w:'old camera', jp:'古いカメラ', art:'an' },
+    { w:'English book', jp:'英語の本', art:'an' }, { w:'interesting book', jp:'おもしろい本', art:'an' },
+    { w:'pen', jp:'ペン', art:'a' }, { w:'notebook', jp:'ノート', art:'a' },
+    { w:'new bike', jp:'新しい自転車', art:'a' }, { w:'guitar', jp:'ギター', art:'a' },
+    { w:'camera', jp:'カメラ', art:'a' }, { w:'big dog', jp:'大きな犬', art:'a' },
+    { w:'red cup', jp:'赤いコップ', art:'a' }, { w:'dictionary', jp:'辞書', art:'a' }
+  ],
+  plurals: [
+    { sg:'box', pl:'boxes', jp:'箱', rule:'語尾が x なので -es', enPre:'I have', jpPre:'私は', jpPost:'を持っています。' },
+    { sg:'watch', pl:'watches', jp:'腕時計', rule:'語尾が ch なので -es', enPre:'I have', jpPre:'私は', jpPost:'を持っています。' },
+    { sg:'dish', pl:'dishes', jp:'お皿', rule:'語尾が sh なので -es', enPre:'We need', jpPre:'私たちは', jpPost:'が必要です。' },
+    { sg:'peach', pl:'peaches', jp:'桃', rule:'語尾が ch なので -es', enPre:'I want', jpPre:'私は', jpPost:'がほしいです。' },
+    { sg:'bus', pl:'buses', jp:'バス', rule:'語尾が s なので -es', enPre:'I see', jpPre:'私は', jpPost:'が見えます。' },
+    { sg:'class', pl:'classes', jp:'授業（クラス）', rule:'語尾が s なので -es', enPre:'We have', jpPre:'私たちは', jpPost:'があります。' },
+    { sg:'city', pl:'cities', jp:'都市', rule:'子音字＋y は y を i に変えて -es', enPre:'I know', jpPre:'私は', jpPost:'を知っています。' },
+    { sg:'library', pl:'libraries', jp:'図書館', rule:'子音字＋y は y を i に変えて -es', enPre:'I use', jpPre:'私は', jpPost:'を利用します。' },
+    { sg:'book', pl:'books', jp:'本', rule:'語尾に -s をつける', enPre:'I have', jpPre:'私は', jpPost:'を持っています。' },
+    { sg:'bag', pl:'bags', jp:'かばん', rule:'語尾に -s をつける', enPre:'I have', jpPre:'私は', jpPost:'を持っています。' }
+  ],
+  beSubjects: [
+    { en:'I', be:'am', neg:'am not', jp:'私は', ansYes:'Yes, you are.', ansNo:"No, you aren't.", type:'sg', qAble:false },
+    { en:'You', be:'are', neg:"aren't", jp:'あなたは', ansYes:'Yes, I am.', ansNo:"No, I'm not.", type:'sg', qAble:true },
+    { en:'He', be:'is', neg:"isn't", jp:'彼は', ansYes:'Yes, he is.', ansNo:"No, he isn't.", type:'sg', qAble:true },
+    { en:'She', be:'is', neg:"isn't", jp:'彼女は', ansYes:'Yes, she is.', ansNo:"No, she isn't.", type:'sg', qAble:true },
+    { en:'Ken', be:'is', neg:"isn't", jp:'ケンは', ansYes:'Yes, he is.', ansNo:"No, he isn't.", type:'sg', qAble:true },
+    { en:'Yumi', be:'is', neg:"isn't", jp:'ユミは', ansYes:'Yes, she is.', ansNo:"No, she isn't.", type:'sg', qAble:true },
+    { en:'My brother', be:'is', neg:"isn't", jp:'私の兄は', ansYes:'Yes, he is.', ansNo:"No, he isn't.", type:'sg', qAble:true },
+    { en:'Ms. Brown', be:'is', neg:"isn't", jp:'ブラウン先生は', ansYes:'Yes, she is.', ansNo:"No, she isn't.", type:'sg', qAble:true },
+    { en:'We', be:'are', neg:"aren't", jp:'私たちは', ansYes:'Yes, we are.', ansNo:"No, we aren't.", type:'pl', qAble:false },
+    { en:'They', be:'are', neg:"aren't", jp:'彼らは', ansYes:'Yes, they are.', ansNo:"No, they aren't.", type:'pl', qAble:true },
+    { en:'Ken and Mai', be:'are', neg:"aren't", jp:'ケンとマイは', ansYes:'Yes, they are.', ansNo:"No, they aren't.", type:'pl', qAble:true },
+    { en:'Tom and I', be:'are', neg:"aren't", jp:'トムと私は', ansYes:'Yes, we are.', ansNo:"No, we aren't.", type:'pl', qAble:false }
+  ],
+  beComplements: [
+    { en:'from Canada', jp:'カナダ出身です', jpNeg:'カナダ出身ではありません', jpQ:'カナダ出身ですか', type:'both' },
+    { en:'from Australia', jp:'オーストラリア出身です', jpNeg:'オーストラリア出身ではありません', jpQ:'オーストラリア出身ですか', type:'both' },
+    { en:'from Tokyo', jp:'東京出身です', jpNeg:'東京出身ではありません', jpQ:'東京出身ですか', type:'both' },
+    { en:'very kind', jp:'とても親切です', jpNeg:'とても親切ではありません', jpQ:'とても親切ですか', type:'both' },
+    { en:'busy today', jp:'今日忙しいです', jpNeg:'今日忙しくありません', jpQ:'今日忙しいですか', type:'both' },
+    { en:'in the library', jp:'図書館にいます', jpNeg:'図書館にいません', jpQ:'図書館にいますか', type:'both' },
+    { en:'in the classroom', jp:'教室にいます', jpNeg:'教室にいません', jpQ:'教室にいますか', type:'both' },
+    { en:'a junior high school student', jp:'中学生です', jpNeg:'中学生ではありません', jpQ:'中学生ですか', type:'sg' },
+    { en:'a soccer player', jp:'サッカー選手です', jpNeg:'サッカー選手ではありません', jpQ:'サッカー選手ですか', type:'sg' },
+    { en:'a good singer', jp:'上手な歌手です', jpNeg:'上手な歌手ではありません', jpQ:'上手な歌手ですか', type:'sg' },
+    { en:'junior high school students', jp:'中学生です', jpNeg:'中学生ではありません', jpQ:'中学生ですか', type:'pl' },
+    { en:'good swimmers', jp:'上手な水泳選手です', jpNeg:'上手な水泳選手ではありません', jpQ:'上手な水泳選手ですか', type:'pl' },
+    { en:'teammates', jp:'チームメイトです', jpNeg:'チームメイトではありません', jpQ:'チームメイトですか', type:'pl' }
+  ],
+  genSubjects: [
+    { en:'I', jp:'私は', qAble:false, ansPron:'you' },
+    { en:'You', jp:'あなたは', qAble:true, ansPron:'I' },
+    { en:'We', jp:'私たちは', qAble:false, ansPron:'you' },
+    { en:'They', jp:'彼らは', qAble:true, ansPron:'they' },
+    { en:'Ken and Mai', jp:'ケンとマイは', qAble:true, ansPron:'they' },
+    { en:'My friends', jp:'私の友達は', qAble:true, ansPron:'they' }
+  ],
+  genVerbs: [
+    { v:'play', obj:'soccer', jp:'サッカーをする', jpNeg:'サッカーをしない', jpQ:'サッカーをしますか', allowTime:true },
+    { v:'play', obj:'tennis', jp:'テニスをする', jpNeg:'テニスをしない', jpQ:'テニスをしますか', allowTime:true },
+    { v:'play', obj:'basketball', jp:'バスケをする', jpNeg:'バスケをしない', jpQ:'バスケをしますか', allowTime:true },
+    { v:'play', obj:'the piano', jp:'ピアノを弾く', jpNeg:'ピアノを弾かない', jpQ:'ピアノを弾きますか', allowTime:true },
+    { v:'study', obj:'English', jp:'英語を勉強する', jpNeg:'英語を勉強しない', jpQ:'英語を勉強しますか', allowTime:true },
+    { v:'study', obj:'math', jp:'数学を勉強する', jpNeg:'数学を勉強しない', jpQ:'数学を勉強しますか', allowTime:true },
+    { v:'watch', obj:'TV', jp:'テレビを見る', jpNeg:'テレビを見ない', jpQ:'テレビを見ますか', allowTime:true },
+    { v:'read', obj:'comic books', jp:'漫画を読む', jpNeg:'漫画を読まない', jpQ:'漫画を読みますか', allowTime:true },
+    { v:'like', obj:'music', jp:'音楽が好きだ', jpNeg:'音楽が好きではない', jpQ:'音楽が好きですか', allowTime:false },
+    { v:'like', obj:'dogs', jp:'犬が好きだ', jpNeg:'犬が好きではない', jpQ:'犬が好きですか', allowTime:false },
+    { v:'have', obj:'a pet', jp:'ペットを飼っている', jpNeg:'ペットを飼っていない', jpQ:'ペットを飼っていますか', allowTime:false },
+    { v:'have', obj:'a new bike', jp:'新しい自転車を持っている', jpNeg:'新しい自転車を持っていない', jpQ:'新しい自転車を持っていますか', allowTime:false },
+    { v:'speak', obj:'Japanese', jp:'日本語を話す', jpNeg:'日本語を話さない', jpQ:'日本語を話しますか', allowTime:false },
+    { v:'live', obj:'in Osaka', jp:'大阪に住んでいる', jpNeg:'大阪に住んでいない', jpQ:'大阪に住んでいますか', allowTime:false }
+  ],
+  times: [
+    { en:'every day', jp:'毎日' },
+    { en:'after school', jp:'放課後' },
+    { en:'on Sundays', jp:'日曜日に' }
+  ],
+  canActions: [
+    { v:'swim', rest:'fast', jp:'速く泳ぐ', sgErr:'swims', ingErr:'swimming' },
+    { v:'run', rest:'fast', jp:'速く走る', sgErr:'runs', ingErr:'running' },
+    { v:'speak', rest:'English well', jp:'英語を上手に話す', sgErr:'speaks', ingErr:'speaking' },
+    { v:'speak', rest:'French', jp:'フランス語を話す', sgErr:'speaks', ingErr:'speaking' },
+    { v:'play', rest:'the piano well', jp:'ピアノを上手に弾く', sgErr:'plays', ingErr:'playing', isInst:'piano' },
+    { v:'play', rest:'the guitar well', jp:'ギターを上手に弾く', sgErr:'plays', ingErr:'playing', isInst:'guitar' },
+    { v:'cook', rest:'well', jp:'上手に料理する', sgErr:'cooks', ingErr:'cooking' },
+    { v:'skate', rest:'well', jp:'上手にスケートをする', sgErr:'skates', ingErr:'skating' },
+    { v:'use', rest:'this computer', jp:'このコンピューターを使う', sgErr:'uses', ingErr:'using' },
+    { v:'read', rest:'kanji', jp:'漢字を読む', sgErr:'reads', ingErr:'reading' }
+  ],
+  canSubjects: [
+    { en:'I', jp:'私は', ans:'Yes, I can.', is3sg:false },
+    { en:'You', jp:'あなたは', ans:'Yes, I can.', is3sg:false },
+    { en:'Ken', jp:'ケンは', ans:'Yes, he can.', is3sg:true },
+    { en:'Yumi', jp:'ユミは', ans:'Yes, she can.', is3sg:true },
+    { en:'My sister', jp:'私の姉は', ans:'Yes, she can.', is3sg:true },
+    { en:'They', jp:'彼らは', ans:'Yes, they can.', is3sg:false }
+  ]
+};
+
+function generateVocabQuestion(category = 'all', usedSet = new Set()) {
+  const pool = category === 'all' ? VOCAB_BANK : VOCAB_BANK.filter(w => w.cat === category);
+  let item = pick(pool);
+  for (let i = 0; i < 10; i++) {
+    const candidate = pick(pool);
+    if (!usedSet.has(candidate.en)) { item = candidate; break; }
+  }
+  usedSet.add(item.en);
+
+  const mode = pick(['jp2en_choice', 'en2jp_choice', 'spell_choice', 'spell_input']);
+  const uid = 'v_' + item.en + '_' + mode + '_' + Math.random().toString(36).slice(2, 5);
+  const catNames = { cal:'曜日・月・数字', school:'学校・教科・もの', life:'生活・家族・場所', verb:'動詞・形容詞・他' };
+  const catLabel = catNames[item.cat] || '1学期重要単語';
+
+  if (mode === 'jp2en_choice') {
+    const sameCat = pool.filter(x => x.en !== item.en);
+    const distractors = pickN(sameCat.length >= 3 ? sameCat : VOCAB_BANK.filter(x => x.en !== item.en), 3).map(x => x.en);
+    return shuffleChoices({
+      id: uid, unit: 'vocab', unitLabel: `単語：${catLabel}`, diff: 1, isGen: true, type: 'choice',
+      jp: `次の日本語に合う英単語を選ぼう`, q: `「${item.jp}」 ＝ (   )`,
+      opts: [item.en, ...distractors], ans: 0,
+      exp: `「${item.jp}」は <b>${item.en}</b> です。${item.cap ? '※固有名詞・曜日・月なので先頭は大文字！' : ''}`,
+      speak: item.en
+    });
+  }
+
+  if (mode === 'en2jp_choice') {
+    const sameCat = pool.filter(x => x.en !== item.en);
+    const distractors = pickN(sameCat.length >= 3 ? sameCat : VOCAB_BANK.filter(x => x.en !== item.en), 3).map(x => x.jp);
+    return shuffleChoices({
+      id: uid, unit: 'vocab', unitLabel: `単語：${catLabel}`, diff: 1, isGen: true, type: 'choice',
+      jp: `この英単語の意味はどれ？（🔊ボタンで発音も聞けるよ）`, q: `${item.en}`,
+      opts: [item.jp, ...distractors], ans: 0,
+      exp: `<b>${item.en}</b> ＝「${item.jp}」です。発音とつづりをセットで覚えよう！`,
+      speak: item.en
+    });
+  }
+
+  if (mode === 'spell_choice') {
+    return shuffleChoices({
+      id: uid, unit: 'vocab', unitLabel: `単語：${catLabel}`, diff: 2, isGen: true, type: 'choice',
+      jp: `テスト頻出！正しいスペル（つづり）はどれ？`, q: `「${item.jp}」の正しいつづりは？`,
+      opts: [item.en, ...item.typos.slice(0, 3)], ans: 0,
+      exp: `正しいつづりは <b>${item.en}</b> です！似た紛らわしいスペルに引っかからないよう注意しよう。`,
+      speak: item.en
+    });
+  }
+
+  const masked = item.en[0] + item.en.slice(1).replace(/[a-zA-Z]/g, ' _ ');
+  return {
+    id: uid, unit: 'vocab', unitLabel: `単語：${catLabel}`, diff: 2, isGen: true, type: 'input',
+    jp: `テストで書けるかな？英語のスペルを入力しよう${item.cap ? '（先頭は大文字！）' : ''}`,
+    q: `「${item.jp}」 ＝ ${masked} (${item.en.length}文字)`,
+    placeholder: `${item.en[0]} から始まる ${item.en.length}文字`,
+    ansList: [item.en], caseSensitive: item.cap,
+    exp: `正解は <b>${item.en}</b> です！${item.cap ? '先頭を大文字にするのもテストの重要ポイント。' : ''}`,
+    speak: item.en
+  };
+}
+
+function generateQuestionForUnit(unitId, preferredType = null) {
+  const uid = 'g_' + unitId + '_' + Math.random().toString(36).slice(2, 7);
+
+  if (unitId === 'u1') {
+    const mode = preferredType || pick(['a_an', 'plural', 'spell_input', 'spell_choice']);
+    if (mode === 'a_an') {
+      const item = pick(BANK.aAnNouns);
+      const subj = pick(['This is', 'That is', 'I have']);
+      const subjJp = subj === 'This is' ? 'これは' : subj === 'That is' ? 'あれは' : '私は';
+      const endJp = subj === 'I have' ? 'を持っています。' : 'です。';
+      return {
+        id: uid, unit:'u1', diff:1, isGen:true, type:'choice',
+        jp: `${subjJp}1つの${item.jp}${endJp}`, q: `${subj} (   ) ${item.w}.`,
+        opts: ['a', 'an', 'the', 'two'], ans: item.art === 'an' ? 1 : 0,
+        exp: `${item.w} は「${item.art === 'an' ? '母音（ア・イ・ウ・エ・オの音）' : '子音'}」で始まる単数名詞なので ${item.art} を使います。`,
+        speak: `${subj} ${item.art} ${item.w}.`
+      };
+    }
+    if (mode === 'plural') {
+      const item = pick(BANK.plurals);
+      const num = pick([{en:'two',jp:'2つの'}, {en:'three',jp:'3つの'}, {en:'five',jp:'5つの'}]);
+      const wrongs = [item.sg, item.sg + 's', item.sg + 'es', item.sg + 'ies'].filter(x => x !== item.pl);
+      return {
+        id: uid, unit:'u1', diff:2, isGen:true, type:'choice',
+        jp: `${item.jpPre}${num.jp}${item.jp}${item.jpPost}（複数形）`, q: `${item.enPre} ${num.en} (   ).`,
+        opts: [item.pl, ...wrongs.slice(0, 3)], ans: 0,
+        exp: `${item.sg} の複数形は「${item.rule}」なので ${item.pl} になります。`,
+        speak: `${item.enPre} ${num.en} ${item.pl}.`
+      };
+    }
+    if (mode === 'spell_input') {
+      const item = pick(VOCAB_BANK);
+      return {
+        id: uid, unit:'u1', diff:2, isGen:true, type:'input',
+        jp: `テスト頻出単語をスペル入力しよう：「${item.jp}」${item.cap ? '（先頭大文字）' : ''}`, q: `${item.jp} ＝ (          )`,
+        placeholder: `${item.en[0]} から始まる ${item.en.length}文字`, ansList: [item.en], caseSensitive: item.cap,
+        exp: `正解は ${item.en} です。${item.cap ? '曜日や月・言語名などは必ず大文字から始めます！' : ''}`,
+        speak: item.en
+      };
+    }
+    const item = pick(VOCAB_BANK);
+    return {
+      id: uid, unit:'u1', diff:1, isGen:true, type:'choice',
+      jp: `正しいスペルはどれ？`, q: `「${item.jp}」 ＝ (   )`,
+      opts: [item.en, ...item.typos.slice(0, 3)], ans: 0,
+      exp: `「${item.jp}」の正しいつづりは <b>${item.en}</b> です。`,
+      speak: item.en
+    };
+  }
+
+  if (unitId === 'u2') {
+    const sub = pick(BANK.beSubjects);
+    const comp = pick(BANK.beComplements.filter(c => c.type === 'both' || c.type === sub.type));
+    const full = `${sub.en} ${sub.be} ${comp.en}.`;
+    const mode = preferredType || pick(['choice', 'sort', 'error']);
+    if (mode === 'sort') {
+      return { id: uid, unit:'u2', diff:2, isGen:true, type:'sort', jp: `${sub.jp}${comp.jp}`, words: full.split(' '), ans: full, exp: `主語（${sub.en}）に対応する be動詞は ${sub.be} です。`, speak: full };
+    }
+    if (mode === 'error') {
+      const wrongBe = sub.be === 'am' ? 'is' : sub.be === 'are' ? 'is' : 'are';
+      const altBe = ['am', 'is', 'are'].find(x => x !== sub.be && x !== wrongBe);
+      const segs = [sub.en, wrongBe, ...comp.en.split(' ')]; segs[segs.length - 1] += '.';
+      return {
+        id: uid, unit:'u2', diff:2, isGen:true, type:'error', jp: `「${sub.jp}${comp.jp}」間違いを見つけよう。`,
+        segs, errIdx: 1, fixOpts: [sub.be, altBe, 'do'], fixAns: 0,
+        exp: `主語が ${sub.en} のときの be動詞は ${wrongBe} ではなく ${sub.be} です！`, speak: full
+      };
+    }
+    return {
+      id: uid, unit:'u2', diff:1, isGen:true, type:'choice', jp: `${sub.jp}${comp.jp}`, q: `${sub.en} (   ) ${comp.en}.`,
+      opts: ['am', 'is', 'are', 'do'], ans: sub.be === 'am' ? 0 : sub.be === 'is' ? 1 : 2,
+      exp: `主語が ${sub.en} なので be動詞は ${sub.be} を使います。`, speak: full
+    };
+  }
+
+  if (unitId === 'u3') {
+    const sub = pick(BANK.beSubjects.filter(s => s.qAble));
+    const comp = pick(BANK.beComplements.filter(c => c.type === 'both' || c.type === sub.type));
+    const mode = preferredType || pick(['q_ans', 'rewrite_q', 'sort_neg', 'input_neg']);
+    if (mode === 'q_ans') {
+      const isYes = Math.random() < 0.5;
+      const ans = isYes ? sub.ansYes : sub.ansNo;
+      const wrongPool = ['Yes, it is.', "No, it isn't.", 'Yes, I do.', "No, I don't.", "Yes, I'm.", 'Yes, you are.', "No, he isn't.", "No, they aren't."].filter(x => x !== ans);
+      return {
+        id: uid, unit:'u3', diff:2, isGen:true, type:'choice',
+        jp: `「${sub.jp}${comp.jpQ}」「${isYes ? 'はい、そうです' : 'いいえ、ちがいます'}。」`,
+        q: `${cap(sub.be)} ${low(sub.en)} ${comp.en}? — (   )`, opts: [ans, ...pickN(wrongPool, 3)], ans: 0,
+        exp: `主語（${sub.en}）と be動詞（${sub.be}）で聞かれているので、${ans} と答えます！`,
+        speak: `${cap(sub.be)} ${low(sub.en)} ${comp.en}? ${ans}`
+      };
+    }
+    if (mode === 'rewrite_q') {
+      const baseSent = `${sub.en} ${sub.be} ${comp.en}.`;
+      const qSentence = `${cap(sub.be)} ${low(sub.en)} ${comp.en}?`;
+      return {
+        id: uid, unit:'u3', diff:2, isGen:true, type:'input',
+        jp: `次の文を疑問文に書き換えよう（先頭大文字・最後 ?）：`, q: baseSent,
+        placeholder: `${cap(sub.be)} ... ?`, ansList: [qSentence], caseSensitive: true,
+        promptSpeak: baseSent,
+        exp: `be動詞（${cap(sub.be)}）を主語（${low(sub.en)}）の前に出して ${qSentence} にします。`, speak: qSentence
+      };
+    }
+    if (mode === 'input_neg') {
+      return {
+        id: uid, unit:'u3', diff:2, isGen:true, type:'input',
+        jp: `否定文にしよう：${sub.en} ${sub.be} ${comp.en}.`, q: `${sub.en} (     ) ${comp.en}.（短縮形1語で）`,
+        placeholder: `${sub.be} not の短縮形`, ansList: [sub.neg, `${sub.be} not`], caseSensitive: false,
+        exp: `be動詞の否定は ${sub.be} の後ろに not（短縮形：${sub.neg}）を入れます。`, speak: `${sub.en} ${sub.neg} ${comp.en}.`
+      };
+    }
+    const negSent = `${sub.en} ${sub.be} not ${comp.en}.`;
+    return { id: uid, unit:'u3', diff:2, isGen:true, type:'sort', jp: `${sub.jp}${comp.jpNeg}`, words: negSent.split(' '), ans: negSent, exp: `否定の not は必ず be動詞（${sub.be}）のすぐ後ろに置きます。`, speak: negSent };
+  }
+
+  if (unitId === 'u4') {
+    const sub = pick(BANK.genSubjects);
+    const act = pick(BANK.genVerbs);
+    const time = act.allowTime && Math.random() < 0.7 ? pick(BANK.times) : { en:'', jp:'' };
+    const tail = time.en ? ` ${time.en}` : '';
+    const tailJp = time.jp ? `${time.jp}、` : '';
+    const full = `${sub.en} ${act.v} ${act.obj}${tail}.`;
+    const mode = preferredType || pick(['error_be', 'sort', 'choice_verb']);
+    if (mode === 'error_be') {
+      const wrongBe = sub.en === 'I' ? 'am' : 'are';
+      const segs = [sub.en, wrongBe, act.v, ...act.obj.split(' ')];
+      if (time.en) segs.push(...time.en.split(' '));
+      segs[segs.length - 1] += '.';
+      return {
+        id: uid, unit:'u4', diff:2, isGen:true, type:'error', jp: `「${sub.jp}${tailJp}${act.jp}」間違いを見つけよう。`,
+        segs, errIdx: 1, fixOpts: [`${wrongBe} を消す`, `to ${act.v} にする`, 'do を入れる'], fixAns: 0,
+        exp: `一般動詞（${act.v}）がある文に be動詞（${wrongBe}）を一緒に並べてはいけません！`, speak: full
+      };
+    }
+    if (mode === 'sort') {
+      return { id: uid, unit:'u4', diff:2, isGen:true, type:'sort', jp: `${sub.jp}${tailJp}${act.jp}`, words: full.split(' '), ans: full, exp: `「主語（${sub.en}）＋一般動詞（${act.v}）＋目的語〜」の語順にします。`, speak: full };
+    }
+    const wrongBe = sub.en === 'I' ? 'am' : 'are';
+    return {
+      id: uid, unit:'u4', diff:1, isGen:true, type:'choice', jp: `${sub.jp}${tailJp}${act.jp}`, q: `${sub.en} (   ) ${act.obj}${tail}.`,
+      opts: [act.v, `${wrongBe} ${act.v}`, `to ${act.v}`, `do ${act.v}`], ans: 0,
+      exp: `一般動詞 ${act.v} をそのまま使います。be動詞と混ぜないよう注意！`, speak: full
+    };
+  }
+
+  if (unitId === 'u5') {
+    const sub = pick(BANK.genSubjects.filter(s => s.qAble));
+    const act = pick(BANK.genVerbs);
+    const time = act.allowTime && Math.random() < 0.6 ? pick(BANK.times) : { en:'', jp:'' };
+    const tail = time.en ? ` ${time.en}` : '';
+    const tailJp = time.jp ? `${time.jp}` : '';
+    const mode = preferredType || pick(['choice_do_be', 'error_are', 'input_neg', 'input_q', 'sort_q']);
+
+    if (mode === 'choice_do_be') {
+      const isYes = Math.random() < 0.5;
+      const ans = isYes ? `Do / do` : `Do / don't`;
+      const beAns = sub.ansPron === 'I' ? (isYes ? 'Are / am' : 'Are / am not') : (isYes ? 'Are / are' : "Are / aren't");
+      const mix1 = sub.ansPron === 'I' ? 'Are / do' : 'Are / do';
+      const mix2 = sub.ansPron === 'I' ? (isYes ? 'Do / am' : 'Do / am not') : (isYes ? 'Do / are' : "Do / aren't");
+      return {
+        id: uid, unit:'u5', diff:2, isGen:true, type:'choice',
+        jp: `「${sub.jp}${tailJp}${act.jpQ}」「${isYes ? 'はい' : 'いいえ'}。」`,
+        q: `(   ) ${low(sub.en)} ${act.v} ${act.obj}${tail}? — ${isYes ? 'Yes' : 'No'}, ${sub.ansPron} (   ).`,
+        opts: [ans, beAns, mix1, mix2], ans: 0,
+        exp: `${act.v} は一般動詞なので、疑問文は Do で始め、答えも do / don't を使います！`,
+        speak: `Do ${low(sub.en)} ${act.v} ${act.obj}${tail}? ${isYes ? 'Yes' : 'No'}, ${sub.ansPron} ${isYes ? 'do' : "don't"}.`
+      };
+    }
+    if (mode === 'error_are') {
+      const segs = ['Are', low(sub.en), act.v, ...act.obj.split(' ')]; segs[segs.length - 1] += '?';
+      return {
+        id: uid, unit:'u5', diff:2, isGen:true, type:'error', jp: `「${sub.jp}${act.jpQ}」間違いを見つけよう。`,
+        segs, errIdx: 0, fixOpts: ['Do', 'Is', 'Can'], fixAns: 0,
+        exp: `一般動詞（${act.v}）の疑問文なので、Are ではなく Do から始めます！`, speak: `Do ${low(sub.en)} ${act.v} ${act.obj}?`
+      };
+    }
+    if (mode === 'input_neg') {
+      return {
+        id: uid, unit:'u5', diff:2, isGen:true, type:'input',
+        jp: `否定文にしよう：${sub.en} ${act.v} ${act.obj}${tail}.`, q: `${sub.en} (     ) ${act.v} ${act.obj}${tail}.`,
+        placeholder: "do not の短縮形1語", ansList: ["don't", 'do not'], caseSensitive: false,
+        exp: `一般動詞の否定文は動詞の前に don't (do not) を置きます。`, speak: `${sub.en} don't ${act.v} ${act.obj}${tail}.`
+      };
+    }
+    if (mode === 'input_q') {
+      const baseSent = `${sub.en} ${act.v} ${act.obj}${tail}.`;
+      const qSent = `Do ${low(sub.en)} ${act.v} ${act.obj}${tail}?`;
+      return {
+        id: uid, unit:'u5', diff:2, isGen:true, type:'input',
+        jp: `次の文を疑問文に書き換えよう（文頭大文字・最後 ?）：`, q: baseSent,
+        placeholder: 'Do ... ?', ansList: [qSent], caseSensitive: true,
+        promptSpeak: baseSent,
+        exp: `一般動詞の文なので先頭に Do をつけて ${qSent} にします。`, speak: qSent
+      };
+    }
+    const qSent = `Do ${low(sub.en)} ${act.v} ${act.obj}${tail}?`;
+    return { id: uid, unit:'u5', diff:2, isGen:true, type:'sort', jp: `${sub.jp}${tailJp}${act.jpQ}`, words: qSent.split(' '), ans: qSent, exp: `Do＋主語（${low(sub.en)}）＋動詞の原形（${act.v}）〜? の語順です。`, speak: qSent };
+  }
+
+  if (unitId === 'u6') {
+    const sub = pick(BANK.canSubjects);
+    const act = pick(BANK.canActions);
+    const mode = preferredType || pick(['choice_base', 'sort_neg', 'input_q', 'error_inst']);
+    if (mode === 'error_inst') {
+      const inst = act.isInst ? act : BANK.canActions.find(a => a.isInst);
+      const segs = [sub.en, 'can', 'play', inst.isInst, 'well.'];
+      return {
+        id: uid, unit:'u6', diff:2, isGen:true, type:'error', jp: `「${sub.jp}${inst.jp}ことができます」間違いを見つけよう。`,
+        segs, errIdx: 3, fixOpts: [`the ${inst.isInst}`, `a ${inst.isInst}`, `${inst.isInst}s`], fixAns: 0,
+        exp: `楽器を演奏するとき（play the ${inst.isInst}）は、楽器名の前に必ず the をつけます！`, speak: `${sub.en} can play ${inst.rest}.`
+      };
+    }
+    if (mode === 'choice_base') {
+      const wrong2 = sub.is3sg ? act.sgErr : act.ingErr;
+      return {
+        id: uid, unit:'u6', diff:1, isGen:true, type:'choice', jp: `${sub.jp}${act.jp}ことができます。`, q: `${sub.en} can (   ) ${act.rest}.`,
+        opts: [act.v, wrong2, `to ${act.v}`, `is ${act.v}`], ans: 0,
+        exp: `助動詞 can の後ろは主語が ${sub.en} でも必ず動詞の原形（${act.v}）になります！`, speak: `${sub.en} can ${act.v} ${act.rest}.`
+      };
+    }
+    if (mode === 'sort_neg') {
+      const sent = `${sub.en} can't ${act.v} ${act.rest}.`;
+      return { id: uid, unit:'u6', diff:2, isGen:true, type:'sort', jp: `${sub.jp}${act.jp}ことができません。`, words: sent.split(' '), ans: sent, exp: `can't の後ろも必ず動詞の原形（${act.v}）にします。`, speak: sent };
+    }
+    const baseSent = `${sub.en} can ${act.v} ${act.rest}.`;
+    const qSent = `Can ${low(sub.en)} ${act.v} ${act.rest}?`;
+    return {
+      id: uid, unit:'u6', diff:2, isGen:true, type:'input', jp: `次の文を疑問文に書き換えよう（先頭大文字・最後 ?）：`,
+      q: baseSent, placeholder: 'Can ... ?', ansList: [qSent], caseSensitive: true,
+      promptSpeak: baseSent,
+      exp: `Can を文の先頭に出すだけで疑問文になります！`, speak: qSent
+    };
+  }
+
+  if (unitId === 'u7') {
+    const mode = preferredType || pick(['what_noun', 'how_many', 'who_is', 'where_live']);
+    if (mode === 'what_noun') {
+      const cat = pick([{ en:'sport', jp:'スポーツ' }, { en:'subject', jp:'教科' }, { en:'color', jp:'色' }, { en:'animal', jp:'動物' }, { en:'fruit', jp:'果物' }]);
+      const sent = `What ${cat.en} do you like?`;
+      return { id: uid, unit:'u7', diff:2, isGen:true, type:'sort', jp: `あなたは何の${cat.jp}が好きですか。`, words: sent.split(' '), ans: sent, exp: `「何の${cat.jp}」は What ${cat.en} とセットで文頭に置き、後ろを疑問文（do you like?）にします。`, speak: sent };
+    }
+    if (mode === 'how_many') {
+      const noun = pick([{ sg:'pen', pl:'pens', jp:'ペン' }, { sg:'book', pl:'books', jp:'本' }, { sg:'notebook', pl:'notebooks', jp:'ノート' }, { sg:'bag', pl:'bags', jp:'かばん' }, { sg:'apple', pl:'apples', jp:'りんご' }]);
+      return {
+        id: uid, unit:'u7', diff:2, isGen:true, type:'choice', jp: `あなたはいくつの${noun.jp}を持っていますか。`, q: `How (   ) do you have?`,
+        opts: [`many ${noun.pl}`, `many ${noun.sg}`, `much ${noun.pl}`, `old ${noun.pl}`], ans: 0,
+        exp: `【テスト超頻出】How many の後ろは必ず複数形（${noun.pl}）になります！`, speak: `How many ${noun.pl} do you have?`
+      };
+    }
+    if (mode === 'who_is') {
+      const person = pick([
+        { en:'that boy', jp:'あの男の子', pron:'He', role:'my brother', rjp:'私の兄' },
+        { en:'that girl', jp:'あの女の子', pron:'She', role:'my sister', rjp:'私の妹' },
+        { en:'that man', jp:'あの男性', pron:'He', role:'our math teacher', rjp:'私たちの数学の先生' },
+        { en:'that woman', jp:'あの女性', pron:'She', role:'our English teacher', rjp:'私たちの英語の先生' }
+      ]);
+      return {
+        id: uid, unit:'u7', diff:1, isGen:true, type:'choice', jp: `「${person.jp}はだれですか。」「${person.rjp}です。」`,
+        q: `(   ) is ${person.en}? — ${person.pron} is ${person.role}.`, opts: ['Who', 'What', 'Where', 'How'], ans: 0,
+        exp: `「だれ」と人を尋ねるときは Who を使います。`, speak: `Who is ${person.en}? ${person.pron} is ${person.role}.`
+      };
+    }
+    const sub = pick([{ en:'you', jp:'あなたは' }, { en:'they', jp:'彼らは' }, { en:'Ken and Yumi', jp:'ケンとユミは' }]);
+    const sent = `Where do ${sub.en} live?`;
+    return { id: uid, unit:'u7', diff:2, isGen:true, type:'sort', jp: `${sub.jp}どこに住んでいますか。`, words: sent.split(' '), ans: sent, exp: `Where（どこ）＋疑問文の語順（do ${sub.en} live?）にします。`, speak: sent };
+  }
+
+  // Unit 8
+  const mode = preferredType || pick(['be_imp', 'dont_imp', 'please_imp', 'these_those', 'lets_sort']);
+  if (mode === 'be_imp') {
+    const adj = pick([
+      { en:'quiet', rest:'in the library', jp:'図書館では静かにしなさい。', isNeg:false },
+      { en:'kind', rest:'to animals', jp:'動物に親切にしなさい。', isNeg:false },
+      { en:'careful', rest:'here', jp:'ここでは注意しなさい。', isNeg:false },
+      { en:'late', rest:'for school', jp:'学校に遅れてはいけません。', isNeg:true }
+    ]);
+    if (adj.isNeg) {
+      return { id: uid, unit:'u8', diff:2, isGen:true, type:'choice', jp: adj.jp, q: `(   ) be ${adj.en} ${adj.rest}.`, opts: ["Don't", 'Not', 'No', "Aren't"], ans: 0, exp: `be動詞を使った禁止の命令文でも、必ず先頭に Don't を置きます（Don't be 〜）。`, speak: `Don't be ${adj.en} ${adj.rest}.` };
+    }
+    return { id: uid, unit:'u8', diff:2, isGen:true, type:'choice', jp: adj.jp, q: `(   ) ${adj.en} ${adj.rest}.`, opts: ['Be', 'Are', 'Is', 'Do'], ans: 0, exp: `${adj.en} は形容詞なので、命令文にするときは be動詞の原形 Be を先頭に置きます！`, speak: `Be ${adj.en} ${adj.rest}.` };
+  }
+  if (mode === 'dont_imp') {
+    const cmd = pick([
+      { v:'run', rest:'in the hallway', jp:'廊下を走ってはいけません。' },
+      { v:'swim', rest:'in this river', jp:'この川で泳いではいけません。' },
+      { v:'use', rest:'your phone here', jp:'ここでスマホを使ってはいけません。' },
+      { v:'open', rest:'that window', jp:'あの窓を開けてはいけません。' }
+    ]);
+    const sent = `Don't ${cmd.v} ${cmd.rest}.`;
+    return { id: uid, unit:'u8', diff:2, isGen:true, type:'sort', jp: cmd.jp, words: sent.split(' '), ans: sent, exp: `禁止の命令文は Don't ＋動詞の原形（${cmd.v}）で始めます。`, speak: sent };
+  }
+  if (mode === 'please_imp') {
+    const cmd = pick([
+      { v:'open', rest:'the window', jp:'窓を開けてください。' },
+      { v:'close', rest:'your book', jp:'本を閉じてください。' },
+      { v:'clean', rest:'your room', jp:'部屋を掃除してください。' },
+      { v:'write', rest:'your name here', jp:'ここに名前を書いてください。' }
+    ]);
+    const baseSent = `You ${cmd.v} ${cmd.rest}.`;
+    return {
+      id: uid, unit:'u8', diff:2, isGen:true, type:'input',
+      jp: `丁寧な命令文「${cmd.jp}」に書き換えよう：`, q: baseSent,
+      placeholder: 'Please ... .', ansList: [`Please ${cmd.v} ${cmd.rest}.`, `${cap(cmd.v)} ${cmd.rest}, please.`], caseSensitive: true,
+      promptSpeak: baseSent,
+      exp: `主語の You を取り、Please を先頭につけて Please ${cmd.v} ${cmd.rest}. にします。`, speak: `Please ${cmd.v} ${cmd.rest}.`
+    };
+  }
+  if (mode === 'these_those') {
+    const dem = pick([{ en:'these', other:'those', jp:'これら' }, { en:'those', other:'these', jp:'あれら' }]);
+    const noun = pick([{ en:'books', jp:'本' }, { en:'pens', jp:'ペン' }, { en:'bags', jp:'かばん' }, { en:'shoes', jp:'靴' }, { en:'pictures', jp:'写真' }]);
+    const isYes = Math.random() < 0.5;
+    const ans = isYes ? 'they are' : "they aren't";
+    const opts = isYes
+      ? ['they are', `${dem.en} are`, 'it is', `${dem.other} are`]
+      : ["they aren't", `${dem.en} aren't`, "it isn't", `${dem.other} aren't`];
+    return {
+      id: uid, unit:'u8', diff:2, isGen:true, type:'choice',
+      jp: `「${dem.jp}はあなたの${noun.jp}ですか。」「${isYes ? 'はい、そうです' : 'いいえ、ちがいます'}。」`,
+      q: `Are ${dem.en} your ${noun.en}? — ${isYes ? 'Yes' : 'No'}, (   ).`,
+      opts, ans: 0,
+      exp: `these / those の複数に対する答えの文では、必ず代名詞 they を使って答えます！`,
+      speak: `Are ${dem.en} your ${noun.en}? ${isYes ? 'Yes' : 'No'}, ${ans}.`
+    };
+  }
+  const act = pick([
+    { en:'play soccer after school', jp:'放課後サッカーをしましょう。' },
+    { en:'study English together', jp:'いっしょに英語を勉強しましょう。' },
+    { en:'go to the library', jp:'図書館へ行きましょう。' },
+    { en:'listen to music', jp:'音楽を聞きましょう。' }
+  ]);
+  const lSent = `Let's ${act.en}.`;
+  return { id: uid, unit:'u8', diff:1, isGen:true, type:'sort', jp: act.jp, words: lSent.split(' '), ans: lSent, exp: `「〜しましょう」は Let's ＋動詞の原形で始めます。`, speak: lSent };
+}
+
+function shuffleChoices(q) {
+  if (q.type !== 'choice') return q;
+  const copy = { ...q };
+  const tagged = copy.opts.map((text, i) => ({ text, isCorrect: i === copy.ans }));
+  tagged.sort(() => Math.random() - 0.5);
+  copy.opts = tagged.map(t => t.text);
+  copy.ans = tagged.findIndex(t => t.isCorrect);
+  return copy;
+}
+
+function drawUniqueQuestion(unitId, usedPrompts, preferGenProb = 0.65) {
+  for (let tries = 0; tries < 15; tries++) {
+    let q;
+    const staticPool = STATIC_QUESTIONS.filter(x => x.unit === unitId && !usedPrompts.has(x.jp + x.q));
+    if (staticPool.length > 0 && Math.random() > preferGenProb) q = pick(staticPool);
+    else q = generateQuestionForUnit(unitId);
+    const key = (q.jp || '') + (q.q || q.ans || '');
+    if (!usedPrompts.has(key)) { usedPrompts.add(key); return shuffleChoices(q); }
+  }
+  return shuffleChoices(generateQuestionForUnit(unitId));
+}
+
+// ==========================================
+// 4. STATE & STORAGE
+// ==========================================
+const STORAGE_KEY = 'grammar_quest_jhs1_v4';
+let state = {
+  xp: 0, combo: 0, soundOn: true, speed: 0.95, preferredVoiceName: '',
+  diagDone: false, tutorialDone: false, unitStats: {}, missedQuestions: []
+};
+
+function initUnitStats() {
+  UNITS.forEach(u => {
+    if (!state.unitStats[u.id]) state.unitStats[u.id] = { mastery: 0, attempts: 0, correct: 0, streak: 0, status: 'new' };
+  });
+}
+function loadState() {
+  try { const raw = localStorage.getItem(STORAGE_KEY); if (raw) state = { ...state, ...JSON.parse(raw) }; } catch (e) {}
+  initUnitStats();
+}
+function saveState() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {} }
+
+// ==========================================
+// 5. NATURAL VOICE ENGINE & SFX
+// ==========================================
+let audioCtx = null;
+function getAudioCtx() {
+  if (!audioCtx) {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (AC) audioCtx = new AC();
+  }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+function playTone(freq, dur, type='sine', delay=0, vol=0.12) {
+  if (!state.soundOn) return;
+  const ctx = getAudioCtx(); if (!ctx) return;
+  const osc = ctx.createOscillator(); const gain = ctx.createGain();
+  osc.type = type; osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+  gain.gain.setValueAtTime(vol, ctx.currentTime + delay);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + dur);
+  osc.connect(gain); gain.connect(ctx.destination);
+  osc.start(ctx.currentTime + delay); osc.stop(ctx.currentTime + delay + dur);
+}
+function sfxCorrect() { playTone(523.25, 0.12, 'triangle', 0); playTone(659.25, 0.12, 'triangle', 0.08); playTone(783.99, 0.22, 'triangle', 0.16); }
+function sfxWrong() { playTone(220, 0.18, 'sawtooth', 0, 0.08); playTone(180, 0.25, 'sawtooth', 0.14, 0.08); }
+function sfxSkip() { [523, 659, 784, 1046].forEach((f, i) => playTone(f, 0.16, 'sine', i * 0.07, 0.13)); }
+
+function scoreVoice(v) {
+  const lang = (v.lang || '').toLowerCase();
+  if (!lang.startsWith('en')) return -1000;
+  let score = lang === 'en-us' || lang === 'en_us' ? 25 : 15;
+  const n = (v.name || '').toLowerCase();
+  if (n.includes('natural') || n.includes('neural') || n.includes('online')) score += 120;
+  if (n.includes('google us english')) score += 110; else if (n.includes('google')) score += 95;
+  if (n.includes('enhanced') || n.includes('premium') || n.includes('siri')) score += 85;
+  if (n.includes('aria') || n.includes('jenny') || n.includes('ava') || n.includes('samantha') || n.includes('daniel') || n.includes('allison')) score += 45;
+  if (n.includes('espeak') || n.includes('compact')) score -= 40;
+  if (n.includes('david') || n.includes('zira') || n.includes('mark')) score -= 10;
+  return score;
+}
+function getSortedEnglishVoices() {
+  if (!('speechSynthesis' in window)) return [];
+  return window.speechSynthesis.getVoices().filter(v => (v.lang || '').toLowerCase().startsWith('en')).sort((a, b) => scoreVoice(b) - scoreVoice(a));
+}
+function pickBestVoice() {
+  const list = getSortedEnglishVoices();
+  if (list.length === 0) return null;
+  if (state.preferredVoiceName) { const f = list.find(v => v.name === state.preferredVoiceName); if (f) return f; }
+  return list[0];
+}
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+}
+function speakText(text) {
+  if (!state.soundOn || !('speechSynthesis' in window) || !text) return;
+  window.speechSynthesis.cancel();
+  const clean = text.replace(/<u>|<\/u>/g, '').replace(/\(\s*\)/g, ' ... ').replace(/\s*—\s*/g, '. ... ').replace(/\s+/g, ' ').trim();
+  const utt = new SpeechSynthesisUtterance(clean);
+  const voice = pickBestVoice();
+  if (voice) { utt.voice = voice; utt.lang = voice.lang; } else utt.lang = 'en-US';
+  utt.rate = state.speed; utt.pitch = 1.0;
+  window.speechSynthesis.speak(utt);
+}
+function toggleSound() {
+  state.soundOn = !state.soundOn;
+  document.getElementById('btn-sound').textContent = state.soundOn ? '🔊 ON' : '🔇 OFF';
+  saveState();
+}
+function openVoiceSettings() {
+  const voices = getSortedEnglishVoices(); const current = pickBestVoice();
+  const optsHtml = voices.length > 0
+    ? voices.map(v => `<option value="${v.name}" ${current && v.name === current.name ? 'selected' : ''}>${v.name} (${v.lang})${scoreVoice(v) >= 80 ? ' ★高音質' : ''}</option>`).join('')
+    : '<option value="">英語音声が見つかりません（OS標準を使用）</option>';
+  document.getElementById('modal-title').textContent = '🎙 英語音声の設定・聞き比べ';
+  document.getElementById('modal-close-btn').textContent = '✕ 閉じる';
+  document.getElementById('modal-body').innerHTML = `
+    <p style="font-size:0.86rem; color:var(--text-muted); margin-top:0; line-height:1.5;">
+      ※ブラウザ・端末の音声機能を利用しています。<b>「Natural」「Google」「Enhanced」</b>が付いた音声を選ぶと自然な発音になります。
+    </p>
+    <div style="margin-bottom:12px;">
+      <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:6px;">使用する英語の声：</label>
+      <select id="voice-select" class="select-input" onchange="changeVoice(this.value)">${optsHtml}</select>
+    </div>
+    <div style="margin-bottom:14px;">
+      <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:6px;">話すスピード：<span id="speed-label">${state.speed.toFixed(2)}x</span></label>
+      <input type="range" min="0.7" max="1.15" step="0.05" value="${state.speed}" style="width:100%;" oninput="changeSpeed(this.value)">
+    </div>
+    <button class="btn btn-primary" style="width:100%;" onclick="speakText('Hello! Nice to meet you. Let us enjoy learning English together!')">🔊 この声でテスト再生する</button>`;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+function changeVoice(name) { state.preferredVoiceName = name; saveState(); }
+function changeSpeed(val) { state.speed = parseFloat(val); document.getElementById('speed-label').textContent = state.speed.toFixed(2) + 'x'; saveState(); }
+
+// ==========================================
+// 6. TUTORIAL (SKIPPABLE)
+// ==========================================
+const TUTORIAL_STEPS = [
+  {
+    title: '① まずは「実力アナライズ診断」から！',
+    body: `<p style="margin-top:0;">何を勉強したらいいか迷ったら、最初に<strong>「🔍 実力アナライズ診断（16問）」</strong>をやってみよう！</p>
+           <ul class="tut-list">
+             <li>1学期に習う8つの単元からランダムに問題が出ます。</li>
+             <li>自分の「分かっている単元」と「テストで危ない単元」がグラフで一目でわかります。</li>
+           </ul>`
+  },
+  {
+    title: '② 弱点ドリル＆自動スキップのしくみ',
+    body: `<p style="margin-top:0;">診断が終わったら<strong>「🎯 おまかせ弱点ドリル」</strong>に進もう！</p>
+           <ul class="tut-list">
+             <li>苦手な単元から優先的に出題されます。</li>
+             <li><strong>3問連続で正解</strong>すると「完全理解」と判定し、その単元の残りを<strong>自動でスキップ</strong>して次に進みます！</li>
+             <li>同じ単元で2回つまずくと、10秒でわかる解説カードが自動で開きます。</li>
+           </ul>`
+  },
+  {
+    title: '③ 単語クイズ＆テスト対策もバッチリ',
+    body: `<p style="margin-top:0;">文法だけでなく、テストに出る単語も別メニューで特訓できるよ！</p>
+           <ul class="tut-list">
+             <li><strong>🔤 1学期 必須単語クイズ</strong>：曜日・月・基本動詞など88語を、4択・スペル入力・間違い探しで毎回ランダム出題！</li>
+             <li><strong>🏆 期末テスト模擬チャレンジ</strong>：全範囲から15問のテスト形式で実力試しができます。</li>
+           </ul>`
+  },
+  {
+    title: '④ 画面の各ボタン・ゲージの見方',
+    body: `<ul class="tut-list" style="margin-top:0;">
+             <li><strong>✨ XP / 🔥 コンボ</strong>：正解や連続正解でたまるスコアです。</li>
+             <li><strong>🎙 音声設定</strong>：ネイティブ発音の声の種類やスピードを変えられます。</li>
+             <li><strong>📖 まとめ帳</strong>：テストに出るルールをいつでも確認できます。</li>
+             <li><strong>🗺 単元別マスター状況</strong>：下の単元カードをタップすると、テスト範囲の単元だけをピンポイントで10問特訓できます。</li>
+           </ul>`
+  }
+];
+
+function openTutorial(step = 0) {
+  const s = TUTORIAL_STEPS[step];
+  const dots = TUTORIAL_STEPS.map((_, i) => `<span class="tut-dot ${i === step ? 'active' : ''}"></span>`).join('');
+  const isLast = step === TUTORIAL_STEPS.length - 1;
+  document.getElementById('modal-title').textContent = '🎓 学習の進め方ガイド';
+  document.getElementById('modal-close-btn').textContent = 'スキップ ✕';
+  document.getElementById('modal-body').innerHTML = `
+    <div class="tut-box">
+      <h4 style="margin:0 0 8px; color:var(--primary); font-size:1.05rem;">${s.title}</h4>
+      ${s.body}
+    </div>
+    <div class="tut-step-dots">${dots}</div>
+    <div style="display:flex; gap:8px; justify-content:space-between; flex-wrap:wrap;">
+      ${step > 0 ? `<button class="btn btn-secondary btn-sm" onclick="openTutorial(${step - 1})">⬅ 戻る</button>` : `<button class="btn btn-secondary btn-sm" onclick="finishTutorial(false)">スキップする</button>`}
+      ${isLast
+        ? `<div style="display:flex; gap:8px; flex:1; justify-content:flex-end;">
+             <button class="btn btn-secondary btn-sm" onclick="finishTutorial(false)">ホームを見る</button>
+             <button class="btn btn-primary btn-sm" onclick="finishTutorial(true)">🔍 診断を始める</button>
+           </div>`
+        : `<button class="btn btn-primary btn-sm" onclick="openTutorial(${step + 1})">次へ (${step + 1}/${TUTORIAL_STEPS.length}) ➡</button>`}
+    </div>
+  `;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+
+function finishTutorial(startDiag) {
+  state.tutorialDone = true;
+  saveState();
+  closeModal();
+  if (startDiag) startDiagnostic();
+}
+
+// ==========================================
+// 7. SESSION & ADAPTIVE ENGINE
+// ==========================================
+let session = {
+  mode: 'diag', targetUnit: null, vocabCat: 'all', queue: [], idx: 0,
+  correctCount: 0, earnedXp: 0, answered: false, currentQ: null,
+  unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {},
+  sortPicked: [], usedPrompts: new Set()
+};
+let lastPlayedConfig = { mode: 'adaptive', param: null };
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function updateHud() {
+  document.getElementById('hud-xp').textContent = state.xp;
+  document.getElementById('hud-combo').textContent = state.combo;
+  document.getElementById('btn-sound').textContent = state.soundOn ? '🔊 ON' : '🔇 OFF';
+  document.getElementById('btn-continue-adaptive').style.display = state.diagDone ? 'inline-flex' : 'none';
+}
+function renderUnitMap() {
+  const map = document.getElementById('unit-map'); map.innerHTML = '';
+  UNITS.forEach((u, idx) => {
+    const st = state.unitStats[u.id];
+    const tagMap = { master: ['mastered', 'tag-master', '#22c55e'], weak: ['要特訓', 'tag-weak', '#ef4444'], mid: ['あと少し', 'tag-mid', '#f59e0b'], new: ['未診断', 'tag-new', '#64748b'] };
+    const [label, cls, color] = tagMap[st.status] || tagMap.new;
+    const el = document.createElement('div'); el.className = 'unit-item'; el.onclick = () => startUnitDrill(u.id);
+    el.innerHTML = `<div class="unit-top"><span>Unit ${idx + 1}</span><span class="tag ${cls}">${label} (${st.mastery}%)</span></div><div class="unit-title">${u.name}</div><div class="bar-bg"><div class="bar-fill" style="width:${st.mastery}%; background:${color};"></div></div>`;
+    map.appendChild(el);
+  });
+}
+function goHome() {
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  updateHud(); renderUnitMap(); showScreen('screen-home');
+}
+
+function startDiagnostic() {
+  getAudioCtx();
+  lastPlayedConfig = { mode: 'diag', param: null };
+  const used = new Set();
+  const qList = [];
+  UNITS.forEach(u => {
+    qList.push(drawUniqueQuestion(u.id, used, 0.6));
+    qList.push(drawUniqueQuestion(u.id, used, 0.8));
+  });
+  qList.sort(() => Math.random() - 0.5);
+
+  session = {
+    mode: 'diag', targetUnit: null, vocabCat: 'all', queue: qList, idx: 0,
+    correctCount: 0, earnedXp: 0, answered: false, currentQ: null,
+    unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {},
+    sortPicked: [], usedPrompts: used
+  };
+  setHintText('16問の実力アナライズ診断中！分からない問題もそのまま正直に選んでOKだよ。');
+  showScreen('screen-quiz'); renderQuestion();
+}
+
+function startAdaptiveDrill() {
+  getAudioCtx();
+  lastPlayedConfig = { mode: 'adaptive', param: null };
+  const used = new Set();
+  const sortedUnits = [...UNITS].sort((a, b) => state.unitStats[a.id].mastery - state.unitStats[b.id].mastery);
+  let targetUnits = sortedUnits.filter(u => state.unitStats[u.id].mastery < 90);
+  if (targetUnits.length === 0) targetUnits = sortedUnits;
+
+  const qList = [];
+  const recentMissed = state.missedQuestions.filter(m => m.unit !== 'vocab').slice(0, 2);
+  recentMissed.forEach(mq => {
+    used.add((mq.jp || '') + (mq.q || mq.ans || ''));
+    qList.push(shuffleChoices(mq));
+  });
+  targetUnits.slice(0, 3).forEach(u => {
+    for (let i = 0; i < 4; i++) qList.push(drawUniqueQuestion(u.id, used, 0.75));
+  });
+
+  const weakest = targetUnits[0];
+  session = {
+    mode: 'adaptive', targetUnit: null, vocabCat: 'all', queue: qList.slice(0, 12), idx: 0,
+    correctCount: 0, earnedXp: 0, answered: false, currentQ: null,
+    unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {},
+    sortPicked: [], usedPrompts: used
+  };
+  setHintText(`「<b>${weakest.name}</b>」から優先出題中！3問連続正解すると自動で次の単元へスキップするよ。`);
+  showScreen('screen-quiz'); renderQuestion();
+}
+
+function startUnitDrill(unitId) {
+  getAudioCtx();
+  lastPlayedConfig = { mode: 'unit', param: unitId };
+  const used = new Set();
+  const u = UNITS.find(x => x.id === unitId);
+  const qList = [];
+  for (let i = 0; i < 10; i++) qList.push(drawUniqueQuestion(unitId, used, 0.7));
+  session = {
+    mode: 'unit', targetUnit: unitId, vocabCat: 'all', queue: qList, idx: 0,
+    correctCount: 0, earnedXp: 0, answered: false, currentQ: null,
+    unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {},
+    sortPicked: [], usedPrompts: used
+  };
+  setHintText(`「<b>${u.name}</b>」の個別特訓中！迷ったら下の「💡 ヒントを見る」を押してね。`);
+  showScreen('screen-quiz'); renderQuestion();
+}
+
+function startSurvivalTest() {
+  getAudioCtx();
+  lastPlayedConfig = { mode: 'survival', param: null };
+  const used = new Set();
+  const qList = [];
+  for (let i = 0; i < 15; i++) {
+    const u = UNITS[i % UNITS.length];
+    qList.push(drawUniqueQuestion(u.id, used, 0.7));
+  }
+  qList.sort(() => Math.random() - 0.5);
+  session = {
+    mode: 'survival', targetUnit: null, vocabCat: 'all', queue: qList, idx: 0,
+    correctCount: 0, earnedXp: 0, answered: false, currentQ: null,
+    unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {},
+    sortPicked: [], usedPrompts: used
+  };
+  setHintText('1学期の全範囲からランダム15問出題中！ひっかけに気をつけよう。');
+  showScreen('screen-quiz'); renderQuestion();
+}
+
+function openVocabSelector() {
+  document.getElementById('modal-title').textContent = '🔤 1学期 必須単語クイズ';
+  document.getElementById('modal-close-btn').textContent = '✕ 閉じる';
+  document.getElementById('modal-body').innerHTML = `
+    <p style="font-size:0.88rem; color:var(--text-muted); margin-top:0; line-height:1.5;">
+      中1・1学期のテストに必ず出る88語から、毎回ランダムで12問出題します（意味・スペル入力・間違い探し）。
+    </p>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <button class="btn btn-primary" onclick="closeModal(); startVocabQuiz('all')">🌟 全カテゴリからランダム出題（12問）</button>
+      <button class="btn btn-secondary" onclick="closeModal(); startVocabQuiz('cal')">📅 曜日・月・数字・季節（27語）</button>
+      <button class="btn btn-secondary" onclick="closeModal(); startVocabQuiz('school')">🏫 学校・教科・文房具（20語）</button>
+      <button class="btn btn-secondary" onclick="closeModal(); startVocabQuiz('life')">🍙 生活・家族・食べ物・場所（17語）</button>
+      <button class="btn btn-secondary" onclick="closeModal(); startVocabQuiz('verb')">🏃 重要動詞・形容詞・副詞（24語）</button>
+    </div>
+  `;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+
+function startVocabQuiz(category = 'all') {
+  getAudioCtx();
+  lastPlayedConfig = { mode: 'vocab', param: category };
+  const used = new Set();
+  const qList = [];
+  for (let i = 0; i < 12; i++) qList.push(generateVocabQuestion(category, used));
+  session = {
+    mode: 'vocab', targetUnit: null, vocabCat: category, queue: qList, idx: 0,
+    correctCount: 0, earnedXp: 0, answered: false, currentQ: null,
+    unitSessionStreak: {}, unitSessionMiss: {}, diagResults: {},
+    sortPicked: [], usedPrompts: used
+  };
+  setHintText('1学期の必須単語クイズ！スペルと発音（🔊）もあわせて確認しよう。');
+  showScreen('screen-quiz'); renderQuestion();
+}
+
+function retryLastMode() {
+  if (lastPlayedConfig.mode === 'vocab') startVocabQuiz(lastPlayedConfig.param || 'all');
+  else if (lastPlayedConfig.mode === 'unit') startUnitDrill(lastPlayedConfig.param);
+  else if (lastPlayedConfig.mode === 'survival') startSurvivalTest();
+  else startAdaptiveDrill();
+}
+
+function setHintText(html) { document.getElementById('hint-msg').innerHTML = 'ヒント：' + html; }
+
+// ==========================================
+// 8. QUESTION RENDERING & INTERACTION
+// ==========================================
+function renderQuestion() {
+  const q = session.queue[session.idx];
+  session.currentQ = q; session.answered = false; session.sortPicked = [];
+  const u = UNITS.find(x => x.id === q.unit);
+  const modeNames = { diag:'🔍 実力アナライズ', adaptive:'🎯 弱点アダプティブ', unit:'📘 単元特訓', survival:'🏆 模擬テスト', vocab:'🔤 必須単語クイズ' };
+  document.getElementById('q-mode-label').textContent = modeNames[session.mode];
+  document.getElementById('q-unit-label').textContent = q.unitLabel || (u ? u.name : '1学期重要単語');
+  document.getElementById('q-source-badge').textContent = q.isGen ? '⚡ランダム生成' : '⭐テスト厳選';
+  document.getElementById('q-num').textContent = session.idx + 1;
+  document.getElementById('q-total').textContent = session.queue.length;
+  document.getElementById('q-progress').style.width = `${(session.idx / session.queue.length) * 100}%`;
+
+  document.getElementById('q-jp').innerHTML = q.jp;
+  const enBox = document.getElementById('q-en');
+  if (q.type === 'sort') enBox.textContent = '下の単語カードをタップして正しい語順に並べよう';
+  else if (q.type === 'error') enBox.textContent = '下の文の中で「文法的に間違っている箇所」をタップしよう';
+  else enBox.innerHTML = q.q;
+
+  const fb = document.getElementById('feedback'); fb.classList.remove('show', 'ok', 'ng');
+  document.getElementById('btn-hint').style.display = 'inline-flex';
+  const area = document.getElementById('q-interact'); area.innerHTML = '';
+
+  if (q.type === 'choice') {
+    const grid = document.createElement('div'); grid.className = 'opts-grid';
+    q.opts.forEach((opt, i) => {
+      const btn = document.createElement('button'); btn.className = 'opt-btn';
+      btn.innerHTML = `<span class="opt-num">${i + 1}</span><span>${opt}</span>`;
+      btn.onclick = () => checkChoice(i, btn);
+      grid.appendChild(btn);
+    });
+    area.appendChild(grid);
+  } else if (q.type === 'sort') {
+    const shuffled = q.words.map((w, i) => ({ w, id: i })).sort(() => Math.random() - 0.5);
+    area.innerHTML = `
+      <div class="sort-zone" id="sort-zone"><span style="color:#64748b; font-size:0.88rem;">ここに単語が並びます...</span></div>
+      <div class="word-bank" id="word-bank"></div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn btn-secondary btn-sm" onclick="clearSort()">↺ やり直す</button>
+        <button class="btn btn-primary" style="flex:1;" onclick="checkSort()">決定する ✓</button>
+      </div>`;
+    const bank = document.getElementById('word-bank');
+    shuffled.forEach(item => {
+      const chip = document.createElement('button'); chip.className = 'word-chip'; chip.textContent = item.w; chip.dataset.id = item.id;
+      chip.onclick = () => pickSortWord(item.id, item.w, chip);
+      bank.appendChild(chip);
+    });
+  } else if (q.type === 'input') {
+    area.innerHTML = `
+      <div class="input-wrap">
+        <input type="text" id="ans-input" class="text-input" placeholder="${q.placeholder || 'ここに入力...'}" autocomplete="off" autocapitalize="off" spellcheck="false">
+        <div class="helper-keys">
+          <span style="font-size:0.8rem; color:var(--text-muted);">記号入力補助:</span>
+          <button type="button" class="key-chip" onclick="insertChar('\'')">'</button>
+          <button type="button" class="key-chip" onclick="insertChar('?')">?</button>
+          <button type="button" class="key-chip" onclick="insertChar('.')">.</button>
+        </div>
+        <button class="btn btn-primary" onclick="checkInput()">解答する ✓</button>
+      </div>`;
+    const inp = document.getElementById('ans-input'); inp.focus();
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter' && !session.answered) checkInput(); });
+  } else if (q.type === 'error') {
+    area.innerHTML = `
+      <div class="seg-row" id="seg-row"></div>
+      <div id="fix-area" style="display:none; margin-top:10px;">
+        <div style="font-size:0.9rem; color:var(--warning); font-weight:700; margin-bottom:8px;">👇 正しく直すとどうなる？</div>
+        <div class="opts-grid" id="fix-opts"></div>
+      </div>`;
+    const row = document.getElementById('seg-row');
+    q.segs.forEach((seg, i) => {
+      const btn = document.createElement('button'); btn.className = 'seg-btn'; btn.textContent = seg;
+      btn.onclick = () => pickErrorSeg(i, btn);
+      row.appendChild(btn);
+    });
+  }
+}
+
+function speakCurrent() {
+  const q = session.currentQ; if (!q) return;
+  if (q.promptSpeak) speakText(q.promptSpeak);
+  else if (q.unit === 'vocab') speakText(q.speak);
+  else if (q.type === 'sort' || q.type === 'error') speakText(q.speak);
+  else speakText(q.q);
+}
+function speakAnswer() { if (session.currentQ) speakText(session.currentQ.speak); }
+
+function showHint() {
+  const q = session.currentQ;
+  if (q.unit === 'vocab') {
+    setHintText(`最初の文字は「<b>${q.speak[0]}</b>」（文字数: ${q.speak.length}文字）だよ！🔊 発音ボタンもヒントになるよ。`);
+    return;
+  }
+  const u = UNITS.find(x => x.id === q.unit);
+  let hintText = u ? u.tip : '';
+  if (q.type === 'input') hintText = `最初の文字は「<b>${q.ansList[0][0]}</b>」（文字数: ${q.ansList[0].length}文字）だよ！`;
+  else if (q.type === 'sort') hintText = `最初の単語は「<b>${q.ans.split(' ')[0]}</b>」から始まるよ！`;
+  else if (q.type === 'error' && u) hintText = `「<b>${u.short}</b>」のルールをチェック！`;
+  setHintText(hintText);
+}
+
+function checkChoice(idx, btn) {
+  if (session.answered) return;
+  const q = session.currentQ; const buttons = document.querySelectorAll('#q-interact .opt-btn');
+  buttons.forEach(b => b.disabled = true);
+  const isOk = idx === q.ans;
+  btn.classList.add(isOk ? 'correct' : 'wrong');
+  if (!isOk) buttons[q.ans].classList.add('correct');
+  finishQuestion(isOk);
+}
+function pickSortWord(id, word, bankChip) {
+  if (session.answered) return;
+  bankChip.classList.add('used'); session.sortPicked.push({ id, word }); renderSortZone();
+}
+function renderSortZone() {
+  const zone = document.getElementById('sort-zone');
+  if (session.sortPicked.length === 0) { zone.innerHTML = '<span style="color:#64748b; font-size:0.88rem;">ここに単語が並びます...</span>'; return; }
+  zone.innerHTML = '';
+  session.sortPicked.forEach((item, idx) => {
+    const chip = document.createElement('button'); chip.className = 'word-chip placed'; chip.textContent = item.word;
+    chip.onclick = () => {
+      if (session.answered) return;
+      session.sortPicked.splice(idx, 1);
+      const b = document.querySelector(`#word-bank .word-chip[data-id="${item.id}"]`); if (b) b.classList.remove('used');
+      renderSortZone();
+    };
+    zone.appendChild(chip);
+  });
+}
+function clearSort() {
+  if (session.answered) return;
+  session.sortPicked = []; document.querySelectorAll('#word-bank .word-chip').forEach(c => c.classList.remove('used')); renderSortZone();
+}
+function checkSort() {
+  if (session.answered || session.sortPicked.length === 0) return;
+  const q = session.currentQ; const built = session.sortPicked.map(x => x.word).join(' ').replace(/\s+/g, ' ').trim();
+  const isOk = built === q.ans;
+  finishQuestion(isOk, isOk ? null : `正しい語順：<b>${q.ans}</b>`);
+}
+function insertChar(ch) { const inp = document.getElementById('ans-input'); if (inp) { inp.value += ch; inp.focus(); } }
+function checkInput() {
+  if (session.answered) return;
+  const q = session.currentQ; const inp = document.getElementById('ans-input'); if (!inp.value.trim()) return;
+  const userVal = inp.value.trim().replace(/[’‘]/g, "'").replace(/\s+/g, ' ');
+  let isOk = false, almostMsg = null;
+  for (const ans of q.ansList) {
+    if (q.caseSensitive) {
+      if (userVal === ans) { isOk = true; break; }
+      if (userVal.toLowerCase() === ans.toLowerCase()) almostMsg = `スペルは合っていますが、<b>大文字・小文字</b>に注意！（正解：<b>${ans}</b>）`;
+    } else if (userVal.toLowerCase() === ans.toLowerCase()) { isOk = true; break; }
+  }
+  inp.disabled = true;
+  finishQuestion(isOk, almostMsg || (isOk ? null : `正解例：<b>${q.ansList[0]}</b>`));
+}
+function pickErrorSeg(idx, btn) {
+  if (session.answered) return;
+  const q = session.currentQ; const btns = document.querySelectorAll('#seg-row .seg-btn');
+  if (idx !== q.errIdx) {
+    btns.forEach(b => b.disabled = true); btn.classList.add('wrong'); btns[q.errIdx].classList.add('correct');
+    finishQuestion(false, `間違いは「<b>${q.segs[q.errIdx]}</b>」の部分だよ！`); return;
+  }
+  btns.forEach(b => b.disabled = true); btn.classList.add('selected');
+  document.getElementById('fix-area').style.display = 'block';
+  const fixOpts = document.getElementById('fix-opts'); fixOpts.innerHTML = '';
+  q.fixOpts.forEach((opt, i) => {
+    const ob = document.createElement('button'); ob.className = 'opt-btn';
+    ob.innerHTML = `<span class="opt-num">${i + 1}</span><span>${opt}</span>`;
+    ob.onclick = () => {
+      if (session.answered) return;
+      document.querySelectorAll('#fix-opts .opt-btn').forEach(x => x.disabled = true);
+      const isOk = i === q.fixAns;
+      ob.classList.add(isOk ? 'correct' : 'wrong');
+      if (!isOk) document.querySelectorAll('#fix-opts .opt-btn')[q.fixAns].classList.add('correct');
+      btn.classList.remove('selected'); btn.classList.add(isOk ? 'correct' : 'wrong');
+      finishQuestion(isOk);
+    };
+    fixOpts.appendChild(ob);
+  });
+}
+
+// ==========================================
+// 9. ADAPTIVE SCORING, SKIP & RESCUE
+// ==========================================
+function finishQuestion(isOk, extraMsg = null) {
+  session.answered = true;
+  const q = session.currentQ;
+  const isVocab = q.unit === 'vocab';
+  const st = !isVocab ? state.unitStats[q.unit] : null;
+  if (st) st.attempts++;
+
+  if (session.mode === 'diag' && !isVocab) {
+    if (!session.diagResults[q.unit]) session.diagResults[q.unit] = { total: 0, ok: 0 };
+    session.diagResults[q.unit].total++;
+    if (isOk) session.diagResults[q.unit].ok++;
+  }
+
+  if (isOk) {
+    sfxCorrect(); session.correctCount++; state.combo++;
+    const gain = 10 + Math.min(state.combo * 2, 20);
+    state.xp += gain; session.earnedXp += gain;
+    if (st) {
+      st.correct++; st.streak++;
+      if (session.mode !== 'diag') st.mastery = Math.min(100, st.mastery + 25);
+    }
+    state.missedQuestions = state.missedQuestions.filter(m => m.id !== q.id);
+    session.unitSessionStreak[q.unit] = (session.unitSessionStreak[q.unit] || 0) + 1;
+    session.unitSessionMiss[q.unit] = 0;
+  } else {
+    sfxWrong(); state.combo = 0;
+    if (st) {
+      st.streak = 0;
+      if (session.mode !== 'diag') st.mastery = Math.max(0, st.mastery - 10);
+    }
+    if (!isVocab && !state.missedQuestions.some(m => m.id === q.id)) {
+      state.missedQuestions.unshift(q);
+      if (state.missedQuestions.length > 10) state.missedQuestions.pop();
+    }
+    session.unitSessionStreak[q.unit] = 0;
+    session.unitSessionMiss[q.unit] = (session.unitSessionMiss[q.unit] || 0) + 1;
+  }
+
+  if (st && session.mode !== 'diag') {
+    st.status = st.mastery >= 80 ? 'master' : st.mastery >= 45 ? 'mid' : 'weak';
+  }
+  saveState(); updateHud();
+  setTimeout(() => speakText(q.speak), 220);
+
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback show ' + (isOk ? 'ok' : 'ng');
+  document.getElementById('fb-status').textContent = isOk ? `⭕ 正解！ (+${10 + Math.min(state.combo*2,20)} XP)` : '❌ おしい！チェックしよう';
+  document.getElementById('fb-exp').innerHTML = (extraMsg ? extraMsg + '<br>' : '') + q.exp;
+  document.getElementById('btn-hint').style.display = 'none';
+
+  if (!isVocab && session.mode === 'adaptive' && isOk && session.unitSessionStreak[q.unit] >= 3) {
+    const hasMore = session.queue.slice(session.idx + 1).some(nq => nq.unit === q.unit);
+    if (hasMore) {
+      session.queue = [...session.queue.slice(0, session.idx + 1), ...session.queue.slice(session.idx + 1).filter(nq => nq.unit !== q.unit)];
+      st.mastery = Math.max(st.mastery, 90); st.status = 'master'; saveState(); sfxSkip();
+      const u = UNITS.find(x => x.id === q.unit);
+      showAlertModal('⚡ AUTO SKIP発動！', `<p style="font-size:1rem; line-height:1.6;">「<b>${u.name}</b>」を3問連続パーフェクト！<br><strong>『完全理解』</strong>と判定し、残りをスキップして次の単元へ進みます！</p>`);
+    }
+  } else if (!isVocab && !isOk && session.mode !== 'diag') {
+    if (session.unitSessionMiss[q.unit] >= 2) {
+      session.unitSessionMiss[q.unit] = 0;
+      const u = UNITS.find(x => x.id === q.unit);
+      showAlertModal('💡 10秒レスキュー解説！', `<p style="color:var(--warning); font-weight:700; margin-top:0;">「${u.name}」のポイントを確認しよう！</p><div class="cheat-sec"><p>${u.tip}</p></div>`);
+    }
+    if (session.queue.length < 18) {
+      const freshAlt = drawUniqueQuestion(q.unit, session.usedPrompts, 0.9);
+      session.queue.splice(Math.min(session.idx + 3, session.queue.length), 0, freshAlt);
+    }
+  }
+  document.getElementById('btn-next').textContent = (session.idx + 1 >= session.queue.length) ? '結果を見る 🏁' : '次の問題へ ➡';
+}
+
+function nextQuestion() {
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  session.idx++;
+  if (session.idx >= session.queue.length) finishSession();
+  else renderQuestion();
+}
+
+function finishSession() {
+  if (session.mode === 'diag') {
+    state.diagDone = true;
+    UNITS.forEach(u => {
+      const r = session.diagResults[u.id] || { total: 1, ok: 0 };
+      const ratio = r.ok / r.total;
+      const m = ratio >= 1 ? 90 : ratio >= 0.5 ? 50 : 15;
+      state.unitStats[u.id].mastery = m;
+      state.unitStats[u.id].status = m >= 80 ? 'master' : m >= 45 ? 'mid' : 'weak';
+    });
+    saveState();
+    renderDiagnosticReport();
+    showScreen('screen-report');
+  } else {
+    const acc = Math.round((session.correctCount / session.queue.length) * 100);
+    document.getElementById('res-emoji').textContent = acc >= 80 ? '🏆' : acc >= 50 ? '👍' : '💪';
+    document.getElementById('res-title').textContent = acc >= 80 ? '素晴らしい！テスト合格レベル！' : 'ナイスチャレンジ！着実に力がついてるよ';
+    document.getElementById('res-desc').textContent = `${session.queue.length}問中 ${session.correctCount}問正解しました！次はまた違う単語や例文パターンが出題されるよ。`;
+    document.getElementById('res-acc').textContent = acc + '%';
+    document.getElementById('res-xp').textContent = session.earnedXp;
+    document.getElementById('btn-retry-same').textContent = session.mode === 'vocab' ? '🔤 新しい単語問題でもう一度' : '🔥 新しい問題で続けて攻略';
+    renderRandomPrCard('pr-slot-result');
+    showScreen('screen-result');
+  }
+}
+
+// ==========================================
+// 10. DIAGNOSTIC REPORT & RADAR
+// ==========================================
+function renderDiagnosticReport() {
+  const weakUnits = UNITS.filter(u => state.unitStats[u.id].mastery < 60);
+  document.getElementById('report-summary').innerHTML =
+    weakUnits.length > 0
+      ? `分析の結果、<b>${weakUnits.map(u=>u.short).join('・')}</b> にテストでの要注意ポイントが見つかりました！自動でここを優先するドリルを作成したよ。`
+      : `すごい！全単元の基礎がしっかりできています！さらに別パターンの応用問題で100点を目指そう！`;
+
+  renderRandomPrCard('pr-slot-diag');
+
+  const list = document.getElementById('report-list'); list.innerHTML = '';
+  UNITS.forEach((u, i) => {
+    const st = state.unitStats[u.id];
+    const badge = st.mastery >= 80 ? '<span class="tag tag-master">OK / スキップ候補</span>'
+                : st.mastery >= 45 ? '<span class="tag tag-mid">あと少し</span>'
+                : '<span class="tag tag-weak">要注意・重点特訓</span>';
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex; justify-content:space-between; align-items:center; background:var(--bg); padding:8px 12px; border-radius:10px; border:1px solid var(--border); font-size:0.86rem;';
+    row.innerHTML = `<span><b>U${i+1}.</b> ${u.short}</span>${badge}`;
+    list.appendChild(row);
+  });
+
+  const svg = document.getElementById('radar-svg');
+  const cx = 140, cy = 140, maxR = 92, n = UNITS.length; let html = '';
+  [0.33, 0.66, 1].forEach(rScale => {
+    const pts = UNITS.map((_, i) => { const a = (Math.PI * 2 * i) / n - Math.PI / 2; return `${cx + Math.cos(a)*maxR*rScale},${cy + Math.sin(a)*maxR*rScale}`; }).join(' ');
+    html += `<polygon points="${pts}" fill="none" stroke="#334155" stroke-width="1"/>`;
+  });
+  UNITS.forEach((u, i) => {
+    const a = (Math.PI * 2 * i) / n - Math.PI / 2;
+    html += `<line x1="${cx}" y1="${cy}" x2="${cx + Math.cos(a)*maxR}" y2="${cy + Math.sin(a)*maxR}" stroke="#334155" stroke-width="1"/>`;
+    html += `<text x="${cx + Math.cos(a)*(maxR+24)}" y="${cy + Math.sin(a)*(maxR+20)}" fill="#cbd5e1" font-size="10" font-weight="700" text-anchor="middle" dominant-baseline="middle">${u.short}</text>`;
+  });
+  const dataPts = UNITS.map((u, i) => { const val = Math.max(15, state.unitStats[u.id].mastery)/100; const a = (Math.PI*2*i)/n - Math.PI/2; return `${cx+Math.cos(a)*maxR*val},${cy+Math.sin(a)*maxR*val}`; }).join(' ');
+  html += `<polygon points="${dataPts}" fill="rgba(56,189,248,0.28)" stroke="#38bdf8" stroke-width="2.5"/>`;
+  svg.innerHTML = html;
+}
+
+// ==========================================
+// 11. MODALS & RESET
+// ==========================================
+function openCheatSheet() {
+  document.getElementById('modal-title').textContent = '📖 中1・1学期 テスト必勝まとめノート';
+  document.getElementById('modal-close-btn').textContent = '✕ 閉じる';
+  document.getElementById('modal-body').innerHTML = UNITS.map((u, i) => `<div class="cheat-sec"><h4>Unit ${i+1}: ${u.name}</h4><p>${u.tip}</p></div>`).join('');
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+function showAlertModal(title, html) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-close-btn').textContent = '✕ 閉じる';
+  document.getElementById('modal-body').innerHTML = html + `<button class="btn btn-primary" style="width:100%; margin-top:12px;" onclick="closeModal()">OK！続ける</button>`;
+  document.getElementById('modal-backdrop').classList.add('open');
+}
+function closeModal() {
+  if (!state.tutorialDone && document.getElementById('modal-title').textContent.includes('学習の進め方')) {
+    state.tutorialDone = true;
+    saveState();
+  }
+  document.getElementById('modal-backdrop').classList.remove('open');
+}
+function resetProgress() {
+  if (!confirm('学習データ（XP・単元マスター度・診断結果）をリセットしますか？')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  state = { xp: 0, combo: 0, soundOn: state.soundOn, speed: state.speed, preferredVoiceName: state.preferredVoiceName, diagDone: false, tutorialDone: true, unitStats: {}, missedQuestions: [] };
+  initUnitStats(); saveState(); goHome();
+}
+
+loadState();
+goHome();
+if (!state.tutorialDone) {
+  openTutorial(0);
+}
+</script>
+</body>
+</html>
