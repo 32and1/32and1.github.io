@@ -111,23 +111,26 @@ function renderAppShell() {
   document.getElementById("appRoot").innerHTML = `
     <canvas id="confettiCanvas"></canvas>
     <div class="app-container">
-      <header>
-        <div class="brand">
-          <img src="${LOGO_URL}" alt="ロゴ" class="brand-logo" onerror="this.style.display='none'">
-          <div>
-            <h1>${CURRENT_SERIES.gradeLabel}｜${CURRENT_SERIES.title}</h1>
-            <small>収録 ${poolCount}語（全シリーズ計 ${WORDS_DB.length}語・毎回ランダム）</small>
-          </div>
-        </div>
-        <div class="header-actions">
-          <div class="stat-pill" title="連続クリア回数">🔥 <span id="streakVal">0</span>連勝</div>
-          <div class="stat-pill" title="ハイスコア">👑 <span id="bestScoreVal">0</span></div>
-          <button class="btn btn-accent" id="openDictBtn">📖 図鑑 (<span id="dictCountVal">0</span>/${WORDS_DB.length})</button>
-          <button class="btn btn-secondary" id="openTutorialBtn" title="遊び方を見る">❓ 遊び方</button>
-          <button class="btn btn-icon" id="soundToggleBtn" title="効果音 ON/OFF">🔊</button>
-          <button class="btn btn-icon" id="voiceToggleBtn" title="英語読み上げ ON/OFF">🗣️</button>
-        </div>
-      </header>
+    <header>
+            <div class="brand">
+              <a href="https://32and1.com/" title="Grammar Quest (32and1.com) へ戻る">
+                <img src="${LOGO_URL}" alt="ロゴ" class="brand-logo" onerror="this.style.display='none'">
+              </a>
+              <div>
+                <h1>${CURRENT_SERIES.gradeLabel}｜${CURRENT_SERIES.title}</h1>
+                <small>収録 ${poolCount}語（全シリーズ計 ${WORDS_DB.length}語・毎回ランダム）</small>
+              </div>
+            </div>
+            <div class="header-actions">
+              <div class="stat-pill" title="連続クリア回数">🔥 <span id="streakVal">0</span>連勝</div>
+              <div class="stat-pill" title="ハイスコア">👑 <span id="bestScoreVal">0</span></div>
+              <button class="btn btn-accent" id="openDictBtn">📖 図鑑 (<span id="dictCountVal">0</span>/${WORDS_DB.length})</button>
+              <button class="btn btn-secondary" id="openTutorialBtn" title="遊び方を見る">❓ 遊び方</button>
+              <button class="btn btn-icon" id="soundToggleBtn" title="効果音 ON/OFF">🔊</button>
+              <button class="btn btn-icon" id="voiceToggleBtn" title="英語読み上げ ON/OFF">🗣️</button>
+              <a href="https://32and1.com/" class="btn btn-home">🏠 Grammar Questへ戻る (32and1.com)</a>
+            </div>
+          </header>
 
       <div class="controls-bar">
         <div class="control-group">
@@ -252,13 +255,13 @@ function renderAppShell() {
           <h3 id="resultTitle">🎉 ステージクリア！</h3>
           <button class="btn btn-secondary" onclick="closeModal('resultModal')">✕</button>
         </div>
-        <div class="modal-body">
-          <div class="result-banner">
-            <img src="${LOGO_URL}" alt="ロゴ" class="result-logo" onerror="this.style.display='none'">
-            <div style="font-size:0.85rem; color:var(--muted); font-weight:700;">TOTAL SCORE</div>
-            <div class="result-score" id="finalScoreVal">0</div>
-            <div id="resultSubText" style="font-size:0.85rem; font-weight:700; color:#059669; margin-top:4px;"></div>
-          </div>
+        <div class="modal-footer" style="justify-content:space-between;">
+                  <a href="https://32and1.com/" class="btn btn-home">🏠 Grammar Questへ戻る</a>
+                  <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="btn btn-secondary" onclick="closeModal('resultModal')">盤面を見る</button>
+                    <button class="btn btn-primary" id="nextStageBtn">🎲 別の単語で次へ！</button>
+                  </div>
+                </div>
           <h4 style="margin:0 0 8px 0; font-size:0.9rem;">📚 今回の単語復習（タップで発音）</h4>
           <div class="word-list" id="reviewList"></div>
 
