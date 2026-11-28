@@ -34,16 +34,16 @@
     touch-action: none;
   }
 
-  /* 上部HUD */
+  /* 上部HUD（負荷軽減のためblurを排除） */
   #hud {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 10px 12px 4px;
+    padding: 8px 12px 4px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     pointer-events: none;
     z-index: 10;
   }
@@ -56,42 +56,34 @@
   }
   .hud-group {
     display: flex;
-    gap: 6px;
+    gap: 5px;
     align-items: center;
     flex-wrap: wrap;
   }
   .badge {
-    background: rgba(255, 255, 255, 0.22);
+    background: rgba(15, 23, 42, 0.55);
     border: 2px solid rgba(255, 255, 255, 0.55);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(8px);
-    padding: 5px 10px;
+    padding: 4px 10px;
     border-radius: 999px;
     font-weight: 800;
     font-size: 13px;
     display: flex;
     align-items: center;
     gap: 4px;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
   }
   .btn-hud-home {
     pointer-events: auto;
     text-decoration: none;
     color: #ffffff;
-    background: rgba(15, 23, 42, 0.55);
-    border: 2px solid rgba(255, 255, 255, 0.65);
-    padding: 5px 11px;
+    background: rgba(15, 23, 42, 0.72);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    padding: 4px 10px;
     border-radius: 999px;
     font-weight: 800;
     font-size: 12px;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    backdrop-filter: blur(6px);
-    transition: transform 0.1s, background 0.15s;
-  }
-  .btn-hud-home:hover {
-    background: rgba(15, 23, 42, 0.8);
+    gap: 3px;
   }
   .btn-hud-home:active {
     transform: scale(0.94);
@@ -104,39 +96,33 @@
     margin: 0 auto;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
   }
   .timer-track {
     flex: 1;
-    height: 14px;
-    background: rgba(15, 23, 42, 0.45);
-    border: 2px solid rgba(255, 255, 255, 0.7);
+    height: 12px;
+    background: rgba(15, 23, 42, 0.55);
+    border: 2px solid rgba(255, 255, 255, 0.75);
     border-radius: 999px;
     overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
   }
   #timer-fill {
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, #4ade80, #22c55e);
     border-radius: 999px;
-    transition: background 0.2s;
+    will-change: width;
   }
   #timer-fill.warning {
     background: linear-gradient(90deg, #facc15, #f97316);
   }
   #timer-fill.danger {
     background: linear-gradient(90deg, #fb7185, #ef4444);
-    animation: pulseDanger 0.35s infinite alternate;
-  }
-  @keyframes pulseDanger {
-    from { opacity: 1; }
-    to { opacity: 0.65; }
   }
   #timer-text {
     font-weight: 900;
-    font-size: 15px;
-    min-width: 50px;
+    font-size: 14px;
+    min-width: 46px;
     text-align: right;
     font-variant-numeric: tabular-nums;
     text-shadow: 0 2px 4px rgba(0,0,0,0.4);
@@ -144,11 +130,11 @@
 
   .controls-bar {
     position: absolute;
-    top: 84px;
+    top: 76px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 10px;
+    gap: 8px;
     z-index: 10;
     width: max-content;
   }
@@ -157,22 +143,21 @@
     background: linear-gradient(to bottom, #fef08a, #facc15);
     border: 2px solid #ffffff;
     color: #713f12;
-    padding: 7px 15px;
+    padding: 6px 14px;
     border-radius: 999px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
     cursor: pointer;
-    box-shadow: 0 4px 0 #ca8a04, 0 6px 15px rgba(0,0,0,0.2);
-    transition: transform 0.1s, box-shadow 0.1s;
+    box-shadow: 0 3px 0 #ca8a04;
   }
   .btn-small:active {
-    transform: translateY(3px);
+    transform: translateY(2px);
     box-shadow: 0 1px 0 #ca8a04;
   }
   .btn-small.secondary {
     background: linear-gradient(to bottom, #a5f3fc, #22d3ee);
     color: #164e63;
-    box-shadow: 0 4px 0 #0891b2, 0 6px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 3px 0 #0891b2;
   }
   .btn-small.secondary:active {
     box-shadow: 0 1px 0 #0891b2;
@@ -182,8 +167,7 @@
   .overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, rgba(88, 28, 135, 0.9), rgba(30, 27, 75, 0.95));
-    backdrop-filter: blur(10px);
+    background: radial-gradient(circle at center, rgba(88, 28, 135, 0.96), rgba(30, 27, 75, 0.98));
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -210,7 +194,6 @@
     background: linear-gradient(to right, #fde047, #ff85c0, #67e8f9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.35));
     letter-spacing: 1px;
   }
   .subtitle {
@@ -235,7 +218,6 @@
     border-radius: 999px;
     font-weight: 900;
     font-size: 14px;
-    box-shadow: 0 4px 15px rgba(253, 224, 71, 0.2);
   }
   .progress-pill {
     background: rgba(56, 189, 248, 0.2);
@@ -256,12 +238,7 @@
     font-weight: 800;
     border-radius: 999px;
     cursor: pointer;
-    box-shadow: 0 6px 0 #15803d, 0 12px 25px rgba(0, 0, 0, 0.35);
-    transition: transform 0.12s, box-shadow 0.12s;
-    text-shadow: 0 2px 3px rgba(0,0,0,0.25);
-  }
-  .btn-primary:hover {
-    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #15803d, 0 10px 20px rgba(0, 0, 0, 0.3);
   }
   .btn-primary:active {
     transform: translateY(4px);
@@ -282,10 +259,6 @@
     text-decoration: none;
     font-weight: 800;
     font-size: 14px;
-    transition: background 0.15s, transform 0.1s;
-  }
-  .btn-home-link:hover {
-    background: rgba(255, 255, 255, 0.28);
   }
   .btn-home-link:active {
     transform: scale(0.96);
@@ -294,29 +267,24 @@
   /* フィードバックバナー */
   #feedback-banner {
     position: absolute;
-    bottom: 24px;
+    bottom: 22px;
     left: 50%;
     transform: translateX(-50%);
     background: linear-gradient(135deg, #10b981, #059669);
     border: 3px solid #ffffff;
     color: #fff;
-    padding: 10px 22px;
-    border-radius: 20px;
+    padding: 10px 20px;
+    border-radius: 18px;
     font-weight: 800;
-    font-size: 15px;
+    font-size: 14px;
     pointer-events: none;
     z-index: 15;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
     text-align: center;
     max-width: 92%;
-    animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
   #feedback-banner.miss {
     background: linear-gradient(135deg, #f43f5e, #be123c);
-  }
-  @keyframes popIn {
-    from { transform: translate(-50%, 20px) scale(0.8); opacity: 0; }
-    to { transform: translate(-50%, 0) scale(1); opacity: 1; }
   }
 
   /* リザルト振り返り */
@@ -347,9 +315,7 @@
     border-bottom: 1px dashed rgba(255,255,255,0.22);
     cursor: pointer;
     border-radius: 10px;
-    transition: background 0.15s;
   }
-  .review-item:hover { background: rgba(255, 255, 255, 0.1); }
   .review-item:last-child { border-bottom: none; }
   .review-item.playing { background: rgba(253, 224, 71, 0.25); }
   .review-texts { flex: 1; }
@@ -374,14 +340,14 @@
   /* Amazonおすすめ英語教材カード */
   .book-promo-card {
     width: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(254, 249, 195, 0.96));
+    background: linear-gradient(135deg, #ffffff, #fef9c3);
     border: 3px solid #f59e0b;
     border-radius: 16px;
     padding: 12px 14px;
     margin-bottom: 18px;
     text-align: left;
     color: #1e293b;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -390,10 +356,6 @@
     font-size: 11px;
     font-weight: 900;
     color: #b45309;
-    letter-spacing: 0.5px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
   }
   .book-promo-title {
     font-size: 14px;
@@ -413,10 +375,6 @@
     border-radius: 999px;
     border: 2px solid #ffffff;
     box-shadow: 0 3px 0 #b45309;
-    transition: transform 0.1s;
-  }
-  .book-promo-btn:active {
-    transform: translateY(2px);
   }
 
   .new-record-badge {
@@ -429,11 +387,6 @@
     padding: 3px 12px;
     border-radius: 999px;
     margin-bottom: 6px;
-    animation: bounce 0.6s infinite alternate;
-  }
-  @keyframes bounce {
-    from { transform: translateY(0); }
-    to { transform: translateY(-4px); }
   }
 </style>
 </head>
@@ -491,7 +444,7 @@
     <div class="overlay-inner">
       <h1 id="result-title">🎉 クリア！</h1>
       <div id="new-record-badge" class="new-record-badge hidden">🎊 NEW RECORD!!</div>
-      <div style="font-size: 24px; font-weight: 900; text-shadow: 0 2px 6px rgba(0,0,0,0.4);">
+      <div style="font-size: 24px; font-weight: 900;">
         SCORE: <span id="final-score" style="color:#fde047;">0</span>
       </div>
       <div style="font-size: 13px; color: #e9d5ff; margin-top: 4px;">
@@ -501,7 +454,6 @@
       <div class="review-hint">🔊 スピーカーを押すと発音を聴けます</div>
       <div id="review-list"></div>
 
-      <!-- ランダム表示される英語教材Amazonリンク -->
       <div id="book-promo" class="book-promo-card hidden">
         <div class="book-promo-tag">📖 英語力アップにおすすめの問題集（PR）</div>
         <div id="book-promo-title" class="book-promo-title"></div>
@@ -581,7 +533,7 @@
   ];
 
   // =========================================================================
-  // 1. 厳選固定フレーズ（100問）：イディオム・相づち・近年試験頻出会話
+  // 1. 厳選固定フレーズ（100問）
   // =========================================================================
   const FIXED_QUESTIONS = [
     { correct: "We had to call off the meeting.", dummies: ["We had to cool off the meeting.", "We had to call on the manager."], ja: "私たちは会議を中止しなければならなかった。" },
@@ -692,7 +644,6 @@
   function buildGeneratedQuestions() {
     const list = [];
 
-    // --- パターンA: 動詞句 (30) × 会話フレーム (10) = 300問 ---
     const vps = [
       { en: "check the schedule", d1: "change the picture", v: "スケジュールを確認する", te: "スケジュールを確認して" },
       { en: "send the final report", d1: "lend the nice resort", v: "最終レポートを送る", te: "最終レポートを送って" },
@@ -749,7 +700,6 @@
       });
     });
 
-    // --- パターンB: 動名詞 (20) × 会話フレーム (10) = 200問 ---
     const gerunds = [
       { ing: "joining our team", d1: "enjoying our theme", v: "私たちのチームに加わる" },
       { ing: "attending the workshop", d1: "extending the desktop", v: "ワークショップに参加する" },
@@ -796,7 +746,6 @@
       });
     });
 
-    // --- パターンC: 場所・施設 (20) × 道案内/日常フレーム (10) = 200問 ---
     const places = [
       { en: "the airport", d1: "the export", ja: "空港" },
       { en: "the train station", d1: "the main section", ja: "駅" },
@@ -843,7 +792,6 @@
       });
     });
 
-    // --- パターンD: イベント・予定 (20) × 状況報告フレーム (10) = 200問 ---
     const events = [
       { en: "the staff meeting", d1: "the tough reading", ja: "スタッフ会議" },
       { en: "our morning flight", d1: "our warning light", ja: "朝のフライト" },
@@ -893,7 +841,6 @@
     return list;
   }
 
-  // 固定100問 + 生成900問 = ぴったり1,000問
   const QUESTIONS = [...FIXED_QUESTIONS, ...buildGeneratedQuestions()];
 
   const QUESTIONS_PER_ROUND = 10;
@@ -912,29 +859,29 @@
 
   const CONFETTI_COLORS = ['#fde047', '#ff5e99', '#38bdf8', '#4ade80', '#c084fc', '#fb923c'];
 
-  // === Canvas設定 ===
+  // === Canvas設定（スマホでの発熱・カクつき防止のためDPR上限を1.5に最適化） ===
   const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d', { alpha: true });
   let width = 0, height = 0, dpr = 1;
 
   let bgBubbles = [];
   function initBgBubbles() {
-    bgBubbles = Array.from({ length: 24 }, () => ({
+    bgBubbles = Array.from({ length: 12 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      r: 8 + Math.random() * 26,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: -0.2 - Math.random() * 0.5,
-      alpha: 0.08 + Math.random() * 0.14
+      r: 10 + Math.random() * 20,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: -0.2 - Math.random() * 0.4,
+      alpha: 0.08 + Math.random() * 0.1
     }));
   }
 
   function resize() {
-    dpr = window.devicePixelRatio || 1;
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     width = window.innerWidth;
     height = window.innerHeight;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     if (bgBubbles.length === 0) initBgBubbles();
   }
@@ -1015,7 +962,7 @@
   function playSlashSound() {
     if (!audioCtx) return;
     const now = audioCtx.currentTime;
-    const bufferSize = audioCtx.sampleRate * 0.11;
+    const bufferSize = Math.floor(audioCtx.sampleRate * 0.1);
     const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
     const data = buffer.getChannelData(0);
     for (let i = 0; i < bufferSize; i++) {
@@ -1027,11 +974,11 @@
     const filter = audioCtx.createBiquadFilter();
     filter.type = 'bandpass';
     filter.frequency.setValueAtTime(2200, now);
-    filter.frequency.exponentialRampToValueAtTime(450, now + 0.11);
+    filter.frequency.exponentialRampToValueAtTime(450, now + 0.1);
 
     const gain = audioCtx.createGain();
-    gain.gain.setValueAtTime(0.22, now);
-    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.11);
+    gain.gain.setValueAtTime(0.2, now);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
 
     noise.connect(filter);
     filter.connect(gain);
@@ -1048,12 +995,12 @@
       const gain = audioCtx.createGain();
       osc.type = 'triangle';
       osc.frequency.setValueAtTime(freq * pitchMult, now + idx * 0.055);
-      gain.gain.setValueAtTime(0.18, now + idx * 0.055);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.055 + 0.28);
+      gain.gain.setValueAtTime(0.16, now + idx * 0.055);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.055 + 0.25);
       osc.connect(gain);
       gain.connect(audioCtx.destination);
       osc.start(now + idx * 0.055);
-      osc.stop(now + idx * 0.055 + 0.28);
+      osc.stop(now + idx * 0.055 + 0.25);
     });
   }
 
@@ -1064,16 +1011,16 @@
     const gain = audioCtx.createGain();
     osc.type = 'sawtooth';
     osc.frequency.setValueAtTime(190, now);
-    osc.frequency.linearRampToValueAtTime(100, now + 0.28);
-    gain.gain.setValueAtTime(0.18, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+    osc.frequency.linearRampToValueAtTime(100, now + 0.25);
+    gain.gain.setValueAtTime(0.16, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
     osc.connect(gain);
     gain.connect(audioCtx.destination);
     osc.start(now);
-    osc.stop(now + 0.3);
+    osc.stop(now + 0.28);
   }
 
-  // === 1,000問の山札管理（localStorageで進捗を保持） ===
+  // === 1,000問の山札管理 ===
   function createShuffledIndices(total) {
     const arr = Array.from({ length: total }, (_, i) => i);
     for (let i = arr.length - 1; i > 0; i--) {
@@ -1141,6 +1088,7 @@
   let redFlash = 0;
   let hueOffset = 0;
   let lastFrameTime = performance.now();
+  let lastParticleSpawn = 0;
 
   const hud = document.getElementById('hud');
   const controlsBar = document.getElementById('controls-bar');
@@ -1190,6 +1138,73 @@
     }
     lines.push(currentLine);
     return lines;
+  }
+
+  // === 超軽量化：カードの事前レンダリング（オフスクリーンキャッシュ） ===
+  function createCardCache(obj, lineHeight) {
+    const pad = 10;
+    const cw = obj.w + pad * 2;
+    const ch = obj.h + pad * 2 + 4;
+    const off = document.createElement('canvas');
+    off.width = Math.ceil(cw * dpr);
+    off.height = Math.ceil(ch * dpr);
+    const octx = off.getContext('2d');
+    octx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    octx.translate(cw / 2, obj.h / 2 + pad);
+
+    const rx = -obj.w / 2;
+    const ry = -obj.h / 2;
+    const r = 14;
+    const theme = obj.theme;
+
+    // 影
+    octx.fillStyle = theme.shadow;
+    octx.beginPath();
+    octx.roundRect(rx, ry + 5, obj.w, obj.h, r);
+    octx.fill();
+
+    // 本体グラデーション
+    const grad = octx.createLinearGradient(0, ry, 0, ry + obj.h);
+    grad.addColorStop(0, theme.top);
+    grad.addColorStop(1, theme.bottom);
+    octx.fillStyle = grad;
+    octx.beginPath();
+    octx.roundRect(rx, ry, obj.w, obj.h, r);
+    octx.fill();
+
+    // 上部ハイライト
+    octx.fillStyle = 'rgba(255, 255, 255, 0.24)';
+    octx.beginPath();
+    octx.roundRect(rx + 5, ry + 4, obj.w - 10, obj.h * 0.34, 10);
+    octx.fill();
+
+    // 白枠
+    octx.strokeStyle = '#ffffff';
+    octx.lineWidth = 2.5;
+    octx.beginPath();
+    octx.roundRect(rx, ry, obj.w, obj.h, r);
+    octx.stroke();
+
+    // 絵文字
+    octx.font = width < 500 ? '14px sans-serif' : '16px sans-serif';
+    octx.textAlign = 'left';
+    octx.textBaseline = 'top';
+    octx.fillText(theme.icon, rx + 8, ry + 6);
+
+    // テキスト
+    octx.font = obj.font;
+    octx.textAlign = 'center';
+    octx.textBaseline = 'middle';
+    const startY = -((obj.lines.length - 1) * lineHeight) / 2 + 2;
+
+    obj.lines.forEach((line, idx) => {
+      octx.fillStyle = 'rgba(0, 0, 0, 0.35)';
+      octx.fillText(line, 0, startY + idx * lineHeight + 1.5);
+      octx.fillStyle = '#ffffff';
+      octx.fillText(line, 0, startY + idx * lineHeight);
+    });
+
+    return { canvas: off, drawW: cw, drawH: ch, offsetX: -cw / 2, offsetY: -(obj.h / 2 + pad) };
   }
 
   function startGame() {
@@ -1264,37 +1279,55 @@
     ].sort(() => Math.random() - 0.5);
 
     const shuffledThemes = [...CARD_THEMES].sort(() => Math.random() - 0.5);
-    const cardWidth = Math.min(305, Math.max(210, width * 0.5));
-    const font = `800 ${width < 500 ? 14 : 16}px sans-serif`;
+
+    // スマホではコンパクトなサイズにして画面を広く使えるようにする
+    const isMobile = width < 550;
+    const cardWidth = isMobile
+      ? Math.min(185, Math.max(150, Math.floor(width * 0.43)))
+      : Math.min(265, Math.max(200, Math.floor(width * 0.34)));
+    const fontSize = isMobile ? 12.5 : 15.5;
+    const lineHeight = isMobile ? 16 : 20;
+    const font = `800 ${fontSize}px sans-serif`;
+
+    const topBound = 128;
+    const bottomBound = height - 38;
+    const usableH = Math.max(180, bottomBound - topBound);
 
     targets = options.map((opt, idx) => {
-      const lines = wrapText(opt.text, cardWidth - 36, font);
-      const cardHeight = Math.max(70, lines.length * 21 + 32);
+      const lines = wrapText(opt.text, cardWidth - 26, font);
+      const cardHeight = Math.max(54, lines.length * lineHeight + 24);
 
+      // 最初から重ならないように縦に3段へ分散配置
+      const slotH = usableH / options.length;
+      const y = topBound + slotH * (idx + 0.5);
       const marginX = cardWidth / 2 + 12;
-      const safeW = Math.max(10, width - marginX * 2);
-      const x = marginX + (safeW / options.length) * (idx + 0.5) + (Math.random() - 0.5) * 30;
-      const y = 160 + (height - 265) * ((idx % 2) * 0.45 + 0.15);
+      const x = idx === 1
+        ? width - marginX - Math.random() * Math.max(10, (width - cardWidth - 24) * 0.35)
+        : marginX + Math.random() * Math.max(10, (width - cardWidth - 24) * 0.35);
 
-      const speedBase = (width < 500 ? 1.15 : 1.55) + Math.min(1.0, combo * 0.08);
+      const speedBase = (isMobile ? 0.95 : 1.35) + Math.min(0.85, combo * 0.07);
       const angle = Math.random() * Math.PI * 2;
 
-      return {
+      const cardObj = {
         text: opt.text,
         lines,
         font,
         isCorrect: opt.isCorrect,
         x: Math.min(Math.max(x, marginX), width - marginX),
-        y,
+        y: Math.min(Math.max(y, topBound + cardHeight / 2), bottomBound - cardHeight / 2),
         w: cardWidth,
         h: cardHeight,
         vx: Math.cos(angle) * speedBase,
         vy: Math.sin(angle) * speedBase,
-        rot: (Math.random() - 0.5) * 0.1,
-        vRot: (Math.random() - 0.5) * 0.005,
+        rot: (Math.random() - 0.5) * 0.08,
+        vRot: (Math.random() - 0.5) * 0.004,
         theme: shuffledThemes[idx % shuffledThemes.length],
-        bobPhase: Math.random() * Math.PI * 2
+        bobPhase: Math.random() * Math.PI * 2,
+        cache: null
       };
+
+      cardObj.cache = createCardCache(cardObj, lineHeight);
+      return cardObj;
     });
 
     speakText(q.correct);
@@ -1305,8 +1338,8 @@
     playWrongSound();
     combo = 0;
     lives--;
-    screenShake = 14;
-    redFlash = 0.45;
+    screenShake = 12;
+    redFlash = 0.4;
     targets = [];
 
     floatingTexts.push({
@@ -1400,7 +1433,6 @@
       reviewList.appendChild(item);
     });
 
-    // 英語教材のAmazonリンクをランダム表示
     renderRandomEnglishBook();
   }
 
@@ -1419,18 +1451,18 @@
   }
 
   function spawnConfetti(cx, cy) {
-    for (let i = 0; i < 45; i++) {
+    for (let i = 0; i < 24; i++) {
       const a = Math.random() * Math.PI * 2;
-      const sp = 3 + Math.random() * 8;
+      const sp = 3 + Math.random() * 7;
       confetti.push({
         x: cx,
         y: cy,
         vx: Math.cos(a) * sp,
-        vy: Math.sin(a) * sp - 4,
-        w: 7 + Math.random() * 6,
+        vy: Math.sin(a) * sp - 3.5,
+        w: 7 + Math.random() * 5,
         h: 4 + Math.random() * 4,
         rot: Math.random() * Math.PI * 2,
-        vRot: (Math.random() - 0.5) * 0.25,
+        vRot: (Math.random() - 0.5) * 0.22,
         color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
         life: 1
       });
@@ -1444,27 +1476,22 @@
       x: t.x,
       y: t.y,
       r: 10,
-      maxR: t.isCorrect ? 170 : 100,
+      maxR: t.isCorrect ? 140 : 85,
       color: t.isCorrect ? '#fde047' : '#ef4444',
       life: 1
     });
 
     [-1, 1].forEach(side => {
       slices.push({
-        text: t.text,
-        lines: t.lines,
-        font: t.font,
         x: t.x,
         y: t.y,
-        w: t.w,
-        h: t.h,
-        vx: t.vx + Math.cos(angle + (side * Math.PI / 2)) * 4.2,
-        vy: t.vy - 2.5 + Math.sin(angle + (side * Math.PI / 2)) * 2.5,
+        vx: t.vx + Math.cos(angle + (side * Math.PI / 2)) * 4.0,
+        vy: t.vy - 2.2 + Math.sin(angle + (side * Math.PI / 2)) * 2.2,
         rot: t.rot,
         vRot: side * 0.07,
         side,
         cutAngle: angle - t.rot,
-        theme: t.theme,
+        cache: t.cache,
         alpha: 1
       });
     });
@@ -1506,8 +1533,8 @@
       playWrongSound();
       combo = 0;
       lives--;
-      screenShake = 16;
-      redFlash = 0.45;
+      screenShake = 14;
+      redFlash = 0.4;
 
       floatingTexts.push({
         x: t.x,
@@ -1543,14 +1570,17 @@
     if (!isPointerDown || state !== 'playing') return;
     const pt = getPoint(e);
     slashTrail.push(pt);
+    if (slashTrail.length > 16) slashTrail.shift();
 
-    if (Math.random() > 0.35) {
+    // パーティクル生成を間引き＆上限設定してスマホ負荷を抑制
+    if (pt.time - lastParticleSpawn > 28 && particles.length < 30) {
+      lastParticleSpawn = pt.time;
       particles.push({
-        x: pt.x + (Math.random() - 0.5) * 10,
-        y: pt.y + (Math.random() - 0.5) * 10,
-        vx: (Math.random() - 0.5) * 1.5,
-        vy: 0.5 + Math.random() * 1.5,
-        size: 2.5 + Math.random() * 3,
+        x: pt.x + (Math.random() - 0.5) * 8,
+        y: pt.y + (Math.random() - 0.5) * 8,
+        vx: (Math.random() - 0.5) * 1.4,
+        vy: 0.5 + Math.random() * 1.4,
+        size: 2.5 + Math.random() * 2.5,
         color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
         life: 1
       });
@@ -1595,8 +1625,10 @@
     if (state === 'playing' && qIndex < deck.length) speakText(deck[qIndex].correct);
   });
 
-  // === カード描画 ===
+  // === キャッシュ済みカードの超高速描画 ===
   function drawCard(obj, isSlice = false) {
+    const c = obj.cache;
+    if (!c) return;
     ctx.save();
     ctx.translate(obj.x, obj.y);
     ctx.rotate(obj.rot);
@@ -1604,7 +1636,7 @@
     if (isSlice) {
       ctx.globalAlpha = Math.max(0, obj.alpha);
       ctx.beginPath();
-      const big = 500;
+      const big = 400;
       ctx.rotate(obj.cutAngle);
       if (obj.side === -1) ctx.rect(-big, -big, big * 2, big);
       else ctx.rect(-big, 0, big * 2, big);
@@ -1612,53 +1644,7 @@
       ctx.rotate(-obj.cutAngle);
     }
 
-    const rx = -obj.w / 2;
-    const ry = -obj.h / 2;
-    const r = 18;
-    const theme = obj.theme;
-
-    ctx.fillStyle = theme.shadow;
-    ctx.beginPath();
-    ctx.roundRect(rx, ry + 6, obj.w, obj.h, r);
-    ctx.fill();
-
-    const grad = ctx.createLinearGradient(0, ry, 0, ry + obj.h);
-    grad.addColorStop(0, theme.top);
-    grad.addColorStop(1, theme.bottom);
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.roundRect(rx, ry, obj.w, obj.h, r);
-    ctx.fill();
-
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
-    ctx.beginPath();
-    ctx.roundRect(rx + 6, ry + 4, obj.w - 12, obj.h * 0.35, 12);
-    ctx.fill();
-
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.roundRect(rx, ry, obj.w, obj.h, r);
-    ctx.stroke();
-
-    ctx.font = '18px sans-serif';
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'top';
-    ctx.fillText(theme.icon, rx + 10, ry + 8);
-
-    ctx.font = obj.font;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    const lineHeight = 21;
-    const startY = -((obj.lines.length - 1) * lineHeight) / 2 + 2;
-
-    obj.lines.forEach((line, idx) => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
-      ctx.fillText(line, 0, startY + idx * lineHeight + 2);
-      ctx.fillStyle = '#ffffff';
-      ctx.fillText(line, 0, startY + idx * lineHeight);
-    });
-
+    ctx.drawImage(c.canvas, c.offsetX, c.offsetY, c.drawW, c.drawH);
     ctx.restore();
   }
 
@@ -1682,18 +1668,19 @@
       }
     }
 
-    bgBubbles.forEach(b => {
+    // 背景のバブル
+    ctx.fillStyle = '#ffffff';
+    for (let i = 0; i < bgBubbles.length; i++) {
+      const b = bgBubbles[i];
       b.x += b.vx * frameScale;
       b.y += b.vy * frameScale;
       if (b.y < -40) { b.y = height + 40; b.x = Math.random() * width; }
-      ctx.save();
       ctx.globalAlpha = b.alpha;
-      ctx.fillStyle = '#ffffff';
       ctx.beginPath();
       ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
       ctx.fill();
-      ctx.restore();
-    });
+    }
+    ctx.globalAlpha = 1;
 
     ctx.save();
     if (screenShake > 0) {
@@ -1702,23 +1689,60 @@
       if (screenShake < 0.5) screenShake = 0;
     }
 
-    const topBound = 138;
-    const bottomBound = height - 42;
+    const topBound = 128;
+    const bottomBound = height - 38;
 
-    targets.forEach(t => {
+    // ターゲットの移動
+    for (let i = 0; i < targets.length; i++) {
+      const t = targets[i];
       t.bobPhase += 0.05 * frameScale;
       t.x += t.vx * frameScale;
-      t.y += (t.vy + Math.sin(t.bobPhase) * 0.25) * frameScale;
+      t.y += (t.vy + Math.sin(t.bobPhase) * 0.2) * frameScale;
       t.rot += t.vRot * frameScale;
+      if (Math.abs(t.rot) > 0.12) t.vRot *= -1;
+    }
 
-      if (t.x - t.w / 2 < 12) { t.x = 12 + t.w / 2; t.vx *= -1; }
-      if (t.x + t.w / 2 > width - 12) { t.x = width - 12 - t.w / 2; t.vx *= -1; }
-      if (t.y - t.h / 2 < topBound) { t.y = topBound + t.h / 2; t.vy *= -1; }
-      if (t.y + t.h / 2 > bottomBound) { t.y = bottomBound - t.h / 2; t.vy *= -1; }
-      if (Math.abs(t.rot) > 0.14) t.vRot *= -1;
+    // カード同士の重なり防止（相互反発処理）
+    for (let i = 0; i < targets.length; i++) {
+      for (let j = i + 1; j < targets.length; j++) {
+        const a = targets[i];
+        const b = targets[j];
+        const minDistX = (a.w + b.w) / 2 + 12;
+        const minDistY = (a.h + b.h) / 2 + 12;
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const overlapX = minDistX - Math.abs(dx);
+        const overlapY = minDistY - Math.abs(dy);
 
+        if (overlapX > 0 && overlapY > 0) {
+          if (overlapX < overlapY) {
+            const sign = dx >= 0 ? 1 : -1;
+            a.x -= sign * overlapX * 0.5;
+            b.x += sign * overlapX * 0.5;
+            if ((a.vx - b.vx) * sign > 0) {
+              const tmp = a.vx; a.vx = b.vx; b.vx = tmp;
+            }
+          } else {
+            const sign = dy >= 0 ? 1 : -1;
+            a.y -= sign * overlapY * 0.5;
+            b.y += sign * overlapY * 0.5;
+            if ((a.vy - b.vy) * sign > 0) {
+              const tmp = a.vy; a.vy = b.vy; b.vy = tmp;
+            }
+          }
+        }
+      }
+    }
+
+    // 壁バウンド＆描画
+    for (let i = 0; i < targets.length; i++) {
+      const t = targets[i];
+      if (t.x - t.w / 2 < 10) { t.x = 10 + t.w / 2; t.vx = Math.abs(t.vx); }
+      if (t.x + t.w / 2 > width - 10) { t.x = width - 10 - t.w / 2; t.vx = -Math.abs(t.vx); }
+      if (t.y - t.h / 2 < topBound) { t.y = topBound + t.h / 2; t.vy = Math.abs(t.vy); }
+      if (t.y + t.h / 2 > bottomBound) { t.y = bottomBound - t.h / 2; t.vy = -Math.abs(t.vy); }
       drawCard(t, false);
-    });
+    }
 
     for (let i = slices.length - 1; i >= 0; i--) {
       const s = slices[i];
@@ -1726,7 +1750,7 @@
       s.y += s.vy * frameScale;
       s.vy += 0.28 * frameScale;
       s.rot += s.vRot * frameScale;
-      s.alpha -= 0.024 * frameScale;
+      s.alpha -= 0.028 * frameScale;
       drawCard(s, true);
       if (s.alpha <= 0) slices.splice(i, 1);
     }
@@ -1734,15 +1758,13 @@
     for (let i = shockwaves.length - 1; i >= 0; i--) {
       const sw = shockwaves[i];
       sw.r += (sw.maxR - sw.r) * 0.18 * frameScale;
-      sw.life -= 0.05 * frameScale;
-      ctx.save();
+      sw.life -= 0.055 * frameScale;
       ctx.globalAlpha = Math.max(0, sw.life);
       ctx.strokeStyle = sw.color;
-      ctx.lineWidth = 5 * Math.max(0, sw.life);
+      ctx.lineWidth = 4 * Math.max(0, sw.life);
       ctx.beginPath();
       ctx.arc(sw.x, sw.y, sw.r, 0, Math.PI * 2);
       ctx.stroke();
-      ctx.restore();
       if (sw.life <= 0) shockwaves.splice(i, 1);
     }
 
@@ -1753,7 +1775,7 @@
       c.vy += 0.22 * frameScale;
       c.vx *= Math.pow(0.99, frameScale);
       c.rot += c.vRot * frameScale;
-      c.life -= 0.015 * frameScale;
+      c.life -= 0.018 * frameScale;
       ctx.save();
       ctx.translate(c.x, c.y);
       ctx.rotate(c.rot);
@@ -1768,52 +1790,50 @@
       const p = particles[i];
       p.x += p.vx * frameScale;
       p.y += p.vy * frameScale;
-      p.life -= 0.035 * frameScale;
-      ctx.save();
+      p.life -= 0.045 * frameScale;
       ctx.globalAlpha = Math.max(0, p.life);
       ctx.fillStyle = p.color;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fill();
-      ctx.restore();
       if (p.life <= 0) particles.splice(i, 1);
     }
+    ctx.globalAlpha = 1;
 
     for (let i = floatingTexts.length - 1; i >= 0; i--) {
       const ft = floatingTexts[i];
-      ft.y -= 1.4 * frameScale;
-      ft.life -= 0.02 * frameScale;
-      ctx.save();
+      ft.y -= 1.3 * frameScale;
+      ft.life -= 0.022 * frameScale;
       ctx.globalAlpha = Math.max(0, ft.life);
-      ctx.font = '900 26px sans-serif';
+      ctx.font = '900 24px sans-serif';
       ctx.textAlign = 'center';
-      ctx.lineWidth = 5;
+      ctx.lineWidth = 4;
       ctx.strokeStyle = 'rgba(0,0,0,0.45)';
       ctx.strokeText(ft.text, ft.x, ft.y);
       ctx.fillStyle = ft.color;
       ctx.fillText(ft.text, ft.x, ft.y);
-      ctx.restore();
       if (ft.life <= 0) floatingTexts.splice(i, 1);
     }
+    ctx.globalAlpha = 1;
 
-    slashTrail = slashTrail.filter(pt => now - pt.time < 150);
+    slashTrail = slashTrail.filter(pt => now - pt.time < 130);
     if (slashTrail.length > 1) {
+      ctx.lineCap = 'round';
       for (let i = 1; i < slashTrail.length; i++) {
         const p1 = slashTrail[i - 1];
         const p2 = slashTrail[i];
         const ratio = i / slashTrail.length;
-        const hue = (hueOffset + i * 20) % 360;
+        const hue = (hueOffset + i * 22) % 360;
 
         ctx.strokeStyle = `hsla(${hue}, 100%, 65%, ${ratio})`;
-        ctx.lineWidth = ratio * 14;
-        ctx.lineCap = 'round';
+        ctx.lineWidth = ratio * 12;
         ctx.beginPath();
         ctx.moveTo(p1.x, p1.y);
         ctx.lineTo(p2.x, p2.y);
         ctx.stroke();
 
         ctx.strokeStyle = `rgba(255, 255, 255, ${ratio})`;
-        ctx.lineWidth = ratio * 5;
+        ctx.lineWidth = ratio * 4;
         ctx.stroke();
       }
     }
