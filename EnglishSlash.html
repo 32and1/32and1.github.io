@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>English Slash! 1000 Phrases Edition</title>
+<style>
+  * {
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: linear-gradient(135deg, #4f46e5 0%, #9333ea 45%, #ec4899 100%);
+    font-family: "Hiragino Maru Gothic ProN", "Rounded Mplus 1c", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #ffffff;
+  }
+  #game-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+    touch-action: none;
+  }
+
+  /* 上部HUD */
+  #hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 12px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .hud-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 6px;
+  }
+  .hud-group {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .badge {
+    background: rgba(255, 255, 255, 0.22);
+    border: 2px solid rgba(255, 255, 255, 0.55);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+  .btn-hud-home {
+    pointer-events: auto;
+    text-decoration: none;
+    color: #ffffff;
+    background: rgba(15, 23, 42, 0.55);
+    border: 2px solid rgba(255, 255, 255, 0.65);
+    padding: 5px 11px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    backdrop-filter: blur(6px);
+    transition: transform 0.1s, background 0.15s;
+  }
+  .btn-hud-home:hover {
+    background: rgba(15, 23, 42, 0.8);
+  }
+  .btn-hud-home:active {
+    transform: scale(0.94);
+  }
+
+  /* タイマーバー */
+  .timer-wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .timer-track {
+    flex: 1;
+    height: 14px;
+    background: rgba(15, 23, 42, 0.45);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 999px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  }
+  #timer-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #4ade80, #22c55e);
+    border-radius: 999px;
+    transition: background 0.2s;
+  }
+  #timer-fill.warning {
+    background: linear-gradient(90deg, #facc15, #f97316);
+  }
+  #timer-fill.danger {
+    background: linear-gradient(90deg, #fb7185, #ef4444);
+    animation: pulseDanger 0.35s infinite alternate;
+  }
+  @keyframes pulseDanger {
+    from { opacity: 1; }
+    to { opacity: 0.65; }
+  }
+  #timer-text {
+    font-weight: 900;
+    font-size: 15px;
+    min-width: 50px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  }
+
+  .controls-bar {
+    position: absolute;
+    top: 84px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+    width: max-content;
+  }
+  .btn-small {
+    pointer-events: auto;
+    background: linear-gradient(to bottom, #fef08a, #facc15);
+    border: 2px solid #ffffff;
+    color: #713f12;
+    padding: 7px 15px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #ca8a04, 0 6px 15px rgba(0,0,0,0.2);
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+  .btn-small:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #ca8a04;
+  }
+  .btn-small.secondary {
+    background: linear-gradient(to bottom, #a5f3fc, #22d3ee);
+    color: #164e63;
+    box-shadow: 0 4px 0 #0891b2, 0 6px 15px rgba(0,0,0,0.2);
+  }
+  .btn-small.secondary:active {
+    box-shadow: 0 1px 0 #0891b2;
+  }
+
+  /* オーバーレイ画面 */
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(88, 28, 135, 0.9), rgba(30, 27, 75, 0.95));
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 18px 34px;
+    text-align: center;
+    z-index: 20;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .overlay-inner {
+    margin: auto 0;
+    width: 100%;
+    max-width: 540px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hidden {
+    display: none !important;
+  }
+  h1 {
+    font-size: clamp(28px, 7vw, 48px);
+    margin: 0 0 10px;
+    background: linear-gradient(to right, #fde047, #ff85c0, #67e8f9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.35));
+    letter-spacing: 1px;
+  }
+  .subtitle {
+    color: #f3e8ff;
+    max-width: 460px;
+    line-height: 1.65;
+    margin-bottom: 18px;
+    font-size: 14px;
+  }
+  .stats-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 22px;
+  }
+  .best-score-pill {
+    background: rgba(253, 224, 71, 0.2);
+    border: 2px solid #fde047;
+    color: #fde047;
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-weight: 900;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(253, 224, 71, 0.2);
+  }
+  .progress-pill {
+    background: rgba(56, 189, 248, 0.2);
+    border: 2px solid #38bdf8;
+    color: #e0f2fe;
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-weight: 900;
+    font-size: 14px;
+  }
+
+  .btn-primary {
+    background: linear-gradient(to bottom, #4ade80, #16a34a);
+    color: white;
+    border: 3px solid #ffffff;
+    padding: 14px 40px;
+    font-size: 19px;
+    font-weight: 800;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #15803d, 0 12px 25px rgba(0, 0, 0, 0.35);
+    transition: transform 0.12s, box-shadow 0.12s;
+    text-shadow: 0 2px 3px rgba(0,0,0,0.25);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+  }
+  .btn-primary:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 #15803d;
+  }
+
+  .btn-home-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 16px;
+    padding: 10px 24px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14px;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .btn-home-link:hover {
+    background: rgba(255, 255, 255, 0.28);
+  }
+  .btn-home-link:active {
+    transform: scale(0.96);
+  }
+
+  /* フィードバックバナー */
+  #feedback-banner {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #10b981, #059669);
+    border: 3px solid #ffffff;
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 15px;
+    pointer-events: none;
+    z-index: 15;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+    text-align: center;
+    max-width: 92%;
+    animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  #feedback-banner.miss {
+    background: linear-gradient(135deg, #f43f5e, #be123c);
+  }
+  @keyframes popIn {
+    from { transform: translate(-50%, 20px) scale(0.8); opacity: 0; }
+    to { transform: translate(-50%, 0) scale(1); opacity: 1; }
+  }
+
+  /* リザルト振り返り */
+  .review-hint {
+    font-size: 13px;
+    color: #fde047;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  #review-list {
+    max-height: 195px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.14);
+    border: 2px solid rgba(255,255,255,0.28);
+    border-radius: 18px;
+    padding: 8px 14px;
+    margin: 8px 0 14px;
+    text-align: left;
+  }
+  .review-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 6px;
+    border-bottom: 1px dashed rgba(255,255,255,0.22);
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background 0.15s;
+  }
+  .review-item:hover { background: rgba(255, 255, 255, 0.1); }
+  .review-item:last-child { border-bottom: none; }
+  .review-item.playing { background: rgba(253, 224, 71, 0.25); }
+  .review-texts { flex: 1; }
+  .review-en { color: #fde047; font-weight: 800; font-size: 14px; line-height: 1.35; }
+  .review-ja { color: #f1f5f9; font-size: 12px; margin-top: 2px; }
+  .btn-speaker {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    background: linear-gradient(to bottom, #38bdf8, #0284c7);
+    color: #ffffff;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 3px 0 #075985;
+  }
+
+  /* Amazonおすすめ英語教材カード */
+  .book-promo-card {
+    width: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(254, 249, 195, 0.96));
+    border: 3px solid #f59e0b;
+    border-radius: 16px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    text-align: left;
+    color: #1e293b;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .book-promo-tag {
+    font-size: 11px;
+    font-weight: 900;
+    color: #b45309;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .book-promo-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.4;
+  }
+  .book-promo-btn {
+    display: inline-block;
+    align-self: flex-end;
+    background: linear-gradient(to bottom, #fbbf24, #f59e0b);
+    color: #451a03;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 13px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 2px solid #ffffff;
+    box-shadow: 0 3px 0 #b45309;
+    transition: transform 0.1s;
+  }
+  .book-promo-btn:active {
+    transform: translateY(2px);
+  }
+
+  .new-record-badge {
+    display: inline-block;
+    background: #ef4444;
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 900;
+    padding: 3px 12px;
+    border-radius: 999px;
+    margin-bottom: 6px;
+    animation: bounce 0.6s infinite alternate;
+  }
+  @keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-4px); }
+  }
+</style>
+</head>
+<body>
+
+<div id="game-container">
+  <canvas id="canvas"></canvas>
+
+  <!-- ゲーム中HUD -->
+  <div id="hud" class="hidden">
+    <div class="hud-top-row">
+      <div class="hud-group">
+        <a href="http://32and1.com" class="btn-hud-home">🏠 戻る</a>
+        <div class="badge">❤️ <span id="lives-el">3</span></div>
+        <div class="badge">🔥 <span id="combo-el">0</span></div>
+      </div>
+      <div class="hud-group">
+        <div class="badge">⭐ <span id="progress-el">1/10</span></div>
+        <div class="badge">🏆 <span id="score-el">0</span></div>
+      </div>
+    </div>
+    <div class="timer-wrapper">
+      <div class="timer-track"><div id="timer-fill"></div></div>
+      <div id="timer-text">12.0s</div>
+    </div>
+  </div>
+
+  <div id="controls-bar" class="controls-bar hidden">
+    <button class="btn-small" id="btn-replay">🔊 もう一度聞く</button>
+    <button class="btn-small secondary" id="btn-speed">⚡ 速度: 普通</button>
+  </div>
+
+  <div id="feedback-banner" class="hidden"></div>
+
+  <!-- タイトル画面 -->
+  <div id="start-screen" class="overlay">
+    <div class="overlay-inner">
+      <h1>⚔️ English Slash!</h1>
+      <p class="subtitle">
+        日常会話や近年の試験に頻出の<strong>全1,000フレーズ</strong>を収録！<br>
+        制限時間12秒以内に<strong>早く斬るほどハイスコア</strong>が出ます⚡<br>
+        ※1,000問一巡するまで同じ文は出題されません！
+      </p>
+      <div class="stats-row">
+        <div class="best-score-pill">👑 BEST: <span id="start-best-score">0</span></div>
+        <div class="progress-pill">📚 制覇: <span id="mastered-count">0</span> / 1000</div>
+      </div>
+      <button class="btn-primary" id="btn-start">START!</button>
+      <a href="http://32and1.com" class="btn-home-link">🏠 32and1.com へ戻る</a>
+    </div>
+  </div>
+
+  <!-- リザルト画面 -->
+  <div id="result-screen" class="overlay hidden">
+    <div class="overlay-inner">
+      <h1 id="result-title">🎉 クリア！</h1>
+      <div id="new-record-badge" class="new-record-badge hidden">🎊 NEW RECORD!!</div>
+      <div style="font-size: 24px; font-weight: 900; text-shadow: 0 2px 6px rgba(0,0,0,0.4);">
+        SCORE: <span id="final-score" style="color:#fde047;">0</span>
+      </div>
+      <div style="font-size: 13px; color: #e9d5ff; margin-top: 4px;">
+        👑 BEST: <span id="result-best-score">0</span> ｜ 📚 制覇: <span id="result-mastered">0</span>/1000
+      </div>
+
+      <div class="review-hint">🔊 スピーカーを押すと発音を聴けます</div>
+      <div id="review-list"></div>
+
+      <!-- ランダム表示される英語教材Amazonリンク -->
+      <div id="book-promo" class="book-promo-card hidden">
+        <div class="book-promo-tag">📖 英語力アップにおすすめの問題集（PR）</div>
+        <div id="book-promo-title" class="book-promo-title"></div>
+        <a id="book-promo-link" class="book-promo-btn" href="#" target="_blank" rel="noopener noreferrer">
+          Amazonで詳細を見る ↗
+        </a>
+      </div>
+
+      <button class="btn-primary" id="btn-retry">次の10問に挑戦！</button>
+      <a href="http://32and1.com" class="btn-home-link">🏠 32and1.com へ戻る</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+  // =========================================================================
+  // 英語専用のAmazonおすすめ書籍リスト（他教科混在の本は除外済み）
+  // =========================================================================
+  const AMAZON_ENGLISH_BOOKS = [
+    { title: "中3 標準問題集 英語：2025年の教科書改訂に対応 (受験研究社)", url: "https://www.amazon.co.jp/dp/4424638057?tag=goodjobsale-22" },
+    { title: "中3英語をひとつひとつわかりやすく。改訂版", url: "https://www.amazon.co.jp/dp/4053052491?tag=goodjobsale-22" },
+    { title: "ぐーんっとやさしく 中3英語", url: "https://www.amazon.co.jp/dp/4578234207?tag=goodjobsale-22" },
+    { title: "Mr. Evine の中学英文法を修了するドリル【音声DL付】", url: "https://www.amazon.co.jp/dp/4757412223?tag=goodjobsale-22" },
+    { title: "中3 ハイクラステスト 英語：2025年の教科書改訂に対応 (受験研究社)", url: "https://www.amazon.co.jp/dp/4424638227?tag=goodjobsale-22" },
+    { title: "中学英語スーパードリル 中3 完全マスター", url: "https://www.amazon.co.jp/dp/4863925972?tag=goodjobsale-22" },
+    { title: "新中学問題集 英語 中3 発展編 2024年改訂版", url: "https://www.amazon.co.jp/dp/B0CRKSFBJH?tag=goodjobsale-22" },
+    { title: "ホントにわかる 中学3年間の総復習 英語", url: "https://www.amazon.co.jp/dp/4402426324?tag=goodjobsale-22" },
+    { title: "チャート式シリーズ 中学英語 3年 準拠ドリル", url: "https://www.amazon.co.jp/dp/4410150596?tag=goodjobsale-22" },
+    { title: "【音声DL付】中3英語をおさらいして話せるようになる本", url: "https://www.amazon.co.jp/dp/4757439067?tag=goodjobsale-22" },
+    { title: "つみあげ英語 中３", url: "https://www.amazon.co.jp/dp/4410153773?tag=goodjobsale-22" },
+    { title: "音声DL BOOK 30日で完成! イラストで覚える 中3の英単語550 (NHKテキスト)", url: "https://www.amazon.co.jp/dp/4142133721?tag=goodjobsale-22" },
+    { title: "わからないをわかるにかえる 中3英語 (オールカラー,付録付き)", url: "https://www.amazon.co.jp/dp/4581110416?tag=goodjobsale-22" },
+    { title: "チャート式シリーズ 中学英語 3年", url: "https://www.amazon.co.jp/dp/4410151754?tag=goodjobsale-22" },
+    { title: "できた!中3英語 文法 (中学基礎がため100%)", url: "https://www.amazon.co.jp/dp/4774331139?tag=goodjobsale-22" },
+    { title: "ひとつずつ すこしずつ ホントにわかる 中3英語", url: "https://www.amazon.co.jp/dp/4402426278?tag=goodjobsale-22" },
+    { title: "中３英文法 パターンドリル (シグマベスト)", url: "https://www.amazon.co.jp/dp/4578221377?tag=goodjobsale-22" },
+    { title: "改訂第２版 中３英語が面白いほどわかる本", url: "https://www.amazon.co.jp/dp/B0FPTY9B1L?tag=goodjobsale-22" },
+    { title: "ニューコース問題集 中3英語 新装版", url: "https://www.amazon.co.jp/dp/4053063434?tag=goodjobsale-22" },
+    { title: "完全攻略 中3 英語", url: "https://www.amazon.co.jp/dp/458110968X?tag=goodjobsale-22" },
+    { title: "アウトプット専用問題集 中３英語 [文法] (シグマベスト)", url: "https://www.amazon.co.jp/dp/4578234886?tag=goodjobsale-22" },
+    { title: "できた!中3英語 単語・読解 (中学基礎がため100%)", url: "https://www.amazon.co.jp/dp/4774331147?tag=goodjobsale-22" },
+    { title: "中3 英語 (10分間集中ドリル)", url: "https://www.amazon.co.jp/dp/4053054575?tag=goodjobsale-22" },
+    { title: "最高水準問題集 中3英語 (シグマベスト)", url: "https://www.amazon.co.jp/dp/4578233871?tag=goodjobsale-22" },
+    { title: "中学 標準問題集 英語長文：2025年の教科書改訂に対応 (受験研究社)", url: "https://www.amazon.co.jp/dp/4424638065?tag=goodjobsale-22" },
+    { title: "アウトプット専用問題集 中３英語 [単語・読解・リスニング] (シグマベスト)", url: "https://www.amazon.co.jp/dp/4578234878?tag=goodjobsale-22" },
+    { title: "中学 ハイクラステスト 英語長文：2025年の教科書改訂に対応 (受験研究社)", url: "https://www.amazon.co.jp/dp/4424638235?tag=goodjobsale-22" },
+    { title: "高校入試 中学3年間の総復習 英語 新装改訂版", url: "https://www.amazon.co.jp/dp/4010222816?tag=goodjobsale-22" },
+    { title: "完全攻略 高校入試 3年間の総仕上げ 英語", url: "https://www.amazon.co.jp/dp/4581122635?tag=goodjobsale-22" },
+    { title: "中学校3年間の英単語が1ヵ月で1000語覚えられる本", url: "https://www.amazon.co.jp/dp/4761274859?tag=goodjobsale-22" },
+    { title: "中2英語をひとつひとつわかりやすく。改訂版", url: "https://www.amazon.co.jp/dp/4053052459?tag=goodjobsale-22" },
+    { title: "中2 標準問題集 英語：2025年の教科書改訂に対応 (受験研究社)", url: "https://www.amazon.co.jp/dp/4424638049?tag=goodjobsale-22" },
+    { title: "中２英文法 パターンドリル (シグマベスト)", url: "https://www.amazon.co.jp/dp/4578221369?tag=goodjobsale-22" },
+    { title: "できた!中2英語 文法 (中学基礎がため100%)", url: "https://www.amazon.co.jp/dp/4774331112?tag=goodjobsale-22" },
+    { title: "改訂第2版 中2英語が面白いほどわかる本", url: "https://www.amazon.co.jp/dp/4046076283?tag=goodjobsale-22" },
+    { title: "ぐーんっとやさしく 中2英語", url: "https://www.amazon.co.jp/dp/4578234193?tag=goodjobsale-22" },
+    { title: "【音声DL付】中2英語をおさらいして話せるようになる本", url: "https://www.amazon.co.jp/dp/4757439059?tag=goodjobsale-22" },
+    { title: "ホントにわかる 中1・2年の総復習 英語", url: "https://www.amazon.co.jp/dp/4402426146?tag=goodjobsale-22" },
+    { title: "10日間完成 中1・2の総復習 英語 改訂版", url: "https://www.amazon.co.jp/dp/4053053714?tag=goodjobsale-22" },
+    { title: "中2 ハイクラステスト 英語：2025年の教科書改訂に対応 (受験研究社)", url: "https://www.amazon.co.jp/dp/4424638219?tag=goodjobsale-22" },
+    { title: "アウトプット専用問題集 中2英語［単語・読解・リスニング］", url: "https://www.amazon.co.jp/dp/4578234738?tag=goodjobsale-22" },
+    { title: "中学英単語をひとつひとつわかりやすく。 改訂版", url: "https://www.amazon.co.jp/dp/4053053439?tag=goodjobsale-22" },
+    { title: "中２英単語 パターンドリル６７０ (シグマベスト)", url: "https://www.amazon.co.jp/dp/4578221407?tag=goodjobsale-22" },
+    { title: "中1 標準問題集 英語：2025年の教科書改訂に対応 (受験研究社)", url: "https://www.amazon.co.jp/dp/4424638030?tag=goodjobsale-22" },
+    { title: "中1英語をひとつひとつわかりやすく。改訂版", url: "https://www.amazon.co.jp/dp/4053052440?tag=goodjobsale-22" },
+    { title: "ニューコース参考書 中1英語 新装版", url: "https://www.amazon.co.jp/dp/4053063221?tag=goodjobsale-22" },
+    { title: "とってもやさしい 中１英語 新装改訂版", url: "https://www.amazon.co.jp/dp/4010222301?tag=goodjobsale-22" },
+    { title: "中１英単語 パターンドリル７４０ (シグマベスト)", url: "https://www.amazon.co.jp/dp/4578221393?tag=goodjobsale-22" },
+    { title: "マンガでわかる中学英語 中1~3 (COMIC×STUDY)", url: "https://www.amazon.co.jp/dp/4053049245?tag=goodjobsale-22" },
+    { title: "音声DL BOOK 30日で完成! イラストで覚える 中1の英単語550 (NHKテキスト)", url: "https://www.amazon.co.jp/dp/4142133705?tag=goodjobsale-22" },
+    { title: "アウトプット専用問題集 中1英語［単語・読解・リスニング］", url: "https://www.amazon.co.jp/dp/4578234711?tag=goodjobsale-22" },
+    { title: "中１英語表現 パターンドリル 重要表現８２ (シグマベスト)", url: "https://www.amazon.co.jp/dp/4578221423?tag=goodjobsale-22" },
+    { title: "中学英語をもう一度ひとつひとつわかりやすく。改訂版", url: "https://www.amazon.co.jp/dp/4053054826?tag=goodjobsale-22" },
+    { title: "小1~中1対象 書き方パターンでスペリングのルールが身につく! 英単語スペリングドリル(音声DL対応)", url: "https://www.amazon.co.jp/dp/4384060831?tag=goodjobsale-22" }
+  ];
+
+  // =========================================================================
+  // 1. 厳選固定フレーズ（100問）：イディオム・相づち・近年試験頻出会話
+  // =========================================================================
+  const FIXED_QUESTIONS = [
+    { correct: "We had to call off the meeting.", dummies: ["We had to cool off the meeting.", "We had to call on the manager."], ja: "私たちは会議を中止しなければならなかった。" },
+    { correct: "Let's put off the trip until May.", dummies: ["Let's put on the coat in May.", "Let's take off the tip in May."], ja: "旅行は5月まで延期しましょう。" },
+    { correct: "I finally figured out the problem.", dummies: ["I finally fingered out the problem.", "I finally filled out the program."], ja: "ようやくその問題の解決策がわかった。" },
+    { correct: "We just ran out of printer paper.", dummies: ["We just ran into printed paper.", "We just ran out of bitter pepper."], ja: "ちょうどプリンター用紙を切らしてしまった。" },
+    { correct: "She turned down the job offer.", dummies: ["She turned around the job office.", "She turned on the top offer."], ja: "彼女はその仕事のオファーを断った。" },
+    { correct: "I really look up to my mentor.", dummies: ["I really look out for my member.", "I really lock up my mentor."], ja: "私は指導者を心から尊敬している。" },
+    { correct: "Let's catch up over coffee soon.", dummies: ["Let's cut up over coffee soon.", "Let's check out some coffee soon."], ja: "近いうちにコーヒーでも飲みながら近況を話そう。" },
+    { correct: "Feel free to drop by anytime.", dummies: ["Feel free to drive by any line.", "Fall free to drop out anytime."], ja: "いつでも気軽に立ち寄ってください。" },
+    { correct: "Have you made up your mind yet?", dummies: ["Have you made out your sign yet?", "Have you picked up your mind yet?"], ja: "もう決心はつきましたか？" },
+    { correct: "Could you fill in for me today?", dummies: ["Could you feel free for me today?", "Could you fill out the form today?"], ja: "今日、私の代理を務めてもらえますか？" },
+    { correct: "How do you get along with him?", dummies: ["How did you get away with him?", "How do you go along for him?"], ja: "彼とはうまくやっていますか？" },
+    { correct: "Don't bring up that topic now.", dummies: ["Don't break up that topic now.", "Don't bring out that copy now."], ja: "今その話題を持ち出さないで。" },
+    { correct: "Everything will work out fine.", dummies: ["Everyone will walk out fine.", "Everything will wear out fine."], ja: "すべてうまくいくはずですよ。" },
+    { correct: "Who came up with this idea?", dummies: ["Who came out with this item?", "Who caught up with this idea?"], ja: "誰がこのアイデアを思いついたのですか？" },
+    { correct: "It's hard to keep track of costs.", dummies: ["It's hard to keep back the coats.", "It's hard to get track of cases."], ja: "費用を正確に把握し続けるのは難しい。" },
+    { correct: "I'm looking forward to seeing you.", dummies: ["I'm looking for words to say to you.", "I'm locking forward to meeting you."], ja: "お会いできるのを楽しみにしています。" },
+    { correct: "It took weeks to get over the flu.", dummies: ["It took weeks to go over the floor.", "It took days to get under the flu."], ja: "インフルエンザが治るのに数週間かかった。" },
+    { correct: "He didn't show up at the station.", dummies: ["He didn't shut up at the station.", "He didn't slow down at the stadium."], ja: "彼は駅に姿を見せなかった。" },
+    { correct: "We need to carry out the plan.", dummies: ["We need to hurry out of the plane.", "We need to carry on the plant."], ja: "私たちはその計画を実行する必要がある。" },
+    { correct: "You can always count on me.", dummies: ["You can always call on me.", "You can never count out me."], ja: "いつでも私を頼っていいですよ。" },
+    { correct: "We should cut down on sugar.", dummies: ["We should shut down on sugar.", "We should cut out the supper."], ja: "私たちは砂糖を控えるべきだ。" },
+    { correct: "Please look over the contract first.", dummies: ["Please look after the contact first.", "Please take over the concert first."], ja: "まず契約書にざっと目を通してください。" },
+    { correct: "The event ended up being cancelled.", dummies: ["The event ended off being called.", "The evening ended up being crowded."], ja: "そのイベントは結局中止になった。" },
+    { correct: "I'm trying to keep up with the news.", dummies: ["I'm trying to pick up the new views.", "I'm trying to put up with the noise."], ja: "最新のニュースについていこうとしている。" },
+    { correct: "Could you say that again please?", dummies: ["Could you stay there again please?", "Would you see that game please?"], ja: "もう一度言っていただけますか？" },
+    { correct: "Would you mind opening the door?", dummies: ["Would you mean closing the door?", "Could you find opening the store?"], ja: "ドアを開けていただけますか？" },
+    { correct: "Do you happen to know the time?", dummies: ["Did you happen to show the sign?", "Do you hope to know the line?"], ja: "今何時かご存じですか？" },
+    { correct: "Why don't we grab a quick bite?", dummies: ["Why didn't we grab a nice bike?", "Why don't you drop a big kite?"], ja: "軽く何か食べに行きませんか？" },
+    { correct: "That sounds like a solid plan.", dummies: ["That seems like a sudden plant.", "That songs like a silly pan."], ja: "それはしっかりした良い計画ですね。" },
+    { correct: "I'm afraid I can't make it tonight.", dummies: ["I'm afraid I can't take it right.", "I agree I can't bake it tonight."], ja: "あいにく今夜は出席できそうにありません。" },
+    { correct: "Let me double-check my schedule.", dummies: ["Let me double-change my picture.", "Let him check my simple rule."], ja: "スケジュールを念のため確認させてください。" },
+    { correct: "It's completely up to you.", dummies: ["It's completely out of you.", "It's commonly on to you."], ja: "それは完全にあなた次第です。" },
+    { correct: "Take your time, there's no rush.", dummies: ["Take your dime, there's no crash.", "Make your line, there's no brush."], ja: "急がなくていいので、ゆっくりどうぞ。" },
+    { correct: "Sorry to keep you waiting so long.", dummies: ["Sorry to keep you waking alone.", "Sorry to leave you walking along."], ja: "長くお待たせして申し訳ありません。" },
+    { correct: "How come you left so early?", dummies: ["How can you live so easily?", "How long have you slept early?"], ja: "どうしてそんなに早く帰ったのですか？" },
+    { correct: "Feel free to ask any questions.", dummies: ["Fall free to add many sections.", "Feel fine to pass any lessons."], ja: "遠慮なく何でも質問してください。" },
+    { correct: "I couldn't agree with you more.", dummies: ["I couldn't argue with you more.", "I should agree with you before."], ja: "まったく同感です（これ以上ないほど賛成です）。" },
+    { correct: "That actually makes a lot of sense.", dummies: ["That actually takes a lot of cents.", "That finally makes a box of science."], ja: "それは確かにとても筋が通っていますね。" },
+    { correct: "Let's call it a day and go home.", dummies: ["Let's call it a date and stay home.", "Let's fall in a way to go home."], ja: "今日はこれくらいにして帰りましょう。" },
+    { correct: "Would it be possible to reschedule?", dummies: ["Could it be impossible to remember?", "Should it be probable to recycle?"], ja: "日程を変更することは可能でしょうか？" },
+    { correct: "Let me know if anything changes.", dummies: ["Let me go if everything charges.", "Let him know if nothing chances."], ja: "何か変更があれば知らせてください。" },
+    { correct: "Thank you in advance for your help.", dummies: ["Thank you at last for your health.", "Thank you on advice for your heart."], ja: "ご協力のほど、あらかじめ感謝いたします。" },
+    { correct: "What brings you to this neighborhood?", dummies: ["What gives you this neighbor's food?", "Where brings you to that brother's wood?"], ja: "どういったご用でこのあたりへ？" },
+    { correct: "How did your job interview go?", dummies: ["How long did your review grow?", "Who did your job in the view show?"], ja: "就職の面接はどうでしたか？" },
+    { correct: "I'll get back to you by Friday.", dummies: ["I'll go back to you on Monday.", "I'll get packed for you by Friday."], ja: "金曜日までにお返事します。" },
+    { correct: "Make sure to lock the front door.", dummies: ["Make sense to knock the back floor.", "Take care to look at the front store."], ja: "必ず玄関の鍵を閉めてください。" },
+    { correct: "You can say that again!", dummies: ["You can't stay there again!", "You may see that game!"], ja: "まったくその通りだね！" },
+    { correct: "It goes without saying that it's true.", dummies: ["It comes without seeing that it's new.", "It goes with saying what is blue."], ja: "それが本当なのは言うまでもない。" },
+    { correct: "We are running behind schedule.", dummies: ["We are walking beside the school.", "We are turning behind the rule."], ja: "予定より遅れています。" },
+    { correct: "The traffic was heavier than usual.", dummies: ["The topic was happier than visual.", "The trophy was harder than actual."], ja: "交通量がいつもより多かった。" },
+    { correct: "Did you already submit the report?", dummies: ["Did you really admit the resort?", "Do you already support the record?"], ja: "もうレポートは提出しましたか？" },
+    { correct: "The copy machine is out of order.", dummies: ["The coffee machine is out of sugar.", "The copy magazine is on the border."], ja: "コピー機が故障中です。" },
+    { correct: "I barely caught the last train.", dummies: ["I clearly missed the fast plane.", "I badly bought the last ticket."], ja: "終電にぎりぎり間に合った。" },
+    { correct: "She is on leave until next Monday.", dummies: ["She is on live until last Sunday.", "He is in love until next month."], ja: "彼女は来週の月曜日まで休暇中です。" },
+    { correct: "Could you give me a quick hand?", dummies: ["Could you leave me a thick band?", "Would you give him a clean hat?"], ja: "ちょっと手を貸してもらえますか？" },
+    { correct: "Let's go over the main points.", dummies: ["Let's go under the same coins.", "Let's get over the nine lines."], ja: "主な要点をおさらいしましょう。" },
+    { correct: "I'm supposed to meet the client.", dummies: ["I'm surprised to beat the giant.", "I'm supported to feed the patient."], ja: "私はクライアントと会う予定になっている。" },
+    { correct: "It took me ages to find a spot.", dummies: ["It took me pages to bind a pot.", "It makes me anxious to buy a lot."], ja: "場所を見つけるのにすごく時間がかかった。" },
+    { correct: "Please keep this strictly between us.", dummies: ["Please keep it simply behind us.", "Please leave this clearly beside us."], ja: "これはここだけの秘密にしておいてください。" },
+    { correct: "Everything is going smoothly so far.", dummies: ["Everyone is growing slowly by far.", "Anything is doing softly for us."], ja: "今のところすべて順調に進んでいます。" },
+    { correct: "Don't forget to attach the PDF file.", dummies: ["Don't expect to attack the free style.", "Don't regret to catch the next mile."], ja: "PDFファイルを添付するのを忘れないで。" },
+    { correct: "The deadline has been extended.", dummies: ["The headline has been expected.", "The landline has been expanded."], ja: "締め切りが延長されました。" },
+    { correct: "I'll take care of it right away.", dummies: ["I'll take part in it far away.", "I'll make sure of it by the way."], ja: "すぐに対応いたします。" },
+    { correct: "Have you tried restarting your laptop?", dummies: ["Have you cried regarding your tabletop?", "Did you try returning your desktop?"], ja: "ノートPCを再起動してみましたか？" },
+    { correct: "Who is in charge of the budget?", dummies: ["Who is in change of the bucket?", "Where is the charger of the gadget?"], ja: "誰が予算の担当ですか？" },
+    { correct: "Let's touch base again next week.", dummies: ["Let's teach math again last week.", "Let's watch baseball next weekend."], ja: "来週また連絡を取り合いましょう。" },
+    { correct: "That wasn't quite what I expected.", dummies: ["That wasn't quiet when I accepted.", "It isn't white like I inspected."], ja: "それは私が期待していたものとは少し違った。" },
+    { correct: "I'm still working on the first draft.", dummies: ["I'm still walking on the fast craft.", "I'm just looking at the last graph."], ja: "まだ最初の草稿に取り組んでいるところです。" },
+    { correct: "Thank you for taking the time today.", dummies: ["Thank you for making the line today.", "Thank you for saving the dime away."], ja: "本日はお時間をいただきありがとうございます。" },
+    { correct: "How long does the flight usually take?", dummies: ["How far did the fight really make?", "How long did the light nearly shake?"], ja: "フライトは普段どのくらいかかりますか？" },
+    { correct: "I'm sorry, you have the wrong number.", dummies: ["I'm sorry, you left the long member.", "I'm sure you got the strong summer."], ja: "すみません、間違い電話のようです。" },
+    { correct: "Would you like your receipt in the bag?", dummies: ["Would you hide your recipe in the back?", "Do you like your seat near the bag?"], ja: "レシートは袋にお入れしますか？" },
+    { correct: "The Wi-Fi connection seems very unstable.", dummies: ["The Wi-Fi collection seems really unable.", "The highway direction looks quite stable."], ja: "Wi-Fiの接続がとても不安定なようです。" },
+    { correct: "Do you take credit cards here?", dummies: ["Do you make create cards near?", "Did you bake fresh tarts here?"], ja: "ここはクレジットカードが使えますか？" },
+    { correct: "Can I try this jacket on in medium?", dummies: ["Can I buy this ticket on the stadium?", "Should I tie this pocket on my arm?"], ja: "このジャケットのMサイズを試着できますか？" },
+    { correct: "Excuse me, is this seat taken?", dummies: ["Excuse me, is this street shaken?", "Excuse him, was that sweet bacon?"], ja: "すみません、この席は誰か座っていますか？" },
+    { correct: "It looks like it's going to rain soon.", dummies: ["It sounds like it's going to train noon.", "He looks like he's going to run soon."], ja: "もうすぐ雨が降りそうですね。" },
+    { correct: "I'm running a few minutes late.", dummies: ["I'm turning a few mirrors right.", "I'm bringing a new menu tonight."], ja: "数分ほど遅れそうです。" },
+    { correct: "Please take your shoes off at the entrance.", dummies: ["Please make your shows off at the exit.", "Please keep your shirts on near the fence."], ja: "玄関で靴を脱いでください。" },
+    { correct: "What's the main purpose of your visit?", dummies: ["What's the same person for your ticket?", "Where's the new circus you will visit?"], ja: "本日のご来訪の主な目的は何ですか？" },
+    { correct: "Keep the change, and have a nice day.", dummies: ["Keep the chain, and buy a nice tray.", "Clean the range, and stay for a day."], ja: "お釣りは取っておいてください、良い一日を。" },
+    { correct: "That's easier said than done.", dummies: ["That's earlier sent than won.", "It's heavier sand than stone."], ja: "言うは易く行うは難しだね。" },
+    { correct: "Better late than never, I suppose.", dummies: ["Better rate than ever, I oppose.", "Bitter taste than lemon, I propose."], ja: "遅れてでもやらないよりはマシかな。" },
+    { correct: "Long time no see! How have you been?", dummies: ["Long line to see! Where have you seen?", "Strong wind by sea! Who has been?"], ja: "久しぶり！元気にしてた？" },
+    { correct: "Don't hesitate to reach out anytime.", dummies: ["Don't estimate to switch out on time.", "Do imitate to watch out one time."], ja: "いつでも遠慮なく連絡してください。" },
+    { correct: "Could I get a glass of tap water?", dummies: ["Could I set a class of hot butter?", "Should I guess a grass of top order?"], ja: "お水（水道水）を一杯いただけますか？" },
+    { correct: "I'm not familiar with this software.", dummies: ["I'm not similar to his hardware.", "I'm quite popular with this fanfare."], ja: "このソフトの使い方にあまり詳しくありません。" },
+    { correct: "We need to narrow down our choices.", dummies: ["We need to borrow brown suitcases.", "We try to follow down their voices."], ja: "選択肢を絞り込む必要があります。" },
+    { correct: "Let's wrap up today's discussion.", dummies: ["Let's wake up today's decision.", "Let's trap up this celebration."], ja: "今日の話し合いを締めくくりましょう。" },
+    { correct: "By the way, did you hear the news?", dummies: ["On the way, did you fear the views?", "Buy a tray, did you clear the shoes?"], ja: "ところで、そのニュース聞きましたか？" },
+    { correct: "As far as I know, it's still available.", dummies: ["As fast as I go, it's quite reliable.", "So far as I show, it's not foldable."], ja: "私の知る限り、まだ利用可能ですよ。" },
+    { correct: "He tends to exaggerate things a bit.", dummies: ["He tries to celebrate swings a bit.", "She sends to separate wings a lot."], ja: "彼は物事を少し大げさに言う傾向がある。" },
+    { correct: "No wonder the restaurant is always packed.", dummies: ["No matter the apartment is always locked.", "No longer the assistant is mostly shocked."], ja: "そのレストランがいつも満員なのも無理はない。" },
+    { correct: "I'd rather stay home than go out tonight.", dummies: ["I'd better say no than shout tonight.", "I'll never stay long when you go right."], ja: "今夜は出かけるより家にいたいです。" },
+    { correct: "To be honest, I wasn't impressed at all.", dummies: ["To be modest, I wasn't depressed at all.", "To feel coldest, I couldn't express the call."], ja: "正直に言うと、まったく感銘を受けませんでした。" },
+    { correct: "It makes no difference to me either way.", dummies: ["It takes no preference to see my way.", "It gives some confidence to me today."], ja: "どちらでも私にとっては変わりません。" },
+    { correct: "Make yourself at home while I get tea.", dummies: ["Take yourself alone while I set three.", "Bake your loaf at noon when I see."], ja: "お茶を入れてくる間、どうぞくつろいでいてください。" },
+    { correct: "I lost track of time while reading.", dummies: ["I lost back the line while writing.", "I cost half a dime while riding."], ja: "読書に夢中で時間を忘れてしまった。" },
+    { correct: "She has a knack for solving puzzles.", dummies: ["She had a snack for serving noodles.", "He has a bag for selling apples."], ja: "彼女はパズルを解く才能がある。" },
+    { correct: "Just in case, let's bring a jacket.", dummies: ["Just in place, let's ring a bracket.", "First in race, let's clean the basket."], ja: "念のため、上着を持っていきましょう。" }
+  ];
+
+  // =========================================================================
+  // 2. 900問の高精度・自然会話フレーズ生成エンジン（合計 1,000問）
+  // =========================================================================
+  function buildGeneratedQuestions() {
+    const list = [];
+
+    // --- パターンA: 動詞句 (30) × 会話フレーム (10) = 300問 ---
+    const vps = [
+      { en: "check the schedule", d1: "change the picture", v: "スケジュールを確認する", te: "スケジュールを確認して" },
+      { en: "send the final report", d1: "lend the nice resort", v: "最終レポートを送る", te: "最終レポートを送って" },
+      { en: "lock the back door", d1: "knock the black floor", v: "裏口に鍵をかける", te: "裏口に鍵をかけて" },
+      { en: "turn off the lights", d1: "turn on the flights", v: "電気を消す", te: "電気を消して" },
+      { en: "cancel the reservation", d1: "confirm the conversation", v: "予約をキャンセルする", te: "予約をキャンセルして" },
+      { en: "reschedule the meeting", d1: "remember the reading", v: "会議の日程を変更する", te: "会議の日程を変更して" },
+      { en: "attach the file", d1: "attack the style", v: "ファイルを添付する", te: "ファイルを添付して" },
+      { en: "restart the computer", d1: "return the commuter", v: "パソコンを再起動する", te: "パソコンを再起動して" },
+      { en: "update the software", d1: "upgrade the hardware", v: "ソフトを更新する", te: "ソフトを更新して" },
+      { en: "review the contract", d1: "renew the contact", v: "契約書を見直す", te: "契約書を見直して" },
+      { en: "print the handout", d1: "paint the hangout", v: "資料を印刷する", te: "資料を印刷して" },
+      { en: "reserve a table", d1: "deserve a label", v: "テーブルを予約する", te: "テーブルを予約して" },
+      { en: "order office supplies", d1: "offer honest replies", v: "事務用品を注文する", te: "事務用品を注文して" },
+      { en: "clean up the desk", d1: "clear out the deck", v: "机を片付ける", te: "机を片付けて" },
+      { en: "fill out the form", d1: "feel out the storm", v: "申込用紙に記入する", te: "申込用紙に記入して" },
+      { en: "submit the invoice", d1: "admit the choice", v: "請求書を提出する", te: "請求書を提出して" },
+      { en: "book the flight", d1: "look at the light", v: "航空券を予約する", te: "航空券を予約して" },
+      { en: "call the client", d1: "cool the climate", v: "取引先に電話する", te: "取引先に電話して" },
+      { en: "answer the email", d1: "enter the detail", v: "メールに返信する", te: "メールに返信して" },
+      { en: "lower the volume", d1: "borrow the column", v: "音量を下げる", te: "音量を下げて" },
+      { en: "open the window", d1: "close the willow", v: "窓を開ける", te: "窓を開けて" },
+      { en: "share the screen", d1: "wear the green", v: "画面を共有する", te: "画面を共有して" },
+      { en: "save the draft", d1: "serve the craft", v: "下書きを保存する", te: "下書きを保存して" },
+      { en: "check the weather", d1: "change the sweater", v: "天気を確認する", te: "天気を確認して" },
+      { en: "bring an umbrella", d1: "buy a vanilla", v: "傘を持っていく", te: "傘を持っていって" },
+      { en: "fix the printer", d1: "mix the dinner", v: "プリンターを直す", te: "プリンターを直して" },
+      { en: "pack the suitcase", d1: "park near the case", v: "スーツケースを詰める", te: "スーツケースを詰めて" },
+      { en: "water the plants", d1: "wash the plates", v: "植物に水をやる", te: "植物に水をやって" },
+      { en: "pay the electric bill", d1: "play the little bell", v: "電気代を支払う", te: "電気代を支払って" },
+      { en: "sign the receipt", d1: "find the recipe", v: "領収書にサインする", te: "領収書にサインして" }
+    ];
+
+    const vpFrames = [
+      { make: (x) => `Could you ${x} right now?`, dMake: (x) => `Should I ${x} right now?`, ja: (vp) => `今すぐ${vp.te}いただけますか？` },
+      { make: (x) => `Don't forget to ${x} today.`, dMake: (x) => `Don't expect to ${x} today.`, ja: (vp) => `今日中に${vp.v}のを忘れないでください。` },
+      { make: (x) => `Make sure to ${x} first.`, dMake: (x) => `Take care to ${x} first.`, ja: (vp) => `まず必ず${vp.te}ください。` },
+      { make: (x) => `Did you already ${x}?`, dMake: (x) => `Do you really ${x}?`, ja: (vp) => `もう${vp.v}のは済ませましたか？` },
+      { make: (x) => `I forgot to ${x} earlier.`, dMake: (x) => `I tried to ${x} earlier.`, ja: (vp) => `さっき${vp.v}のを忘れてしまいました。` },
+      { make: (x) => `We still need to ${x}.`, dMake: (x) => `We will fail to ${x}.`, ja: (vp) => `私たちはまだ${vp.v}必要があります。` },
+      { make: (x) => `I'm planning to ${x} soon.`, dMake: (x) => `I'm waiting to ${x} soon.`, ja: (vp) => `もうすぐ${vp.v}予定です。` },
+      { make: (x) => `She promised to ${x}.`, dMake: (x) => `He refused to ${x}.`, ja: (vp) => `彼女は${vp.v}と約束しました。` },
+      { make: (x) => `It's important to ${x}.`, dMake: (x) => `It's impossible to ${x}.`, ja: (vp) => `${vp.v}ことは大切です。` },
+      { make: (x) => `Can someone help me ${x}?`, dMake: (x) => `Did anyone watch me ${x}?`, ja: (vp) => `誰か${vp.v}のを手伝ってもらえますか？` }
+    ];
+
+    vpFrames.forEach(f => {
+      vps.forEach(vp => {
+        list.push({
+          correct: f.make(vp.en),
+          dummies: [f.make(vp.d1), f.dMake(vp.en)],
+          ja: f.ja(vp)
+        });
+      });
+    });
+
+    // --- パターンB: 動名詞 (20) × 会話フレーム (10) = 200問 ---
+    const gerunds = [
+      { ing: "joining our team", d1: "enjoying our theme", v: "私たちのチームに加わる" },
+      { ing: "attending the workshop", d1: "extending the desktop", v: "ワークショップに参加する" },
+      { ing: "hosting the event", d1: "posting the rent", v: "イベントを主催する" },
+      { ing: "preparing the slides", d1: "repairing the rides", v: "スライドを準備する" },
+      { ing: "organizing the files", d1: "recognizing the miles", v: "ファイルを整理する" },
+      { ing: "sharing your ideas", d1: "caring about areas", v: "アイデアを共有する" },
+      { ing: "visiting the museum", d1: "building the stadium", v: "美術館を訪れる" },
+      { ing: "taking the express train", d1: "making the extra gain", v: "急行電車に乗る" },
+      { ing: "working from home", d1: "walking back home", v: "在宅勤務をする" },
+      { ing: "learning a new skill", d1: "earning a blue bill", v: "新しいスキルを学ぶ" },
+      { ing: "trying the local food", d1: "buying the global good", v: "地元の料理を試す" },
+      { ing: "reading the manual", d1: "leading the annual", v: "説明書を読む" },
+      { ing: "practicing every morning", d1: "promising every evening", v: "毎朝練習する" },
+      { ing: "explaining the details", d1: "complaining of emails", v: "詳細を説明する" },
+      { ing: "helping with the project", d1: "hoping for the object", v: "プロジェクトを手伝う" },
+      { ing: "cleaning the meeting room", d1: "clearing the dining room", v: "会議室を掃除する" },
+      { ing: "discussing the budget", d1: "discovering the bucket", v: "予算を話し合う" },
+      { ing: "designing the website", d1: "deciding the right side", v: "サイトをデザインする" },
+      { ing: "writing the summary", d1: "riding in memory", v: "要約を書く" },
+      { ing: "checking the inventory", d1: "changing the history", v: "在庫を確認する" }
+    ];
+
+    const gerundFrames = [
+      { make: (x) => `I'm looking forward to ${x}.`, dMake: (x) => `I'm looking backward to ${x}.`, ja: (g) => `${g.v}のを楽しみにしています。` },
+      { make: (x) => `Thank you for ${x}.`, dMake: (x) => `Sorry about ${x}.`, ja: (g) => `${g.v}ことに感謝します。` },
+      { make: (x) => `Have you finished ${x}?`, dMake: (x) => `Have you avoided ${x}?`, ja: (g) => `${g.v}のは終わりましたか？` },
+      { make: (x) => `How about ${x} tomorrow?`, dMake: (x) => `What happened after ${x}?`, ja: (g) => `明日${g.v}のはどうですか？` },
+      { make: (x) => `I'm really enjoying ${x}.`, dMake: (x) => `I'm really avoiding ${x}.`, ja: (g) => `${g.v}のをとても楽しんでいます。` },
+      { make: (x) => `She's busy ${x} right now.`, dMake: (x) => `She's tired of ${x} right now.`, ja: (g) => `彼女は今${g.v}ので忙しいです。` },
+      { make: (x) => `Would you consider ${x}?`, dMake: (x) => `Could you remember ${x}?`, ja: (g) => `${g.v}ことを検討してもらえますか？` },
+      { make: (x) => `It's definitely worth ${x}.`, dMake: (x) => `It's actually worse than ${x}.`, ja: (g) => `${g.v}価値は間違いなくあります。` },
+      { make: (x) => `We ended up ${x}.`, dMake: (x) => `We gave up ${x}.`, ja: (g) => `私たちは結局${g.v}ことになりました。` },
+      { make: (x) => `I'm used to ${x} now.`, dMake: (x) => `I used to hate ${x} now.`, ja: (g) => `今では${g.v}のにすっかり慣れました。` }
+    ];
+
+    gerundFrames.forEach(f => {
+      gerunds.forEach(g => {
+        list.push({
+          correct: f.make(g.ing),
+          dummies: [f.make(g.d1), f.dMake(g.ing)],
+          ja: f.ja(g)
+        });
+      });
+    });
+
+    // --- パターンC: 場所・施設 (20) × 道案内/日常フレーム (10) = 200問 ---
+    const places = [
+      { en: "the airport", d1: "the export", ja: "空港" },
+      { en: "the train station", d1: "the main section", ja: "駅" },
+      { en: "the post office", d1: "the host office", ja: "郵便局" },
+      { en: "the city library", d1: "the busy bakery", ja: "市立図書館" },
+      { en: "the coffee shop", d1: "the copy shop", ja: "コーヒーショップ" },
+      { en: "the grocery store", d1: "the clothing store", ja: "スーパー（食料品店）" },
+      { en: "the conference room", d1: "the common room", ja: "会議室" },
+      { en: "the hotel lobby", d1: "the local hobby", ja: "ホテルのロビー" },
+      { en: "the shopping mall", d1: "the bowling hall", ja: "ショッピングモール" },
+      { en: "the art museum", d1: "the old stadium", ja: "美術館" },
+      { en: "the fitness gym", d1: "the business team", ja: "スポーツジム" },
+      { en: "the parking lot", d1: "the starting spot", ja: "駐車場" },
+      { en: "the pharmacy", d1: "the embassy", ja: "薬局" },
+      { en: "the bakery", d1: "the gallery", ja: "パン屋" },
+      { en: "the subway entrance", d1: "the highway exit", ja: "地下鉄の入り口" },
+      { en: "the service desk", d1: "the silver disk", ja: "サービスカウンター" },
+      { en: "the main hall", d1: "the rain fall", ja: "メインホール" },
+      { en: "the local bank", d1: "the front rank", ja: "地元の銀行" },
+      { en: "the travel agency", d1: "the level energy", ja: "旅行代理店" },
+      { en: "the clinic", d1: "the picnic", ja: "クリニック（診療所）" }
+    ];
+
+    const placeFrames = [
+      { make: (x) => `How long does it take to reach ${x}?`, dMake: (x) => `How far do we have to watch ${x}?`, ja: (p) => `${p.ja}に着くまでどのくらい時間がかかりますか？` },
+      { make: (x) => `I'll meet you right near ${x}.`, dMake: (x) => `I'll leave you far from ${x}.`, ja: (p) => `${p.ja}のすぐ近くで会いましょう。` },
+      { make: (x) => `Do you know where ${x} is?`, dMake: (x) => `Did you see when ${x} closed?`, ja: (p) => `${p.ja}がどこにあるか知っていますか？` },
+      { make: (x) => `Is ${x} open on Sundays?`, dMake: (x) => `Was ${x} closed on Mondays?`, ja: (p) => `${p.ja}は日曜日も営業していますか？` },
+      { make: (x) => `I left my bag at ${x}.`, dMake: (x) => `I bought a tag at ${x}.`, ja: (p) => `${p.ja}にバッグを置き忘れてしまいました。` },
+      { make: (x) => `Let's wait in front of ${x}.`, dMake: (x) => `Let's walk behind ${x}.`, ja: (p) => `${p.ja}の前で待ちましょう。` },
+      { make: (x) => `I walked past ${x} earlier.`, dMake: (x) => `I talked near ${x} earlier.`, ja: (p) => `さっき${p.ja}の前を通り過ぎました。` },
+      { make: (x) => `There was a long line at ${x}.`, dMake: (x) => `There was a small sign at ${x}.`, ja: (p) => `${p.ja}には長い列ができていました。` },
+      { make: (x) => `They are renovating ${x} now.`, dMake: (x) => `They are removing ${x} now.`, ja: (p) => `今、${p.ja}は改装中です。` },
+      { make: (x) => `Could you drop me off at ${x}?`, dMake: (x) => `Could you pick me up near ${x}?`, ja: (p) => `${p.ja}で降ろしてもらえますか？` }
+    ];
+
+    placeFrames.forEach(f => {
+      places.forEach(p => {
+        list.push({
+          correct: f.make(p.en),
+          dummies: [f.make(p.d1), f.dMake(p.en)],
+          ja: f.ja(p)
+        });
+      });
+    });
+
+    // --- パターンD: イベント・予定 (20) × 状況報告フレーム (10) = 200問 ---
+    const events = [
+      { en: "the staff meeting", d1: "the tough reading", ja: "スタッフ会議" },
+      { en: "our morning flight", d1: "our warning light", ja: "朝のフライト" },
+      { en: "the product launch", d1: "the project lunch", ja: "新製品の発売" },
+      { en: "the training session", d1: "the trading section", ja: "研修セッション" },
+      { en: "the package delivery", d1: "the luggage recovery", ja: "荷物の配達" },
+      { en: "the summer festival", d1: "the winter carnival", ja: "夏祭り" },
+      { en: "the job interview", d1: "the top review", ja: "就職面接" },
+      { en: "the art exhibition", d1: "the part expedition", ja: "美術展" },
+      { en: "the annual conference", d1: "the usual confidence", ja: "年次会議" },
+      { en: "the charity concert", d1: "the clarity contest", ja: "チャリティーコンサート" },
+      { en: "the budget review", d1: "the bucket preview", ja: "予算の見直し" },
+      { en: "the system update", d1: "the simple debate", ja: "システム更新" },
+      { en: "the office renovation", d1: "the offer reservation", ja: "オフィスの改装" },
+      { en: "the welcome party", d1: "the second study", ja: "歓迎会" },
+      { en: "the orientation", d1: "the organization", ja: "オリエンテーション" },
+      { en: "the guest lecture", d1: "the best picture", ja: "特別講演" },
+      { en: "the client presentation", d1: "the quiet celebration", ja: "顧客へのプレゼン" },
+      { en: "the final rehearsal", d1: "the minor proposal", ja: "最終リハーサル" },
+      { en: "the charity run", d1: "the cherry sun", ja: "チャリティーマラソン" },
+      { en: "the awards ceremony", d1: "the forward memory", ja: "授賞式" }
+    ];
+
+    const eventFrames = [
+      { make: (x) => `${cap(x)} has been postponed.`, dMake: (x) => `${cap(x)} has been confirmed.`, ja: (e) => `${e.ja}は延期されました。` },
+      { make: (x) => `${cap(x)} was cancelled yesterday.`, dMake: (x) => `${cap(x)} was crowded yesterday.`, ja: (e) => `${e.ja}は昨日中止になりました。` },
+      { make: (x) => `${cap(x)} went better than expected.`, dMake: (x) => `${cap(x)} ended sooner than accepted.`, ja: (e) => `${e.ja}は予想よりもうまくいきました。` },
+      { make: (x) => `${cap(x)} starts at ten o'clock.`, dMake: (x) => `${cap(x)} stops at two o'clock.`, ja: (e) => `${e.ja}は10時に始まります。` },
+      { make: (x) => `${cap(x)} will be held online.`, dMake: (x) => `${cap(x)} will be sold in line.`, ja: (e) => `${e.ja}はオンラインで開催されます。` },
+      { make: (x) => `${cap(x)} ended thirty minutes early.`, dMake: (x) => `${cap(x)} started twenty minutes late.`, ja: (e) => `${e.ja}は30分早く終わりました。` },
+      { make: (x) => `${cap(x)} was moved to Room B.`, dMake: (x) => `${cap(x)} was proved in Room D.`, ja: (e) => `${e.ja}はB会議室に変更されました。` },
+      { make: (x) => `Everyone is excited about ${x}.`, dMake: (x) => `Nobody is worried about ${x}.`, ja: (e) => `みんな${e.ja}をとても楽しみにしています。` },
+      { make: (x) => `Did you hear about ${x}?`, dMake: (x) => `Did you care about ${x}?`, ja: (e) => `${e.ja}について聞きましたか？` },
+      { make: (x) => `We need time to prepare for ${x}.`, dMake: (x) => `We had time to pay for ${x}.`, ja: (e) => `${e.ja}に備える時間が必要です。` }
+    ];
+
+    eventFrames.forEach(f => {
+      events.forEach(e => {
+        list.push({
+          correct: f.make(e.en),
+          dummies: [f.make(e.d1), f.dMake(e.en)],
+          ja: f.ja(e)
+        });
+      });
+    });
+
+    return list;
+  }
+
+  // 固定100問 + 生成900問 = ぴったり1,000問
+  const QUESTIONS = [...FIXED_QUESTIONS, ...buildGeneratedQuestions()];
+
+  const QUESTIONS_PER_ROUND = 10;
+  const TIME_LIMIT = 12.0;
+  const BEST_SCORE_KEY = 'english_slash_best_score_v1';
+  const POOL_KEY = 'english_slash_pool_1000_v1';
+
+  const CARD_THEMES = [
+    { top: '#ff5e99', bottom: '#e11d48', shadow: '#9f1239', icon: '🍓' },
+    { top: '#38bdf8', bottom: '#0284c7', shadow: '#075985', icon: '💎' },
+    { top: '#fb923c', bottom: '#ea580c', shadow: '#9a3412', icon: '🍊' },
+    { top: '#a855f7', bottom: '#7e22ce', shadow: '#581c87', icon: '🍇' },
+    { top: '#34d399', bottom: '#059669', shadow: '#065f46', icon: '🍀' },
+    { top: '#facc15', bottom: '#d97706', shadow: '#92400e', icon: '⭐' }
+  ];
+
+  const CONFETTI_COLORS = ['#fde047', '#ff5e99', '#38bdf8', '#4ade80', '#c084fc', '#fb923c'];
+
+  // === Canvas設定 ===
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  let width = 0, height = 0, dpr = 1;
+
+  let bgBubbles = [];
+  function initBgBubbles() {
+    bgBubbles = Array.from({ length: 24 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      r: 8 + Math.random() * 26,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: -0.2 - Math.random() * 0.5,
+      alpha: 0.08 + Math.random() * 0.14
+    }));
+  }
+
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (bgBubbles.length === 0) initBgBubbles();
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // === 最も自然なアメリカ英語（en-US）を1つ自動選択 ===
+  let bestUSVoice = null;
+  let speechRate = 0.96;
+
+  function pickBestUSEnglishVoice() {
+    if (!('speechSynthesis' in window)) return null;
+    const voices = window.speechSynthesis.getVoices();
+    if (!voices.length) return null;
+
+    let candidates = voices.filter(v =>
+      v.lang && v.lang.toLowerCase().replace('_', '-') === 'en-us'
+    );
+    if (candidates.length === 0) {
+      candidates = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
+    }
+    if (candidates.length === 0) return null;
+
+    const scoreVoice = (v) => {
+      let s = 0;
+      const name = v.name.toLowerCase();
+      if (name.includes('natural')) s += 150;
+      if (name.includes('aria') || name.includes('jenny') || name.includes('ava') ||
+          name.includes('andrew') || name.includes('emma')) s += 100;
+      if (name.includes('google us english')) s += 95;
+      if (name.includes('online')) s += 90;
+      if (name.includes('siri')) s += 85;
+      if (name.includes('google')) s += 80;
+      if (name.includes('enhanced') || name.includes('premium')) s += 75;
+      if (name.includes('samantha')) s += 65;
+      if (!v.localService) s += 20;
+      if (name.includes('espeak') || name.includes('compact') ||
+          name.includes('microsoft david') || name.includes('microsoft zira')) {
+        s -= 50;
+      }
+      return s;
+    };
+
+    candidates.sort((a, b) => scoreVoice(b) - scoreVoice(a));
+    return candidates[0];
+  }
+
+  function refreshVoice() {
+    bestUSVoice = pickBestUSEnglishVoice();
+  }
+  if ('speechSynthesis' in window) {
+    refreshVoice();
+    window.speechSynthesis.onvoiceschanged = refreshVoice;
+  }
+
+  function speakText(text, rateOverride = null) {
+    if (!('speechSynthesis' in window)) return;
+    if (!bestUSVoice) refreshVoice();
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'en-US';
+    if (bestUSVoice) utter.voice = bestUSVoice;
+    utter.rate = rateOverride !== null ? rateOverride : speechRate;
+    utter.pitch = 1.02;
+    window.speechSynthesis.speak(utter);
+  }
+
+  // === 効果音 ===
+  let audioCtx = null;
+  function initAudio() {
+    if (!audioCtx) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContext();
+    }
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+  }
+
+  function playSlashSound() {
+    if (!audioCtx) return;
+    const now = audioCtx.currentTime;
+    const bufferSize = audioCtx.sampleRate * 0.11;
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+    }
+    const noise = audioCtx.createBufferSource();
+    noise.buffer = buffer;
+
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(2200, now);
+    filter.frequency.exponentialRampToValueAtTime(450, now + 0.11);
+
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(0.22, now);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.11);
+
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(audioCtx.destination);
+    noise.start();
+  }
+
+  function playCorrectSound(currentCombo) {
+    if (!audioCtx) return;
+    const now = audioCtx.currentTime;
+    const pitchMult = Math.pow(1.06, Math.min(currentCombo, 8));
+    [523.25, 659.25, 783.99, 1046.5].forEach((freq, idx) => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq * pitchMult, now + idx * 0.055);
+      gain.gain.setValueAtTime(0.18, now + idx * 0.055);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.055 + 0.28);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now + idx * 0.055);
+      osc.stop(now + idx * 0.055 + 0.28);
+    });
+  }
+
+  function playWrongSound() {
+    if (!audioCtx) return;
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(190, now);
+    osc.frequency.linearRampToValueAtTime(100, now + 0.28);
+    gain.gain.setValueAtTime(0.18, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(now);
+    osc.stop(now + 0.3);
+  }
+
+  // === 1,000問の山札管理（localStorageで進捗を保持） ===
+  function createShuffledIndices(total) {
+    const arr = Array.from({ length: total }, (_, i) => i);
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  let remainingIndices = [];
+  function loadPool() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(POOL_KEY) || 'null');
+      if (Array.isArray(saved) && saved.length > 0 && saved.every(n => Number.isInteger(n) && n >= 0 && n < QUESTIONS.length)) {
+        remainingIndices = saved;
+        return;
+      }
+    } catch (e) {}
+    remainingIndices = createShuffledIndices(QUESTIONS.length);
+    savePool();
+  }
+
+  function savePool() {
+    try {
+      localStorage.setItem(POOL_KEY, JSON.stringify(remainingIndices));
+    } catch (e) {}
+  }
+
+  function drawOneQuestion() {
+    if (remainingIndices.length === 0) {
+      remainingIndices = createShuffledIndices(QUESTIONS.length);
+    }
+    const idx = remainingIndices.pop();
+    savePool();
+    return QUESTIONS[idx];
+  }
+
+  function getMasteredCount() {
+    return QUESTIONS.length - remainingIndices.length;
+  }
+
+  loadPool();
+
+  // === ゲーム状態 ===
+  let state = 'start';
+  let deck = [];
+  let playedQuestions = [];
+  let qIndex = 0;
+  let score = 0;
+  let lives = 3;
+  let combo = 0;
+  let questionTimeLeft = TIME_LIMIT;
+  let bestScore = parseInt(localStorage.getItem(BEST_SCORE_KEY) || '0', 10);
+
+  let targets = [];
+  let slices = [];
+  let particles = [];
+  let confetti = [];
+  let shockwaves = [];
+  let floatingTexts = [];
+  let slashTrail = [];
+  let isPointerDown = false;
+  let lastPointer = null;
+  let screenShake = 0;
+  let redFlash = 0;
+  let hueOffset = 0;
+  let lastFrameTime = performance.now();
+
+  const hud = document.getElementById('hud');
+  const controlsBar = document.getElementById('controls-bar');
+  const startScreen = document.getElementById('start-screen');
+  const resultScreen = document.getElementById('result-screen');
+  const livesEl = document.getElementById('lives-el');
+  const comboEl = document.getElementById('combo-el');
+  const progressEl = document.getElementById('progress-el');
+  const scoreEl = document.getElementById('score-el');
+  const timerFill = document.getElementById('timer-fill');
+  const timerText = document.getElementById('timer-text');
+  const feedbackBanner = document.getElementById('feedback-banner');
+  const btnSpeed = document.getElementById('btn-speed');
+  const startBestEl = document.getElementById('start-best-score');
+  const resultBestEl = document.getElementById('result-best-score');
+  const masteredCountEl = document.getElementById('mastered-count');
+  const resultMasteredEl = document.getElementById('result-mastered');
+  const newRecordBadge = document.getElementById('new-record-badge');
+  const bookPromo = document.getElementById('book-promo');
+  const bookPromoTitle = document.getElementById('book-promo-title');
+  const bookPromoLink = document.getElementById('book-promo-link');
+
+  startBestEl.textContent = bestScore;
+  masteredCountEl.textContent = getMasteredCount();
+
+  function renderRandomEnglishBook() {
+    if (!AMAZON_ENGLISH_BOOKS.length) return;
+    const book = AMAZON_ENGLISH_BOOKS[Math.floor(Math.random() * AMAZON_ENGLISH_BOOKS.length)];
+    bookPromoTitle.textContent = book.title;
+    bookPromoLink.href = book.url;
+    bookPromo.classList.remove('hidden');
+  }
+
+  function wrapText(text, maxWidth, font) {
+    ctx.font = font;
+    const words = text.split(' ');
+    const lines = [];
+    let currentLine = words[0];
+    for (let i = 1; i < words.length; i++) {
+      const testLine = currentLine + ' ' + words[i];
+      if (ctx.measureText(testLine).width < maxWidth) {
+        currentLine = testLine;
+      } else {
+        lines.push(currentLine);
+        currentLine = words[i];
+      }
+    }
+    lines.push(currentLine);
+    return lines;
+  }
+
+  function startGame() {
+    initAudio();
+    refreshVoice();
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.speak(new SpeechSynthesisUtterance(''));
+    }
+
+    deck = Array.from({ length: QUESTIONS_PER_ROUND }, () => drawOneQuestion());
+    playedQuestions = [];
+    qIndex = 0;
+    score = 0;
+    lives = 3;
+    combo = 0;
+    slices = [];
+    particles = [];
+    confetti = [];
+    shockwaves = [];
+    floatingTexts = [];
+    state = 'playing';
+
+    startScreen.classList.add('hidden');
+    resultScreen.classList.add('hidden');
+    hud.classList.remove('hidden');
+    controlsBar.classList.remove('hidden');
+    feedbackBanner.classList.add('hidden');
+
+    updateHUD();
+    spawnQuestion();
+  }
+
+  function updateHUD() {
+    livesEl.textContent = lives;
+    comboEl.textContent = combo;
+    progressEl.textContent = `${Math.min(qIndex + 1, deck.length)}/${deck.length}`;
+    scoreEl.textContent = score;
+  }
+
+  function updateTimerUI() {
+    const ratio = Math.max(0, questionTimeLeft / TIME_LIMIT);
+    timerFill.style.width = `${ratio * 100}%`;
+    timerText.textContent = `${Math.max(0, questionTimeLeft).toFixed(1)}s`;
+
+    timerFill.classList.remove('warning', 'danger');
+    if (questionTimeLeft <= 3.5) {
+      timerFill.classList.add('danger');
+    } else if (questionTimeLeft <= 6.5) {
+      timerFill.classList.add('warning');
+    }
+  }
+
+  function spawnQuestion() {
+    if (qIndex >= deck.length || lives <= 0) {
+      endGame();
+      return;
+    }
+
+    state = 'playing';
+    questionTimeLeft = TIME_LIMIT;
+    feedbackBanner.classList.add('hidden');
+    feedbackBanner.classList.remove('miss');
+    updateHUD();
+    updateTimerUI();
+
+    const q = deck[qIndex];
+    playedQuestions.push(q);
+
+    const options = [
+      { text: q.correct, isCorrect: true },
+      ...q.dummies.map(d => ({ text: d, isCorrect: false }))
+    ].sort(() => Math.random() - 0.5);
+
+    const shuffledThemes = [...CARD_THEMES].sort(() => Math.random() - 0.5);
+    const cardWidth = Math.min(305, Math.max(210, width * 0.5));
+    const font = `800 ${width < 500 ? 14 : 16}px sans-serif`;
+
+    targets = options.map((opt, idx) => {
+      const lines = wrapText(opt.text, cardWidth - 36, font);
+      const cardHeight = Math.max(70, lines.length * 21 + 32);
+
+      const marginX = cardWidth / 2 + 12;
+      const safeW = Math.max(10, width - marginX * 2);
+      const x = marginX + (safeW / options.length) * (idx + 0.5) + (Math.random() - 0.5) * 30;
+      const y = 160 + (height - 265) * ((idx % 2) * 0.45 + 0.15);
+
+      const speedBase = (width < 500 ? 1.15 : 1.55) + Math.min(1.0, combo * 0.08);
+      const angle = Math.random() * Math.PI * 2;
+
+      return {
+        text: opt.text,
+        lines,
+        font,
+        isCorrect: opt.isCorrect,
+        x: Math.min(Math.max(x, marginX), width - marginX),
+        y,
+        w: cardWidth,
+        h: cardHeight,
+        vx: Math.cos(angle) * speedBase,
+        vy: Math.sin(angle) * speedBase,
+        rot: (Math.random() - 0.5) * 0.1,
+        vRot: (Math.random() - 0.5) * 0.005,
+        theme: shuffledThemes[idx % shuffledThemes.length],
+        bobPhase: Math.random() * Math.PI * 2
+      };
+    });
+
+    speakText(q.correct);
+  }
+
+  function handleTimeUp() {
+    state = 'transition';
+    playWrongSound();
+    combo = 0;
+    lives--;
+    screenShake = 14;
+    redFlash = 0.45;
+    targets = [];
+
+    floatingTexts.push({
+      x: width / 2,
+      y: height / 2,
+      text: 'TIME UP! ⏰',
+      color: '#fecdd3',
+      life: 1
+    });
+
+    const q = deck[qIndex];
+    feedbackBanner.textContent = `⏰ 正解: ${q.correct} (${q.ja})`;
+    feedbackBanner.classList.add('miss');
+    feedbackBanner.classList.remove('hidden');
+
+    updateHUD();
+    setTimeout(() => {
+      if (lives <= 0) endGame();
+      else {
+        qIndex++;
+        spawnQuestion();
+      }
+    }, 1800);
+  }
+
+  function endGame() {
+    state = 'result';
+    hud.classList.add('hidden');
+    controlsBar.classList.add('hidden');
+    feedbackBanner.classList.add('hidden');
+    resultScreen.classList.remove('hidden');
+    resultScreen.scrollTop = 0;
+
+    let isNewRecord = false;
+    if (score > bestScore) {
+      bestScore = score;
+      localStorage.setItem(BEST_SCORE_KEY, String(bestScore));
+      isNewRecord = true;
+    }
+
+    const mastered = getMasteredCount();
+    document.getElementById('result-title').textContent = lives > 0 ? '🎉 AWESOME CLEAR!' : '💥 GAME OVER!';
+    document.getElementById('final-score').textContent = score;
+    resultBestEl.textContent = bestScore;
+    startBestEl.textContent = bestScore;
+    masteredCountEl.textContent = mastered;
+    resultMasteredEl.textContent = mastered;
+
+    if (isNewRecord && score > 0) {
+      newRecordBadge.classList.remove('hidden');
+    } else {
+      newRecordBadge.classList.add('hidden');
+    }
+
+    const reviewList = document.getElementById('review-list');
+    reviewList.innerHTML = '';
+
+    playedQuestions.forEach((q) => {
+      const item = document.createElement('div');
+      item.className = 'review-item';
+
+      const texts = document.createElement('div');
+      texts.className = 'review-texts';
+
+      const en = document.createElement('div');
+      en.className = 'review-en';
+      en.textContent = q.correct;
+
+      const ja = document.createElement('div');
+      ja.className = 'review-ja';
+      ja.textContent = q.ja;
+
+      texts.appendChild(en);
+      texts.appendChild(ja);
+
+      const speakerBtn = document.createElement('button');
+      speakerBtn.className = 'btn-speaker';
+      speakerBtn.type = 'button';
+      speakerBtn.setAttribute('aria-label', `${q.correct} を再生`);
+      speakerBtn.textContent = '🔊';
+
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.review-item.playing').forEach(el => el.classList.remove('playing'));
+        item.classList.add('playing');
+        speakText(q.correct, 0.95);
+        setTimeout(() => item.classList.remove('playing'), 1400);
+      });
+
+      item.appendChild(texts);
+      item.appendChild(speakerBtn);
+      reviewList.appendChild(item);
+    });
+
+    // 英語教材のAmazonリンクをランダム表示
+    renderRandomEnglishBook();
+  }
+
+  function lineIntersectsTarget(p1, p2, t) {
+    const left = t.x - t.w / 2;
+    const right = t.x + t.w / 2;
+    const top = t.y - t.h / 2;
+    const bottom = t.y + t.h / 2;
+    const steps = 6;
+    for (let i = 0; i <= steps; i++) {
+      const x = p1.x + (p2.x - p1.x) * (i / steps);
+      const y = p1.y + (p2.y - p1.y) * (i / steps);
+      if (x >= left && x <= right && y >= top && y <= bottom) return true;
+    }
+    return false;
+  }
+
+  function spawnConfetti(cx, cy) {
+    for (let i = 0; i < 45; i++) {
+      const a = Math.random() * Math.PI * 2;
+      const sp = 3 + Math.random() * 8;
+      confetti.push({
+        x: cx,
+        y: cy,
+        vx: Math.cos(a) * sp,
+        vy: Math.sin(a) * sp - 4,
+        w: 7 + Math.random() * 6,
+        h: 4 + Math.random() * 4,
+        rot: Math.random() * Math.PI * 2,
+        vRot: (Math.random() - 0.5) * 0.25,
+        color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+        life: 1
+      });
+    }
+  }
+
+  function sliceTarget(t, index, angle) {
+    targets.splice(index, 1);
+
+    shockwaves.push({
+      x: t.x,
+      y: t.y,
+      r: 10,
+      maxR: t.isCorrect ? 170 : 100,
+      color: t.isCorrect ? '#fde047' : '#ef4444',
+      life: 1
+    });
+
+    [-1, 1].forEach(side => {
+      slices.push({
+        text: t.text,
+        lines: t.lines,
+        font: t.font,
+        x: t.x,
+        y: t.y,
+        w: t.w,
+        h: t.h,
+        vx: t.vx + Math.cos(angle + (side * Math.PI / 2)) * 4.2,
+        vy: t.vy - 2.5 + Math.sin(angle + (side * Math.PI / 2)) * 2.5,
+        rot: t.rot,
+        vRot: side * 0.07,
+        side,
+        cutAngle: angle - t.rot,
+        theme: t.theme,
+        alpha: 1
+      });
+    });
+
+    if (t.isCorrect) {
+      combo++;
+      playCorrectSound(combo);
+
+      const speedBonus = Math.round((Math.max(0, questionTimeLeft) / TIME_LIMIT) * 300);
+      const comboBonus = (combo - 1) * 30;
+      const gained = 100 + speedBonus + comboBonus;
+
+      score += gained;
+      state = 'transition';
+
+      spawnConfetti(t.x, t.y);
+
+      const speedTag = speedBonus >= 220 ? '⚡GODSPEED!' : speedBonus >= 140 ? '⚡FAST!' : 'NICE!';
+      floatingTexts.push({
+        x: t.x,
+        y: t.y - 24,
+        text: `${speedTag} +${gained}`,
+        color: '#fde047',
+        life: 1
+      });
+
+      feedbackBanner.textContent = `✨ ${deck[qIndex].ja} (⚡早斬り +${speedBonus})`;
+      feedbackBanner.classList.remove('miss');
+      feedbackBanner.classList.remove('hidden');
+
+      targets = [];
+      updateHUD();
+
+      setTimeout(() => {
+        qIndex++;
+        spawnQuestion();
+      }, 1450);
+    } else {
+      playWrongSound();
+      combo = 0;
+      lives--;
+      screenShake = 16;
+      redFlash = 0.45;
+
+      floatingTexts.push({
+        x: t.x,
+        y: t.y - 20,
+        text: 'MISS! 💔',
+        color: '#fecdd3',
+        life: 1
+      });
+
+      updateHUD();
+      if (lives <= 0) {
+        state = 'transition';
+        setTimeout(endGame, 800);
+      }
+    }
+  }
+
+  // === ポインター操作 ===
+  function getPoint(e) {
+    const rect = canvas.getBoundingClientRect();
+    return { x: e.clientX - rect.left, y: e.clientY - rect.top, time: performance.now() };
+  }
+
+  canvas.addEventListener('pointerdown', (e) => {
+    if (state !== 'playing') return;
+    isPointerDown = true;
+    const pt = getPoint(e);
+    lastPointer = pt;
+    slashTrail.push(pt);
+  });
+
+  canvas.addEventListener('pointermove', (e) => {
+    if (!isPointerDown || state !== 'playing') return;
+    const pt = getPoint(e);
+    slashTrail.push(pt);
+
+    if (Math.random() > 0.35) {
+      particles.push({
+        x: pt.x + (Math.random() - 0.5) * 10,
+        y: pt.y + (Math.random() - 0.5) * 10,
+        vx: (Math.random() - 0.5) * 1.5,
+        vy: 0.5 + Math.random() * 1.5,
+        size: 2.5 + Math.random() * 3,
+        color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+        life: 1
+      });
+    }
+
+    if (lastPointer) {
+      const dx = pt.x - lastPointer.x;
+      const dy = pt.y - lastPointer.y;
+      if (Math.hypot(dx, dy) > 6) {
+        const angle = Math.atan2(dy, dx);
+        for (let i = targets.length - 1; i >= 0; i--) {
+          if (lineIntersectsTarget(lastPointer, pt, targets[i])) {
+            playSlashSound();
+            sliceTarget(targets[i], i, angle);
+            break;
+          }
+        }
+      }
+    }
+    lastPointer = pt;
+  });
+
+  window.addEventListener('pointerup', () => {
+    isPointerDown = false;
+    lastPointer = null;
+  });
+
+  document.getElementById('btn-start').addEventListener('click', startGame);
+  document.getElementById('btn-retry').addEventListener('click', startGame);
+  document.getElementById('btn-replay').addEventListener('click', () => {
+    if (qIndex < deck.length) speakText(deck[qIndex].correct);
+  });
+
+  btnSpeed.addEventListener('click', () => {
+    if (speechRate > 0.8) {
+      speechRate = 0.72;
+      btnSpeed.textContent = '🐢 速度: ゆっくり';
+    } else {
+      speechRate = 0.96;
+      btnSpeed.textContent = '⚡ 速度: 普通';
+    }
+    if (state === 'playing' && qIndex < deck.length) speakText(deck[qIndex].correct);
+  });
+
+  // === カード描画 ===
+  function drawCard(obj, isSlice = false) {
+    ctx.save();
+    ctx.translate(obj.x, obj.y);
+    ctx.rotate(obj.rot);
+
+    if (isSlice) {
+      ctx.globalAlpha = Math.max(0, obj.alpha);
+      ctx.beginPath();
+      const big = 500;
+      ctx.rotate(obj.cutAngle);
+      if (obj.side === -1) ctx.rect(-big, -big, big * 2, big);
+      else ctx.rect(-big, 0, big * 2, big);
+      ctx.clip();
+      ctx.rotate(-obj.cutAngle);
+    }
+
+    const rx = -obj.w / 2;
+    const ry = -obj.h / 2;
+    const r = 18;
+    const theme = obj.theme;
+
+    ctx.fillStyle = theme.shadow;
+    ctx.beginPath();
+    ctx.roundRect(rx, ry + 6, obj.w, obj.h, r);
+    ctx.fill();
+
+    const grad = ctx.createLinearGradient(0, ry, 0, ry + obj.h);
+    grad.addColorStop(0, theme.top);
+    grad.addColorStop(1, theme.bottom);
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.roundRect(rx, ry, obj.w, obj.h, r);
+    ctx.fill();
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+    ctx.beginPath();
+    ctx.roundRect(rx + 6, ry + 4, obj.w - 12, obj.h * 0.35, 12);
+    ctx.fill();
+
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.roundRect(rx, ry, obj.w, obj.h, r);
+    ctx.stroke();
+
+    ctx.font = '18px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.fillText(theme.icon, rx + 10, ry + 8);
+
+    ctx.font = obj.font;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    const lineHeight = 21;
+    const startY = -((obj.lines.length - 1) * lineHeight) / 2 + 2;
+
+    obj.lines.forEach((line, idx) => {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
+      ctx.fillText(line, 0, startY + idx * lineHeight + 2);
+      ctx.fillStyle = '#ffffff';
+      ctx.fillText(line, 0, startY + idx * lineHeight);
+    });
+
+    ctx.restore();
+  }
+
+  // === メインループ ===
+  function loop(now) {
+    const dt = Math.min(0.1, (now - lastFrameTime) / 1000);
+    lastFrameTime = now;
+    const frameScale = dt * 60;
+
+    ctx.clearRect(0, 0, width, height);
+    hueOffset = (hueOffset + 3 * frameScale) % 360;
+
+    if (state === 'playing') {
+      questionTimeLeft -= dt;
+      if (questionTimeLeft <= 0) {
+        questionTimeLeft = 0;
+        updateTimerUI();
+        handleTimeUp();
+      } else {
+        updateTimerUI();
+      }
+    }
+
+    bgBubbles.forEach(b => {
+      b.x += b.vx * frameScale;
+      b.y += b.vy * frameScale;
+      if (b.y < -40) { b.y = height + 40; b.x = Math.random() * width; }
+      ctx.save();
+      ctx.globalAlpha = b.alpha;
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    });
+
+    ctx.save();
+    if (screenShake > 0) {
+      ctx.translate((Math.random() - 0.5) * screenShake, (Math.random() - 0.5) * screenShake);
+      screenShake *= Math.pow(0.85, frameScale);
+      if (screenShake < 0.5) screenShake = 0;
+    }
+
+    const topBound = 138;
+    const bottomBound = height - 42;
+
+    targets.forEach(t => {
+      t.bobPhase += 0.05 * frameScale;
+      t.x += t.vx * frameScale;
+      t.y += (t.vy + Math.sin(t.bobPhase) * 0.25) * frameScale;
+      t.rot += t.vRot * frameScale;
+
+      if (t.x - t.w / 2 < 12) { t.x = 12 + t.w / 2; t.vx *= -1; }
+      if (t.x + t.w / 2 > width - 12) { t.x = width - 12 - t.w / 2; t.vx *= -1; }
+      if (t.y - t.h / 2 < topBound) { t.y = topBound + t.h / 2; t.vy *= -1; }
+      if (t.y + t.h / 2 > bottomBound) { t.y = bottomBound - t.h / 2; t.vy *= -1; }
+      if (Math.abs(t.rot) > 0.14) t.vRot *= -1;
+
+      drawCard(t, false);
+    });
+
+    for (let i = slices.length - 1; i >= 0; i--) {
+      const s = slices[i];
+      s.x += s.vx * frameScale;
+      s.y += s.vy * frameScale;
+      s.vy += 0.28 * frameScale;
+      s.rot += s.vRot * frameScale;
+      s.alpha -= 0.024 * frameScale;
+      drawCard(s, true);
+      if (s.alpha <= 0) slices.splice(i, 1);
+    }
+
+    for (let i = shockwaves.length - 1; i >= 0; i--) {
+      const sw = shockwaves[i];
+      sw.r += (sw.maxR - sw.r) * 0.18 * frameScale;
+      sw.life -= 0.05 * frameScale;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, sw.life);
+      ctx.strokeStyle = sw.color;
+      ctx.lineWidth = 5 * Math.max(0, sw.life);
+      ctx.beginPath();
+      ctx.arc(sw.x, sw.y, sw.r, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.restore();
+      if (sw.life <= 0) shockwaves.splice(i, 1);
+    }
+
+    for (let i = confetti.length - 1; i >= 0; i--) {
+      const c = confetti[i];
+      c.x += c.vx * frameScale;
+      c.y += c.vy * frameScale;
+      c.vy += 0.22 * frameScale;
+      c.vx *= Math.pow(0.99, frameScale);
+      c.rot += c.vRot * frameScale;
+      c.life -= 0.015 * frameScale;
+      ctx.save();
+      ctx.translate(c.x, c.y);
+      ctx.rotate(c.rot);
+      ctx.globalAlpha = Math.max(0, c.life);
+      ctx.fillStyle = c.color;
+      ctx.fillRect(-c.w / 2, -c.h / 2, c.w, c.h);
+      ctx.restore();
+      if (c.life <= 0) confetti.splice(i, 1);
+    }
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.x += p.vx * frameScale;
+      p.y += p.vy * frameScale;
+      p.life -= 0.035 * frameScale;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, p.life);
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+      if (p.life <= 0) particles.splice(i, 1);
+    }
+
+    for (let i = floatingTexts.length - 1; i >= 0; i--) {
+      const ft = floatingTexts[i];
+      ft.y -= 1.4 * frameScale;
+      ft.life -= 0.02 * frameScale;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, ft.life);
+      ctx.font = '900 26px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = 'rgba(0,0,0,0.45)';
+      ctx.strokeText(ft.text, ft.x, ft.y);
+      ctx.fillStyle = ft.color;
+      ctx.fillText(ft.text, ft.x, ft.y);
+      ctx.restore();
+      if (ft.life <= 0) floatingTexts.splice(i, 1);
+    }
+
+    slashTrail = slashTrail.filter(pt => now - pt.time < 150);
+    if (slashTrail.length > 1) {
+      for (let i = 1; i < slashTrail.length; i++) {
+        const p1 = slashTrail[i - 1];
+        const p2 = slashTrail[i];
+        const ratio = i / slashTrail.length;
+        const hue = (hueOffset + i * 20) % 360;
+
+        ctx.strokeStyle = `hsla(${hue}, 100%, 65%, ${ratio})`;
+        ctx.lineWidth = ratio * 14;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+
+        ctx.strokeStyle = `rgba(255, 255, 255, ${ratio})`;
+        ctx.lineWidth = ratio * 5;
+        ctx.stroke();
+      }
+    }
+
+    ctx.restore();
+
+    if (redFlash > 0) {
+      ctx.fillStyle = `rgba(239, 68, 68, ${redFlash})`;
+      ctx.fillRect(0, 0, width, height);
+      redFlash *= Math.pow(0.88, frameScale);
+      if (redFlash < 0.02) redFlash = 0;
+    }
+
+    requestAnimationFrame(loop);
+  }
+
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
