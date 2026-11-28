@@ -52,7 +52,13 @@
   #btn-x { background: #000; border: 1px solid #555; }
   #btn-img { background: #0284c7; }
   #sbtn { padding: 11px 30px; font-size: 17px; font-weight: bold; background: linear-gradient(135deg, #f59e0b, #eab308); color: #111; border: none; border-radius: 50px; cursor: pointer; touch-action: manipulation; }
-  #affi-area { display: none; margin-top: 18px; padding: 6px; background: rgba(255, 255, 255, 0.08); border: 1px solid #4f46e5; border-radius: 8px; width: 334px; max-width: 100%; box-sizing: border-box; text-align: center; }
+  #home-btn {
+    display: none; margin-top: 10px; padding: 8px 22px; font-size: 13px; font-weight: bold;
+    color: #e0e7ff; background: rgba(51, 65, 85, 0.85); border: 1px solid #64748b;
+    border-radius: 50px; text-decoration: none; cursor: pointer; touch-action: manipulation;
+  }
+  #home-btn:active { opacity: 0.8; }
+  #affi-area { display: none; margin-top: 14px; padding: 6px; background: rgba(255, 255, 255, 0.08); border: 1px solid #4f46e5; border-radius: 8px; width: 334px; max-width: 100%; box-sizing: border-box; text-align: center; }
   #affi-label { font-size: 10px; color: #94a3b8; margin-bottom: 4px; }
   #affi-content { width: 320px; max-width: 100%; height: 48px; margin: 0 auto; overflow: hidden; }
   #bottom-ad-wrap { margin-top: 8px; width: auto; max-width: 100%; min-height: 50px; display: block; text-align: center; flex-shrink: 0; overflow: visible; touch-action: auto; user-select: auto; }
@@ -94,6 +100,7 @@
       <button class="s-act" id="btn-img">結果画像を保存</button>
     </div>
     <button id="sbtn">ゲームスタート</button>
+    <a id="home-btn" href="https://32and1.com/">Grammar Questへ戻る</a>
     <div id="affi-area">
       <div id="affi-label">[PR] 開発者の応援リンク（楽天市場）</div>
       <div id="affi-content">
@@ -120,7 +127,7 @@ const feverBar = document.getElementById('fever-bar'), gates = document.getEleme
 const menu = document.getElementById('menu'), mTitle = document.getElementById('m-title'), mDesc = document.getElementById('m-desc'), sbtn = document.getElementById('sbtn');
 const rankBox = document.getElementById('rank-box'), rankChar = document.getElementById('rank-char'), rankMsg = document.getElementById('rank-msg'), bestTxt = document.getElementById('best-txt');
 const shareRow = document.getElementById('share-row'), btnX = document.getElementById('btn-x'), btnImg = document.getElementById('btn-img');
-const affiArea = document.getElementById('affi-area'), logoWrap = document.getElementById('studio-logo-wrap');
+const homeBtn = document.getElementById('home-btn'), affiArea = document.getElementById('affi-area'), logoWrap = document.getElementById('studio-logo-wrap');
 
 let run = false, zList = new Array(), bList = new Array(), tList = new Array(), rList = new Array();
 let pwr = 2, kills = 0, tLeft = 60.0, lastT = 0, spAcc = 0, midT = 0, bigT = 0, spdUp = 0, shk = 0, gT = 0, gL = 0, gOn = false, opL = null, opR = null;
@@ -417,6 +424,7 @@ function start() {
   fit(); run = true; pwr = 2; kills = 0; tLeft = 60.0; lastT = performance.now();
   spAcc = 0; midT = 4.5; bigT = 8.0; spdUp = 0; shk = 0; gT = 0; gOn = false; feverTime = 0; feverMult = 1;
   box.className = ''; feverBar.style.display = 'none'; rankBox.style.display = 'none'; shareRow.style.display = 'none';
+  homeBtn.style.display = 'none';
   affiArea.style.display = 'none';
   logoWrap.style.display = 'none';
   zList = new Array(); bList = new Array(); tList = new Array(); rList = new Array();
@@ -445,6 +453,7 @@ function end(why) {
   mDesc.innerHTML = (why === 'time' ? '60秒間集めきった！' : '一番下まで溢れてしまった！') + '<br>獲得コイン: <strong>' + kills + '枚</strong>';
   bestTxt.textContent = '自己ベスト: ' + bestScore + '枚';
   sbtn.textContent = 'もう一度挑戦';
+  homeBtn.style.display = 'inline-block';
   affiArea.style.display = 'block';
 }
 sbtn.onclick = start;
